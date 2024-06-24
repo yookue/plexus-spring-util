@@ -1,0 +1,53 @@
+# Plexus Spring Util
+# Copyright (c) 2016 Yookue Ltd. All rights reserved.
+# https://yookue.com
+
+
+spring:
+    autoconfigure:
+        exclude:
+            - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+            - org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration
+            - org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.mongo.MongoReactiveRepositoriesAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration
+            - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+            - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+            - org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration
+            - org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration
+            - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+            - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+            - org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
+            - org.springframework.boot.autoconfigure.jsonb.JsonbAutoConfiguration
+            - org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration
+            - org.springframework.boot.autoconfigure.mail.MailSenderValidatorAutoConfiguration
+            - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+            - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+            - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+            - org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration
+            - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+            - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+            - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration
+            - org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration
+            - org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration
+            - org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration
+            - org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration
+            - org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration
+            - org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+            - org.springframework.boot.autoconfigure.webservices.client.WebServiceTemplateAutoConfiguration
+            - org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration
+    cache:
+        type: redis
+    data:
+        redis:
+            repositories:
+                enabled: false
+    redis:
+        host: 'localhost'
+        port: 6379
