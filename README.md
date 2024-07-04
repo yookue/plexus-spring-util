@@ -43,7 +43,7 @@ Yookue plexus-spring-util is a packages of utility classes for Spring's hierarch
 
 ## Requirement
 
-- jdk 1.8+
+- jdk 17+
 
 ## License
 
