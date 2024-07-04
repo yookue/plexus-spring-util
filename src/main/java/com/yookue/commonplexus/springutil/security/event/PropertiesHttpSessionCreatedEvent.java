@@ -18,9 +18,9 @@ package com.yookue.commonplexus.springutil.security.event;
 
 
 import java.util.Properties;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.servlet.http.HttpSession;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.web.session.HttpSessionCreatedEvent;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import lombok.Getter;

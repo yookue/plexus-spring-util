@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.cache;
 
 
 import java.util.Arrays;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;

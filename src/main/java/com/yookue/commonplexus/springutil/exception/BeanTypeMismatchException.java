@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.exception;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.beans.BeansException;
 import org.springframework.util.ClassUtils;
 

@@ -19,7 +19,7 @@ package com.yookue.commonplexus.springutil.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;

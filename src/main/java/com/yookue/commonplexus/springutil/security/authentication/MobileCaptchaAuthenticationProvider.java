@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.security.authentication;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
@@ -147,9 +147,8 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
     }
 
     protected String determineDial(@Nullable Authentication authentication) {
-        if (authentication instanceof MobileCaptchaAuthenticationToken) {
-            MobileCaptchaAuthenticationToken token = (MobileCaptchaAuthenticationToken) authentication;
-            return ObjectUtilsWraps.castAs(token.getAuxiliary(), String.class);
+        if (authentication instanceof MobileCaptchaAuthenticationToken instance) {
+            return ObjectUtilsWraps.castAs(instance.getAuxiliary(), String.class);
         }
         return null;
     }

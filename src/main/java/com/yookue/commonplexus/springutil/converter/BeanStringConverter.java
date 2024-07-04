@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.converter;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.converters.AbstractConverter;
 import org.apache.commons.lang3.ClassUtils;

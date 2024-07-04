@@ -19,7 +19,7 @@ package com.yookue.commonplexus.springutil.jackson.deserializer;
 
 import java.io.IOException;
 import java.util.Date;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

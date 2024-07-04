@@ -19,7 +19,7 @@ package com.yookue.commonplexus.springutil.util;
 
 import java.text.NumberFormat;
 import java.util.Collection;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;

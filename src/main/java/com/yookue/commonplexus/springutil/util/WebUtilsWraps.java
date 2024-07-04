@@ -31,22 +31,22 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
-import javax.servlet.DispatcherType;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletRequestWrapper;
-import javax.servlet.ServletResponse;
-import javax.servlet.ServletResponseWrapper;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletRequestWrapper;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.ServletResponseWrapper;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -223,13 +223,13 @@ public abstract class WebUtilsWraps {
     @Nullable
     public static HttpServletRequest getContextServletRequest() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-        return (attributes instanceof ServletRequestAttributes) ? ((ServletRequestAttributes) attributes).getRequest() : null;
+        return (attributes instanceof ServletRequestAttributes instance) ? instance.getRequest() : null;
     }
 
     @Nullable
     public static HttpServletResponse getContextServletResponse() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-        return (attributes instanceof ServletRequestAttributes) ? ((ServletRequestAttributes) attributes).getResponse() : null;
+        return (attributes instanceof ServletRequestAttributes instance) ? instance.getResponse() : null;
     }
 
     /**
@@ -315,10 +315,10 @@ public abstract class WebUtilsWraps {
             return null;
         }
         Object locale = WebUtils.getSessionAttribute(request, sessionName);
-        if (locale instanceof Locale) {
-            return (Locale) locale;
-        } else if (locale instanceof String) {
-            return LocaleParserWraps.parse((String) locale);
+        if (locale instanceof Locale instance) {
+            return instance;
+        } else if (locale instanceof String instance) {
+            return LocaleParserWraps.parse(instance);
         }
         return null;
     }
@@ -543,10 +543,10 @@ public abstract class WebUtilsWraps {
     }
 
     public static <T extends ServletRequestWrapper> T getServletRequestWrapper(@Nullable HttpServletRequest request, @Nullable Class<T> expectedType) {
-        if (!(request instanceof ServletRequestWrapper) || expectedType == null) {
+        if (!(request instanceof ServletRequestWrapper instance) || expectedType == null) {
             return null;
         }
-        ServletRequest wrapper = ((ServletRequestWrapper) request).getRequest();
+        ServletRequest wrapper = instance.getRequest();
         while (wrapper instanceof ServletRequestWrapper) {
             if (ClassUtils.isAssignableValue(expectedType, wrapper)) {
                 return ObjectUtilsWraps.castAs(wrapper, expectedType);
@@ -579,7 +579,7 @@ public abstract class WebUtilsWraps {
     }
 
     /**
-     * @see org.springframework.web.context.request.async.WebAsyncUtils#getAsyncManager(javax.servlet.ServletRequest)
+     * @see org.springframework.web.context.request.async.WebAsyncUtils#getAsyncManager(jakarta.servlet.ServletRequest)
      */
     public static boolean isAsyncRequest(@Nullable ServletRequest request) {
         return request != null && ClassUtils.isAssignableValue(WebAsyncManager.class, request.getAttribute(WebAsyncUtils.WEB_ASYNC_MANAGER_ATTRIBUTE));

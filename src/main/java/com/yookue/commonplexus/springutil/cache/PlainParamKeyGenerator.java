@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.cache;
 
 
 import java.util.StringJoiner;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.CharUtils;
@@ -63,16 +63,16 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                 joiner.add(JavaKeywordConst.NULL);
                 continue;
             }
-            if (param instanceof Boolean) {
-                joiner.add(BooleanUtils.toStringTrueFalse((Boolean) param));
+            if (param instanceof Boolean instance) {
+                joiner.add(BooleanUtils.toStringTrueFalse(instance));
                 continue;
             }
-            if (param instanceof Character) {
-                joiner.add(CharUtils.toString((Character) param));
+            if (param instanceof Character instance) {
+                joiner.add(CharUtils.toString(instance));
                 continue;
             }
-            if (param instanceof CharSequence) {
-                String sequence = ((CharSequence) param).toString();
+            if (param instanceof CharSequence instance) {
+                String sequence = instance.toString();
                 String reserves = RegexUtilsWraps.reserveAlphanumeric(sequence);
                 if (StringUtils.isNotBlank(reserves) && maxParamLength > 0) {
                     reserves = StringUtils.left(reserves, maxParamLength);
@@ -80,20 +80,20 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                 joiner.add(StringUtils.join(reserves, CharVariantConst.TILDE, sequence.hashCode()));
                 continue;
             }
-            if (param instanceof java.util.Date) {
-                joiner.add(UtilDateWraps.formatDateTime((java.util.Date) param, TemporalFormatConst.NON_YYYYMMDD));
+            if (param instanceof java.util.Date instance) {
+                joiner.add(UtilDateWraps.formatDateTime(instance, TemporalFormatConst.NON_YYYYMMDD));
                 continue;
             }
-            if (param instanceof java.time.LocalDate) {
-                joiner.add(LocalDateWraps.formatDate((java.time.LocalDate) param, TemporalFormatConst.NON_YYYYMMDD));
+            if (param instanceof java.time.LocalDate instance) {
+                joiner.add(LocalDateWraps.formatDate(instance, TemporalFormatConst.NON_YYYYMMDD));
                 continue;
             }
-            if (param instanceof java.time.LocalDateTime) {
-                joiner.add(LocalDateWraps.formatDateTime((java.time.LocalDateTime) param, TemporalFormatConst.NON_YYYYMMDD_HHMMSS));
+            if (param instanceof java.time.LocalDateTime instance) {
+                joiner.add(LocalDateWraps.formatDateTime(instance, TemporalFormatConst.NON_YYYYMMDD_HHMMSS));
                 continue;
             }
-            if (param instanceof java.time.LocalTime) {
-                joiner.add(LocalDateWraps.formatTime((java.time.LocalTime) param, TemporalFormatConst.NON_HHMMSS));
+            if (param instanceof java.time.LocalTime instance) {
+                joiner.add(LocalDateWraps.formatTime(instance, TemporalFormatConst.NON_HHMMSS));
                 continue;
             }
             joiner.add(ObjectUtils.getDisplayString(param));

@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -116,11 +116,10 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static Object autowireBeanType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, int autowireMode, boolean dependencyCheck) throws BeansException {
-        if (!(factory instanceof AutowireCapableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof AutowireCapableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        AutowireCapableBeanFactory beanFactory = (AutowireCapableBeanFactory) factory;
-        return beanFactory.autowire(expectedType, autowireMode, dependencyCheck);
+        return instance.autowire(expectedType, autowireMode, dependencyCheck);
     }
 
     @Nullable
@@ -134,12 +133,11 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     public static <T> T createBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        if (!(factory instanceof AutowireCapableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof AutowireCapableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        AutowireCapableBeanFactory beanFactory = (AutowireCapableBeanFactory) factory;
         try {
-            return beanFactory.createBean(expectedType);
+            return instance.createBean(expectedType);
         } catch (Exception ignored) {
         }
         return null;
@@ -147,12 +145,11 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     public static Object createBean(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, int autowireMode, boolean dependencyCheck) {
-        if (!(factory instanceof AutowireCapableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof AutowireCapableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        AutowireCapableBeanFactory beanFactory = (AutowireCapableBeanFactory) factory;
         try {
-            return beanFactory.createBean(expectedType, autowireMode, dependencyCheck);
+            return instance.createBean(expectedType, autowireMode, dependencyCheck);
         } catch (Exception ignored) {
         }
         return null;
@@ -170,12 +167,12 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     public static AutowireCapableBeanFactory castToAutowireBeanFactory(@Nullable BeanFactory factory) {
-        return (factory instanceof AutowireCapableBeanFactory) ? (AutowireCapableBeanFactory) factory : null;
+        return (factory instanceof AutowireCapableBeanFactory instance) ? instance : null;
     }
 
     @Nullable
     public static ListableBeanFactory castToListableBeanFactory(@Nullable BeanFactory factory) {
-        return (factory instanceof ListableBeanFactory) ? (ListableBeanFactory) factory : null;
+        return (factory instanceof ListableBeanFactory instance) ? instance : null;
     }
 
     public static boolean containsAllBeans(@Nullable BeanFactory factory, @Nullable String... beanNames) {
@@ -223,11 +220,10 @@ public abstract class BeanFactoryWraps {
      * @return if this bean factory contains a bean definition with the given name
      */
     public static boolean containsBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName) {
-        if (!(factory instanceof BeanDefinitionRegistry) || StringUtils.isBlank(beanName)) {
+        if (!(factory instanceof BeanDefinitionRegistry instance) || StringUtils.isBlank(beanName)) {
             return false;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
-        return registry.containsBeanDefinition(beanName);
+        return instance.containsBeanDefinition(beanName);
     }
 
     @Nullable
@@ -502,12 +498,11 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static <A extends Annotation> A getBeanAnnotation(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<A> annotation, boolean allowFactoryBeanInit) {
-        if (!(factory instanceof ListableBeanFactory) || StringUtils.isBlank(beanName) || annotation == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || StringUtils.isBlank(beanName) || annotation == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
         try {
-            return beanFactory.findAnnotationOnBean(beanName, annotation, allowFactoryBeanInit);
+            return instance.findAnnotationOnBean(beanName, annotation, allowFactoryBeanInit);
         } catch (Exception ignored) {
         }
         return null;
@@ -585,18 +580,17 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static Set<String> getBeanNamesWithAllAnnotationsToSet(@Nullable BeanFactory factory, @Nullable Collection<Class<? extends Annotation>> annotations) {
-        if (!(factory instanceof ListableBeanFactory) || CollectionUtils.isEmpty(annotations) || annotations.stream().anyMatch(Objects::isNull)) {
+        if (!(factory instanceof ListableBeanFactory instance) || CollectionUtils.isEmpty(annotations) || annotations.stream().anyMatch(Objects::isNull)) {
             return null;
         }
         Set<String> result = new LinkedHashSet<>();
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
         int index = 0;
         for (Class<? extends Annotation> annotation : annotations) {
             if (annotation == null) {
                 return null;
             }
             try {
-                Set<String> set = ArrayUtilsWraps.asSet(beanFactory.getBeanNamesForAnnotation(annotation));
+                Set<String> set = ArrayUtilsWraps.asSet(instance.getBeanNamesForAnnotation(annotation));
                 if (CollectionUtils.isEmpty(set)) {
                     return null;
                 }
@@ -646,19 +640,17 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static Set<String> getBeanNamesWithAnyAnnotationsToSet(@Nullable BeanFactory factory, @Nullable Collection<Class<? extends Annotation>> annotations) {
-        if (!(factory instanceof ListableBeanFactory) || CollectionUtils.isEmpty(annotations)) {
+        if (!(factory instanceof ListableBeanFactory instance) || CollectionUtils.isEmpty(annotations)) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
-        return annotations.stream().filter(Objects::nonNull).map(annotation -> ArrayUtilsWraps.asSet(beanFactory.getBeanNamesForAnnotation(annotation))).filter(element -> !CollectionUtils.isEmpty(element)).flatMap(Collection::stream).collect(Collectors.toSet());
+        return annotations.stream().filter(Objects::nonNull).map(annotation -> ArrayUtilsWraps.asSet(instance.getBeanNamesForAnnotation(annotation))).filter(element -> !CollectionUtils.isEmpty(element)).flatMap(Collection::stream).collect(Collectors.toSet());
     }
 
     public static BeanDefinition getBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName) throws NoSuchBeanDefinitionException {
-        if (!(factory instanceof BeanDefinitionRegistry) || StringUtils.isBlank(beanName)) {
+        if (!(factory instanceof BeanDefinitionRegistry instance) || StringUtils.isBlank(beanName)) {
             return null;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
-        return registry.getBeanDefinition(beanName);
+        return instance.getBeanDefinition(beanName);
     }
 
     @Nullable
@@ -678,7 +670,7 @@ public abstract class BeanFactoryWraps {
      * @return the number of beans defined in the factory
      */
     public static int getBeanDefinitionCount(@Nullable BeanFactory factory) {
-        return (factory instanceof BeanDefinitionRegistry) ? ((BeanDefinitionRegistry) factory).getBeanDefinitionCount() : 0;
+        return (factory instanceof BeanDefinitionRegistry instance) ? instance.getBeanDefinitionCount() : 0;
     }
 
     /**
@@ -690,11 +682,10 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static String[] getBeanDefinitionNames(@Nullable BeanFactory factory) {
-        if (!(factory instanceof BeanDefinitionRegistry)) {
+        if (!(factory instanceof BeanDefinitionRegistry instance)) {
             return null;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
-        String[] result = registry.getBeanDefinitionNames();
+        String[] result = instance.getBeanDefinitionNames();
         return ArrayUtils.isEmpty(result) ? null : result;
     }
 
@@ -730,11 +721,10 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
-        return beanFactory.getBeanProvider(expectedType, allowEagerInit);
+        return instance.getBeanProvider(expectedType, allowEagerInit);
     }
 
     /**
@@ -748,11 +738,10 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
-        return beanFactory.getBeanProvider(expectedType, allowEagerInit);
+        return instance.getBeanProvider(expectedType, allowEagerInit);
     }
 
     /**
@@ -780,11 +769,10 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, boolean includeNonSingletons, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
-        return beanFactory.getBeanNamesForType(expectedType, includeNonSingletons, allowEagerInit);
+        return instance.getBeanNamesForType(expectedType, includeNonSingletons, allowEagerInit);
     }
 
     /**
@@ -812,11 +800,10 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, boolean includeNonSingletons, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
-        return beanFactory.getBeanNamesForType(expectedType, includeNonSingletons, allowEagerInit);
+        return instance.getBeanNamesForType(expectedType, includeNonSingletons, allowEagerInit);
     }
 
     /**
@@ -879,12 +866,11 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean includeNonSingletons, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || expectedType == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
         try {
-            return beanFactory.getBeansOfType(expectedType, includeNonSingletons, allowEagerInit);
+            return instance.getBeansOfType(expectedType, includeNonSingletons, allowEagerInit);
         } catch (Exception ignored) {
         }
         return null;
@@ -939,12 +925,11 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static Map<String, Object> getBeansWithAnnotation(@Nullable BeanFactory factory, @Nullable Class<? extends Annotation> annotation) {
-        if (!(factory instanceof ListableBeanFactory) || annotation == null) {
+        if (!(factory instanceof ListableBeanFactory instance) || annotation == null) {
             return null;
         }
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
         try {
-            return beanFactory.getBeansWithAnnotation(annotation);
+            return instance.getBeansWithAnnotation(annotation);
         } catch (Exception ignored) {
         }
         return null;
@@ -1001,18 +986,17 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static Map<String, Object> getBeansWithAllAnnotations(@Nullable BeanFactory factory, @Nullable Collection<Class<? extends Annotation>> annotations) {
-        if (!(factory instanceof ListableBeanFactory) || CollectionUtils.isEmpty(annotations)) {
+        if (!(factory instanceof ListableBeanFactory instance) || CollectionUtils.isEmpty(annotations)) {
             return null;
         }
         Map<String, Object> result = new LinkedHashMap<>();
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
         int index = 0;
         for (Class<? extends Annotation> annotation : annotations) {
             if (annotation == null) {
                 return null;
             }
             try {
-                Map<String, Object> map = beanFactory.getBeansWithAnnotation(annotation);
+                Map<String, Object> map = instance.getBeansWithAnnotation(annotation);
                 if (index == 0) {
                     result.putAll(map);
                 } else {
@@ -1057,17 +1041,16 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     public static Map<String, Object> getBeansWithAnyAnnotations(@Nullable BeanFactory factory, @Nullable Collection<Class<? extends Annotation>> annotations) {
-        if (!(factory instanceof ListableBeanFactory) || CollectionUtils.isEmpty(annotations)) {
+        if (!(factory instanceof ListableBeanFactory instance) || CollectionUtils.isEmpty(annotations)) {
             return null;
         }
         Map<String, Object> result = new LinkedHashMap<>();
-        ListableBeanFactory beanFactory = (ListableBeanFactory) factory;
         for (Class<? extends Annotation> annotation : annotations) {
             if (annotation == null) {
                 continue;
             }
             try {
-                result.putAll(beanFactory.getBeansWithAnnotation(annotation));
+                result.putAll(instance.getBeansWithAnnotation(annotation));
             } catch (Exception ignored) {
             }
         }
@@ -1075,19 +1058,17 @@ public abstract class BeanFactoryWraps {
     }
 
     public static boolean isBeanAlias(@Nullable BeanFactory factory, @Nullable String alias) {
-        if (!(factory instanceof AliasRegistry) || StringUtils.isBlank(alias)) {
+        if (!(factory instanceof AliasRegistry instance) || StringUtils.isBlank(alias)) {
             return false;
         }
-        AliasRegistry registry = (AliasRegistry) factory;
-        return registry.isAlias(alias);
+        return instance.isAlias(alias);
     }
 
     public static boolean isBeanNameUsed(@Nullable BeanFactory factory, @Nullable String beanName) {
-        if (!(factory instanceof BeanDefinitionRegistry) || StringUtils.isBlank(beanName)) {
+        if (!(factory instanceof BeanDefinitionRegistry instance) || StringUtils.isBlank(beanName)) {
             return false;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
-        return registry.isBeanNameInUse(beanName);
+        return instance.isBeanNameInUse(beanName);
     }
 
     public static boolean isBeanPrototype(@Nullable BeanFactory factory, @Nullable String beanName) {
@@ -1138,11 +1119,10 @@ public abstract class BeanFactoryWraps {
 
     @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static boolean registerBeanAlias(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable String alias) throws IllegalStateException {
-        if (!(factory instanceof AliasRegistry) || StringUtils.isAnyBlank(beanName, alias)) {
+        if (!(factory instanceof AliasRegistry instance) || StringUtils.isAnyBlank(beanName, alias)) {
             return false;
         }
-        AliasRegistry registry = (AliasRegistry) factory;
-        registry.registerAlias(beanName, alias);
+        instance.registerAlias(beanName, alias);
         return true;
     }
 
@@ -1163,16 +1143,15 @@ public abstract class BeanFactoryWraps {
      * @see org.springframework.beans.factory.support.BeanDefinitionBuilder
      */
     public static boolean registerBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType, @Nullable String parentName) throws BeanDefinitionStoreException {
-        if (!(factory instanceof BeanDefinitionRegistry) || StringUtils.isBlank(beanName) || expectedType == null) {
+        if (!(factory instanceof BeanDefinitionRegistry instance) || StringUtils.isBlank(beanName) || expectedType == null) {
             return false;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
         AbstractBeanDefinition definition = StringUtils.isBlank(parentName) ? new RootBeanDefinition() : new GenericBeanDefinition();
         definition.setBeanClass(expectedType);
         if (StringUtils.isNotBlank(parentName)) {
             definition.setParentName(parentName);
         }
-        registry.registerBeanDefinition(beanName, definition);
+        instance.registerBeanDefinition(beanName, definition);
         return true;
     }
 
@@ -1193,11 +1172,10 @@ public abstract class BeanFactoryWraps {
      * @see org.springframework.beans.factory.support.BeanDefinitionBuilder
      */
     public static boolean registerBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable BeanDefinition definition) throws BeanDefinitionStoreException {
-        if (!(factory instanceof BeanDefinitionRegistry) || StringUtils.isBlank(beanName) || definition == null) {
+        if (!(factory instanceof BeanDefinitionRegistry instance) || StringUtils.isBlank(beanName) || definition == null) {
             return false;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
-        registry.registerBeanDefinition(beanName, definition);
+        instance.registerBeanDefinition(beanName, definition);
         return true;
     }
 
@@ -1213,11 +1191,10 @@ public abstract class BeanFactoryWraps {
      * @see org.springframework.beans.factory.config.SingletonBeanRegistry
      */
     public static boolean registerSingletonBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Object beanInstance) throws IllegalStateException {
-        if (!(factory instanceof SingletonBeanRegistry) || StringUtils.isBlank(beanName) || beanInstance == null) {
+        if (!(factory instanceof SingletonBeanRegistry instance) || StringUtils.isBlank(beanName) || beanInstance == null) {
             return false;
         }
-        SingletonBeanRegistry registry = (SingletonBeanRegistry) factory;
-        registry.registerSingleton(beanName, beanInstance);
+        instance.registerSingleton(beanName, beanInstance);
         return true;
     }
 
@@ -1230,11 +1207,10 @@ public abstract class BeanFactoryWraps {
     }
 
     public static boolean removeBeanAlias(@Nullable BeanFactory factory, @Nullable String alias) throws IllegalStateException {
-        if (!(factory instanceof AliasRegistry) || StringUtils.isBlank(alias)) {
+        if (!(factory instanceof AliasRegistry instance) || StringUtils.isBlank(alias)) {
             return false;
         }
-        AliasRegistry registry = (AliasRegistry) factory;
-        registry.removeAlias(alias);
+        instance.removeAlias(alias);
         return true;
     }
 
@@ -1247,11 +1223,10 @@ public abstract class BeanFactoryWraps {
     }
 
     public static boolean removeBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName) throws NoSuchBeanDefinitionException {
-        if (!(factory instanceof BeanDefinitionRegistry) || StringUtils.isBlank(beanName)) {
+        if (!(factory instanceof BeanDefinitionRegistry instance) || StringUtils.isBlank(beanName)) {
             return false;
         }
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) factory;
-        registry.removeBeanDefinition(beanName);
+        instance.removeBeanDefinition(beanName);
         return true;
     }
 

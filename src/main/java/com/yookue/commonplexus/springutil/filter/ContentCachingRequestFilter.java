@@ -19,11 +19,11 @@ package com.yookue.commonplexus.springutil.filter;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import javax.annotation.Nonnull;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Nonnull;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
@@ -38,7 +38,7 @@ import lombok.Setter;
 
 
 /**
- * {@link javax.servlet.Filter} for caching request contents
+ * {@link jakarta.servlet.Filter} for caching request contents
  *
  * @author David Hsing
  * @see org.springframework.web.util.ContentCachingRequestWrapper

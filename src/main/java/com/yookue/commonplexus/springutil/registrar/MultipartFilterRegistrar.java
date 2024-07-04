@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.registrar;
 
 
 import java.lang.annotation.Annotation;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

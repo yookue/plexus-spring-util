@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import javax.annotation.Nullable;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.session.Session;
 import org.springframework.session.SessionRepository;
 import org.springframework.session.web.http.SessionRepositoryFilter;
@@ -49,12 +49,12 @@ public abstract class SessionUtilsWraps {
 
     @Nullable
     public static String getCookieName(@Nullable WebSessionIdResolver resolver) {
-        return (resolver instanceof CookieWebSessionIdResolver) ? ((CookieWebSessionIdResolver) resolver).getCookieName() : null;
+        return (resolver instanceof CookieWebSessionIdResolver instance) ? instance.getCookieName() : null;
     }
 
     @Nullable
     public static String getHeaderName(@Nullable WebSessionIdResolver resolver) {
-        return (resolver instanceof HeaderWebSessionIdResolver) ? ((HeaderWebSessionIdResolver) resolver).getHeaderName() : null;
+        return (resolver instanceof HeaderWebSessionIdResolver instance) ? instance.getHeaderName() : null;
     }
 
     @SuppressWarnings("unchecked")

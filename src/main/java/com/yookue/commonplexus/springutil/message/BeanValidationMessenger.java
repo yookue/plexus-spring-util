@@ -23,10 +23,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
@@ -52,7 +52,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * {@link org.springframework.context.support.MessageSourceAccessor} for resolving {@link javax.validation.Validator} messages
+ * {@link org.springframework.context.support.MessageSourceAccessor} for resolving {@link jakarta.validation.Validator} messages
  *
  * @author David Hsing
  * @see org.springframework.context.MessageSource
@@ -102,41 +102,40 @@ public class BeanValidationMessenger {
         List<String> result = new ArrayList<>();
         List<ObjectError> objectErrors = binding.getAllErrors();
         for (int i = 0; i < objectErrors.size(); i++) {
-            ObjectError objectError = objectErrors.get(i);
-            StringBuilder stringBuilder = new StringBuilder();
+            ObjectError error = objectErrors.get(i);
+            StringBuilder builder = new StringBuilder();
             if (objectErrors.size() > 1 && StringUtils.isNotBlank(orderFormat)) {
                 try {
-                    stringBuilder.append(String.format(orderFormat, i + 1));
+                    builder.append(String.format(orderFormat, i + 1));
                 } catch (IllegalFormatException ex) {
                     if (log.isWarnEnabled()) {
                         log.warn(LogMessageConst.EXCEPTION_OCCURRED, ex);
                     }
                 }
             }
-            if (objectError instanceof FieldError) {
-                FieldError fieldError = (FieldError) objectError;
-                List<String> arrayIndexes = RegexUtilsWraps.extractMatched(fieldError.getField(), RegexVariantConst.ARRAY_INDEX);
+            if (error instanceof FieldError instance) {
+                List<String> arrayIndexes = RegexUtilsWraps.extractMatched(instance.getField(), RegexVariantConst.ARRAY_INDEX);
                 if (CollectionPlainWraps.isNotEmpty(arrayIndexes)) {
-                    stringBuilder.append(StringUtilsWraps.joinRoughly(arrayIndexes)).append(StringUtils.SPACE);
+                    builder.append(StringUtilsWraps.joinRoughly(arrayIndexes)).append(StringUtils.SPACE);
                 }
-                String plainName = RegexUtilsWraps.removeAll(fieldError.getField(), RegexVariantConst.ARRAY_INDEX);
+                String plainName = RegexUtilsWraps.removeAll(instance.getField(), RegexVariantConst.ARRAY_INDEX);
                 if (fieldName) {
-                    String localeName = getFieldLocaleName(fieldError, binding, locale);
+                    String localeName = getFieldLocaleName(instance, binding, locale);
                     if (nameLocalized && StringUtils.isNotEmpty(localeName)) {
-                        stringBuilder.append(localeName);
+                        builder.append(localeName);
                     } else {
-                        stringBuilder.append(plainName);
+                        builder.append(plainName);
                     }
                     if (!LocalePlainWraps.isChineseLanguage(LocaleContextHolder.getLocale())) {
-                        stringBuilder.append(StringUtils.SPACE);
+                        builder.append(StringUtils.SPACE);
                     }
                 }
-                stringBuilder.append(getErrorMessage(fieldError, locale));
+                builder.append(getErrorMessage(instance, locale));
             } else {
-                stringBuilder.append(getErrorMessage(objectError, locale));
+                builder.append(getErrorMessage(error, locale));
             }
-            if (stringBuilder.length() > 0) {
-                result.add(stringBuilder.toString());
+            if (!builder.isEmpty()) {
+                result.add(builder.toString());
             }
         }
         return CollectionUtils.isEmpty(result) ? null : result;

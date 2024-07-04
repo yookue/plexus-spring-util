@@ -31,7 +31,7 @@ import com.yookue.commonplexus.springutil.registrar.RequestContextListenerRegist
 /**
  * Annotation that enables a {@link org.springframework.web.context.request.RequestContextListener}
  * <p>
- * With this listener, the {@link javax.servlet.http.HttpServletRequest} can be autowired anywhere<br/>
+ * With this listener, the {@link jakarta.servlet.http.HttpServletRequest} can be autowired anywhere<br/>
  * And also, the {@link com.yookue.commonplexus.springutil.util.WebUtilsWraps#getContextServletRequest} can be performed anywhere
  *
  * @author David Hsing

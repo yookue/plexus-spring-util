@@ -19,10 +19,10 @@ package com.yookue.commonplexus.springutil.security.session;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSessionEvent;
 import org.springframework.security.core.session.AbstractSessionEvent;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.context.WebApplicationContext;

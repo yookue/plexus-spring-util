@@ -17,9 +17,9 @@
 package com.yookue.commonplexus.springutil.resolver;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -63,8 +63,8 @@ public class TextualRequestBodyResolver implements HandlerMethodArgumentResolver
             return null;
         }
         ContentCachingRequestWrapper wrapper;
-        if (servletRequest instanceof ContentCachingRequestWrapper) {
-            wrapper = (ContentCachingRequestWrapper) servletRequest;
+        if (servletRequest instanceof ContentCachingRequestWrapper instance) {
+            wrapper = instance;
         } else {
             wrapper = (annotation.limitation() >= 0) ? new ContentCachingRequestWrapper(servletRequest, annotation.limitation()) : new ContentCachingRequestWrapper(servletRequest);
         }

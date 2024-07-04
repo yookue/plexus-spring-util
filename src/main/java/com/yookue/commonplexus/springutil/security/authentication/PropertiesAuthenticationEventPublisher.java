@@ -21,8 +21,8 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.function.Consumer;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -102,8 +102,8 @@ public class PropertiesAuthenticationEventPublisher implements AuthenticationEve
             throw new IllegalArgumentException(String.format("Authentication exception class %s has no suitable event", exception.getClass().getName()));    // $NON-NLS-1$
         }
         AbstractAuthenticationEvent event = ConstructorUtilsWraps.newInstance(constructor, authentication, exception);
-        if (event instanceof PropertiesCapableEvent && authenticationFailureTransition != null) {
-            authenticationFailureTransition.accept((PropertiesCapableEvent) event);
+        if (event instanceof PropertiesCapableEvent instance && authenticationFailureTransition != null) {
+            authenticationFailureTransition.accept(instance);
         }
         publishEvent(event);
     }

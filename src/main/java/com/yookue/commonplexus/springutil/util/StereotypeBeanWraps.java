@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.util.Collection;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;

@@ -20,7 +20,7 @@ package com.yookue.commonplexus.springutil.jackson.processor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.http.MediaType;
@@ -43,16 +43,15 @@ public class JacksonXmlMediaTypeProcessor implements BeanPostProcessor {
     @Override
     @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
-        if (!(bean instanceof MappingJackson2HttpMessageConverter)) {
+        if (!(bean instanceof MappingJackson2HttpMessageConverter instance)) {
             return bean;
         }
-        MappingJackson2HttpMessageConverter converter = (MappingJackson2HttpMessageConverter) bean;
         MediaType soapXml = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.SOAP_XML);
         MediaType starXml = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.STAR_XML);
         List<MediaType> addTypes = Arrays.asList(MediaType.APPLICATION_XML, MediaType.APPLICATION_ATOM_XML, MediaType.APPLICATION_PROBLEM_XML, MediaType.APPLICATION_RSS_XML, MediaType.APPLICATION_XHTML_XML, soapXml, starXml);
         List<MediaType> allTypes = new ArrayList<>();
-        CollectionPlainWraps.addAllIfNotContains(allTypes, converter.getSupportedMediaTypes(), addTypes);
-        converter.setSupportedMediaTypes(allTypes);
+        CollectionPlainWraps.addAllIfNotContains(allTypes, instance.getSupportedMediaTypes(), addTypes);
+        instance.setSupportedMediaTypes(allTypes);
         return bean;
     }
 }

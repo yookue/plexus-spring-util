@@ -22,7 +22,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -31,17 +31,17 @@ import com.yookue.commonplexus.springutil.registrar.FileUploadCleanerRegistrar;
 
 
 /**
- * Annotation that enables a {@link org.apache.commons.fileupload.servlet.FileCleanerCleanup}
+ * Annotation that enables a {@link org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner}
  *
  * @author David Hsing
- * @see org.apache.commons.fileupload.servlet.FileCleanerCleanup
+ * @see org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner
  * @see com.yookue.commonplexus.springutil.registrar.FileUploadCleanerRegistrar
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(value = FileUpload.class)
+@ConditionalOnClass(value = JakartaFileCleaner.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @Import(value = FileUploadCleanerRegistrar.class)
 @SuppressWarnings("unused")

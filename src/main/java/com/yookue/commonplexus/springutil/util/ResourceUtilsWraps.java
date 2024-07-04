@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.ClassPathResource;
@@ -189,16 +189,16 @@ public abstract class ResourceUtilsWraps {
         if (resource == null) {
             return null;
         }
-        if (resource instanceof ClassPathResource) {
-            return ((ClassPathResource) resource).getPath();
-        } else if (resource instanceof FileSystemResource) {
-            return ((FileSystemResource) resource).getPath();
-        } else if (resource instanceof PathResource) {
-            return ((PathResource) resource).getPath();
-        } else if (resource instanceof ServletContextResource) {
-            return ((ServletContextResource) resource).getPath();
-        } else if (resource instanceof UrlResource) {
-            return resource.getURL().toString();
+        if (resource instanceof ClassPathResource instance) {
+            return instance.getPath();
+        } else if (resource instanceof FileSystemResource instance) {
+            return instance.getPath();
+        } else if (resource instanceof PathResource instance) {
+            return instance.getPath();
+        } else if (resource instanceof ServletContextResource instance) {
+            return instance.getPath();
+        } else if (resource instanceof UrlResource instance) {
+            return instance.getURL().toString();
         }
         throw new UnsupportedResourceException();
     }

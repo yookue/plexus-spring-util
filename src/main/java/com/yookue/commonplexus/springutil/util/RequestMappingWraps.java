@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -333,10 +333,9 @@ public abstract class RequestMappingWraps {
      *
      * @return request mapping info with handle methods in the given application context
      *
-     * @see org.springframework.boot.actuate.endpoint.web.servlet.ControllerEndpointHandlerMapping
+     * @see "org.springframework.boot.actuate.endpoint.web.servlet.ControllerEndpointHandlerMapping"
      */
     @Nullable
-    @SuppressWarnings("JavadocReference")
     public static Map<RequestMappingInfo, HandlerMethod> getRequestMappingMethods(@Nullable ApplicationContext context, @Nullable BiPredicate<RequestMappingInfo, HandlerMethod> filter, @Nullable Class<?> controller, boolean recursive) {
         if (context == null || (controller != null && !StereotypeBeanWraps.isMergedController(controller))) {
             return null;

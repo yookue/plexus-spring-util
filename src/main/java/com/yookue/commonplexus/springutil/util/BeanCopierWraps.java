@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import com.yookue.commonplexus.springutil.cglib.EnhancedBeanCopier;

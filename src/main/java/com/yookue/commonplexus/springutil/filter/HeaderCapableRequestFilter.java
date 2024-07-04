@@ -18,16 +18,16 @@ package com.yookue.commonplexus.springutil.filter;
 
 
 import java.io.IOException;
-import javax.annotation.Nonnull;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Nonnull;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import com.yookue.commonplexus.springutil.support.HeaderCapableRequestWrapper;
 
 
 /**
- * {@link javax.servlet.Filter} with header modifiable
+ * {@link jakarta.servlet.Filter} with header modifiable
  *
  * @author David Hsing
  * @see com.yookue.commonplexus.springutil.support.HeaderCapableRequestWrapper

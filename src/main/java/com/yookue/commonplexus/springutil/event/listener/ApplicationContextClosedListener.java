@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.event.listener;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.context.event.ContextClosedEvent;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
 import lombok.Getter;

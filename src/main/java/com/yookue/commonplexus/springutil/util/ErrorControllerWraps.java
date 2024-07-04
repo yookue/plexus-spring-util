@@ -18,9 +18,9 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.util.Map;
-import javax.annotation.Nullable;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
@@ -38,7 +38,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  * Utilities for {@link org.springframework.boot.web.servlet.error.ErrorController}
  *
  * @author David Hsing
- * @see javax.servlet.RequestDispatcher
+ * @see jakarta.servlet.RequestDispatcher
  * @see org.springframework.boot.web.servlet.error.ErrorController
  * @see org.springframework.boot.web.servlet.error.DefaultErrorAttributes
  */

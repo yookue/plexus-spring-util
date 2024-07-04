@@ -19,8 +19,8 @@ package com.yookue.commonplexus.springutil.util;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

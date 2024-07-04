@@ -18,8 +18,8 @@ package com.yookue.commonplexus.springutil.security.detail;
 
 
 import java.time.LocalDateTime;
-import javax.annotation.Nonnull;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nonnull;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;

@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.lang.reflect.Method;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;

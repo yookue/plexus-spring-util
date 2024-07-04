@@ -19,7 +19,7 @@ package com.yookue.commonplexus.springutil.util;
 
 import java.io.Reader;
 import java.lang.reflect.Type;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

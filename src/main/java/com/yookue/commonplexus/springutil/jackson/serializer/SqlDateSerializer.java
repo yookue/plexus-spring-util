@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.jackson.serializer;
 
 
 import java.text.DateFormat;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import lombok.NoArgsConstructor;
 
 

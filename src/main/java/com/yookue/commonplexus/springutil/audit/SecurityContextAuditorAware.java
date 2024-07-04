@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.audit;
 
 
 import java.util.Optional;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.AuditorAware;

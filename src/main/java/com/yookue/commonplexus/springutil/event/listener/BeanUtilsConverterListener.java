@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.event.listener;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import com.yookue.commonplexus.javaseutil.converter.LocalDateConverter;

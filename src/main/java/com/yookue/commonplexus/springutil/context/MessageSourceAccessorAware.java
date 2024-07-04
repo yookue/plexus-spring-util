@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.context;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.beans.factory.Aware;
 import org.springframework.context.support.MessageSourceAccessor;
 

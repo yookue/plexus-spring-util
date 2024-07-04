@@ -20,8 +20,8 @@ package com.yookue.commonplexus.springutil.util;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Objects;
-import javax.annotation.Nullable;
-import javax.mail.internet.InternetAddress;
+import jakarta.annotation.Nullable;
+import jakarta.mail.internet.InternetAddress;
 import org.apache.commons.lang3.StringUtils;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 
@@ -30,7 +30,7 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
  * Utilities for jakarta mail
  *
  * @author David Hsing
- * @see javax.mail.internet.MimeUtility
+ * @see jakarta.mail.internet.MimeUtility
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class JakartaMailWraps {
@@ -40,12 +40,12 @@ public abstract class JakartaMailWraps {
     }
 
     /**
-     * Returns a new {@link javax.mail.internet.InternetAddress} with the specified email
+     * Returns a new {@link jakarta.mail.internet.InternetAddress} with the specified email
      *
      * @param email the given email address
      * @param personal whether to extract personal information automatically (before the character @)
      *
-     * @return a new {@link javax.mail.internet.InternetAddress} with the specified email
+     * @return a new {@link jakarta.mail.internet.InternetAddress} with the specified email
      *
      * @throws java.io.UnsupportedEncodingException if the personal name can't be encoded in the default charset
      */

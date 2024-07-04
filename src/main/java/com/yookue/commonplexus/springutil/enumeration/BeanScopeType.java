@@ -60,7 +60,7 @@ public enum BeanScopeType implements ValueEnum<String> {
     SESSION("session"),    // $NON-NLS-1$
 
     /**
-     * Scopes a single bean definition to the lifecycle of a {@link javax.servlet.ServletContext}
+     * Scopes a single bean definition to the lifecycle of a {@link jakarta.servlet.ServletContext}
      * <br>
      * Only valid in the context of a web-aware Spring {@link org.springframework.context.ApplicationContext}
      */

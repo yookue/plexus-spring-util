@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.security.detail;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.DisabledException;

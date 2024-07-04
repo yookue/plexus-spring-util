@@ -21,7 +21,7 @@ package com.yookue.commonplexus.springutil.constant;
  * Constants for servlet error attributes
  *
  * @author David Hsing
- * @see javax.servlet.RequestDispatcher
+ * @see jakarta.servlet.RequestDispatcher
  * @see org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController
  * @see org.springframework.boot.web.servlet.error.DefaultErrorAttributes
  * @see org.springframework.web.util.WebUtils#clearErrorRequestAttributes

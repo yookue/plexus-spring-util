@@ -20,7 +20,7 @@ package com.yookue.commonplexus.springutil.jackson.processor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.http.MediaType;
@@ -42,16 +42,15 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 public class JacksonJsonMediaTypeProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
-        if (!(bean instanceof MappingJackson2HttpMessageConverter)) {
+        if (!(bean instanceof MappingJackson2HttpMessageConverter instance)) {
             return bean;
         }
-        MappingJackson2HttpMessageConverter converter = (MappingJackson2HttpMessageConverter) bean;
         MediaType soapJson = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.SOAP_JSON);
         MediaType starJson = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.STAR_JSON);
         List<MediaType> addTypes = Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_PROBLEM_JSON, MediaType.APPLICATION_NDJSON, soapJson, starJson);
         List<MediaType> allTypes = new ArrayList<>();
-        CollectionPlainWraps.addAllIfNotContains(allTypes, converter.getSupportedMediaTypes(), addTypes);
-        converter.setSupportedMediaTypes(allTypes);
+        CollectionPlainWraps.addAllIfNotContains(allTypes, instance.getSupportedMediaTypes(), addTypes);
+        instance.setSupportedMediaTypes(allTypes);
         return bean;
     }
 }

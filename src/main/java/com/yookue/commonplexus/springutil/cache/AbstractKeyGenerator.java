@@ -18,8 +18,8 @@ package com.yookue.commonplexus.springutil.cache;
 
 
 import java.lang.reflect.Method;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.support.AopUtils;

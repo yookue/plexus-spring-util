@@ -19,8 +19,8 @@ package com.yookue.commonplexus.springutil.event.listener;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.servlet.ServletContext;
+import jakarta.annotation.Nonnull;
+import jakarta.servlet.ServletContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.context.ApplicationContext;
@@ -95,9 +95,8 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
         container = servletContext.getServerInfo();
         contextPath = StringUtils.trimToNull(servletContext.getContextPath());
         startupTime = LocalDateWraps.fromEpochMillis(applicationContext.getStartupDate());
-        if (event.getSource() instanceof WebServer) {
-            WebServer webServer = (WebServer) event.getSource();
-            serverPort = webServer.getPort();
+        if (event.getSource() instanceof WebServer instance) {
+            serverPort = instance.getPort();
         }
         if (serverPort == null) {
             serverPort = ApplicationContextWraps.getLocalServerPort(applicationContext);

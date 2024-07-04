@@ -25,11 +25,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
-import javax.annotation.Nullable;
-import javax.persistence.Id;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Id;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.CharUtils;
@@ -773,8 +773,8 @@ public abstract class RequestParamWraps {
             return MapPlainWraps.emptyAsNull(result);
         }
         MapPlainWraps.forEach(payloads, (key, value) -> {
-            if (value instanceof String && emptyAsNull) {
-                result.put(key, StringUtils.trimToNull((String) value));
+            if (value instanceof String instance && emptyAsNull) {
+                result.put(key, StringUtils.trimToNull(instance));
             } else {
                 result.put(key, value);
             }

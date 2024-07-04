@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.util.Map;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.expression.MapAccessor;

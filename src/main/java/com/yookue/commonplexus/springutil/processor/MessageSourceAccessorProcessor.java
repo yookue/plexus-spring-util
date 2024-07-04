@@ -17,13 +17,9 @@
 package com.yookue.commonplexus.springutil.processor;
 
 
-import java.security.AccessControlContext;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.Locale;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import org.springframework.beans.BeansException;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -59,26 +55,9 @@ public class MessageSourceAccessorProcessor implements BeanPostProcessor, Ordere
         messageAccessor = new MessageSourceAccessor(applicationContext, defaultLocale);
     }
 
-    @Override
-    public Object postProcessBeforeInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
-        if (!(bean instanceof MessageSourceAccessorAware)) {
-            return bean;
-        }
-        AccessControlContext acc = (System.getSecurityManager() == null) ? null : applicationContext.getBeanFactory().getAccessControlContext();
-        if (acc != null) {
-            AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-                invokeAwareInterfaces(bean);
-                return null;
-            }, acc);
-        } else {
-            invokeAwareInterfaces(bean);
-        }
-        return bean;
-    }
-
     private void invokeAwareInterfaces(@Nonnull Object bean) {
-        if (bean instanceof MessageSourceAccessorAware) {
-            ((MessageSourceAccessorAware) bean).setMessageSourceAccessor(messageAccessor);
+        if (bean instanceof MessageSourceAccessorAware instance) {
+            instance.setMessageSourceAccessor(messageAccessor);
         }
     }
 }

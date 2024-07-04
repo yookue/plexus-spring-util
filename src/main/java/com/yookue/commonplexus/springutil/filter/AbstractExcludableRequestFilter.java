@@ -20,10 +20,10 @@ package com.yookue.commonplexus.springutil.filter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.servlet.filter.OrderedFilter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -35,7 +35,7 @@ import lombok.Setter;
 
 
 /**
- * {@link javax.servlet.Filter} with excluding ant paths capable
+ * {@link jakarta.servlet.Filter} with excluding ant paths capable
  *
  * @author David Hsing
  * @see org.springframework.web.filter.OncePerRequestFilter

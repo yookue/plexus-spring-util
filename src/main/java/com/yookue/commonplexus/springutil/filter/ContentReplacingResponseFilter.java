@@ -18,11 +18,11 @@ package com.yookue.commonplexus.springutil.filter;
 
 
 import java.io.IOException;
-import javax.annotation.Nonnull;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Nonnull;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ import lombok.Setter;
 
 
 /**
- * {@link javax.servlet.Filter} for replacing response contents
+ * {@link jakarta.servlet.Filter} for replacing response contents
  *
  * @author David Hsing
  * @see org.springframework.web.util.ContentCachingResponseWrapper

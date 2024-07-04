@@ -20,9 +20,9 @@ package com.yookue.commonplexus.springutil.util;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.sql.DataSource;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.jdbc.support.JdbcUtils;
@@ -69,8 +69,8 @@ public abstract class JdbcUtilsWraps {
             } catch (IllegalAccessException ex) {
                 throw new MetaDataAccessException(String.format("Could not access method '%s' on DatabaseMetaData '%s'", metaMethod, metaData), ex);
             } catch (InvocationTargetException ex) {
-                if (ex.getTargetException() instanceof SQLException) {
-                    throw (SQLException) ex.getTargetException();
+                if (ex.getTargetException() instanceof SQLException instance) {
+                    throw instance;
                 }
                 throw new MetaDataAccessException(String.format("Invocation method '%s' failed on DatabaseMetaData '%s'", metaMethod, metaData), ex);
             }
@@ -103,10 +103,9 @@ public abstract class JdbcUtilsWraps {
      *
      * @return the database product name
      *
-     * @see org.springframework.boot.jdbc.AbstractDataSourceInitializer#getDatabaseName
+     * @see "org.springframework.boot.jdbc.AbstractDataSourceInitializer#getDatabaseName"
      */
     @Nullable
-    @SuppressWarnings({"JavadocReference", "deprecation"})
     public static String getDatabaseProductName(@Nullable DataSource dataSource, boolean commonName, boolean validateDriver) throws MetaDataAccessException, IllegalStateException {
         if (dataSource == null) {
             return null;

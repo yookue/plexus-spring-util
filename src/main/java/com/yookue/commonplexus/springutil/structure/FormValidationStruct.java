@@ -19,8 +19,8 @@ package com.yookue.commonplexus.springutil.structure;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;

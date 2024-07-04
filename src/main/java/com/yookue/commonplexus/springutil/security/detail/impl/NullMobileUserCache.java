@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.security.detail.impl;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.yookue.commonplexus.springutil.security.detail.MobileUserCache;
 

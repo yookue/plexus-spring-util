@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.support;
 
 
-import javax.annotation.Nullable;
-import javax.servlet.ServletContext;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.ServletContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 

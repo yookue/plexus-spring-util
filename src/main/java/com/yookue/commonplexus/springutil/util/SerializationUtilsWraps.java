@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.springframework.util.SerializationUtils;
 
 

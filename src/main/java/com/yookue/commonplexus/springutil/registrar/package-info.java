@@ -14,24 +14,9 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.validation.sequence;
-
-
-import jakarta.validation.GroupSequence;
-import jakarta.validation.groups.Default;
-import com.yookue.commonplexus.springutil.validation.group.UpdateGroup;
-
 
 /**
- * Validation sequence for default and persistence update
- *
- * @author David Hsing
- * @see jakarta.validation.Validator
- * @see org.springframework.validation.Validator
- * @see jakarta.validation.Valid
- * @see org.springframework.validation.annotation.Validated
+ * Support for registrars
  */
-@GroupSequence(value = {Default.class, UpdateGroup.class})
-@SuppressWarnings("unused")
-public interface DefaultUpdateSequence {
-}
+
+package com.yookue.commonplexus.springutil.registrar;

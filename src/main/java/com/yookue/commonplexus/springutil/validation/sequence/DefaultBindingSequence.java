@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.validation.sequence;
 
 
-import javax.validation.GroupSequence;
-import javax.validation.groups.Default;
+import jakarta.validation.GroupSequence;
+import jakarta.validation.groups.Default;
 import com.yookue.commonplexus.springutil.validation.group.BindingGroup;
 
 
@@ -26,9 +26,9 @@ import com.yookue.commonplexus.springutil.validation.group.BindingGroup;
  * Validation sequence for default and controller binding
  *
  * @author David Hsing
- * @see javax.validation.Validator
+ * @see jakarta.validation.Validator
  * @see org.springframework.validation.Validator
- * @see javax.validation.Valid
+ * @see jakarta.validation.Valid
  * @see org.springframework.validation.annotation.Validated
  */
 @GroupSequence(value = {Default.class, BindingGroup.class})

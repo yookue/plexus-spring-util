@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import javax.annotation.Nullable;
-import javax.servlet.ServletContext;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.ServletContext;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.context.WebServerApplicationContext;
@@ -79,11 +79,10 @@ public abstract class ApplicationContextWraps {
      * @see org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer
      */
     public static Integer getLocalServerPort(@Nullable ApplicationContext context) {
-        if (!(context instanceof ConfigurableApplicationContext)) {
+        if (!(context instanceof ConfigurableApplicationContext instance)) {
             return null;
         }
-        ConfigurableApplicationContext alias = (ConfigurableApplicationContext) context;
-        Integer result = ApplicationEnvironmentWraps.getLocalServerPort(alias.getEnvironment());
+        Integer result = ApplicationEnvironmentWraps.getLocalServerPort(instance.getEnvironment());
         if (result == null && context.getParent() != null) {
             return getLocalServerPort(context.getParent());
         }

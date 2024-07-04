@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.audit;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.data.auditing.IsNewAwareAuditingHandler;
 import org.springframework.data.domain.AuditorAware;

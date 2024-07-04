@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.util.Optional;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.domain.AuditorAware;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;

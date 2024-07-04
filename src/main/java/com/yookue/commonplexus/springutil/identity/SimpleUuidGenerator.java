@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.identity;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.IdGenerator;
 import org.springframework.util.SimpleIdGenerator;

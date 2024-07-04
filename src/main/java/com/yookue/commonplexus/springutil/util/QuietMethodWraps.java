@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.lang.model.element.Modifier;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -482,7 +482,7 @@ public abstract class QuietMethodWraps {
         /**
          * Specifies the implementation of {@code @Nullable} annotation
          */
-        private String nullableAnnotationImpl = "javax.annotation.Nullable";    // $NON-NLS-1$
+        private String nullableAnnotationImpl = "jakarta.annotation.Nullable";    // $NON-NLS-1$
 
         /**
          * Whether only to generate the methods which marked as static

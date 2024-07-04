@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.security.event;
 
 
 import java.util.Properties;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 import org.springframework.security.core.Authentication;
 import com.yookue.commonplexus.springutil.event.PropertiesCapableEvent;

@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
-import javax.validation.ConstraintViolation;
+import jakarta.annotation.Nullable;
+import jakarta.validation.ConstraintViolation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.FieldError;
@@ -60,9 +60,8 @@ public abstract class ValidationUtilsWraps {
             return null;
         }
         String result = error.contains(ConstraintViolation.class) ? error.unwrap(ConstraintViolation.class).getMessage() : error.getDefaultMessage();
-        if (error instanceof FieldError) {
-            FieldError fieldError = (FieldError) error;
-            return StringUtils.join(prefix, fieldError.getField(), suffix, LocaleHolderWraps.getOptionalSpace(), result);
+        if (error instanceof FieldError instance) {
+            return StringUtils.join(prefix, instance.getField(), suffix, LocaleHolderWraps.getOptionalSpace(), result);
         }
         return result;
     }
@@ -73,7 +72,7 @@ public abstract class ValidationUtilsWraps {
             return null;
         }
         String result = error.contains(ConstraintViolation.class) ? error.unwrap(ConstraintViolation.class).getMessage() : error.getDefaultMessage();
-        return (error instanceof FieldError) ? action.apply((FieldError) error) : result;
+        return (error instanceof FieldError instance) ? action.apply(instance) : result;
     }
 
     @Nullable

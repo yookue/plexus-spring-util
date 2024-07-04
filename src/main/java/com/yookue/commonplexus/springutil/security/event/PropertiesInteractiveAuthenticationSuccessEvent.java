@@ -18,8 +18,8 @@ package com.yookue.commonplexus.springutil.security.event;
 
 
 import java.util.Properties;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;

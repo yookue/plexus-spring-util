@@ -19,9 +19,9 @@ package com.yookue.commonplexus.springutil.message;
 
 import java.util.List;
 import java.util.Locale;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.validation.Validator;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.validation.Validator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.util.Assert;

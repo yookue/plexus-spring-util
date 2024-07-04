@@ -18,8 +18,8 @@ package com.yookue.commonplexus.springutil.registrar;
 
 
 import java.lang.annotation.Annotation;
-import javax.annotation.Nonnull;
-import org.apache.commons.fileupload.servlet.FileCleanerCleanup;
+import jakarta.annotation.Nonnull;
+import org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ import com.yookue.commonplexus.springutil.annotation.EnableFileUploadCleaner;
 
 
 /**
- * Registrar of a {@link org.apache.commons.fileupload.servlet.FileCleanerCleanup}
+ * Registrar of a {@link org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner}
  *
  * @author David Hsing
  * @reference "http://commons.apache.org/proper/commons-fileupload/using.html"
@@ -49,9 +49,9 @@ public class FileUploadCleanerRegistrar implements ImportAware {
     }
 
     @Bean
-    @ConditionalOnMissingBean(value = FileCleanerCleanup.class, parameterizedContainer = ServletListenerRegistrationBean.class)
-    public ServletListenerRegistrationBean<FileCleanerCleanup> fileCleanerCleanupRegistration() {
-        ServletListenerRegistrationBean<FileCleanerCleanup> result = new ServletListenerRegistrationBean<>(new FileCleanerCleanup());
+    @ConditionalOnMissingBean(value = JakartaFileCleaner.class, parameterizedContainer = ServletListenerRegistrationBean.class)
+    public ServletListenerRegistrationBean<JakartaFileCleaner> fileCleanerCleanupRegistration() {
+        ServletListenerRegistrationBean<JakartaFileCleaner> result = new ServletListenerRegistrationBean<>(new JakartaFileCleaner());
         result.setOrder(attributes.getNumber("listenerOrder"));    // $NON-NLS-1$
         return result;
     }

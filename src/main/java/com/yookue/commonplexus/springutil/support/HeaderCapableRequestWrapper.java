@@ -23,10 +23,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.http.HttpHeaders;
@@ -40,7 +40,7 @@ import com.yookue.commonplexus.springutil.util.MultiMapWraps;
 
 
 /**
- * {@link javax.servlet.http.HttpServletRequestWrapper} with header modifiable
+ * {@link jakarta.servlet.http.HttpServletRequestWrapper} with header modifiable
  *
  * @author David Hsing
  */
@@ -51,7 +51,7 @@ public class HeaderCapableRequestWrapper extends HttpServletRequestWrapper {
     /**
      * Constructs a request object wrapping the given request
      *
-     * @param request the {@link javax.servlet.http.HttpServletRequest} to be wrapped
+     * @param request the {@link jakarta.servlet.http.HttpServletRequest} to be wrapped
      */
     public HeaderCapableRequestWrapper(@Nonnull HttpServletRequest request) {
         super(request);

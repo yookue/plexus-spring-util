@@ -21,9 +21,9 @@ package com.yookue.commonplexus.springutil.validation.group;
  * Validation group for controller binding
  *
  * @author David Hsing
- * @see javax.validation.Validator
+ * @see jakarta.validation.Validator
  * @see org.springframework.validation.Validator
- * @see javax.validation.Valid
+ * @see jakarta.validation.Valid
  * @see org.springframework.validation.annotation.Validated
  */
 @SuppressWarnings("unused")

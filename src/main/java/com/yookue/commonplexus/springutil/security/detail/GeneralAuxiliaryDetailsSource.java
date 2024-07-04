@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.security.detail;
 
 
-import javax.annotation.Nonnull;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.Nonnull;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import lombok.Getter;
 

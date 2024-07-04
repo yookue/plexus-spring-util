@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.jackson.serializer;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.function.Failable;
 import com.fasterxml.jackson.core.JsonGenerator;

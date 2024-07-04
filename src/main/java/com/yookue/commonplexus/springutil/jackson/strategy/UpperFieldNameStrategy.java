@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.jackson.strategy;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 

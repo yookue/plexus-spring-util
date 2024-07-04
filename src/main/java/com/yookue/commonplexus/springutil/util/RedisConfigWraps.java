@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -114,9 +114,7 @@ public abstract class RedisConfigWraps {
         ObjectMapper mapper = JacksonConfigWraps.jsonObjectMapper(properties);
         mapper = mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         mapper = mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL);
-        Jackson2JsonRedisSerializer<Object> result = new Jackson2JsonRedisSerializer<>(Object.class);
-        result.setObjectMapper(mapper);
-        return result;
+        return new Jackson2JsonRedisSerializer<>(mapper, Object.class);
     }
 
     public static RedisTemplate<String, Object> jacksonJsonSerializerTemplate(@Nullable RedisConnectionFactory factory) {
