@@ -22,7 +22,7 @@
 
     <groupId>com.yookue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.0.0</version>
+    <version>3.3.1</version>
 
     <name>${project.artifactId}</name>
     <description>Plexus Spring Util</description>

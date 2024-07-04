@@ -144,18 +144,6 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    public static Object createBean(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, int autowireMode, boolean dependencyCheck) {
-        if (!(factory instanceof AutowireCapableBeanFactory instance) || expectedType == null) {
-            return null;
-        }
-        try {
-            return instance.createBean(expectedType, autowireMode, dependencyCheck);
-        } catch (Exception ignored) {
-        }
-        return null;
-    }
-
-    @Nullable
     public static AutowireCapableBeanFactory castToAutowireBeanFactory(@Nullable ApplicationContext context) {
         try {
             WebApplicationContext webContext = ApplicationContextWraps.getWebApplicationContext(context);
