@@ -30,6 +30,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.context.request.ServletWebRequest;
+import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
@@ -82,7 +83,7 @@ public abstract class ErrorControllerWraps {
         if (ObjectUtils.anyNull(controller, request, type)) {
             return null;
         }
-        return ReflectionUtilsWraps.invokeMethodAs(BasicErrorController.class, "getErrorAttributeOptions", true, controller, ErrorAttributeOptions.class, request, type);    // $NON-NLS-1$
+        return ReflectionUtilsWraps.invokeMethodAs(BasicErrorController.class, "getErrorAttributeOptions", true, controller, ArrayUtilsWraps.toArray(request, type), ErrorAttributeOptions.class);    // $NON-NLS-1$
     }
 
     @Nullable
