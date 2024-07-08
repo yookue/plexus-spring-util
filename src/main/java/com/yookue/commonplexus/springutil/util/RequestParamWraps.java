@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 import jakarta.annotation.Nullable;
@@ -803,7 +804,7 @@ public abstract class RequestParamWraps {
     }
 
     /**
-     * @see org.springframework.web.util.CookieGenerator
+     * @see org.springframework.http.ResponseCookie
      */
     public static List<Cookie> getCookies(@Nullable HttpServletRequest request) {
         return (request == null) ? null : ArrayUtilsWraps.asList(true, request.getCookies());
@@ -832,7 +833,7 @@ public abstract class RequestParamWraps {
     }
 
     public static String getHeaderValue(@Nullable HttpServletRequest request, @Nullable String name, @Nullable String defaultValue) {
-        return (request == null || StringUtils.isBlank(name)) ? defaultValue : StringUtils.defaultString(request.getHeader(name), defaultValue);
+        return (request == null || StringUtils.isBlank(name)) ? defaultValue : Objects.toString(request.getHeader(name), defaultValue);
     }
 
     public static String[] getHeaderValues(@Nullable HttpServletRequest request, @Nullable String name) {

@@ -56,13 +56,6 @@ public abstract class SpringAttributeConst {
     public static final String LOCALE_RESOLVER_TIMEZONE = "LocaleResolver.TIMEZONE";    // $NON-NLS-1$
 
     /**
-     * Shortened form for {@code CookieThemeResolver.THEME_REQUEST_ATTRIBUTE_NAME}
-     *
-     * @see org.springframework.web.servlet.theme.CookieThemeResolver
-     */
-    public static final String THEME_RESOLVER_THEME = "ThemeResolver.THEME";    // $NON-NLS-1$
-
-    /**
      * @see org.springframework.session.data.redis.RedisIndexedSessionRepository
      */
     public static final String SESSION_NAMESPACE = "spring:session:";    // $NON-NLS-1$

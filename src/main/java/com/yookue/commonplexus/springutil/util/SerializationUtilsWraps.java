@@ -17,6 +17,7 @@
 package com.yookue.commonplexus.springutil.util;
 
 
+import java.io.Serializable;
 import jakarta.annotation.Nullable;
 import org.springframework.util.SerializationUtils;
 
@@ -39,9 +40,9 @@ public abstract class SerializationUtilsWraps {
     }
 
     @Nullable
-    public static Object deserialize(@Nullable byte[] input) {
+    public static <T extends Serializable> T clone(T object) {
         try {
-            return SerializationUtils.deserialize(input);
+            return SerializationUtils.clone(object);
         } catch (Exception ignored) {
         }
         return null;

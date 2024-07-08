@@ -93,9 +93,4 @@ public abstract class SpringBeanConst {
      * @see org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter#requestContextFilter
      */
     public static final String REQUEST_CONTEXT_FILTER = "requestContextFilter";    // $NON-NLS-1$
-
-    /**
-     * @see org.springframework.ui.context.support.UiApplicationContextUtils
-     */
-    public static final String THEME_SOURCE = "themeSource";    // $NON-NLS-1$
 }

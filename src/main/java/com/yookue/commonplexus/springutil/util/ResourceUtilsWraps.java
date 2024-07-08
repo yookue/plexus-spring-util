@@ -185,7 +185,7 @@ public abstract class ResourceUtilsWraps {
     }
 
     @Nullable
-    public static String getResourcePath(@Nullable Resource resource) throws IOException, UnsupportedResourceException {
+    public static String getResourcePath(@Nullable Resource resource) throws UnsupportedResourceException {
         if (resource == null) {
             return null;
         }

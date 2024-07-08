@@ -49,7 +49,7 @@ public abstract class UriUtilsWraps {
     @Nullable
     public static String decodeUrlWithUtf8(@Nullable String url) {
         try {
-            return StringUtils.isEmpty(url) ? null : URLDecoder.decode(url, StandardCharsets.UTF_8.name());
+            return StringUtils.isEmpty(url) ? null : URLDecoder.decode(url, StandardCharsets.UTF_8);
         } catch (Exception ignored) {
         }
         return null;
@@ -58,7 +58,7 @@ public abstract class UriUtilsWraps {
     @Nullable
     public static String encodeUrlWithUtf8(@Nullable String url) {
         try {
-            return StringUtils.isEmpty(url) ? null : URLEncoder.encode(url, StandardCharsets.UTF_8.name());
+            return StringUtils.isEmpty(url) ? null : URLEncoder.encode(url, StandardCharsets.UTF_8);
         } catch (Exception ignored) {
         }
         return null;

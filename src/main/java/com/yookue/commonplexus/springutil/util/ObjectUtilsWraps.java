@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.util;
 
 
+import java.util.Objects;
 import jakarta.annotation.Nullable;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 
 
@@ -45,7 +45,7 @@ public abstract class ObjectUtilsWraps {
      * @see org.springframework.util.ObjectUtils#nullSafeToString(Object)
      */
     public static String getDisplayString(@Nullable Object source, @Nullable String nullString) {
-        return (source == null) ? nullString : StringUtils.defaultString(ObjectUtils.getDisplayString(source), nullString);
+        return (source == null) ? nullString : Objects.toString(ObjectUtils.getDisplayString(source), nullString);
     }
 
     /**

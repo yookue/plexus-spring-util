@@ -14,7 +14,7 @@ Yookue plexus-spring-util is a packages of utility classes for Spring's hierarch
     </dependency>
 ```
 
-- There are many useful packages that may helps you a lot, code with it as you wish.
+- There are many useful packages that may help you a lot, code with it as you wish.
 
 | Package     | Description                                                                          |
 |-------------|--------------------------------------------------------------------------------------|
