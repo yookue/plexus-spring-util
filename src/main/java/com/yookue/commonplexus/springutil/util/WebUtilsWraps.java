@@ -58,6 +58,7 @@ import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
@@ -534,7 +535,7 @@ public abstract class WebUtilsWraps {
     /**
      * @see org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController#getStatus
      */
-    public static HttpStatus getServletStatus(@Nullable HttpServletRequest request) {
+    public static HttpStatusCode getServletStatus(@Nullable HttpServletRequest request) {
         if (request == null) {
             return null;
         }
@@ -787,19 +788,19 @@ public abstract class WebUtilsWraps {
         writeResponse(response, text, contentType, charset, null, null, null);
     }
 
-    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatus status) throws IOException {
+    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatusCode status) throws IOException {
         writeResponse(response, text, contentType, charset, status, null, null);
     }
 
-    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, String charset, @Nullable HttpStatus status) throws IOException {
+    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, String charset, @Nullable HttpStatusCode status) throws IOException {
         writeResponse(response, text, contentType, charset, status, null, null);
     }
 
-    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatus status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) throws IOException {
+    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatusCode status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) throws IOException {
         writeResponse(response, text, Objects.toString(contentType, null), Objects.toString(charset, null), status, null, null);
     }
 
-    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, @Nullable String charset, @Nullable HttpStatus status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) throws IOException {
+    public static void writeResponse(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, @Nullable String charset, @Nullable HttpStatusCode status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) throws IOException {
         if (response == null || response.isCommitted()) {
             return;
         }
@@ -831,22 +832,22 @@ public abstract class WebUtilsWraps {
         writeResponseQuietly(response, text, contentType, charset, null, null, null);
     }
 
-    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatus status) {
+    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatusCode status) {
         writeResponseQuietly(response, text, contentType, charset, status, null, null);
     }
 
-    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, @Nullable String charset, @Nullable HttpStatus status) {
+    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, @Nullable String charset, @Nullable HttpStatusCode status) {
         writeResponseQuietly(response, text, contentType, charset, status, null, null);
     }
 
-    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatus status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) {
+    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable MimeType contentType, @Nullable Charset charset, @Nullable HttpStatusCode status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) {
         try {
             writeResponse(response, text, contentType, charset, status, headers, cookies);
         } catch (Exception ignored) {
         }
     }
 
-    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, @Nullable String charset, @Nullable HttpStatus status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) {
+    public static void writeResponseQuietly(@Nullable HttpServletResponse response, @Nullable String text, @Nullable String contentType, @Nullable String charset, @Nullable HttpStatusCode status, @Nullable Map<String, String> headers, @Nullable List<Cookie> cookies) {
         try {
             writeResponse(response, text, contentType, charset, status, headers, cookies);
         } catch (Exception ignored) {

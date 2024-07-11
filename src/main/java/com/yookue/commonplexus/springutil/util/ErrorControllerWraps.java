@@ -27,7 +27,7 @@ import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorCon
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.context.request.ServletWebRequest;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
@@ -101,14 +101,14 @@ public abstract class ErrorControllerWraps {
     }
 
     @Nullable
-    public static HttpStatus getErrorStatus(@Nullable HttpServletRequest request) {
+    public static HttpStatusCode getErrorStatus(@Nullable HttpServletRequest request) {
         if (request == null) {
             return null;
         }
         Integer status = ObjectUtilsWraps.castAs(request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE), Integer.class);
         if (status != null) {
             try {
-                return HttpStatus.valueOf(status);
+                return HttpStatusCode.valueOf(status);
             } catch (Exception ignored) {
             }
         }
