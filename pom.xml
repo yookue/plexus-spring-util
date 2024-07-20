@@ -104,6 +104,10 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-fileupload2-jakarta-servlet6</artifactId>
             <version>${commons-fileupload2.version}</version>
@@ -180,22 +184,18 @@
         <dependency>
             <groupId>jakarta.mail</groupId>
             <artifactId>jakarta.mail-api</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.squareup</groupId>
@@ -236,10 +236,6 @@
             <artifactId>plexus-javase-util</artifactId>
             <version>${plexus-javase-util.version}</version>
             <exclusions>
-                <exclusion>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
