@@ -22,8 +22,10 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 import com.yookue.commonplexus.springutil.registrar.JacksonTemporalFormatRegistrar;
 
@@ -39,6 +41,7 @@ import com.yookue.commonplexus.springutil.registrar.JacksonTemporalFormatRegistr
 @Documented
 @Configuration(proxyBeanMethods = false)
 @Import(value = JacksonTemporalFormatRegistrar.class)
+@ConditionalOnClass(value = ObjectMapper.class)
 @SuppressWarnings("unused")
 public @interface JacksonTemporalFormat {
     /**

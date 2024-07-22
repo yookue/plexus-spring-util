@@ -18,8 +18,11 @@ package com.yookue.commonplexus.springutil.registrar;
 
 
 import java.lang.annotation.Annotation;
+import java.util.TimeZone;
 import jakarta.annotation.Nonnull;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +33,9 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.Assert;
 import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
 import com.yookue.commonplexus.springutil.annotation.JacksonTemporalFormat;
-import com.yookue.commonplexus.springutil.util.JacksonConfigWraps;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCustomizer;
 
 
 /**
@@ -53,7 +58,22 @@ public class JacksonTemporalFormatRegistrar implements ImportAware {
     }
 
     /**
-     * {@link org.springframework.http.converter.json.Jackson2ObjectMapperBuilder} can be customized by one or more {@link org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer} beans
+     * {@link org.springframework.http.converter.json.Jackson2ObjectMapperBuilder} for util-date
+     * <p>
+     * These customizer beans can be ordered (Spring own customizer has an order of 0)
+     */
+    @Bean
+    @Order(value = 100)
+    @SuppressWarnings("DuplicatedCode")
+    public Jackson2ObjectMapperBuilderCustomizer jacksonUtilDateMapperCustomizer(@Nonnull JacksonProperties properties) {
+        Assert.notNull(attributes, AssertMessageConst.NOT_NULL);
+        String dateTimeFormat = StringUtils.defaultIfBlank(attributes.getString("dateTimeFormat"), properties.getDateFormat());    // $NON-NLS-1$
+        TimeZone timeZone = ObjectUtils.defaultIfNull(properties.getTimeZone(), TimeZone.getDefault());
+        return JacksonUtilDateCustomizer.mapperCustomizer(dateTimeFormat, timeZone);
+    }
+
+    /**
+     * {@link org.springframework.http.converter.json.Jackson2ObjectMapperBuilder} for jsr-310
      * <p>
      * These customizer beans can be ordered (Spring own customizer has an order of 0)
      *
@@ -62,12 +82,33 @@ public class JacksonTemporalFormatRegistrar implements ImportAware {
      * @see com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer
      */
     @Bean
-    @Order(value = 100)
-    public Jackson2ObjectMapperBuilderCustomizer jacksonDateTimeCustomizer(@Nonnull JacksonProperties properties) {
+    @Order(value = 110)
+    @ConditionalOnClass(name = "com.fasterxml.jackson.datatype.jsr310.JavaTimeModule")
+    @SuppressWarnings("DuplicatedCode")
+    public Jackson2ObjectMapperBuilderCustomizer jacksonJsr310MapperCustomizer(@Nonnull JacksonProperties properties) {
         Assert.notNull(attributes, AssertMessageConst.NOT_NULL);
         String dateFormat = StringUtils.defaultIfBlank(attributes.getString("dateFormat"), properties.getDateFormat());    // $NON-NLS-1$
         String timeFormat = attributes.getString("timeFormat");    // $NON-NLS-1$
         String dateTimeFormat = attributes.getString("dateTimeFormat");    // $NON-NLS-1$
-        return JacksonConfigWraps.dateTimeCustomizer(dateFormat, timeFormat, dateTimeFormat, properties.getTimeZone());
+        TimeZone timeZone = ObjectUtils.defaultIfNull(properties.getTimeZone(), TimeZone.getDefault());
+        return JacksonJsr310Customizer.mapperCustomizer(dateFormat, timeFormat, dateTimeFormat, timeZone);
+    }
+
+    /**
+     * {@link org.springframework.http.converter.json.Jackson2ObjectMapperBuilder} for joda-time
+     * <p>
+     * These customizer beans can be ordered (Spring own customizer has an order of 0)
+     */
+    @Bean
+    @Order(value = 120)
+    @ConditionalOnClass(name = "com.fasterxml.jackson.datatype.joda.JodaModule")
+    @SuppressWarnings("DuplicatedCode")
+    public Jackson2ObjectMapperBuilderCustomizer jacksonJodaTimeMapperCustomizer(@Nonnull JacksonProperties properties) {
+        Assert.notNull(attributes, AssertMessageConst.NOT_NULL);
+        String dateFormat = StringUtils.defaultIfBlank(attributes.getString("dateFormat"), properties.getDateFormat());    // $NON-NLS-1$
+        String timeFormat = attributes.getString("timeFormat");    // $NON-NLS-1$
+        String dateTimeFormat = attributes.getString("dateTimeFormat");    // $NON-NLS-1$
+        TimeZone timeZone = ObjectUtils.defaultIfNull(properties.getTimeZone(), TimeZone.getDefault());
+        return JacksonJodaTimeCustomizer.mapperCustomizer(dateFormat, timeFormat, dateTimeFormat, timeZone);
     }
 }

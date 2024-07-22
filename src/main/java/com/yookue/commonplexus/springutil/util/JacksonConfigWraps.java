@@ -18,6 +18,7 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -37,11 +38,7 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
-import com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer;
-import com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer;
-import com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer;
 
 
 /**
@@ -56,23 +53,23 @@ import com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class JacksonConfigWraps {
     @Nonnull
-    @SuppressWarnings("ParameterCanBeLocal")
+    @SuppressWarnings("DuplicatedCode")
     public static Jackson2ObjectMapperBuilderCustomizer dateTimeCustomizer(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
-        dateFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD);
-        timeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_HHMMSS);
+        dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
+        timeFormat = StringUtils.defaultIfBlank(timeFormat, TemporalFormatConst.ISO_HHMMSS);
         dateTimeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD_HHMMSS);
         // Prepare jackson install modules
         List<Module> prepareModules = new ArrayList<>();
         SimpleModule utilModule = new SimpleModule();
-        utilModule.addSerializer(java.util.Date.class, new DateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        utilModule.addSerializer(java.sql.Date.class, new SqlDateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        utilModule.addDeserializer(java.util.Date.class, new UtilDateDeserializer());
-        utilModule.addDeserializer(java.sql.Date.class, new SqlDateDeserializer());
+        utilModule.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
+        utilModule.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
+        utilModule.addDeserializer(java.util.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer());
+        utilModule.addDeserializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer());
         prepareModules.add(utilModule);
         if (ClassUtils.isPresent("com.fasterxml.jackson.datatype.jsr310.JavaTimeModule", null)) {    // $NON-NLS-1$
-            java.time.format.DateTimeFormatter dateFormatter = java.time.format.DateTimeFormatter.ofPattern(dateFormat);
-            java.time.format.DateTimeFormatter timeFormatter = java.time.format.DateTimeFormatter.ofPattern(timeFormat);
-            java.time.format.DateTimeFormatter dateTimeFormatter = java.time.format.DateTimeFormatter.ofPattern(dateTimeFormat);
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(timeFormat);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeFormat);
             SimpleModule jsrModule = new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule();
             jsrModule.addSerializer(java.time.LocalDate.class, new com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer(dateFormatter));
             jsrModule.addSerializer(java.time.LocalTime.class, new com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer(timeFormatter));
