@@ -56,10 +56,9 @@ import com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class JacksonConfigWraps {
     @Nonnull
-    @SuppressWarnings("ParameterCanBeLocal")
     public static Jackson2ObjectMapperBuilderCustomizer dateTimeCustomizer(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
-        dateFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD);
-        timeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_HHMMSS);
+        dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
+        timeFormat = StringUtils.defaultIfBlank(timeFormat, TemporalFormatConst.ISO_HHMMSS);
         dateTimeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD_HHMMSS);
         // Prepare jackson install modules
         List<Module> prepareModules = new ArrayList<>();
