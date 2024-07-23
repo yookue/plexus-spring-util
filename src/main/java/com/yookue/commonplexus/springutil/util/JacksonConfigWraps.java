@@ -17,28 +17,26 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.util.ClassUtils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCustomizer;
 
 
 /**
@@ -53,47 +51,14 @@ import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class JacksonConfigWraps {
     @Nonnull
-    @SuppressWarnings("DuplicatedCode")
     public static Jackson2ObjectMapperBuilderCustomizer dateTimeCustomizer(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
-        dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
-        timeFormat = StringUtils.defaultIfBlank(timeFormat, TemporalFormatConst.ISO_HHMMSS);
-        dateTimeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD_HHMMSS);
-        // Prepare jackson install modules
-        List<Module> prepareModules = new ArrayList<>();
-        SimpleModule utilModule = new SimpleModule();
-        utilModule.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        utilModule.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        utilModule.addDeserializer(java.util.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer());
-        utilModule.addDeserializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer());
-        prepareModules.add(utilModule);
-        if (ClassUtils.isPresent("com.fasterxml.jackson.datatype.jsr310.JavaTimeModule", null)) {    // $NON-NLS-1$
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(dateFormat);
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(timeFormat);
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimeFormat);
-            SimpleModule jsrModule = new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule();
-            jsrModule.addSerializer(java.time.LocalDate.class, new com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer(dateFormatter));
-            jsrModule.addSerializer(java.time.LocalTime.class, new com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer(timeFormatter));
-            jsrModule.addSerializer(java.time.LocalDateTime.class, new com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer(dateTimeFormatter));
-            jsrModule.addDeserializer(java.time.LocalDate.class, new com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer(dateFormatter));
-            jsrModule.addDeserializer(java.time.LocalTime.class, new com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer(timeFormatter));
-            jsrModule.addDeserializer(java.time.LocalDateTime.class, new com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer(dateTimeFormatter));
-            prepareModules.add(jsrModule);
-        }
-        if (ClassUtils.isPresent("com.fasterxml.jackson.datatype.joda.JodaModule", null)) {    // $NON-NLS-1$
-            com.fasterxml.jackson.datatype.joda.cfg.JacksonJodaDateFormat dateFormatter = new com.fasterxml.jackson.datatype.joda.cfg.JacksonJodaDateFormat(org.joda.time.format.DateTimeFormat.forPattern(dateFormat));
-            com.fasterxml.jackson.datatype.joda.cfg.JacksonJodaDateFormat timeFormatter = new com.fasterxml.jackson.datatype.joda.cfg.JacksonJodaDateFormat(org.joda.time.format.DateTimeFormat.forPattern(timeFormat));
-            com.fasterxml.jackson.datatype.joda.cfg.JacksonJodaDateFormat dateTimeFormatter = new com.fasterxml.jackson.datatype.joda.cfg.JacksonJodaDateFormat(org.joda.time.format.DateTimeFormat.forPattern(dateTimeFormat));
-            SimpleModule jodaModule = new com.fasterxml.jackson.datatype.joda.JodaModule();
-            jodaModule.addSerializer(org.joda.time.LocalDate.class, new com.fasterxml.jackson.datatype.joda.ser.LocalDateSerializer(dateFormatter));
-            jodaModule.addSerializer(org.joda.time.LocalTime.class, new com.fasterxml.jackson.datatype.joda.ser.LocalTimeSerializer(timeFormatter));
-            jodaModule.addSerializer(org.joda.time.LocalDateTime.class, new com.fasterxml.jackson.datatype.joda.ser.LocalDateTimeSerializer(timeFormatter));
-            jodaModule.addDeserializer(org.joda.time.LocalDate.class, new com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer(dateFormatter));
-            jodaModule.addDeserializer(org.joda.time.LocalTime.class, new com.fasterxml.jackson.datatype.joda.deser.LocalTimeDeserializer(timeFormatter));
-            jodaModule.addDeserializer(org.joda.time.LocalDateTime.class, new com.fasterxml.jackson.datatype.joda.deser.LocalDateTimeDeserializer(dateTimeFormatter));
-            prepareModules.add(jodaModule);
-        }
+        List<SimpleModule> modules = new ArrayList<>();
+        modules.add(JacksonUtilDateCustomizer.mapperModule(dateTimeFormat));
+        modules.add(JacksonJsr310Customizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
+        modules.add(JacksonJodaTimeCustomizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
+        SimpleModule[] alias = modules.stream().filter(Objects::nonNull).toArray(SimpleModule[]::new);
         return builder -> {
-            builder.modulesToInstall(prepareModules.toArray(new Module[0]));
+            builder.modulesToInstall(alias);
             builder.timeZone(ObjectUtils.defaultIfNull(timeZone, TimeZone.getDefault()));
         };
     }

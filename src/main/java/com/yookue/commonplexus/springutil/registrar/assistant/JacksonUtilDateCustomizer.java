@@ -33,19 +33,22 @@ import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
  *
  * @author David Hsing
  */
-@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class JacksonUtilDateCustomizer {
     @Nonnull
-    @SuppressWarnings("DuplicatedCode")
-    public static Jackson2ObjectMapperBuilderCustomizer mapperCustomizer(@Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
+    public static SimpleModule mapperModule(@Nullable String dateTimeFormat) {
         dateTimeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD_HHMMSS);
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        module.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        module.addDeserializer(java.util.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer());
-        module.addDeserializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer());
+        SimpleModule result = new SimpleModule();
+        result.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
+        result.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
+        result.addDeserializer(java.util.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer());
+        result.addDeserializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer());
+        return result;
+    }
+
+    @Nonnull
+    public static Jackson2ObjectMapperBuilderCustomizer mapperCustomizer(@Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
         return builder -> {
-            builder.modulesToInstall(module);
+            builder.modulesToInstall(mapperModule(dateTimeFormat));
             builder.timeZone(ObjectUtils.defaultIfNull(timeZone, TimeZone.getDefault()));
         };
     }
