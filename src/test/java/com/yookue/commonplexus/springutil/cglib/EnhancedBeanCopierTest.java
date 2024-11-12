@@ -34,15 +34,15 @@ import lombok.extern.slf4j.Slf4j;
 class EnhancedBeanCopierTest {
     @Test
     void copyIgnoreNullSource() {
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:/cglib-test");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "D:/plexus-test");
         SimpleStruct source = new SimpleStruct(), target = new SimpleStruct();
         source.setCode(200);
         target.setCode(500);
-        target.setName("testing2");
+        target.setName("yookue");
         EnhancedBeanCopier copier = EnhancedBeanCopier.create(SimpleStruct.class, SimpleStruct.class, true);
         copier.copy(source, target, (sourceValue, targetType, targetSetter, targetName, targetValue) -> sourceValue == null ? targetValue : sourceValue);
         log.info("{} = {}", StackTraceWraps.getExecutingMethodName(), target.getName());
-        Assertions.assertEquals("testing2", target.getName());
+        Assertions.assertEquals("yookue", target.getName());
     }
 
     @Data
