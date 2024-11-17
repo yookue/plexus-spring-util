@@ -68,6 +68,6 @@ public abstract class AlternativeUuidGenerator {
     public static String getBalancedUuid(boolean uppercase, boolean hyphen) {
         String result = idGenerator.generateId().toString();
         result = uppercase ? StringUtils.upperCase(result) : StringUtils.lowerCase(result);
-        return hyphen ? result : StringUtils.remove(result, CharVariantConst.MINUS);
+        return hyphen ? result : StringUtils.remove(result, CharVariantConst.HYPHEN);
     }
 }

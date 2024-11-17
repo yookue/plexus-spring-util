@@ -68,6 +68,6 @@ public abstract class SimpleUuidGenerator {
     public static String getIncreasedUuid(boolean uppercase, boolean hyphen) {
         String result = idGenerator.generateId().toString();
         result = uppercase ? StringUtils.upperCase(result) : StringUtils.lowerCase(result);
-        return hyphen ? result : StringUtils.remove(result, CharVariantConst.MINUS);
+        return hyphen ? result : StringUtils.remove(result, CharVariantConst.HYPHEN);
     }
 }

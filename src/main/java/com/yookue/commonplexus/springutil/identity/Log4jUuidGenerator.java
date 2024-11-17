@@ -65,6 +65,6 @@ public abstract class Log4jUuidGenerator {
     public static String getTemporalUuid(boolean uppercase, boolean hyphen) {
         String result = UuidUtil.getTimeBasedUuid().toString();
         result = uppercase ? StringUtils.upperCase(result) : StringUtils.lowerCase(result);
-        return hyphen ? result : StringUtils.remove(result, CharVariantConst.MINUS);
+        return hyphen ? result : StringUtils.remove(result, CharVariantConst.HYPHEN);
     }
 }

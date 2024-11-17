@@ -67,7 +67,7 @@ public abstract class MapPlainWraps {
 
     @Nullable
     public static <K, V> String toDelimitedString(@Nullable Map<K, V> map) {
-        return toDelimitedString(map, CharUtils.toString(CharVariantConst.EQUALS), SymbolVariantConst.COMMA_SPACE);
+        return toDelimitedString(map, CharUtils.toString(CharVariantConst.EQUAL), SymbolVariantConst.COMMA_SPACE);
     }
 
     @Nullable

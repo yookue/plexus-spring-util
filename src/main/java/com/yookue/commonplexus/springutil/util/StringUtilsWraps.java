@@ -157,7 +157,7 @@ public abstract class StringUtilsWraps {
             return null;
         }
         if (!StringUtils.hasText(keyValueDelimiter)) {
-            keyValueDelimiter = CharUtils.toString(CharVariantConst.EQUALS);
+            keyValueDelimiter = CharUtils.toString(CharVariantConst.EQUAL);
         }
         return StringUtils.splitArrayElementsIntoProperties(groups, keyValueDelimiter.toString(), CharSequenceWraps.toStringIgnoreNull(charsToDelete));
     }

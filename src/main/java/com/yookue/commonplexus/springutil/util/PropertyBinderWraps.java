@@ -127,9 +127,9 @@ public abstract class PropertyBinderWraps {
             }
             char character1 = Character.toLowerCase(property1.charAt(index1));
             char character2 = Character.toLowerCase(property2.charAt(index2));
-            if (character1 == CharVariantConst.MINUS || character1 == CharVariantConst.UNDERLINE) {
+            if (character1 == CharVariantConst.HYPHEN || character1 == CharVariantConst.UNDERSCORE) {
                 index1++;
-            } else if (character2 == CharVariantConst.MINUS || character2 == CharVariantConst.UNDERLINE) {
+            } else if (character2 == CharVariantConst.HYPHEN || character2 == CharVariantConst.UNDERSCORE) {
                 index2++;
             } else if (character1 != character2) {
                 return false;
@@ -140,7 +140,7 @@ public abstract class PropertyBinderWraps {
         }
         while (index2 < length2 - offset2) {
             char ch = property2.charAt(index2++);
-            if (ch != CharVariantConst.MINUS && ch != CharVariantConst.UNDERLINE) {
+            if (ch != CharVariantConst.HYPHEN && ch != CharVariantConst.UNDERSCORE) {
                 return false;
             }
         }

@@ -811,7 +811,7 @@ public abstract class RequestParamWraps {
     }
 
     public static String getCookiesAsString(@Nullable HttpServletRequest request) {
-        return getCookiesAsString(request, CharUtils.toString(CharVariantConst.EQUALS), SymbolVariantConst.SEMICOLON_SPACE);
+        return getCookiesAsString(request, CharUtils.toString(CharVariantConst.EQUAL), SymbolVariantConst.SEMICOLON_SPACE);
     }
 
     @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})

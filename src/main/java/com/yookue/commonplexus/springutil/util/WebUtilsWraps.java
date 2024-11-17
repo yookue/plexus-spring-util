@@ -524,8 +524,8 @@ public abstract class WebUtilsWraps {
             return null;
         }
         for (String content : contents) {
-            if (StringUtils.startsWithIgnoreCase(content, StringVariantConst.FILENAME) && StringUtils.contains(content, CharVariantConst.EQUALS)) {
-                String filename = StringUtils.remove(StringUtils.substringAfter(content, CharVariantConst.EQUALS), CharVariantConst.DOUBLE_QUOTE);
+            if (StringUtils.startsWithIgnoreCase(content, StringVariantConst.FILENAME) && StringUtils.contains(content, CharVariantConst.EQUAL)) {
+                String filename = StringUtils.remove(StringUtils.substringAfter(content, CharVariantConst.EQUAL), CharVariantConst.DOUBLE_QUOTE);
                 return StringUtils.trimToNull(filename);
             }
         }
