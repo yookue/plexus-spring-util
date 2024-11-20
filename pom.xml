@@ -234,7 +234,7 @@
         <dependency>
             <groupId>com.yookue.commonplexus</groupId>
             <artifactId>plexus-javase-util</artifactId>
-            <version>${plexus-javase-util.version}</version>
+            <version>[${plexus-javase-util.version},)</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
