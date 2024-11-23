@@ -20,13 +20,15 @@ package com.yookue.commonplexus.springutil.util;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import jakarta.annotation.Nullable;
+import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;
+import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
 
 /**
- * Utilities for AspectJ
+ * Utilities for Spring aop
  *
  * @author David Hsing
  * @see org.springframework.aop.support.AopUtils
@@ -34,7 +36,7 @@ import org.aspectj.lang.reflect.MethodSignature;
  * @see org.springframework.aop.config.AopNamespaceUtils
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
-public abstract class AspectUtilsWraps {
+public abstract class AopUtilsWraps {
     @Nullable
     public static Constructor<?> getConstructor(@Nullable JoinPoint point) throws NoSuchMethodException, SecurityException {
         ConstructorSignature signature = getConstructorSignature(point);
@@ -54,22 +56,50 @@ public abstract class AspectUtilsWraps {
         return (point != null && point.getSignature() instanceof ConstructorSignature) ? (ConstructorSignature) point.getSignature() : null;
     }
 
+    public static MethodSignature getMethodSignature(@Nullable JoinPoint point) {
+        return (point != null && point.getSignature() instanceof MethodSignature) ? (MethodSignature) point.getSignature() : null;
+    }
+
+    public static Object getParameter(@Nullable JoinPoint point, int index) {
+        return getParameter(point, index, null);
+    }
+
+    public static Object getParameter(@Nullable JoinPoint point, int index, @Nullable Object defaultValue) {
+        return (point == null || index < 0) ? defaultValue : ArrayUtils.get(point.getArgs(), index, defaultValue);
+    }
+
+    public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectedType) {
+        return getParameterAs(point, index, expectedType, null);
+    }
+
+    public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectedType, @Nullable T defaultValue) {
+        return ObjectUtilsWraps.castAs(getParameter(point, index), expectedType, defaultValue);
+    }
+
     @Nullable
-    public static Method getMethod(@Nullable JoinPoint point) throws NoSuchMethodException, SecurityException {
+    public static Method getTargetMethod(@Nullable JoinPoint point) throws NoSuchMethodException, SecurityException {
         MethodSignature signature = getMethodSignature(point);
         return (signature == null) ? null : point.getTarget().getClass().getMethod(signature.getName(), signature.getParameterTypes());
     }
 
     @Nullable
-    public static Method getMethodQuietly(@Nullable JoinPoint point) {
+    public static Method getTargetMethodQuietly(@Nullable JoinPoint point) {
         try {
-            return getMethod(point);
+            return getTargetMethod(point);
         } catch (Exception ignored) {
         }
         return null;
     }
 
-    public static MethodSignature getMethodSignature(@Nullable JoinPoint point) {
-        return (point != null && point.getSignature() instanceof MethodSignature) ? (MethodSignature) point.getSignature() : null;
+    public static boolean isTargetClassAssignable(@Nullable JoinPoint point, @Nullable Class<?> superclass) {
+        return point != null && ClassUtilsWraps.isAssignable(superclass, point.getTarget().getClass());
+    }
+
+    public static boolean isTargetClassAssignable(@Nullable JoinPoint point, @Nullable String superclassName) {
+        return isTargetClassAssignable(point, superclassName, null);
+    }
+
+    public static boolean isTargetClassAssignable(@Nullable JoinPoint point, @Nullable String superclassName, @Nullable ClassLoader classLoader) {
+        return point != null && ClassUtilsWraps.isAssignable(superclassName, point.getTarget().getClass().getName(), classLoader);
     }
 }
