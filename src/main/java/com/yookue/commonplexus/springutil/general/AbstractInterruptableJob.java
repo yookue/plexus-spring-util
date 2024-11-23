@@ -17,7 +17,18 @@
 package com.yookue.commonplexus.springutil.general;
 
 
+import org.quartz.InterruptableJob;
+import org.springframework.scheduling.quartz.QuartzJobBean;
+import lombok.Getter;
+
+
+@Getter
 @SuppressWarnings("unused")
-public abstract class AbstractExecutableSchedule {
-    public abstract void execute();
+public abstract class AbstractInterruptableJob extends QuartzJobBean implements InterruptableJob {
+    private boolean interrupted = false;
+
+    @Override
+    public void interrupt() {
+        interrupted = true;
+    }
 }
