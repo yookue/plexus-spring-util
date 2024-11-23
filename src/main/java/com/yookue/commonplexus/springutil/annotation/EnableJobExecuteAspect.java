@@ -14,28 +14,26 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.general;
+package com.yookue.commonplexus.springutil.annotation;
 
 
-import org.quartz.InterruptableJob;
-import org.springframework.scheduling.quartz.QuartzJobBean;
-import lombok.Getter;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 
 /**
- * Abstract interruptable job for Spring quartz
+ * Annotation for marking the method named "executeInternal" within a class that extend {@link org.springframework.scheduling.quartz.QuartzJobBean} to aspect
  *
  * @author David Hsing
- * @see org.quartz.InterruptableJob
- * @see org.springframework.scheduling.quartz.QuartzJobBean
  */
-@Getter
+@Target(value = ElementType.METHOD)
+@Retention(value = RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
 @SuppressWarnings("unused")
-public abstract class AbstractInterruptableJob extends QuartzJobBean implements InterruptableJob {
-    private boolean interrupted = false;
-
-    @Override
-    public void interrupt() {
-        interrupted = true;
-    }
+public @interface EnableJobExecuteAspect {
 }
