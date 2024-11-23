@@ -25,23 +25,23 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import com.yookue.commonplexus.springutil.constant.AntPathConst;
-import com.yookue.commonplexus.springutil.registrar.LoggingMdcInterceptorRegistrar;
+import com.yookue.commonplexus.springutil.registrar.MdcTraceInterceptorRegistrar;
 
 
 /**
- * Annotation that enables a {@link com.yookue.commonplexus.springutil.interceptor.LoggingMdcInterceptor}
+ * Annotation that enables a {@link com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor}
  *
  * @author David Hsing
- * @see com.yookue.commonplexus.springutil.interceptor.LoggingMdcInterceptor
- * @see com.yookue.commonplexus.springutil.registrar.LoggingMdcInterceptorRegistrar
+ * @see com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor
+ * @see com.yookue.commonplexus.springutil.registrar.MdcTraceInterceptorRegistrar
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration
-@Import(value = LoggingMdcInterceptorRegistrar.class)
+@Import(value = MdcTraceInterceptorRegistrar.class)
 @SuppressWarnings("unused")
-public @interface EnableLoggingMdcInterceptor {
+public @interface EnableMdcTraceInterceptor {
     /**
      * Returns the url patterns of the interceptor
      *

@@ -31,13 +31,13 @@ import com.yookue.commonplexus.springutil.util.HttpHeaderWraps;
 
 
 /**
- * {@link org.springframework.web.servlet.HandlerInterceptor} for logging Mapped Diagnostic Context
+ * {@link org.springframework.web.servlet.HandlerInterceptor} for tracing Mapped Diagnostic Context
  * <p>
  * Usage: include <code>%X{traceId}</code> as pattern in your logging configuration
  *
  * @author David Hsing
  */
-public class LoggingMdcInterceptor implements HandlerInterceptor {
+public class MdcTraceInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response, @Nonnull Object handler) {
         String traceId = HttpHeaderWraps.getHeader(request, HttpHeaderConst.X_TRACE_ID, UtilUuidGenerator.getPopularUuid());

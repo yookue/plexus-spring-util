@@ -26,18 +26,18 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import com.yookue.commonplexus.springutil.annotation.EnableLoggingMdcInterceptor;
-import com.yookue.commonplexus.springutil.interceptor.LoggingMdcInterceptor;
+import com.yookue.commonplexus.springutil.annotation.EnableMdcTraceInterceptor;
+import com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor;
 
 
 /**
- * Registrar of a {@link com.yookue.commonplexus.springutil.interceptor.LoggingMdcInterceptor}
+ * Registrar of a {@link com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor}
  *
  * @author David Hsing
  * @see org.slf4j.MDC
  */
-public class LoggingMdcInterceptorRegistrar implements ImportAware, WebMvcConfigurer {
-    private final Class<? extends Annotation> annotation = EnableLoggingMdcInterceptor.class;
+public class MdcTraceInterceptorRegistrar implements ImportAware, WebMvcConfigurer {
+    private final Class<? extends Annotation> annotation = EnableMdcTraceInterceptor.class;
     private AnnotationAttributes attributes;
 
     @Override
@@ -50,12 +50,12 @@ public class LoggingMdcInterceptorRegistrar implements ImportAware, WebMvcConfig
 
     @Bean
     @ConditionalOnMissingBean
-    public LoggingMdcInterceptor loggingMdcInterceptor() {
-        return new LoggingMdcInterceptor();
+    public MdcTraceInterceptor mdcTraceInterceptor() {
+        return new MdcTraceInterceptor();
     }
 
     @Override
     public void addInterceptors(@Nonnull InterceptorRegistry registry) {
-        registry.addInterceptor(loggingMdcInterceptor()).addPathPatterns(attributes.getStringArray("urlPatterns"));    // $NON-NLS-1$
+        registry.addInterceptor(mdcTraceInterceptor()).addPathPatterns(attributes.getStringArray("urlPatterns"));    // $NON-NLS-1$
     }
 }
