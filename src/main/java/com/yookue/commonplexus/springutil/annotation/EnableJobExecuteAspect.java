@@ -26,7 +26,13 @@ import java.lang.annotation.Target;
 
 
 /**
- * Annotation for marking the method named "executeInternal" within a class that extend {@link org.springframework.scheduling.quartz.QuartzJobBean} to aspect
+ * Annotation for marking a method need to be processed by aop
+ * <p>
+ * Expectations:
+ * <ul>
+ *     <li>Classes implements {@link org.quartz.Job} and annotated this on the method which overrides {@link org.quartz.Job#execute(org.quartz.JobExecutionContext)}</li>
+ *     <li>Classes extends {@link org.springframework.scheduling.quartz.QuartzJobBean} and annotated this on the method which overrides {@link org.springframework.scheduling.quartz.QuartzJobBean#executeInternal(org.quartz.JobExecutionContext)}</li>
+ * </ul>
  *
  * @author David Hsing
  */
@@ -34,6 +40,6 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "JavadocReference"})
 public @interface EnableJobExecuteAspect {
 }
