@@ -280,7 +280,7 @@ public abstract class QuietMethodWraps {
                 ArrayUtilsWraps.forEachIndexing(types, (index, element) -> {
                     String name = StringUtils.defaultIfBlank(ArrayUtils.get(names, index), String.format("arg%d", index));    // $NON-NLS-1$
                     while (MapPlainWraps.containsKey(nameTypes, name)) {
-                        name = StringUtils.lowerCase(RandomStringUtils.random(6));
+                        name = StringUtils.lowerCase(RandomStringUtils.secure().next(6));
                     }
                     nameTypes.put(name, element);
                 });

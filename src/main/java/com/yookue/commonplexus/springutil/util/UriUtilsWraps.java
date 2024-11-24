@@ -312,6 +312,6 @@ public abstract class UriUtilsWraps {
 
     @Nullable
     public static UriComponents parseComponentsFromUrl(@Nullable String url) {
-        return StringUtils.isBlank(url) ? null : UriComponentsBuilder.fromHttpUrl(url).build();
+        return StringUtils.isBlank(url) ? null : UriComponentsBuilder.fromUriString(url).build();
     }
 }

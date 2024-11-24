@@ -64,7 +64,6 @@ public class JacksonTemporalFormatRegistrar implements ImportAware {
      */
     @Bean
     @Order(value = 100)
-    @SuppressWarnings("DuplicatedCode")
     public Jackson2ObjectMapperBuilderCustomizer jacksonUtilDateMapperCustomizer(@Nonnull JacksonProperties properties) {
         Assert.notNull(attributes, AssertMessageConst.NOT_NULL);
         String dateTimeFormat = StringUtils.defaultIfBlank(attributes.getString("dateTimeFormat"), properties.getDateFormat());    // $NON-NLS-1$
