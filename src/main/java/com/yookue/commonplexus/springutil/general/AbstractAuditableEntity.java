@@ -20,7 +20,6 @@ package com.yookue.commonplexus.springutil.general;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
@@ -46,7 +45,6 @@ import lombok.ToString;
  * @see org.springframework.data.auditing.AuditingHandler
  */
 @MappedSuperclass
-@Embeddable
 @EntityListeners(value = AuditingEntityListener.class)
 @Getter
 @Setter
