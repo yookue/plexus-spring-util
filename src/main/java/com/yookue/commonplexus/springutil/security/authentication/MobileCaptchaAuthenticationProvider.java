@@ -147,8 +147,8 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
     }
 
     protected String determineDial(@Nullable Authentication authentication) {
-        if (authentication instanceof MobileCaptchaAuthenticationToken instance) {
-            return ObjectUtilsWraps.castAs(instance.getAuxiliary(), String.class);
+        if (authentication instanceof MobileCaptchaAuthenticationToken alias) {
+            return ObjectUtilsWraps.castAs(alias.getAuxiliary(), String.class);
         }
         return null;
     }

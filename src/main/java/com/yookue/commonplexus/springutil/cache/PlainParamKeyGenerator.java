@@ -63,16 +63,16 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                 joiner.add(JavaKeywordConst.NULL);
                 continue;
             }
-            if (param instanceof Boolean instance) {
-                joiner.add(BooleanUtils.toStringTrueFalse(instance));
+            if (param instanceof Boolean alias) {
+                joiner.add(BooleanUtils.toStringTrueFalse(alias));
                 continue;
             }
-            if (param instanceof Character instance) {
-                joiner.add(CharUtils.toString(instance));
+            if (param instanceof Character alias) {
+                joiner.add(CharUtils.toString(alias));
                 continue;
             }
-            if (param instanceof CharSequence instance) {
-                String sequence = instance.toString();
+            if (param instanceof CharSequence alias) {
+                String sequence = alias.toString();
                 String reserves = RegexUtilsWraps.reserveAlphanumeric(sequence);
                 if (StringUtils.isNotBlank(reserves) && maxParamLength > 0) {
                     reserves = StringUtils.left(reserves, maxParamLength);
@@ -80,20 +80,20 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                 joiner.add(StringUtils.join(reserves, CharVariantConst.TILDE, sequence.hashCode()));
                 continue;
             }
-            if (param instanceof java.util.Date instance) {
-                joiner.add(UtilDateWraps.formatDateTime(instance, TemporalFormatConst.NON_YYYYMMDD));
+            if (param instanceof java.util.Date alias) {
+                joiner.add(UtilDateWraps.formatDateTime(alias, TemporalFormatConst.NON_YYYYMMDD));
                 continue;
             }
-            if (param instanceof java.time.LocalDate instance) {
-                joiner.add(LocalDateWraps.formatDate(instance, TemporalFormatConst.NON_YYYYMMDD));
+            if (param instanceof java.time.LocalDate alias) {
+                joiner.add(LocalDateWraps.formatDate(alias, TemporalFormatConst.NON_YYYYMMDD));
                 continue;
             }
-            if (param instanceof java.time.LocalDateTime instance) {
-                joiner.add(LocalDateWraps.formatDateTime(instance, TemporalFormatConst.NON_YYYYMMDD_HHMMSS));
+            if (param instanceof java.time.LocalDateTime alias) {
+                joiner.add(LocalDateWraps.formatDateTime(alias, TemporalFormatConst.NON_YYYYMMDD_HHMMSS));
                 continue;
             }
-            if (param instanceof java.time.LocalTime instance) {
-                joiner.add(LocalDateWraps.formatTime(instance, TemporalFormatConst.NON_HHMMSS));
+            if (param instanceof java.time.LocalTime alias) {
+                joiner.add(LocalDateWraps.formatTime(alias, TemporalFormatConst.NON_HHMMSS));
                 continue;
             }
             joiner.add(ObjectUtils.getDisplayString(param));

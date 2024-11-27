@@ -109,7 +109,7 @@ public abstract class ApplicationEnvironmentWraps {
     }
 
     public static ConfigurableEnvironment getConfigurableEnvironment(@Nullable Environment environment) {
-        return (environment instanceof ConfigurableEnvironment) ? (ConfigurableEnvironment) environment : null;
+        return (environment instanceof ConfigurableEnvironment alias) ? alias : null;
     }
 
     public static Integer getLocalServerPort(@Nullable Environment environment) {
@@ -123,18 +123,16 @@ public abstract class ApplicationEnvironmentWraps {
      *
      * @see org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer#onApplicationEvent
      */
-    @SuppressWarnings("unchecked")
     public static Integer getLocalServerPort(@Nullable ConfigurableEnvironment environment) {
         if (environment == null) {
             return null;
         }
         PropertySource<?> source = getServerPortsPropertySource(environment);
-        if (source == null || !(source.getSource() instanceof Map)) {
+        if (source == null || !(source.getSource() instanceof Map<?, ?> alias)) {
             return null;
         }
-        Map<String, Object> properties = (Map<String, Object>) source.getSource();
-        for (Map.Entry<String, Object> entry : properties.entrySet()) {
-            if (RegexUtilsWraps.matches(entry.getKey(), "^local\\.\\S+\\.port$")) {    // $NON-NLS-1$
+        for (Map.Entry<?, ?> entry : alias.entrySet()) {
+            if ((entry.getKey() instanceof String keyAlias) && RegexUtilsWraps.matches(keyAlias, "^local\\.\\S+\\.port$")) {    // $NON-NLS-1$
                 return ObjectUtilsWraps.castAs(entry.getValue(), Integer.class);
             }
         }

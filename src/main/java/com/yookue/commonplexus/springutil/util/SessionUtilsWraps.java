@@ -49,12 +49,12 @@ public abstract class SessionUtilsWraps {
 
     @Nullable
     public static String getCookieName(@Nullable WebSessionIdResolver resolver) {
-        return (resolver instanceof CookieWebSessionIdResolver instance) ? instance.getCookieName() : null;
+        return (resolver instanceof CookieWebSessionIdResolver alias) ? alias.getCookieName() : null;
     }
 
     @Nullable
     public static String getHeaderName(@Nullable WebSessionIdResolver resolver) {
-        return (resolver instanceof HeaderWebSessionIdResolver instance) ? instance.getHeaderName() : null;
+        return (resolver instanceof HeaderWebSessionIdResolver alias) ? alias.getHeaderName() : null;
     }
 
     @SuppressWarnings("unchecked")

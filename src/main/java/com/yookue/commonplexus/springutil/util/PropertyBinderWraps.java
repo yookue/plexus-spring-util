@@ -56,19 +56,19 @@ public abstract class PropertyBinderWraps {
      * @return whether the environment contains the given property/prefix or not
      */
     public static boolean contains(@Nullable Environment environment, @Nullable String property) {
-        if (!(environment instanceof ConfigurableEnvironment) || StringUtils.isBlank(property)) {
+        if (!(environment instanceof ConfigurableEnvironment alias) || StringUtils.isBlank(property)) {
             return false;
         }
         ConfigurationPropertyName name = ConfigurationPropertyName.ofIfValid(property);
         if (name == null) {
             return false;
         }
-        MutablePropertySources sources = ((ConfigurableEnvironment) environment).getPropertySources();
+        MutablePropertySources sources = alias.getPropertySources();
         Assert.notNull(sources, AssertMessageConst.NOT_NULL);
         for (PropertySource<?> source : sources) {
             if (source instanceof OriginTrackedMapPropertySource) {
-                ConfigurationPropertySource alias = ConfigurationPropertySource.from(source);
-                if (alias.containsDescendantOf(name) == ConfigurationPropertyState.PRESENT) {
+                ConfigurationPropertySource element = ConfigurationPropertySource.from(source);
+                if (element.containsDescendantOf(name) == ConfigurationPropertyState.PRESENT) {
                     return true;
                 }
             }

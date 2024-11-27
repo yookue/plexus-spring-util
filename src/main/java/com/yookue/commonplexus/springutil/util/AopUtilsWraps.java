@@ -53,11 +53,11 @@ public abstract class AopUtilsWraps {
     }
 
     public static ConstructorSignature getConstructorSignature(@Nullable JoinPoint point) {
-        return (point != null && point.getSignature() instanceof ConstructorSignature) ? (ConstructorSignature) point.getSignature() : null;
+        return (point != null && point.getSignature() instanceof ConstructorSignature alias) ? alias : null;
     }
 
     public static MethodSignature getMethodSignature(@Nullable JoinPoint point) {
-        return (point != null && point.getSignature() instanceof MethodSignature) ? (MethodSignature) point.getSignature() : null;
+        return (point != null && point.getSignature() instanceof MethodSignature alias) ? alias : null;
     }
 
     public static Object getParameter(@Nullable JoinPoint point, int index) {

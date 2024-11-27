@@ -52,12 +52,12 @@ public class RdbmsDataAuditHandler extends IsNewAwareAuditingHandler {
     @Nonnull
     @Override
     public <T> T markCreated(@Nonnull T source) {
-        return (source instanceof AbstractAuditableEntity && BooleanUtils.isTrue(((AbstractAuditableEntity) source).getAuditCreate())) ? super.markCreated(source) : source;
+        return (source instanceof AbstractAuditableEntity alias && BooleanUtils.isTrue(alias.getAuditCreate())) ? super.markCreated(source) : source;
     }
 
     @Nonnull
     @Override
     public <T> T markModified(@Nonnull T source) {
-        return (source instanceof AbstractAuditableEntity && BooleanUtils.isTrue(((AbstractAuditableEntity) source).getAuditCreate())) ? super.markModified(source) : source;
+        return (source instanceof AbstractAuditableEntity alias && BooleanUtils.isTrue(alias.getAuditCreate())) ? super.markModified(source) : source;
     }
 }

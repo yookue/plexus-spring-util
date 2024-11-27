@@ -113,14 +113,14 @@ public class BeanValidationMessenger {
                     }
                 }
             }
-            if (error instanceof FieldError instance) {
-                List<String> arrayIndexes = RegexUtilsWraps.extractMatched(instance.getField(), RegexVariantConst.ARRAY_INDEX);
+            if (error instanceof FieldError alias) {
+                List<String> arrayIndexes = RegexUtilsWraps.extractMatched(alias.getField(), RegexVariantConst.ARRAY_INDEX);
                 if (CollectionPlainWraps.isNotEmpty(arrayIndexes)) {
                     builder.append(StringUtilsWraps.joinRoughly(arrayIndexes)).append(StringUtils.SPACE);
                 }
-                String plainName = RegexUtilsWraps.removeAll(instance.getField(), RegexVariantConst.ARRAY_INDEX);
+                String plainName = RegexUtilsWraps.removeAll(alias.getField(), RegexVariantConst.ARRAY_INDEX);
                 if (fieldName) {
-                    String localeName = getFieldLocaleName(instance, binding, locale);
+                    String localeName = getFieldLocaleName(alias, binding, locale);
                     if (nameLocalized && StringUtils.isNotEmpty(localeName)) {
                         builder.append(localeName);
                     } else {
@@ -130,7 +130,7 @@ public class BeanValidationMessenger {
                         builder.append(StringUtils.SPACE);
                     }
                 }
-                builder.append(getErrorMessage(instance, locale));
+                builder.append(getErrorMessage(alias, locale));
             } else {
                 builder.append(getErrorMessage(error, locale));
             }

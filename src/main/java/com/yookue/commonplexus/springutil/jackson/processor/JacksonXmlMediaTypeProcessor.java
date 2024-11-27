@@ -43,15 +43,15 @@ public class JacksonXmlMediaTypeProcessor implements BeanPostProcessor {
     @Override
     @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
-        if (!(bean instanceof MappingJackson2HttpMessageConverter instance)) {
+        if (!(bean instanceof MappingJackson2HttpMessageConverter alias)) {
             return bean;
         }
         MediaType soapXml = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.SOAP_XML);
         MediaType starXml = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.STAR_XML);
         List<MediaType> addTypes = Arrays.asList(MediaType.APPLICATION_XML, MediaType.APPLICATION_ATOM_XML, MediaType.APPLICATION_PROBLEM_XML, MediaType.APPLICATION_RSS_XML, MediaType.APPLICATION_XHTML_XML, soapXml, starXml);
         List<MediaType> allTypes = new ArrayList<>();
-        CollectionPlainWraps.addAllIfNotContains(allTypes, instance.getSupportedMediaTypes(), addTypes);
-        instance.setSupportedMediaTypes(allTypes);
+        CollectionPlainWraps.addAllIfNotContains(allTypes, alias.getSupportedMediaTypes(), addTypes);
+        alias.setSupportedMediaTypes(allTypes);
         return bean;
     }
 }

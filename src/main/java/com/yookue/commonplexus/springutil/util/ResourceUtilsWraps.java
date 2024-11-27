@@ -189,16 +189,16 @@ public abstract class ResourceUtilsWraps {
         if (resource == null) {
             return null;
         }
-        if (resource instanceof ClassPathResource instance) {
-            return instance.getPath();
-        } else if (resource instanceof FileSystemResource instance) {
-            return instance.getPath();
-        } else if (resource instanceof PathResource instance) {
-            return instance.getPath();
-        } else if (resource instanceof ServletContextResource instance) {
-            return instance.getPath();
-        } else if (resource instanceof UrlResource instance) {
-            return instance.getURL().toString();
+        if (resource instanceof ClassPathResource alias) {
+            return alias.getPath();
+        } else if (resource instanceof FileSystemResource alias) {
+            return alias.getPath();
+        } else if (resource instanceof PathResource alias) {
+            return alias.getPath();
+        } else if (resource instanceof ServletContextResource alias) {
+            return alias.getPath();
+        } else if (resource instanceof UrlResource alias) {
+            return alias.getURL().toString();
         }
         throw new UnsupportedResourceException();
     }

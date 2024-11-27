@@ -81,12 +81,12 @@ public abstract class SecurityUtilsWraps {
             return null;
         }
         Object principal = authentication.getPrincipal();
-        if (principal instanceof UserDetails instance) {
-            return instance.getUsername();
-        } else if (principal instanceof AuthenticatedPrincipal instance) {
-            return instance.getName();
-        } else if (principal instanceof Principal instance) {
-            return instance.getName();
+        if (principal instanceof UserDetails alias) {
+            return alias.getUsername();
+        } else if (principal instanceof AuthenticatedPrincipal alias) {
+            return alias.getName();
+        } else if (principal instanceof Principal alias) {
+            return alias.getName();
         }
         return Objects.toString(principal, null);
     }
@@ -137,8 +137,8 @@ public abstract class SecurityUtilsWraps {
         if (authentication == null) {
             return null;
         }
-        if (authentication.getPrincipal() instanceof UserDetails instance) {
-            return instance.getUsername();
+        if (authentication.getPrincipal() instanceof UserDetails alias) {
+            return alias.getUsername();
         }
         return ObjectUtilsWraps.toString(authentication.getPrincipal());
     }
@@ -193,8 +193,8 @@ public abstract class SecurityUtilsWraps {
         while (attributes != null && attributes.hasMoreElements()) {
             String name = attributes.nextElement();
             Object value = session.getAttribute(name);
-            if (value instanceof SecurityContext instance) {
-                result.add(instance);
+            if (value instanceof SecurityContext alias) {
+                result.add(alias);
             }
         }
         return CollectionUtils.isEmpty(result) ? null : result;
@@ -232,16 +232,16 @@ public abstract class SecurityUtilsWraps {
         }
         Authentication result;
         final String keyHash = "keyHash";    // $NON-NLS-1$
-        if (authentication instanceof AnonymousAuthenticationToken instance) {
+        if (authentication instanceof AnonymousAuthenticationToken alias) {
             result = new AnonymousAuthenticationToken(StringUtils.SPACE, principal, renewAuthorities ? authorities : authentication.getAuthorities());
-            FieldUtils.writeField(result, keyHash, instance.getKeyHash(), true);
-        } else if (authentication instanceof JaasAuthenticationToken instance) {
-            result = new JaasAuthenticationToken(principal, renewCredentials ? credentials : authentication.getCredentials(), instance.getLoginContext());
+            FieldUtils.writeField(result, keyHash, alias.getKeyHash(), true);
+        } else if (authentication instanceof JaasAuthenticationToken alias) {
+            result = new JaasAuthenticationToken(principal, renewCredentials ? credentials : authentication.getCredentials(), alias.getLoginContext());
         } else if (authentication instanceof PreAuthenticatedAuthenticationToken) {
             result = new PreAuthenticatedAuthenticationToken(principal, renewCredentials ? credentials : authentication.getCredentials(), renewAuthorities ? authorities : authentication.getAuthorities());
-        } else if (authentication instanceof RememberMeAuthenticationToken instance) {
+        } else if (authentication instanceof RememberMeAuthenticationToken alias) {
             result = new RememberMeAuthenticationToken(StringUtils.SPACE, principal, renewAuthorities ? authorities : authentication.getAuthorities());
-            FieldUtils.writeField(result, keyHash, instance.getKeyHash(), true);
+            FieldUtils.writeField(result, keyHash, alias.getKeyHash(), true);
         } else if (authentication instanceof TestingAuthenticationToken) {
             List<GrantedAuthority> oldAuthorities = new ArrayList<>(authentication.getAuthorities());
             List<GrantedAuthority> newAuthorities = new ArrayList<>(authorities);

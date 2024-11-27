@@ -60,11 +60,11 @@ public abstract class ApplicationContextWraps {
     }
 
     public static ConfigurableApplicationContext getConfigurableApplicationContext(@Nullable ApplicationContext context) {
-        return (context instanceof ConfigurableApplicationContext) ? (ConfigurableApplicationContext) context : null;
+        return (context instanceof ConfigurableApplicationContext alias) ? alias : null;
     }
 
     public static WebApplicationContext getWebApplicationContext(@Nullable ApplicationContext context) {
-        return (context instanceof WebApplicationContext) ? (WebApplicationContext) context : null;
+        return (context instanceof WebApplicationContext alias) ? alias : null;
     }
 
     public static WebApplicationContext getWebApplicationContext(@Nullable ServletContext context) {
@@ -72,17 +72,17 @@ public abstract class ApplicationContextWraps {
     }
 
     public static WebServerApplicationContext getWebServerApplicationContext(@Nullable ApplicationContext context) {
-        return (context instanceof WebServerApplicationContext) ? (WebServerApplicationContext) context : null;
+        return (context instanceof WebServerApplicationContext alias) ? alias : null;
     }
 
     /**
      * @see org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer
      */
     public static Integer getLocalServerPort(@Nullable ApplicationContext context) {
-        if (!(context instanceof ConfigurableApplicationContext instance)) {
+        if (!(context instanceof ConfigurableApplicationContext alias)) {
             return null;
         }
-        Integer result = ApplicationEnvironmentWraps.getLocalServerPort(instance.getEnvironment());
+        Integer result = ApplicationEnvironmentWraps.getLocalServerPort(alias.getEnvironment());
         if (result == null && context.getParent() != null) {
             return getLocalServerPort(context.getParent());
         }

@@ -49,11 +49,11 @@ public class ThymeleafTemplateResolverProcessor implements BeanPostProcessor, Or
         if (beanProcessed) {
             return bean;
         }
-        if (bean instanceof TemplateEngine) {
-            engine = (TemplateEngine) bean;
+        if (bean instanceof TemplateEngine alias) {
+            engine = alias;
         }
-        if (bean instanceof ThymeleafProperties) {
-            properties = (ThymeleafProperties) bean;
+        if (bean instanceof ThymeleafProperties alias) {
+            properties = alias;
         }
         if (engine != null && properties != null) {
             UrlTemplateResolver resolver = new UrlTemplateResolver();

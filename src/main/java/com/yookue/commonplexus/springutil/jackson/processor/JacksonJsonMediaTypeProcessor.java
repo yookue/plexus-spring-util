@@ -42,15 +42,15 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 public class JacksonJsonMediaTypeProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
-        if (!(bean instanceof MappingJackson2HttpMessageConverter instance)) {
+        if (!(bean instanceof MappingJackson2HttpMessageConverter alias)) {
             return bean;
         }
         MediaType soapJson = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.SOAP_JSON);
         MediaType starJson = new MediaType(HttpMimeConst.APPLICATION, HttpMimeConst.STAR_JSON);
         List<MediaType> addTypes = Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_PROBLEM_JSON, MediaType.APPLICATION_NDJSON, soapJson, starJson);
         List<MediaType> allTypes = new ArrayList<>();
-        CollectionPlainWraps.addAllIfNotContains(allTypes, instance.getSupportedMediaTypes(), addTypes);
-        instance.setSupportedMediaTypes(allTypes);
+        CollectionPlainWraps.addAllIfNotContains(allTypes, alias.getSupportedMediaTypes(), addTypes);
+        alias.setSupportedMediaTypes(allTypes);
         return bean;
     }
 }

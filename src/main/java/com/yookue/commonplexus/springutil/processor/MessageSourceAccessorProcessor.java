@@ -56,8 +56,8 @@ public class MessageSourceAccessorProcessor implements BeanPostProcessor, Ordere
     }
 
     private void invokeAwareInterfaces(@Nonnull Object bean) {
-        if (bean instanceof MessageSourceAccessorAware instance) {
-            instance.setMessageSourceAccessor(messageAccessor);
+        if (bean instanceof MessageSourceAccessorAware alias) {
+            alias.setMessageSourceAccessor(messageAccessor);
         }
     }
 }

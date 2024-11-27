@@ -52,12 +52,12 @@ public class MongoDataAuditHandler extends IsNewAwareAuditingHandler {
     @Nonnull
     @Override
     public <T> T markCreated(@Nonnull T source) {
-        return (source instanceof AbstractAuditableDocument && BooleanUtils.isTrue(((AbstractAuditableDocument) source).getAuditCreate())) ? super.markCreated(source) : source;
+        return (source instanceof AbstractAuditableDocument alias && BooleanUtils.isTrue(alias.getAuditCreate())) ? super.markCreated(source) : source;
     }
 
     @Nonnull
     @Override
     public <T> T markModified(@Nonnull T source) {
-        return (source instanceof AbstractAuditableDocument && BooleanUtils.isTrue(((AbstractAuditableDocument) source).getAuditCreate())) ? super.markModified(source) : source;
+        return (source instanceof AbstractAuditableDocument alias && BooleanUtils.isTrue(alias.getAuditCreate())) ? super.markModified(source) : source;
     }
 }

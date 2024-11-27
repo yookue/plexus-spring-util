@@ -224,13 +224,13 @@ public abstract class WebUtilsWraps {
     @Nullable
     public static HttpServletRequest getContextServletRequest() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-        return (attributes instanceof ServletRequestAttributes instance) ? instance.getRequest() : null;
+        return (attributes instanceof ServletRequestAttributes alias) ? alias.getRequest() : null;
     }
 
     @Nullable
     public static HttpServletResponse getContextServletResponse() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-        return (attributes instanceof ServletRequestAttributes instance) ? instance.getResponse() : null;
+        return (attributes instanceof ServletRequestAttributes alias) ? alias.getResponse() : null;
     }
 
     /**
@@ -316,10 +316,10 @@ public abstract class WebUtilsWraps {
             return null;
         }
         Object locale = WebUtils.getSessionAttribute(request, sessionName);
-        if (locale instanceof Locale instance) {
-            return instance;
-        } else if (locale instanceof String instance) {
-            return LocaleParserWraps.parse(instance);
+        if (locale instanceof Locale alias) {
+            return alias;
+        } else if (locale instanceof String alias) {
+            return LocaleParserWraps.parse(alias);
         }
         return null;
     }
@@ -544,15 +544,15 @@ public abstract class WebUtilsWraps {
     }
 
     public static <T extends ServletRequestWrapper> T getServletRequestWrapper(@Nullable HttpServletRequest request, @Nullable Class<T> expectedType) {
-        if (!(request instanceof ServletRequestWrapper instance) || expectedType == null) {
+        if (!(request instanceof ServletRequestWrapper alias) || expectedType == null) {
             return null;
         }
-        ServletRequest wrapper = instance.getRequest();
-        while (wrapper instanceof ServletRequestWrapper) {
+        ServletRequest wrapper = alias.getRequest();
+        while (wrapper instanceof ServletRequestWrapper subAlias) {
             if (ClassUtils.isAssignableValue(expectedType, wrapper)) {
                 return ObjectUtilsWraps.castAs(wrapper, expectedType);
             }
-            wrapper = ((ServletRequestWrapper) wrapper).getRequest();
+            wrapper = subAlias.getRequest();
         }
         return null;
     }

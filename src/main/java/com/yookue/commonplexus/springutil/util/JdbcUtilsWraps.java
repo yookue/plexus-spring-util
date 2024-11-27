@@ -69,8 +69,8 @@ public abstract class JdbcUtilsWraps {
             } catch (IllegalAccessException ex) {
                 throw new MetaDataAccessException(String.format("Could not access method '%s' on DatabaseMetaData '%s'", metaMethod, metaData), ex);
             } catch (InvocationTargetException ex) {
-                if (ex.getTargetException() instanceof SQLException instance) {
-                    throw instance;
+                if (ex.getTargetException() instanceof SQLException alias) {
+                    throw alias;
                 }
                 throw new MetaDataAccessException(String.format("Invocation method '%s' failed on DatabaseMetaData '%s'", metaMethod, metaData), ex);
             }

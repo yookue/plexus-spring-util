@@ -60,8 +60,8 @@ public abstract class ValidationUtilsWraps {
             return null;
         }
         String result = error.contains(ConstraintViolation.class) ? error.unwrap(ConstraintViolation.class).getMessage() : error.getDefaultMessage();
-        if (error instanceof FieldError instance) {
-            return StringUtils.join(prefix, instance.getField(), suffix, LocaleHolderWraps.getOptionalSpace(), result);
+        if (error instanceof FieldError alias) {
+            return StringUtils.join(prefix, alias.getField(), suffix, LocaleHolderWraps.getOptionalSpace(), result);
         }
         return result;
     }
@@ -72,7 +72,7 @@ public abstract class ValidationUtilsWraps {
             return null;
         }
         String result = error.contains(ConstraintViolation.class) ? error.unwrap(ConstraintViolation.class).getMessage() : error.getDefaultMessage();
-        return (error instanceof FieldError instance) ? action.apply(instance) : result;
+        return (error instanceof FieldError alias) ? action.apply(alias) : result;
     }
 
     @Nullable

@@ -102,8 +102,8 @@ public class PropertiesAuthenticationEventPublisher implements AuthenticationEve
             throw new IllegalArgumentException(String.format("Authentication exception class %s has no suitable event", exception.getClass().getName()));    // $NON-NLS-1$
         }
         AbstractAuthenticationEvent event = ConstructorUtilsWraps.newInstance(constructor, authentication, exception);
-        if (event instanceof PropertiesCapableEvent instance && authenticationFailureTransition != null) {
-            authenticationFailureTransition.accept(instance);
+        if (event instanceof PropertiesCapableEvent alias && authenticationFailureTransition != null) {
+            authenticationFailureTransition.accept(alias);
         }
         publishEvent(event);
     }

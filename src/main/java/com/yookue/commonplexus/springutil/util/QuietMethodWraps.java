@@ -258,8 +258,8 @@ public abstract class QuietMethodWraps {
         // Declare generic types
         if (MethodUtilsWraps.returnGeneric(method)) {
             // @see "https://www.cnblogs.com/one777/p/7833789.html"
-            if (returnType instanceof TypeVariable) {
-                methodBuilder.addTypeVariable(TypeVariableName.get((TypeVariable<?>) returnType));
+            if (returnType instanceof TypeVariable<?> alias) {
+                methodBuilder.addTypeVariable(TypeVariableName.get(alias));
             } else if (returnType instanceof ParameterizedType) {
                 Type[] actualTypes = ((ParameterizedType) method.getGenericReturnType()).getActualTypeArguments();
                 ArrayUtilsWraps.forEach(actualTypes, element -> methodBuilder.addTypeVariable(TypeVariableName.get(element.getTypeName())));

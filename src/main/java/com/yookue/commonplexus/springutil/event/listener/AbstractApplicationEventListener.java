@@ -95,8 +95,8 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
         container = servletContext.getServerInfo();
         contextPath = StringUtils.trimToNull(servletContext.getContextPath());
         startupTime = LocalDateWraps.fromEpochMillis(applicationContext.getStartupDate());
-        if (event.getSource() instanceof WebServer instance) {
-            serverPort = instance.getPort();
+        if (event.getSource() instanceof WebServer alias) {
+            serverPort = alias.getPort();
         }
         if (serverPort == null) {
             serverPort = ApplicationContextWraps.getLocalServerPort(applicationContext);

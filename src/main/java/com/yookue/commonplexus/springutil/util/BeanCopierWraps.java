@@ -70,6 +70,6 @@ public abstract class BeanCopierWraps {
             return;
         }
         EnhancedBeanCopier copier = EnhancedBeanCopier.create(source.getClass(), target.getClass(), true);
-        copier.copy(source, target, (sourceValue, targetType, targetSetter, targetName, targetValue) -> (sourceValue instanceof String && StringUtils.hasText((String) sourceValue)) ? sourceValue : targetValue);
+        copier.copy(source, target, (sourceValue, targetType, targetSetter, targetName, targetValue) -> (sourceValue instanceof String alias && StringUtils.hasText(alias)) ? sourceValue : targetValue);
     }
 }
