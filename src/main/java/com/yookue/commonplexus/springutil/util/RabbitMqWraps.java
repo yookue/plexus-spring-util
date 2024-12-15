@@ -95,7 +95,7 @@ public abstract class RabbitMqWraps {
         builder.contentType(StringUtils.defaultIfBlank(contentType, MessageProperties.CONTENT_TYPE_JSON));
         builder.contentEncoding(CharsetPlainWraps.defaultCharsetName(charset));
         builder.deliveryMode(MessageDeliveryMode.toInt(ObjectUtils.defaultIfNull(mode, MessageDeliveryMode.PERSISTENT)));
-        builder.messageId(AlternativeUuidGenerator.getBalancedUuid());
+        builder.messageId(AlternativeUuidGenerator.getBalanceId());
         builder.timestamp(UtilDateWraps.getCurrentDateTime());
         return builder.build();
     }

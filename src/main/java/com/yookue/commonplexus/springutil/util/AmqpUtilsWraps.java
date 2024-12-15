@@ -91,7 +91,7 @@ public abstract class AmqpUtilsWraps {
             properties.setContentType(StringUtils.defaultIfBlank(contentType, MessageProperties.CONTENT_TYPE_JSON));
             properties.setContentEncoding(CharsetPlainWraps.defaultCharsetName(charset));
             properties.setDeliveryMode(mode != null ? mode : MessageDeliveryMode.PERSISTENT);
-            properties.setMessageId(AlternativeUuidGenerator.getBalancedUuid());
+            properties.setMessageId(AlternativeUuidGenerator.getBalanceId());
             properties.setTimestamp(UtilDateWraps.getCurrentDateTime());
             return message;
         };

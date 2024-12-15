@@ -37,8 +37,8 @@ public abstract class Log4jUuidGenerator {
      * @return an uuid string with uppercase and none hyphens
      */
     @Nonnull
-    public static String getCapitalUuid() {
-        return getTemporalUuid(true, false);
+    public static String getCapitalId() {
+        return getTemporalId(true, false);
     }
 
     /**
@@ -47,22 +47,22 @@ public abstract class Log4jUuidGenerator {
      * @return an uuid string with lowercase and none hyphens
      */
     @Nonnull
-    public static String getPopularUuid() {
-        return getTemporalUuid(false, false);
+    public static String getPopularId() {
+        return getTemporalId(false, false);
     }
 
     @Nonnull
-    public static String getTemporalUuid() {
-        return getTemporalUuid(false, true);
+    public static String getTemporalId() {
+        return getTemporalId(false, true);
     }
 
     @Nonnull
-    public static String getTemporalUuid(boolean uppercase) {
-        return getTemporalUuid(uppercase, true);
+    public static String getTemporalId(boolean uppercase) {
+        return getTemporalId(uppercase, true);
     }
 
     @Nonnull
-    public static String getTemporalUuid(boolean uppercase, boolean hyphen) {
+    public static String getTemporalId(boolean uppercase, boolean hyphen) {
         String result = UuidUtil.getTimeBasedUuid().toString();
         result = uppercase ? StringUtils.upperCase(result) : StringUtils.lowerCase(result);
         return hyphen ? result : StringUtils.remove(result, CharVariantConst.HYPHEN);

@@ -57,7 +57,7 @@
         <joda-time.version>2.13.0</joda-time.version>
         <mybatis.version>3.5.16</mybatis.version>
         <pagehelper.version>6.1.0</pagehelper.version>
-        <plexus-javase-util.version>2.0.1</plexus-javase-util.version>
+        <plexus-javase-util.version>2.0.3</plexus-javase-util.version>
 
         <javadoc-docent-maven-plugin.version>2.0.0</javadoc-docent-maven-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
