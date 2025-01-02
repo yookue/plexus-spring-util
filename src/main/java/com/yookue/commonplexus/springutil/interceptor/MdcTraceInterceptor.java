@@ -40,7 +40,7 @@ import com.yookue.commonplexus.springutil.util.HttpHeaderWraps;
 public class MdcTraceInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response, @Nonnull Object handler) {
-        String traceId = HttpHeaderWraps.getHeader(request, HttpHeaderConst.X_TRACE_ID, UtilUuidGenerator.getPopularUuid());
+        String traceId = HttpHeaderWraps.getHeader(request, HttpHeaderConst.X_TRACE_ID, UtilUuidGenerator.getPopularId());
         request.setAttribute(StringVariantConst.TRACE_ID, traceId);
         MDC.put(StringVariantConst.TRACE_ID, traceId);
         return true;

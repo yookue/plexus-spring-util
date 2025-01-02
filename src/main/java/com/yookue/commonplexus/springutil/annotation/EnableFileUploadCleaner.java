@@ -22,7 +22,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner;
+import org.apache.commons.fileupload2.jakarta.JakartaFileCleaner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
@@ -31,10 +31,10 @@ import com.yookue.commonplexus.springutil.registrar.FileUploadCleanerRegistrar;
 
 
 /**
- * Annotation that enables a {@link org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner}
+ * Annotation that enables a {@link org.apache.commons.fileupload2.jakarta.JakartaFileCleaner}
  *
  * @author David Hsing
- * @see org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner
+ * @see org.apache.commons.fileupload2.jakarta.JakartaFileCleaner
  * @see com.yookue.commonplexus.springutil.registrar.FileUploadCleanerRegistrar
  */
 @Target(value = ElementType.TYPE)

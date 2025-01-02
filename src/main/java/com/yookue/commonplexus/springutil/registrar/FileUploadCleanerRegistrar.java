@@ -19,7 +19,7 @@ package com.yookue.commonplexus.springutil.registrar;
 
 import java.lang.annotation.Annotation;
 import jakarta.annotation.Nonnull;
-import org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner;
+import org.apache.commons.fileupload2.jakarta.JakartaFileCleaner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ import com.yookue.commonplexus.springutil.annotation.EnableFileUploadCleaner;
 
 
 /**
- * Registrar of a {@link org.apache.commons.fileupload2.jakarta.servlet6.JakartaFileCleaner}
+ * Registrar of a {@link org.apache.commons.fileupload2.jakarta.JakartaFileCleaner}
  *
  * @author David Hsing
  * @reference "http://commons.apache.org/proper/commons-fileupload/using.html"
