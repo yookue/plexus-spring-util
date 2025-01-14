@@ -48,7 +48,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class ReflectionUtilsWraps {
     @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
-    public static void doWithLocalFields(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldCallback callback, @Nullable ReflectionUtils.FieldFilter filter) {
+    public static void doWithDeclaredFields(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldCallback callback, @Nullable ReflectionUtils.FieldFilter filter) {
         if (ObjectUtils.anyNull(clazz, callback)) {
             return;
         }
@@ -68,7 +68,7 @@ public abstract class ReflectionUtilsWraps {
     }
 
     @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
-    public static void doWithLocalMethods(@Nullable Class<?> clazz, @Nullable ReflectionUtils.MethodCallback callback, @Nullable ReflectionUtils.MethodFilter filter) {
+    public static void doWithDeclaredMethods(@Nullable Class<?> clazz, @Nullable ReflectionUtils.MethodCallback callback, @Nullable ReflectionUtils.MethodFilter filter) {
         if (ObjectUtils.anyNull(clazz, callback)) {
             return;
         }
@@ -109,7 +109,7 @@ public abstract class ReflectionUtilsWraps {
             return null;
         }
         List<Field> result = new ArrayList<>();
-        doWithLocalFields(clazz, result::add, filter);
+        doWithDeclaredFields(clazz, result::add, filter);
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
@@ -143,7 +143,7 @@ public abstract class ReflectionUtilsWraps {
     @Nullable
     public static List<String> getDeclaredFieldNamesToList(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
         List<String> result = new ArrayList<>();
-        doWithLocalFields(clazz, element -> result.add(element.getName()), filter);
+        doWithDeclaredFields(clazz, element -> result.add(element.getName()), filter);
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
