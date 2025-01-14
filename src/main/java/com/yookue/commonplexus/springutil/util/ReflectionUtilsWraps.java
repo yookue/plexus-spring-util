@@ -23,8 +23,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import jakarta.annotation.Nullable;
@@ -114,6 +116,16 @@ public abstract class ReflectionUtilsWraps {
     }
 
     @Nullable
+    public static Map<String, ?> getDeclaredFieldsToMap(@Nullable Object object, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (object == null || ClassUtils.isPrimitiveOrWrapper(object.getClass())) {
+            return null;
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        doWithDeclaredFields(object.getClass(), (field) -> result.put(field.getName(), getField(field, true, object)), filter);
+        return result.isEmpty() ? null : result;
+    }
+
+    @Nullable
     public static Set<Field> getDeclaredFieldsToSet(@Nullable Class<?> clazz) {
         return getDeclaredFieldsToSet(clazz, null);
     }
@@ -182,6 +194,16 @@ public abstract class ReflectionUtilsWraps {
         List<Field> result = new ArrayList<>();
         ReflectionUtils.doWithFields(clazz, result::add, filter);
         return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    public static Map<String, ?> getNestedFieldsToMap(@Nullable Object object, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (object == null || ClassUtils.isPrimitiveOrWrapper(object.getClass())) {
+            return null;
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        ReflectionUtils.doWithFields(object.getClass(), (field) -> result.put(field.getName(), getField(field, true, object)), filter);
+        return result.isEmpty() ? null : result;
     }
 
     @Nullable
