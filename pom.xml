@@ -793,34 +793,33 @@
                         </manifest>
                     </archive>
                     <links>
-                        <link>https://commons.apache.org/proper/commons-beanutils/apidocs/</link>
-                        <link>https://commons.apache.org/proper/commons-codec/apidocs/</link>
-                        <link>https://commons.apache.org/proper/commons-collections/apidocs/</link>
-                        <link>https://commons.apache.org/proper/commons-io/apidocs/</link>
-                        <link>https://commons.apache.org/proper/commons-lang/apidocs/</link>
-                        <link>https://commons.apache.org/proper/commons-text/javadocs/api-release/</link>
+                        <link>https://commons.apache.org/proper/commons-beanutils/apidocs</link>
+                        <link>https://commons.apache.org/proper/commons-codec/apidocs</link>
+                        <link>https://commons.apache.org/proper/commons-collections/apidocs</link>
+                        <link>https://commons.apache.org/proper/commons-io/apidocs</link>
+                        <link>https://commons.apache.org/proper/commons-lang/apidocs</link>
+                        <link>https://commons.apache.org/proper/commons-text/javadocs/api-release</link>
                         <!--
-                        <link>https://docs.jboss.org/hibernate/stable/validator/api/</link>
-                        <link>https://docs.spring.io/spring-amqp/api/</link>
-                        <link>https://docs.spring.io/spring-boot/docs/current/api/</link>
+                        <link>https://docs.jboss.org/hibernate/stable/validator/api</link>
+                        <link>https://docs.spring.io/spring-amqp/api</link>
+                        <link>https://docs.spring.io/spring-boot/docs/current/api</link>
                         -->
-                        <link>https://docs.spring.io/spring-data/data-commons/docs/current/api/</link>
-                        <link>https://docs.spring.io/spring-data/data-jpa/docs/current/api/</link>
-                        <link>https://docs.spring.io/spring-data/data-redis/docs/current/api/</link>
-                        <link>https://docs.spring.io/spring-data/mongodb/docs/current/api/</link>
-                        <link>https://docs.spring.io/spring-framework/docs/current/javadoc-api/</link>
-                        <link>https://docs.spring.io/spring-security/site/docs/current/api/</link>
-                        <link>https://guava.dev/releases/18.0/api/docs/</link>
-                        <link>https://logging.apache.org/log4j/2.x/javadoc/log4j-api/</link>
+                        <link>https://docs.spring.io/spring-data/data-commons/docs/current/api</link>
+                        <link>https://docs.spring.io/spring-data/data-jpa/docs/current/api</link>
+                        <link>https://docs.spring.io/spring-data/data-redis/docs/current/api</link>
+                        <link>https://docs.spring.io/spring-data/mongodb/docs/current/api</link>
+                        <link>https://docs.spring.io/spring-framework/docs/current/javadoc-api</link>
+                        <link>https://docs.spring.io/spring-security/site/docs/current/api</link>
+                        <link>https://guava.dev/releases/18.0/api/docs</link>
+                        <link>https://logging.apache.org/log4j/2.x/javadoc/log4j-api</link>
                         <!--
-                        <link>https://fasterxml.github.io/jackson-core/javadoc/2.13/</link>
-                        <link>https://fasterxml.github.io/jackson-databind/javadoc/2.13/</link>
-                        <link>https://fasterxml.github.io/jackson-datatype-jsr310/javadoc/2.8/</link>
-                        <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-core/latest/</link>
-                        <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-databind/latest/</link>
+                        <link>https://fasterxml.github.io/jackson-core/javadoc/2.13</link>
+                        <link>https://fasterxml.github.io/jackson-databind/javadoc/2.13</link>
+                        <link>https://fasterxml.github.io/jackson-datatype-jsr310/javadoc/2.8</link>
+                        <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-core/latest</link>
+                        <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-databind/latest</link>
                         -->
-                        <link>https://www.slf4j.org/apidocs/</link>
-                        <link>https://www.joda.org/joda-time/apidocs/</link>
+                        <link>https://www.joda.org/joda-time/apidocs</link>
                     </links>
                     <taglets>
                         <taglet>

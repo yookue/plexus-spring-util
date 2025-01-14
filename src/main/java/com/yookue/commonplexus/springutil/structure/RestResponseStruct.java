@@ -25,6 +25,7 @@ import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
@@ -136,5 +137,9 @@ public class RestResponseStruct implements Serializable {
     public RestResponseStruct setStatus(@Nonnull HttpStatus status) {
         this.status = status.value();
         return this;
+    }
+
+    public ResponseEntity<RestResponseStruct> toResponseEntity() {
+        return new ResponseEntity<>(this, HttpStatus.valueOf(getStatus()));
     }
 }
