@@ -52,7 +52,7 @@
 
         <commons-beanutils2.version>[2.0.0,)</commons-beanutils2.version>
         <commons-fileupload2.version>[2.0.0-M1,)</commons-fileupload2.version>
-        <guava.version>[33.3.1-jre,)</guava.version>
+        <guava.version>[33.4.0-jre,)</guava.version>
         <javapoet.version>[1.13.0,)</javapoet.version>
         <joda-time.version>[2.13.0,)</joda-time.version>
         <mybatis.version>[3.5.17,)</mybatis.version>

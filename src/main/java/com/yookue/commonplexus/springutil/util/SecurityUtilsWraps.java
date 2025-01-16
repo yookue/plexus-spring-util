@@ -216,6 +216,10 @@ public abstract class SecurityUtilsWraps {
         return authentication != null && authentication.isAuthenticated();
     }
 
+    public static boolean isContextAuthenticationAuthenticated() {
+        return isAuthenticationAuthenticated(getContextAuthentication());
+    }
+
     public static Authentication renewAuthentication(@Nullable Authentication authentication, @Nullable Object principal) throws IllegalArgumentException, IllegalAccessException {
         return renewAuthentication(authentication, principal, false, null, false, null, false, null);
     }
