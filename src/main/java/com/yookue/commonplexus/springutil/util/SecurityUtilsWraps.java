@@ -115,8 +115,17 @@ public abstract class SecurityUtilsWraps {
 
     @Nullable
     public static Authentication getContextAuthentication() {
+        return getContextAuthentication(false);
+    }
+
+    @Nullable
+    public static Authentication getContextAuthentication(boolean authenticated) {
         SecurityContext context = SecurityContextHolder.getContext();
-        return (context == null) ? null : context.getAuthentication();
+        if (context == null) {
+            return null;
+        }
+        Authentication authentication = context.getAuthentication();
+        return (!authenticated || isAuthenticationAuthenticated(authentication)) ? authentication : null;
     }
 
     public static void setContextAuthentication(@Nullable Authentication authentication) {
@@ -145,12 +154,22 @@ public abstract class SecurityUtilsWraps {
 
     @Nullable
     public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectedType) {
-        return getAuthenticationPrincipalAs(getContextAuthentication(), expectedType);
+        return getContextAuthenticationPrincipalAs(expectedType, false);
+    }
+
+    @Nullable
+    public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectedType, boolean authenticated) {
+        return getAuthenticationPrincipalAs(getContextAuthentication(authenticated), expectedType);
     }
 
     @Nullable
     public static <T> T getContextAuthenticationDetailsAs(@Nullable Class<T> expectedType) {
-        return getAuthenticationDetailsAs(getContextAuthentication(), expectedType);
+        return getContextAuthenticationDetailsAs(expectedType, false);
+    }
+
+    @Nullable
+    public static <T> T getContextAuthenticationDetailsAs(@Nullable Class<T> expectedType, boolean authenticated) {
+        return getAuthenticationDetailsAs(getContextAuthentication(authenticated), expectedType);
     }
 
     @Nullable
