@@ -27,6 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.MultiValueMap;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
 import com.yookue.commonplexus.springutil.constant.ResponseBodyConst;
@@ -141,5 +142,9 @@ public class RestResponseStruct implements Serializable {
 
     public ResponseEntity<RestResponseStruct> toResponseEntity() {
         return new ResponseEntity<>(this, HttpStatus.valueOf(getStatus()));
+    }
+
+    public ResponseEntity<RestResponseStruct> toResponseEntity(@Nullable MultiValueMap<String, String> headers) {
+        return new ResponseEntity<>(this, headers, HttpStatus.valueOf(getStatus()));
     }
 }
