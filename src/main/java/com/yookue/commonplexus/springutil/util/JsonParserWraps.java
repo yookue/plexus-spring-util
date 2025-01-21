@@ -68,7 +68,7 @@ public abstract class JsonParserWraps {
      *
      * @param content the total content of json string
      * @param field the name of the json node
-     * @param parser the json parser instance, maybe {@link com.fasterxml.jackson.databind.ObjectMapper} or {@link com.google.gson.Gson}
+     * @param parser the json parser instance, maybe {@link com.fasterxml.jackson.databind.ObjectMapper}, {@link com.google.gson.Gson} or {@link jakarta.json.JsonReader}
      *
      * @return the found json node that matches the given {@code field} in the {@code content}, with the json {@code parser} instance
      */
