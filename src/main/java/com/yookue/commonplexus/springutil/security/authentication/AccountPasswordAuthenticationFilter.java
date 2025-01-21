@@ -119,7 +119,7 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
         String result = RequestParamWraps.getStringParameterTrimming(request, super.getUsernameParameter());
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
-            result = JsonParserWraps.findNodeValueAsText(content, super.getUsernameParameter(), beanFactory);
+            result = JsonParserWraps.findNodeValueAsString(content, super.getUsernameParameter(), beanFactory);
         }
         return result;
     }
@@ -128,7 +128,7 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
         String result = RequestParamWraps.getStringParameterTrimming(request, super.getPasswordParameter());
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
-            result = JsonParserWraps.findNodeValueAsText(content, super.getPasswordParameter(), beanFactory);
+            result = JsonParserWraps.findNodeValueAsString(content, super.getPasswordParameter(), beanFactory);
         }
         return result;
     }

@@ -134,7 +134,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         String result = RequestParamWraps.getStringParameterTrimming(request, mobileParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
-            result = JsonParserWraps.findNodeValueAsText(content, mobileParameter, beanFactory);
+            result = JsonParserWraps.findNodeValueAsString(content, mobileParameter, beanFactory);
         }
         return result;
     }
@@ -143,7 +143,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         String result = RequestParamWraps.getStringParameterTrimming(request, captchaParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
-            result = JsonParserWraps.findNodeValueAsText(content, captchaParameter, beanFactory);
+            result = JsonParserWraps.findNodeValueAsString(content, captchaParameter, beanFactory);
         }
         return result;
     }
@@ -152,7 +152,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         String result = RequestParamWraps.getStringParameterTrimming(request, dialParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
-            result = JsonParserWraps.findNodeValueAsText(content, dialParameter, beanFactory);
+            result = JsonParserWraps.findNodeValueAsString(content, dialParameter, beanFactory);
         }
         return result;
     }

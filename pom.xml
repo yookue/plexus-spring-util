@@ -182,6 +182,16 @@
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.json.bind</groupId>
+            <artifactId>jakarta.json.bind-api</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>jakarta.mail</groupId>
             <artifactId>jakarta.mail-api</artifactId>
         </dependency>
@@ -819,7 +829,6 @@
                         <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-core/latest</link>
                         <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-databind/latest</link>
                         -->
-                        <link>https://www.joda.org/joda-time/apidocs</link>
                     </links>
                     <taglets>
                         <taglet>
