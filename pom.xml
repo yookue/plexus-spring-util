@@ -46,6 +46,7 @@
         <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
         <project.build.resourceEncoding>${file.encoding}</project.build.resourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
+        <project.logo>https://yookue.github.io/assets/ico/logo-icon.svg</project.logo>
 
         <spring-boot.version>3.4.1</spring-boot.version>
         <spring-session.version>3.4.1</spring-session.version>
