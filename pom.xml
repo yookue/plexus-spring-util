@@ -821,7 +821,6 @@
                         <link>https://docs.spring.io/spring-data/mongodb/docs/current/api</link>
                         <link>https://docs.spring.io/spring-framework/docs/current/javadoc-api</link>
                         <link>https://docs.spring.io/spring-security/site/docs/current/api</link>
-                        <link>https://guava.dev/releases/18.0/api/docs</link>
                         <link>https://logging.apache.org/log4j/2.x/javadoc/log4j-api</link>
                         <!--
                         <link>https://fasterxml.github.io/jackson-core/javadoc/2.13</link>
