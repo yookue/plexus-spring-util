@@ -17,6 +17,7 @@
 package com.yookue.commonplexus.springutil.util;
 
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -29,7 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.util.ClassUtils;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;
-import com.yookue.commonplexus.javaseutil.util.JakartaJsonWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 import com.yookue.commonplexus.springutil.enumeration.JsonParserType;
 
@@ -73,6 +73,7 @@ public abstract class JsonParserWraps {
      * @return the found json node that matches the given {@code field} in the {@code content}, with the json {@code parser} instance
      */
     @Nullable
+    @SuppressWarnings("DataFlowIssue")
     public static Object findNodeValue(@Nullable String content, @Nullable String field, @Nullable Object parser) {
         if (StringUtils.isAnyBlank(content, field) || parser == null) {
             return null;
@@ -84,8 +85,10 @@ public abstract class JsonParserWraps {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) toJsonTree(content, parser);
             return (node == null || node.isJsonNull()) ? null : node.getAsJsonObject().getAsJsonObject(field);
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.JAKARTA.getValue(), parser)) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            return JakartaJsonWraps.getJsonValue(node, field);
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return jsonReader.read().getValue(field);
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -115,6 +118,7 @@ public abstract class JsonParserWraps {
      * @return the found json node text that matches the given {@code field} in the {@code content}, under the bean factory, with the specified json parser type
      */
     @Nullable
+    @SuppressWarnings("DataFlowIssue")
     public static String findNodeValueAsString(@Nullable String content, @Nullable String field, @Nullable BeanFactory factory, @Nullable JsonParserType type) {
         if (StringUtils.isAnyBlank(content, field) || factory == null || !isParserPresent(type)) {
             return null;
@@ -128,8 +132,10 @@ public abstract class JsonParserWraps {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) findNodeValue(content, field, gson);
             return (node == null || node.isJsonNull()) ? null : node.getAsString();
         } else if (type == JsonParserType.JAKARTA) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            return (node instanceof jakarta.json.JsonObject alias) ? JakartaJsonWraps.getString(alias, field) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return (jsonReader.read() instanceof jakarta.json.JsonObject alias) ? alias.getString(field) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -144,6 +150,7 @@ public abstract class JsonParserWraps {
      * @return the found json node text that matches the given {@code field} in the {@code content}, with the specified json parser type
      */
     @Nullable
+    @SuppressWarnings("DataFlowIssue")
     public static String findNodeValueAsString(@Nullable String content, @Nullable String field, @Nullable JsonParserType type) {
         if (StringUtils.isAnyBlank(content, field) || !isParserPresent(type)) {
             return null;
@@ -155,8 +162,10 @@ public abstract class JsonParserWraps {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) findNodeValue(content, field, new com.google.gson.Gson());
             return (node == null || node.isJsonNull()) ? null : node.getAsString();
         } else if (type == JsonParserType.JAKARTA) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            return (node instanceof jakarta.json.JsonObject alias) ? JakartaJsonWraps.getString(alias, field) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return (jsonReader.read() instanceof jakarta.json.JsonObject alias) ? alias.getString(field) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -171,6 +180,7 @@ public abstract class JsonParserWraps {
      * @return the found json node text that matches the given {@code field} in the {@code content}, with the json {@code parser} instance
      */
     @Nullable
+    @SuppressWarnings("DataFlowIssue")
     public static String findNodeValueAsString(@Nullable String content, @Nullable String field, @Nullable Object parser) {
         if (StringUtils.isAnyBlank(content, field) || parser == null) {
             return null;
@@ -190,8 +200,10 @@ public abstract class JsonParserWraps {
             com.google.gson.JsonObject found = node.getAsJsonObject().getAsJsonObject(field);
             return (found == null || found.isJsonNull()) ? null : found.getAsString();
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.JAKARTA.getValue(), parser)) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            return (node instanceof jakarta.json.JsonObject alias) ? JakartaJsonWraps.getString(alias, field) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return (jsonReader.read() instanceof jakarta.json.JsonObject alias) ? alias.getString(field) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -206,6 +218,7 @@ public abstract class JsonParserWraps {
      * @return the found json node that matches the given {@code field} in the {@code content}, with the json {@code parser} instance
      */
     @Nullable
+    @SuppressWarnings("DataFlowIssue")
     public static List<?> findNodeValues(@Nullable String content, @Nullable String field, @Nullable Object parser) {
         if (StringUtils.isAnyBlank(content, field) || parser == null) {
             return null;
@@ -224,9 +237,11 @@ public abstract class JsonParserWraps {
             }
             return FieldUtilsWraps.readDeclaredFieldAs(array, "elements", true, List.class);    // $NON-NLS-1$
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.JAKARTA.getValue(), parser)) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            jakarta.json.JsonValue value = (node == null) ? null : node.getValue(field);
-            return (value instanceof jakarta.json.JsonArray alias) ? JakartaJsonWraps.getValues(alias) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                jakarta.json.JsonValue value = jsonReader.read().getValue(field);
+                return (value instanceof jakarta.json.JsonArray alias) ? alias.getValuesAs(jakarta.json.JsonValue.class) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -256,7 +271,7 @@ public abstract class JsonParserWraps {
      * @return the found json node texts that matches the given {@code field} in the {@code content}, under the bean factory, with the specified json parser type
      */
     @Nullable
-    @SuppressWarnings("DuplicatedCode")
+    @SuppressWarnings({"DataFlowIssue", "DuplicatedCode"})
     public static List<String> findNodeValuesAsString(@Nullable String content, @Nullable String field, @Nullable BeanFactory factory, @Nullable JsonParserType type) {
         if (StringUtils.isAnyBlank(content, field) || factory == null || !isParserPresent(type)) {
             return null;
@@ -268,9 +283,11 @@ public abstract class JsonParserWraps {
             com.google.gson.Gson gson = BeanFactoryWraps.firstBeanOfType(factory, com.google.gson.Gson.class);
             return findNodeValuesAsString(content, field, gson);
         } else if (type == JsonParserType.JAKARTA) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            jakarta.json.JsonValue value = (node == null) ? null : node.getValue(field);
-            return (value instanceof jakarta.json.JsonArray alias) ? JakartaJsonWraps.getValuesAsString(alias) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                jakarta.json.JsonValue value = jsonReader.read().getValue(field);
+                return (value instanceof jakarta.json.JsonArray alias) ? alias.getValuesAs(jakarta.json.JsonString::getString) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -285,7 +302,7 @@ public abstract class JsonParserWraps {
      * @return the found json node texts that matches the given {@code field} in the {@code content}, with the specified json parser type
      */
     @Nullable
-    @SuppressWarnings("DuplicatedCode")
+    @SuppressWarnings({"DataFlowIssue", "DuplicatedCode"})
     public static List<String> findNodeValuesAsString(@Nullable String content, @Nullable String field, @Nullable JsonParserType type) {
         if (StringUtils.isAnyBlank(content, field) || !isParserPresent(type)) {
             return null;
@@ -297,9 +314,11 @@ public abstract class JsonParserWraps {
             com.google.gson.Gson gson = new com.google.gson.Gson();
             return findNodeValuesAsString(content, field, gson);
         } else if (type == JsonParserType.JAKARTA) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            jakarta.json.JsonValue value = (node == null) ? null : node.getValue(field);
-            return (value instanceof jakarta.json.JsonArray alias) ? JakartaJsonWraps.getValuesAsString(alias) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                jakarta.json.JsonValue value = jsonReader.read().getValue(field);
+                return (value instanceof jakarta.json.JsonArray alias) ? alias.getValuesAs(jakarta.json.JsonString::getString) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -314,6 +333,7 @@ public abstract class JsonParserWraps {
      * @return the string representation of the found json node that matches the given {@code field} in the {@code content}, with the json {@code parser} instance
      */
     @Nullable
+    @SuppressWarnings({"DataFlowIssue", "DuplicatedCode"})
     public static List<String> findNodeValuesAsString(@Nullable String content, @Nullable String field, @Nullable Object parser) {
         if (StringUtils.isAnyBlank(content, field) || parser == null) {
             return null;
@@ -335,9 +355,11 @@ public abstract class JsonParserWraps {
             }
             return result.isEmpty() ? null : result;
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.JAKARTA.getValue(), parser)) {
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            jakarta.json.JsonValue value = (node == null) ? null : node.getValue(field);
-            return (value instanceof jakarta.json.JsonArray alias) ? JakartaJsonWraps.getValuesAsString(alias) : null;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                jakarta.json.JsonValue value = jsonReader.read().getValue(field);
+                return (value instanceof jakarta.json.JsonArray alias) ? alias.getValuesAs(jakarta.json.JsonString::getString) : null;
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -423,15 +445,18 @@ public abstract class JsonParserWraps {
             return result.isEmpty() ? null : result;
         } else if (type == JsonParserType.JAKARTA) {
             Map<String, Object> result = new LinkedHashMap<>();
-            jakarta.json.JsonStructure node = JakartaJsonWraps.fromJson(content);
-            if (JakartaJsonWraps.isObjectType(node)) {
-                for (Map.Entry<String, jakarta.json.JsonValue> entry : node.asJsonObject().entrySet()) {
-                    jakarta.json.JsonValue child = entry.getValue();
-                    if (child == null) {
-                        continue;
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                jakarta.json.JsonStructure node = jsonReader.read();
+                if (node.getValueType() == jakarta.json.JsonValue.ValueType.OBJECT) {
+                    for (Map.Entry<String, jakarta.json.JsonValue> entry : node.asJsonObject().entrySet()) {
+                        jakarta.json.JsonValue child = entry.getValue();
+                        if (child == null) {
+                            continue;
+                        }
+                        result.put(entry.getKey(), child.toString());
                     }
-                    result.put(entry.getKey(), child.toString());
                 }
+            } catch (Exception ignored) {
             }
             return result.isEmpty() ? null : result;
         }
@@ -457,7 +482,10 @@ public abstract class JsonParserWraps {
             return GsonJsonWraps.toJson(gson, value);
         } else if (type == JsonParserType.JAKARTA) {
             jakarta.json.bind.JsonbConfig config = BeanFactoryWraps.firstBeanOfType(factory, jakarta.json.bind.JsonbConfig.class);
-            return JakartaJsonWraps.toJson(value, config);
+            try (jakarta.json.bind.Jsonb jsonb = jakarta.json.bind.JsonbBuilder.create(config)) {
+                return jsonb.toJson(value);
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -474,7 +502,10 @@ public abstract class JsonParserWraps {
             com.google.gson.Gson gson = new com.google.gson.Gson();
             return GsonJsonWraps.toJson(gson, value);
         } else if (type == JsonParserType.JAKARTA) {
-            return JakartaJsonWraps.toJson(value);
+            try (jakarta.json.bind.Jsonb jsonb = jakarta.json.bind.JsonbBuilder.create()) {
+                return jsonb.toJson(value);
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -505,7 +536,10 @@ public abstract class JsonParserWraps {
             com.google.gson.Gson gson = BeanFactoryWraps.firstBeanOfType(factory, com.google.gson.Gson.class);
             return toJsonTree(content, gson);
         } else if (type == JsonParserType.JAKARTA) {
-            return JakartaJsonWraps.fromJson(content);
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return jsonReader.read();
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -530,7 +564,10 @@ public abstract class JsonParserWraps {
             com.google.gson.Gson gson = new com.google.gson.Gson();
             return toJsonTree(content, gson);
         } else if (type == JsonParserType.JAKARTA) {
-            return JakartaJsonWraps.fromJson(content);
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return jsonReader.read();
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -554,10 +591,11 @@ public abstract class JsonParserWraps {
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.GSON.getValue(), parser)) {
             com.google.gson.Gson gson = ObjectUtilsWraps.castAs(parser, com.google.gson.Gson.class);
             return GsonJsonWraps.toJsonTree(gson, content);
-        } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.JACKSON.getValue(), parser)) {
-            return JakartaJsonWraps.fromJson(content);
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.JAKARTA.getValue(), parser)) {
-            return JakartaJsonWraps.fromJson(content);
+            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
+                return jsonReader.read();
+            } catch (Exception ignored) {
+            }
         }
         return null;
     }
@@ -598,11 +636,11 @@ public abstract class JsonParserWraps {
             return;
         }
         action.accept(node);
-        if (JakartaJsonWraps.isArrayType(node)) {
+        if (node.getValueType() == jakarta.json.JsonValue.ValueType.ARRAY) {
             for (jakarta.json.JsonValue child : node.asJsonArray()) {
                 traverseNode(child, action);
             }
-        } else if (JakartaJsonWraps.isObjectType(node)) {
+        } else if (node.getValueType() == jakarta.json.JsonValue.ValueType.OBJECT) {
             for (Map.Entry<String, jakarta.json.JsonValue> entry : node.asJsonObject().entrySet()) {
                 traverseNode(entry.getValue(), action);
             }
