@@ -423,16 +423,22 @@ public abstract class WebUtilsWraps {
      * To make sure the session is properly maintained, you must call this method before the response is committed
      *
      * @param request the <code>HttpServletRequest</code> associated
-     * @param create if there is no current session and <code>create</code> is true, returns a new session
+     * @param createIfNull if there is no current session and <code>create</code> is true, returns a new session
      *
      * @return the current <code>HttpSession</code> associated with this request
      */
-    public static HttpSession getSession(@Nullable HttpServletRequest request, boolean create) {
-        return (request == null) ? null : request.getSession(create);
+    public static HttpSession getSession(@Nullable HttpServletRequest request, boolean createIfNull) {
+        return (request == null) ? null : request.getSession(createIfNull);
     }
 
     public static String getSessionId(@Nullable HttpServletRequest request) {
-        return (request == null) ? null : request.getRequestedSessionId();
+        return getSessionId(request, false);
+    }
+
+    @Nullable
+    public static String getSessionId(@Nullable HttpServletRequest request, boolean createIfNull) {
+        HttpSession session = getSession(request, createIfNull);
+        return (session == null) ? null : session.getId();
     }
 
     public static Object getSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name) {
@@ -454,11 +460,11 @@ public abstract class WebUtilsWraps {
         }
     }
 
-    public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value, boolean create) {
+    public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value, boolean createIfNull) {
         if (request == null || StringUtils.isBlank(name)) {
             return;
         }
-        HttpSession session = request.getSession(create && value != null);
+        HttpSession session = request.getSession(createIfNull && value != null);
         if (session == null) {
             return;
         }

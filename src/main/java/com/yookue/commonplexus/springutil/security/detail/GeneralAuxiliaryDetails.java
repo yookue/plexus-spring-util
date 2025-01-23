@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
+import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import com.yookue.commonplexus.springutil.util.WebUtilsWraps;
 import lombok.Getter;
 import lombok.ToString;
@@ -43,9 +44,13 @@ public class GeneralAuxiliaryDetails extends WebAuthenticationDetails {
 
     public GeneralAuxiliaryDetails(@Nonnull HttpServletRequest request) {
         super(request);
-        String address = WebUtilsWraps.getRemoteAddressQuietly(request);
-        if (StringUtils.isNotBlank(address)) {
-            FieldUtilsWraps.writeField(this, "remoteAddress", address, true);    // $NON-NLS-1$
+        StringUtilsWraps.ifNotBlank(WebUtilsWraps.getRemoteAddressQuietly(request), element -> {
+            FieldUtilsWraps.writeField(this, "remoteAddress", element, true);    // $NON-NLS-1$
+        });
+        if (StringUtils.isBlank(super.getSessionId())) {
+            StringUtilsWraps.ifNotBlank(WebUtilsWraps.getSessionId(request, true), element -> {
+                FieldUtilsWraps.writeField(this, "sessionId", element, true);    // $NON-NLS-1$
+            });
         }
         timestamp = LocalDateWraps.getCurrentDateTime();
     }
