@@ -63,6 +63,7 @@ public abstract class AntPathConst {
     public static final String SLASH_WEBJARS_STARS = SLASH_WEBJARS + SLASH_STARS;
 
     public static final String SLASH_INDEX = "/index";    // $NON-NLS-1$
+    public static final String SLASH_LOGON = "/logon";    // $NON-NLS-1$
     public static final String SLASH_LOGIN = "/login";    // $NON-NLS-1$
     public static final String SLASH_DO_LOGIN = "/do-login";    // $NON-NLS-1$
     public static final String SLASH_LOGOUT = "/logout";    // $NON-NLS-1$
