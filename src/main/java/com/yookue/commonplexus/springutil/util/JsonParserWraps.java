@@ -80,7 +80,7 @@ public abstract class JsonParserWraps {
         }
         if (ClassUtilsWraps.isAssignableValue(JsonParserType.JACKSON.getValue(), parser)) {
             com.fasterxml.jackson.databind.JsonNode node = (com.fasterxml.jackson.databind.JsonNode) toJsonTree(content, parser);
-            return (node == null || node.isNull() || node.isEmpty()) ? null : node.findValue(field);
+            return (node == null || node.isNull()) ? null : node.findValue(field);
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.GSON.getValue(), parser)) {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) toJsonTree(content, parser);
             return (node == null || node.isJsonNull()) ? null : node.getAsJsonObject().getAsJsonObject(field);
@@ -126,7 +126,7 @@ public abstract class JsonParserWraps {
         if (type == JsonParserType.JACKSON) {
             com.fasterxml.jackson.databind.ObjectMapper mapper = BeanFactoryWraps.firstBeanOfType(factory, com.fasterxml.jackson.databind.ObjectMapper.class);
             com.fasterxml.jackson.databind.JsonNode node = (com.fasterxml.jackson.databind.JsonNode) findNodeValue(content, field, mapper);
-            return (node == null || node.isNull() || node.isEmpty()) ? null : node.asText();
+            return (node == null || node.isNull()) ? null : node.asText();
         } else if (type == JsonParserType.GSON) {
             com.google.gson.Gson gson = BeanFactoryWraps.firstBeanOfType(factory, com.google.gson.Gson.class);
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) findNodeValue(content, field, gson);
@@ -157,7 +157,7 @@ public abstract class JsonParserWraps {
         }
         if (type == JsonParserType.JACKSON) {
             com.fasterxml.jackson.databind.JsonNode node = (com.fasterxml.jackson.databind.JsonNode) findNodeValue(content, field, new com.fasterxml.jackson.databind.ObjectMapper());
-            return (node == null || node.isNull() || node.isEmpty()) ? null : node.asText();
+            return (node == null || node.isNull()) ? null : node.asText();
         } else if (type == JsonParserType.GSON) {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) findNodeValue(content, field, new com.google.gson.Gson());
             return (node == null || node.isJsonNull()) ? null : node.getAsString();
@@ -187,11 +187,11 @@ public abstract class JsonParserWraps {
         }
         if (ClassUtilsWraps.isAssignableValue(JsonParserType.JACKSON.getValue(), parser)) {
             com.fasterxml.jackson.databind.JsonNode node = (com.fasterxml.jackson.databind.JsonNode) findNodeValue(content, field, parser);
-            if (node == null || node.isNull() || node.isEmpty()) {
+            if (node == null || node.isNull()) {
                 return null;
             }
             com.fasterxml.jackson.databind.JsonNode found = node.findValue(field);
-            return (found == null || found.isNull() || found.isEmpty()) ? null : found.asText();
+            return (found == null || found.isNull()) ? null : found.asText();
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.GSON.getValue(), parser)) {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) findNodeValue(content, field, parser);
             if (node == null || node.isJsonNull()) {
@@ -225,7 +225,7 @@ public abstract class JsonParserWraps {
         }
         if (ClassUtilsWraps.isAssignableValue(JsonParserType.JACKSON.getValue(), parser)) {
             com.fasterxml.jackson.databind.JsonNode node = (com.fasterxml.jackson.databind.JsonNode) toJsonTree(content, parser);
-            return (node == null || node.isNull() || node.isEmpty()) ? null : node.findValues(field);
+            return (node == null || node.isNull()) ? null : node.findValues(field);
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.GSON.getValue(), parser)) {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) toJsonTree(content, parser);
             if (node == null || node.isJsonNull()) {
@@ -340,7 +340,7 @@ public abstract class JsonParserWraps {
         }
         if (ClassUtilsWraps.isAssignableValue(JsonParserType.JACKSON.getValue(), parser)) {
             com.fasterxml.jackson.databind.JsonNode node = (com.fasterxml.jackson.databind.JsonNode) toJsonTree(content, parser);
-            return (node == null || node.isNull() || node.isEmpty()) ? null : node.findValuesAsText(field);
+            return (node == null || node.isNull()) ? null : node.findValuesAsText(field);
         } else if (ClassUtilsWraps.isAssignableValue(JsonParserType.GSON.getValue(), parser)) {
             com.google.gson.JsonElement node = (com.google.gson.JsonElement) toJsonTree(content, parser);
             if (node == null || node.isJsonNull()) {
@@ -400,7 +400,7 @@ public abstract class JsonParserWraps {
             Map<String, Object> result = new LinkedHashMap<>();
             node.fieldNames().forEachRemaining(fieldName -> {
                 com.fasterxml.jackson.databind.JsonNode child = node.get(fieldName);
-                if (child == null || child.isNull() || child.isEmpty()) {
+                if (child == null || child.isNull()) {
                     result.put(fieldName, null);
                     return;
                 }
