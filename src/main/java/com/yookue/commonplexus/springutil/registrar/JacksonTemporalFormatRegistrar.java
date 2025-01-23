@@ -32,7 +32,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.Assert;
 import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
-import com.yookue.commonplexus.springutil.annotation.JacksonTemporalFormat;
+import com.yookue.commonplexus.springutil.annotation.EnableJacksonTemporalFormat;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCustomizer;
@@ -46,7 +46,7 @@ import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCus
  * @see org.springframework.context.annotation.ImportBeanDefinitionRegistrar
  */
 public class JacksonTemporalFormatRegistrar implements ImportAware {
-    private final Class<? extends Annotation> annotation = JacksonTemporalFormat.class;
+    private final Class<? extends Annotation> annotation = EnableJacksonTemporalFormat.class;
     private AnnotationAttributes attributes;
 
     @Override

@@ -43,7 +43,7 @@ import com.yookue.commonplexus.springutil.registrar.JacksonTemporalFormatRegistr
 @Import(value = JacksonTemporalFormatRegistrar.class)
 @ConditionalOnClass(value = ObjectMapper.class)
 @SuppressWarnings("unused")
-public @interface JacksonTemporalFormat {
+public @interface EnableJacksonTemporalFormat {
     /**
      * Returns the date format
      *
