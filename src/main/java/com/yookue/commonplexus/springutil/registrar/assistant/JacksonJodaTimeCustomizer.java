@@ -35,7 +35,7 @@ import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 public abstract class JacksonJodaTimeCustomizer {
     @Nullable
     public static SimpleModule mapperModule(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat) {
-        if (ClassUtils.isPresent("com.fasterxml.jackson.datatype.joda.JodaModule", null)) {    // $NON-NLS-1$
+        if (!ClassUtils.isPresent("com.fasterxml.jackson.datatype.joda.JodaModule", null)) {    // $NON-NLS-1$
             return null;
         }
         dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
