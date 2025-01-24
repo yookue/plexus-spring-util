@@ -66,16 +66,12 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
     private boolean forcePrincipalAsString = false;
 
     @Getter
-    private boolean hideMobileNotFoundException = true;
-
-    @Getter
     private MobileUserCache userCache = new NullMobileUserCache();
 
     @Getter
     private MobileUserDetailsService userDetailsService;
 
     @Getter
-    @Setter
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
     @Getter
@@ -101,13 +97,7 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
         UserDetails details = (userCache == null) ? null : userCache.getUserFromCache(mobile, dial);
         if (details == null) {
             cacheUsed = false;
-            try {
-                details = retrieveUser(mobile, authentication, dial);
-            } catch (MobileNotFoundException ex) {
-                if (!hideMobileNotFoundException) {
-                    throw ex;
-                }
-            }
+            details = retrieveUser(mobile, authentication, dial);
             Assert.notNull(details, "retrieveUser returned null - a violation of the interface contract");
         }
         try {
