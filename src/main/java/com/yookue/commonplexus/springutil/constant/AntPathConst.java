@@ -31,9 +31,6 @@ public abstract class AntPathConst {
     public static final String STAR_SLASH = "*/";    // $NON-NLS-1$
     public static final String STARS_SLASH = "**/";    // $NON-NLS-1$
 
-    public static final String SLASH_STARS_COUPLE = SLASH_STARS + SLASH_STARS;
-    public static final String STARS_SLASH_COUPLE = STARS_SLASH + STARS_SLASH;
-
     public static final String STARS_FAVICON_STAR = "**/favicon.*";    // $NON-NLS-1$
 
     public static final String SLASH_ADMIN = "/admin";    // $NON-NLS-1$
