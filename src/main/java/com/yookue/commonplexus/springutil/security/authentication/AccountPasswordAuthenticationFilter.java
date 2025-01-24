@@ -34,6 +34,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -66,7 +67,10 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
     private boolean restCompatible = false;
 
     @Getter
-    private Function<InteractiveAuthenticationSuccessEvent, AbstractAuthenticationEvent> authenticationSuccessTransition;
+    private boolean rememberMe = false;
+
+    @Getter
+    private Function<AbstractAuthenticationEvent, AbstractAuthenticationEvent> authenticationSuccessTransition;
 
     protected BeanFactory beanFactory;
 
@@ -161,8 +165,11 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
         if (repository != null) {
             repository.saveContext(context, request, response);
         }
-        super.getRememberMeServices().loginSuccess(request, response, authentication);
-        AbstractAuthenticationEvent event = authenticationSuccessTransition.apply(new InteractiveAuthenticationSuccessEvent(authentication, this.getClass()));
+        if (rememberMe) {
+            super.getRememberMeServices().loginSuccess(request, response, authentication);
+        }
+        AbstractAuthenticationEvent source = rememberMe ? new InteractiveAuthenticationSuccessEvent(authentication, this.getClass()) : new AuthenticationSuccessEvent(authentication);
+        AbstractAuthenticationEvent event = authenticationSuccessTransition.apply(source);
         if (ObjectUtils.allNotNull(event, super.eventPublisher)) {
             super.eventPublisher.publishEvent(event);
         }
