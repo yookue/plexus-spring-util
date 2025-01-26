@@ -55,7 +55,7 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
     private boolean appendHashCode = true;
 
     @Override
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     protected String resolveParams(@Nullable Object... params) {
         int minParamLength = wrapParentheses ? 5 : 3;
         Assert.isTrue(maxKeyLength > minParamLength, "Prop 'maxParamLength' must be greater than " + minParamLength);
