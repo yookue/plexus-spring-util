@@ -20,8 +20,10 @@ package com.yookue.commonplexus.springutil.cache;
 import java.util.Arrays;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
-import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,17 +32,18 @@ import lombok.Setter;
  * Cache key generator by hash codes
  *
  * @author David Hsing
+ * @see org.springframework.cache.interceptor.KeyGenerator
  * @see org.springframework.cache.interceptor.SimpleKeyGenerator
  */
 @Getter
 @Setter
 @SuppressWarnings("unused")
 public class HashCodeKeyGenerator extends AbstractKeyGenerator {
-    private boolean wrapWithParentheses = false;
+    private boolean wrapParentheses = true;
 
     @Override
     protected String resolveParams(@Nullable Object... params) {
-        String result = ArrayUtils.isEmpty(params) ? null : String.format(SymbolVariantConst.ORDER_SQUARES, Arrays.deepHashCode(params));
-        return wrapWithParentheses? StringUtilsWraps.wrapWithParentheses(result) : result;
+        String result = ArrayUtils.isEmpty(params) ? StringVariantConst.NULL : String.format(SymbolVariantConst.ORDER_SQUARES, Arrays.deepHashCode(params));
+        return !wrapParentheses ? result : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, CharVariantConst.PARENTHESIS_RIGHT, result);
     }
 }

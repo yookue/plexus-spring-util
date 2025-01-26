@@ -38,6 +38,7 @@ import lombok.Setter;
  * The maximum allowed key/value size is 512 MB
  *
  * @author David Hsing
+ * @see org.springframework.cache.interceptor.KeyGenerator
  * @see org.springframework.cache.interceptor.SimpleKeyGenerator
  */
 @NoArgsConstructor
