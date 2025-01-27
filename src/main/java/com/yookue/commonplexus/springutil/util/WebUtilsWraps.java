@@ -441,6 +441,11 @@ public abstract class WebUtilsWraps {
         return (session == null) ? null : session.getId();
     }
 
+    @Nullable
+    public static String getSessionIdRequested(@Nullable HttpServletRequest request) {
+        return (request == null) ? null : request.getRequestedSessionId();
+    }
+
     public static Object getSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name) {
         return (request == null || StringUtils.isBlank(name)) ? null : WebUtils.getSessionAttribute(request, name);
     }
