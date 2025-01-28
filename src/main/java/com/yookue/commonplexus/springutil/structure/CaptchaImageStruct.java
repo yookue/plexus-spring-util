@@ -14,29 +14,31 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.enumeration;
+package com.yookue.commonplexus.springutil.structure;
 
 
-import org.springframework.http.MediaType;
-import com.yookue.commonplexus.javaseutil.constant.FileExtensionConst;
-import com.yookue.commonplexus.javaseutil.support.KeyValueEnum;
+import java.io.Serializable;
+import com.yookue.commonplexus.springutil.enumeration.CaptchaImageType;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 
 /**
- * Enumerations of captcha image types
+ * Structure for captcha image
  *
  * @author David Hsing
  */
+@Accessors(chain = true)
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @SuppressWarnings("unused")
-public enum CaptchaImageType implements KeyValueEnum<String, MediaType> {
-    GIF(FileExtensionConst.GIF, MediaType.IMAGE_GIF),    // $NON-NLS-1$
-    JPG(FileExtensionConst.JPG, MediaType.IMAGE_JPEG),    // $NON-NLS-1$
-    PNG(FileExtensionConst.PNG, MediaType.IMAGE_PNG);    // $NON-NLS-1$
-
-    private final String key;
-    private final MediaType value;
+public class CaptchaImageStruct implements Serializable {
+    private Integer width;
+    private Integer height;
+    private String fontName;
+    private Integer fontSize;
+    private CaptchaImageType imageType;
 }
