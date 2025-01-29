@@ -34,11 +34,36 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
  * Utilities for operating {@link org.springframework.data.redis.core.RedisTemplate}
  *
  * @author David Hsing
- * @reference "https://redis.io/"
  * @see org.springframework.data.redis.core.RedisTemplate
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public abstract class RedisOperationWraps {
+public abstract class RedisTemplateWraps {
+    @SafeVarargs
+    public static <K> long countKey(@Nullable RedisTemplate<K, ?> template, @Nullable K... keys) {
+        return countKey(template, ArrayUtilsWraps.asList(keys));
+    }
+
+    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    public static <K> long countKey(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> keys) {
+        if (template == null || CollectionUtils.isEmpty(keys)) {
+            return 0;
+        }
+        return keys.stream().filter(element -> Objects.nonNull(element) && template.hasKey(element)).count();
+    }
+
+    @SafeVarargs
+    public static <K> long countPattern(@Nullable RedisTemplate<K, ?> template, @Nullable K... patterns) {
+        return countPattern(template, ArrayUtilsWraps.asList(patterns));
+    }
+
+    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    public static <K> long countPattern(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> patterns) {
+        if (template == null || CollectionUtils.isEmpty(patterns)) {
+            return 0;
+        }
+        return patterns.stream().filter(Objects::nonNull).map(template::keys).filter(CollectionPlainWraps::isNotEmpty).mapToLong(template::countExistingKeys).sum();
+    }
+
     @SafeVarargs
     public static <K> void deleteKey(@Nullable RedisTemplate<K, ?> template, @Nullable K... keys) {
         deleteKey(template, ArrayUtilsWraps.asList(keys));
