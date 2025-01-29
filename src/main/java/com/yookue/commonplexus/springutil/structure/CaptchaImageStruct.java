@@ -38,6 +38,7 @@ import lombok.experimental.Accessors;
 public class CaptchaImageStruct implements Serializable {
     private Integer width;
     private Integer height;
+    private Integer charCount;
     private String fontName;
     private Integer fontSize;
     private CaptchaImageType imageType;
