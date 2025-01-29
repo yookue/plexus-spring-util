@@ -218,7 +218,12 @@ public abstract class WebUtilsWraps {
 
     @Nullable
     public static String getContextSessionId() {
-        return getSessionId(getContextServletRequest());
+        return getContextSessionId(false);
+    }
+
+    @Nullable
+    public static String getContextSessionId(boolean createIfNull) {
+        return getSessionId(getContextServletRequest(), createIfNull);
     }
 
     @Nullable
