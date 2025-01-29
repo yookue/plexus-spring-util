@@ -36,7 +36,7 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
  * @author David Hsing
  * @see org.springframework.data.redis.core.RedisTemplate
  */
-@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
+@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class RedisTemplateWraps {
     @SafeVarargs
     public static <K> long countKey(@Nullable RedisTemplate<K, ?> template, @Nullable K... keys) {
