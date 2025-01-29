@@ -30,6 +30,7 @@ import org.springframework.core.annotation.AliasFor;
 
 /**
  * Annotation for an alias of {@link org.springframework.beans.factory.annotation.Qualifier}
+ *
  * <p>
  * In order to specify a spare bean, annotated below the spring annotation {@code @Qualifier}
  * <p>
@@ -38,8 +39,8 @@ import org.springframework.core.annotation.AliasFor;
  * @author David Hsing
  * @see org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
  */
-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
-@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Retention(value = RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
 @Qualifier
