@@ -26,7 +26,7 @@ import org.apache.commons.beanutils2.ConvertUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import com.yookue.commonplexus.springutil.registrar.BeanUtilsConverterRegistrar;
+import com.yookue.commonplexus.springutil.registrar.BeanConverterRegistrar;
 
 
 /**
@@ -34,16 +34,16 @@ import com.yookue.commonplexus.springutil.registrar.BeanUtilsConverterRegistrar;
  *
  * @author David Hsing
  * @see org.apache.commons.beanutils2.Converter
- * @see com.yookue.commonplexus.springutil.registrar.BeanUtilsConverterRegistrar
+ * @see com.yookue.commonplexus.springutil.registrar.BeanConverterRegistrar
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(value = ConvertUtils.class)
-@Import(value = BeanUtilsConverterRegistrar.class)
+@Import(value = BeanConverterRegistrar.class)
 @SuppressWarnings("unused")
-public @interface EnableBeanUtilsConverter {
+public @interface EnableBeanConverter {
     /**
      * Returns whether enable publishing event after converters be registered or not
      *

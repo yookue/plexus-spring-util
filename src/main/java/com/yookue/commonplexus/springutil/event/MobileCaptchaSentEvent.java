@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.security.event;
+package com.yookue.commonplexus.springutil.event;
 
 
 import jakarta.annotation.Nonnull;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.security.core.session.AbstractSessionEvent;
+import org.springframework.context.ApplicationEvent;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import com.yookue.commonplexus.springutil.structure.MobileCaptchaStruct;
 
 
 @SuppressWarnings("unused")
-public class HttpSessionIdledEvent extends AbstractSessionEvent {
-    public HttpSessionIdledEvent(@Nonnull HttpSession session) {
-        super(session);
+public class MobileCaptchaSentEvent extends ApplicationEvent {
+    public MobileCaptchaSentEvent(@Nonnull MobileCaptchaStruct struct) {
+        super(struct);
     }
 
-    public HttpSession getSession() {
-        return ObjectUtilsWraps.castAs(super.getSource(), HttpSession.class);
+    public MobileCaptchaStruct getStruct() {
+        return ObjectUtilsWraps.castAs(super.getSource(), MobileCaptchaStruct.class);
     }
 }

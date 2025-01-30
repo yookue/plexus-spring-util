@@ -32,7 +32,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 @SuppressWarnings("unused")
-public enum CaptchaImageType implements KeyValueEnum<String, MediaType> {
+public enum ImageCaptchaType implements KeyValueEnum<String, MediaType> {
     GIF(FileExtensionConst.GIF, MediaType.IMAGE_GIF),    // $NON-NLS-1$
     JPG(FileExtensionConst.JPG, MediaType.IMAGE_JPEG),    // $NON-NLS-1$
     PNG(FileExtensionConst.PNG, MediaType.IMAGE_PNG);    // $NON-NLS-1$

@@ -27,19 +27,19 @@ import com.yookue.commonplexus.javaseutil.converter.SqlDateConverter;
 import com.yookue.commonplexus.javaseutil.converter.UtilDateConverter;
 import com.yookue.commonplexus.javaseutil.util.ConverterUtilsWraps;
 import com.yookue.commonplexus.springutil.converter.BeanStringConverter;
-import com.yookue.commonplexus.springutil.event.BeanUtilsConverterEvent;
+import com.yookue.commonplexus.springutil.event.BeanConverterRegisteredEvent;
 import lombok.Getter;
 import lombok.Setter;
 
 
 /**
- * Registers object converters for apache bean utils and publishes a {@link com.yookue.commonplexus.springutil.event.BeanUtilsConverterEvent}
+ * Registers object converters for apache bean utils and publishes a {@link com.yookue.commonplexus.springutil.event.BeanConverterRegisteredEvent}
  *
  * @author David Hsing
  */
 @Getter
 @Setter
-public class BeanUtilsConverterListener implements ApplicationListener<ContextRefreshedEvent> {
+public class BeanConverterPreparedListener implements ApplicationListener<ContextRefreshedEvent> {
     private boolean publishEvent = true;
 
     @Override
@@ -52,7 +52,7 @@ public class BeanUtilsConverterListener implements ApplicationListener<ContextRe
         ConverterUtilsWraps.registerClassConverter(java.time.LocalDateTime.class, new LocalDateTimeConverter());
         ConverterUtilsWraps.registerClassConverter(java.time.LocalTime.class, new LocalTimeConverter());
         if (publishEvent) {
-            event.getApplicationContext().publishEvent(new BeanUtilsConverterEvent(event.getApplicationContext()));
+            event.getApplicationContext().publishEvent(new BeanConverterRegisteredEvent(event.getApplicationContext()));
         }
     }
 }

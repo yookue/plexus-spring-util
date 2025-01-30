@@ -24,8 +24,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
-import com.yookue.commonplexus.springutil.annotation.EnableBeanUtilsConverter;
-import com.yookue.commonplexus.springutil.event.listener.BeanUtilsConverterListener;
+import com.yookue.commonplexus.springutil.annotation.EnableBeanConverter;
+import com.yookue.commonplexus.springutil.event.listener.BeanConverterPreparedListener;
 
 
 /**
@@ -33,8 +33,8 @@ import com.yookue.commonplexus.springutil.event.listener.BeanUtilsConverterListe
  *
  * @author David Hsing
  */
-public class BeanUtilsConverterRegistrar implements ImportAware {
-    private final Class<? extends Annotation> annotation = EnableBeanUtilsConverter.class;
+public class BeanConverterRegistrar implements ImportAware {
+    private final Class<? extends Annotation> annotation = EnableBeanConverter.class;
     private AnnotationAttributes attributes;
 
     @Override
@@ -47,8 +47,8 @@ public class BeanUtilsConverterRegistrar implements ImportAware {
 
     @Bean
     @ConditionalOnMissingBean
-    public BeanUtilsConverterListener beanUtilsConverterListener() {
-        BeanUtilsConverterListener result = new BeanUtilsConverterListener();
+    public BeanConverterPreparedListener beanConverterPreparedListener() {
+        BeanConverterPreparedListener result = new BeanConverterPreparedListener();
         result.setPublishEvent(attributes.getBoolean("publishEvent"));    // $NON-NLS-1$
         return result;
     }

@@ -14,22 +14,32 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.event;
+package com.yookue.commonplexus.springutil.structure;
 
 
-import jakarta.annotation.Nonnull;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.ApplicationContextEvent;
+import java.io.Serializable;
+import com.yookue.commonplexus.springutil.enumeration.ImageCaptchaType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 
 /**
- * Event when {@link org.apache.commons.beanutils2.Converter} be registered
+ * Structure for image captcha
  *
  * @author David Hsing
  */
+@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @SuppressWarnings("unused")
-public class BeanUtilsConverterEvent extends ApplicationContextEvent {
-    public BeanUtilsConverterEvent(@Nonnull ApplicationContext source) {
-        super(source);
-    }
+public class ImageCaptchaStruct implements Serializable {
+    private Integer width;
+    private Integer height;
+    private Integer charCount;
+    private String fontName;
+    private Integer fontSize;
+    private ImageCaptchaType type;
 }
