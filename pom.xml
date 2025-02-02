@@ -22,7 +22,7 @@
 
     <groupId>com.yookue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.4.1</version>
+    <version>3.4.2</version>
 
     <name>${project.artifactId}</name>
     <description>Plexus Spring Util</description>
@@ -48,17 +48,16 @@
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
         <project.logo>https://yookue.github.io/assets/ico/logo-icon.svg</project.logo>
 
-        <spring-boot.version>3.4.1</spring-boot.version>
-        <spring-session.version>3.4.1</spring-session.version>
+        <spring-boot.version>3.4.2</spring-boot.version>
 
-        <commons-beanutils2.version>[2.0.0,)</commons-beanutils2.version>
-        <commons-fileupload2.version>[2.0.0-M1,)</commons-fileupload2.version>
-        <guava.version>[33.4.0-jre,)</guava.version>
-        <javapoet.version>[1.13.0,)</javapoet.version>
-        <joda-time.version>[2.13.0,)</joda-time.version>
-        <mybatis.version>[3.5.17,)</mybatis.version>
-        <pagehelper.version>[6.1.0,)</pagehelper.version>
-        <plexus-javase-util.version>[2.0.3,)</plexus-javase-util.version>
+        <commons-beanutils2.version>2.0.0</commons-beanutils2.version>
+        <commons-fileupload2.version>2.0.0-M1</commons-fileupload2.version>
+        <guava.version>33.4.0-jre</guava.version>
+        <javapoet.version>1.13.0</javapoet.version>
+        <joda-time.version>2.13.0</joda-time.version>
+        <mybatis.version>3.5.19</mybatis.version>
+        <pagehelper.version>6.1.0</pagehelper.version>
+        <plexus-javase-util.version>2.0.4</plexus-javase-util.version>
 
         <javadoc-docent-maven-plugin.version>2.0.2</javadoc-docent-maven-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -78,13 +77,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.session</groupId>
-                <artifactId>spring-session-bom</artifactId>
-                <version>${spring-session.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
