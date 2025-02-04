@@ -43,7 +43,7 @@ public class HashCodeKeyGenerator extends AbstractKeyGenerator {
 
     @Override
     protected String resolveParams(@Nullable Object... params) {
-        String result = ArrayUtils.isEmpty(params) ? StringVariantConst.NULL : String.format(SymbolVariantConst.ORDER_SQUARES, Arrays.deepHashCode(params));
+        String result = ArrayUtils.isEmpty(params) ? StringVariantConst.NULL : String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Arrays.deepHashCode(params));
         return !wrapParentheses ? result : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, CharVariantConst.PARENTHESIS_RIGHT, result);
     }
 }
