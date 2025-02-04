@@ -110,6 +110,6 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
         if (!appendHashCode) {
             return content;
         }
-        return StringUtils.join(content, String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Arrays.deepHashCode(params)));
+        return StringUtils.join(content, String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(Arrays.deepHashCode(params))));
     }
 }
