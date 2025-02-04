@@ -39,4 +39,6 @@ public class MobileCaptchaStruct implements Serializable {
     private String mobile;
     private String captcha;
     private String serial;
+    private String scenario;
+    private String session;
 }
