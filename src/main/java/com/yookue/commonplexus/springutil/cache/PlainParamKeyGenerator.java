@@ -78,11 +78,12 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                 }
                 if (param instanceof CharSequence alias) {
                     String sequence = alias.toString();
-                    String reserves = RegexUtilsWraps.reserveAlphanumeric(sequence);
-                    if (StringUtils.isNotBlank(reserves) && maxKeyLength > 0) {
-                        reserves = StringUtils.left(reserves, maxKeyLength);
+                    if (RegexUtilsWraps.isAlphanumeric(sequence)) {
+                        joiner.add(sequence);
+                    } else {
+                        String reserves = RegexUtilsWraps.reserveAlphanumeric(sequence);
+                        joiner.add(StringUtils.join(reserves, String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(sequence.hashCode()))));
                     }
-                    joiner.add(StringUtils.join(reserves, CharVariantConst.TILDE, sequence.hashCode()));
                     continue;
                 }
                 if (param instanceof java.util.Date alias) {
