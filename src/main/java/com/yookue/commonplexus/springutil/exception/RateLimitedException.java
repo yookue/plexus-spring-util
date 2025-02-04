@@ -14,28 +14,20 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.event;
+package com.yookue.commonplexus.springutil.exception;
 
 
-import jakarta.annotation.Nonnull;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.context.ApplicationEvent;
-import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import lombok.NoArgsConstructor;
+import lombok.experimental.StandardException;
 
 
 /**
- * Event when {@link jakarta.servlet.http.HttpSession} idled
+ * Thrown to indicate that the request rate is limited
  *
  * @author David Hsing
  */
+@NoArgsConstructor
+@StandardException
 @SuppressWarnings("unused")
-public class HttpSessionIdledEvent extends ApplicationEvent {
-    public HttpSessionIdledEvent(@Nonnull HttpSession session) {
-        super(session);
-    }
-
-    @Nonnull
-    public HttpSession getSession() {
-        return ObjectUtilsWraps.castAs(super.getSource(), HttpSession.class);
-    }
+public class RateLimitedException extends RuntimeException {
 }

@@ -23,6 +23,12 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 import com.yookue.commonplexus.springutil.structure.MobileCaptchaStruct;
 
 
+/**
+ * Event when sending mobile captcha
+ *
+ * @author David Hsing
+ * @see com.yookue.commonplexus.springutil.exception.MobileCaptchaSendException
+ */
 @SuppressWarnings("unused")
 public class MobileCaptchaSentEvent extends ApplicationEvent {
     public MobileCaptchaSentEvent(@Nonnull MobileCaptchaStruct struct) {

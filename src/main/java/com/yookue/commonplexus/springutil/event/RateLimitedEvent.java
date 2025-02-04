@@ -18,24 +18,19 @@ package com.yookue.commonplexus.springutil.event;
 
 
 import jakarta.annotation.Nonnull;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.ApplicationEvent;
-import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
 
 /**
- * Event when {@link jakarta.servlet.http.HttpSession} idled
+ * Event when request rate is limited
  *
  * @author David Hsing
+ * @see com.yookue.commonplexus.springutil.exception.RateLimitedException
  */
 @SuppressWarnings("unused")
-public class HttpSessionIdledEvent extends ApplicationEvent {
-    public HttpSessionIdledEvent(@Nonnull HttpSession session) {
-        super(session);
-    }
-
-    @Nonnull
-    public HttpSession getSession() {
-        return ObjectUtilsWraps.castAs(super.getSource(), HttpSession.class);
+public class RateLimitedEvent extends ApplicationEvent {
+    public RateLimitedEvent(@Nonnull HttpServletRequest request) {
+        super(request);
     }
 }
