@@ -31,7 +31,6 @@ import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
-import com.yookue.commonplexus.javaseutil.util.RegexUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
 import lombok.Getter;
 import lombok.Setter;
@@ -77,13 +76,7 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                     continue;
                 }
                 if (param instanceof CharSequence alias) {
-                    String sequence = alias.toString();
-                    if (RegexUtilsWraps.isAlphanumeric(sequence)) {
-                        joiner.add(sequence);
-                    } else {
-                        String reserves = RegexUtilsWraps.reserveAlphanumeric(sequence);
-                        joiner.add(StringUtils.join(reserves, String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(sequence.hashCode()))));
-                    }
+                    joiner.add(alias.toString());
                     continue;
                 }
                 if (param instanceof java.util.Date alias) {
