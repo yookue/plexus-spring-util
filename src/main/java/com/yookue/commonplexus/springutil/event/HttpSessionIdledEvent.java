@@ -29,6 +29,7 @@ public class HttpSessionIdledEvent extends ApplicationEvent {
         super(session);
     }
 
+    @Nonnull
     public HttpSession getSession() {
         return ObjectUtilsWraps.castAs(super.getSource(), HttpSession.class);
     }

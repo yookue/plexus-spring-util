@@ -29,6 +29,7 @@ public class MobileCaptchaSentEvent extends ApplicationEvent {
         super(struct);
     }
 
+    @Nonnull
     public MobileCaptchaStruct getStruct() {
         return ObjectUtilsWraps.castAs(super.getSource(), MobileCaptchaStruct.class);
     }
