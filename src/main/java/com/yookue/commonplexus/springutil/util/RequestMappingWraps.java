@@ -73,6 +73,17 @@ import com.yookue.commonplexus.springutil.structure.RequestMappingStruct;
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class RequestMappingWraps {
+    /**
+     * Return whether the method is any mapping present or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is any mapping present or not
+     */
+    public static boolean anyMapping(@Nullable Method method) {
+        return AnnotationUtilsWraps.anyPresent(method, RequestMapping.class, GetMapping.class, PostMapping.class, PatchMapping.class, PutMapping.class, DeleteMapping.class);
+    }
+
     @Nullable
     public static String[] getAllMappingPaths(@Nullable Class<?> controller) {
         Set<String> result = getAllMappingPathsToSet(controller);
@@ -613,5 +624,71 @@ public abstract class RequestMappingWraps {
             }
         }
         return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    /**
+     * Return whether the method is annotated with {@code org.springframework.web.bind.annotation.RequestMapping} or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is annotated with {@code org.springframework.web.bind.annotation.RequestMapping} or not
+     */
+    public static boolean isRequestMapping(@Nullable Method method) {
+        return method != null && AnnotationUtils.findAnnotation(method, RequestMapping.class) != null;
+    }
+
+    /**
+     * Return whether the method is annotated with {@code org.springframework.web.bind.annotation.GetMapping} or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is annotated with {@code org.springframework.web.bind.annotation.GetMapping} or not
+     */
+    public static boolean isGetMapping(@Nullable Method method) {
+        return method != null && AnnotationUtils.findAnnotation(method, GetMapping.class) != null;
+    }
+
+    /**
+     * Return whether the method is annotated with {@code org.springframework.web.bind.annotation.PostMapping} or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is annotated with {@code org.springframework.web.bind.annotation.PostMapping} or not
+     */
+    public static boolean isPostMapping(@Nullable Method method) {
+        return method != null && AnnotationUtils.findAnnotation(method, PostMapping.class) != null;
+    }
+
+    /**
+     * Return whether the method is annotated with {@code org.springframework.web.bind.annotation.PatchMapping} or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is annotated with {@code org.springframework.web.bind.annotation.PatchMapping} or not
+     */
+    public static boolean isPatchMapping(@Nullable Method method) {
+        return method != null && AnnotationUtils.findAnnotation(method, PatchMapping.class) != null;
+    }
+
+    /**
+     * Return whether the method is annotated with {@code org.springframework.web.bind.annotation.PutMapping} or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is annotated with {@code org.springframework.web.bind.annotation.PutMapping} or not
+     */
+    public static boolean isPutMapping(@Nullable Method method) {
+        return method != null && AnnotationUtils.findAnnotation(method, PutMapping.class) != null;
+    }
+
+    /**
+     * Return whether the method is annotated with {@code org.springframework.web.bind.annotation.DeleteMapping} or not
+     *
+     * @param method the method of controller class
+     *
+     * @return whether the method is annotated with {@code org.springframework.web.bind.annotation.DeleteMapping} or not
+     */
+    public static boolean isDeleteMapping(@Nullable Method method) {
+        return method != null && AnnotationUtils.findAnnotation(method, DeleteMapping.class) != null;
     }
 }
