@@ -43,6 +43,7 @@ import org.springframework.util.CollectionUtils;
 import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
 import com.yookue.commonplexus.javaseutil.annotation.ViewSubmitIgnore;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
@@ -842,6 +843,10 @@ public abstract class RequestParamWraps {
 
     public static String[] getHeaderValues(@Nullable HttpServletRequest request, @Nullable String name, @Nullable String[] defaultValues) {
         return (request == null || StringUtils.isBlank(name)) ? defaultValues : EnumerationPlainWraps.toElementArray(request.getHeaders(name));
+    }
+
+    public static boolean isValidPathVariable(@Nullable CharSequence sequence) {
+        return StringUtils.isNotBlank(sequence) && !StringUtils.equalsAnyIgnoreCase(sequence, StringVariantConst.NULL, StringVariantConst.UNDEFINED);
     }
 
     public static void populateBean(@Nullable Object bean, @Nullable HttpServletRequest request) {
