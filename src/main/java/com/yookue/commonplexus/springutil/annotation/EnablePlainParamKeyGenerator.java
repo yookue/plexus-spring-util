@@ -22,6 +22,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Configuration;
@@ -31,9 +32,13 @@ import com.yookue.commonplexus.springutil.registrar.PlainParamKeyGeneratorRegist
 
 
 /**
- * Annotation that enables plain param key generator for spring cache
+ * Annotation that enables global plain param key generator for spring cache
+ *
+ * <p>
+ * Specifies the global cache key generator format
  *
  * @author David Hsing
+ * @see com.yookue.commonplexus.springutil.cache.PlainParamKeyFormat
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
@@ -43,6 +48,41 @@ import com.yookue.commonplexus.springutil.registrar.PlainParamKeyGeneratorRegist
 @Import(value = PlainParamKeyGeneratorRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnablePlainParamKeyGenerator {
+    /**
+     * Returns the prefix of the generated keys
+     *
+     * @return the prefix of the generated keys
+     */
+    String prefix() default StringUtils.EMPTY;
+
+    /**
+     * Returns the suffix of the generated keys
+     *
+     * @return the suffix of the generated keys
+     */
+    String suffix() default StringUtils.EMPTY;
+
+    /**
+     * Returns whether to prepend the class name or not
+     *
+     * @return whether to prepend the class name or not
+     */
+    boolean clazzName() default false;
+
+    /**
+     * Returns whether to use the short class name when {@code clazzName} is {@code true}
+     *
+     * @return whether to use the short class name when {@code clazzName} is {@code true}
+     */
+    boolean shortClazzName() default true;
+
+    /**
+     * Returns whether to use the hash code of the method or not
+     *
+     * @return whether to use the hash code of the method or not
+     */
+    boolean methodHash() default false;
+
     /**
      * Returns the max key length of the generated keys
      *
@@ -55,12 +95,12 @@ public @interface EnablePlainParamKeyGenerator {
      *
      * @return whether to wrap the params with parentheses or not
      */
-    boolean wrapParentheses() default true;
+    boolean paramParentheses() default true;
 
     /**
-     * Returns whether to append the hash code of the params or not
+     * Returns whether to use the hash code of the params or not
      *
-     * @return whether to append the hash code of the params or not
+     * @return whether to use the hash code of the params or not
      */
-    boolean appendHashCode() default true;
+    boolean paramHash() default true;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2025 Yookue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,35 +14,33 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.annotation;
+package com.yookue.commonplexus.springutil.cache;
 
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import com.yookue.commonplexus.springutil.registrar.HashCodeKeyGeneratorRegistrar;
 
 
 /**
- * Annotation that enables hash code key generator for spring cache
+ * Annotation that formats local plain param key generator for spring cache
+ *
+ * <p>
+ * Specifies the local cache key generator format
  *
  * @author David Hsing
+ * @see com.yookue.commonplexus.springutil.annotation.EnablePlainParamKeyGenerator
  */
-@Target(value = ElementType.TYPE)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
 @Retention(value = RetentionPolicy.RUNTIME)
+@Inherited
 @Documented
-@Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(value = KeyGenerator.class)
-@Import(value = HashCodeKeyGeneratorRegistrar.class)
 @SuppressWarnings("unused")
-public @interface EnableHashCodeKeyGenerator {
+public @interface PlainParamKeyFormat {
     /**
      * Returns the prefix of the generated keys
      *
@@ -79,9 +77,23 @@ public @interface EnableHashCodeKeyGenerator {
     boolean methodHash() default false;
 
     /**
+     * Returns the max key length of the generated keys
+     *
+     * @return the max key length of the generated keys
+     */
+    int maxKeyLength() default PlainParamKeyGenerator.DEFAULT_KEY_LENGTH;
+
+    /**
      * Returns whether to wrap the params with parentheses or not
      *
      * @return whether to wrap the params with parentheses or not
      */
     boolean paramParentheses() default true;
+
+    /**
+     * Returns whether to append the hash code of the params or not
+     *
+     * @return whether to append the hash code of the params or not
+     */
+    boolean paramHash() default true;
 }

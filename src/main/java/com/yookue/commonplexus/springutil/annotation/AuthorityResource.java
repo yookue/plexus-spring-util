@@ -24,7 +24,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 
 /**
@@ -36,7 +35,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@Qualifier
 @SuppressWarnings("unused")
 public @interface AuthorityResource {
     /**

@@ -50,7 +50,12 @@ public class HashCodeKeyGeneratorRegistrar implements ImportAware {
     @ConditionalOnMissingBean(name = KEY_GENERATOR)
     public HashCodeKeyGenerator hashCodeKeyGenerator() {
         HashCodeKeyGenerator result = new HashCodeKeyGenerator();
-        result.setWrapParentheses(attributes.getBoolean("wrapParentheses"));    // $NON-NLS-1$
+        result.setPrefix(attributes.getString("prefix"));    // $NON-NLS-1$
+        result.setSuffix(attributes.getString("suffix"));    // $NON-NLS-1$
+        result.setClazzName(attributes.getBoolean("clazzName"));    // $NON-NLS-1$
+        result.setShortClazzName(attributes.getBoolean("shortClazzName"));    // $NON-NLS-1$
+        result.setMethodHash(attributes.getBoolean("methodHash"));    // $NON-NLS-1$
+        result.setParamParentheses(attributes.getBoolean("paramParentheses"));    // $NON-NLS-1$
         return result;
     }
 }

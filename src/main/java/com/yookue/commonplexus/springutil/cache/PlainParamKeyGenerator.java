@@ -17,13 +17,17 @@
 package com.yookue.commonplexus.springutil.cache;
 
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.StringJoiner;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
@@ -50,14 +54,29 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
     public static final int DEFAULT_KEY_LENGTH = 512;
 
     private int maxKeyLength = DEFAULT_KEY_LENGTH;
-    private boolean wrapParentheses = true;
-    private boolean appendHashCode = true;
+    private boolean paramParentheses = true;
+    private boolean paramHash = true;
+
+    @Override
+    protected void beforeGenerate(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
+        Class<?> targetClass = AopUtils.getTargetClass(target);
+        PlainParamKeyFormat clazzAnnotation = AnnotationUtils.findAnnotation(targetClass, PlainParamKeyFormat.class);
+        if (clazzAnnotation != null) {
+            processAnnotation(clazzAnnotation);
+        }
+        PlainParamKeyFormat methodAnnotation = AnnotationUtils.findAnnotation(method, PlainParamKeyFormat.class);
+        if (methodAnnotation != null) {
+            processAnnotation(methodAnnotation);
+        }
+    }
 
     @Override
     @SuppressWarnings("DataFlowIssue")
-    protected String resolveParams(@Nullable Object... params) {
-        int minParamLength = wrapParentheses ? 5 : 3;
+    protected String resolveParams(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
+        // Validate param length
+        int minParamLength = paramParentheses ? 5 : 3;
         Assert.isTrue(maxKeyLength > minParamLength, "Prop 'maxParamLength' must be greater than " + minParamLength);
+        // Generate cache key
         StringJoiner joiner = new StringJoiner(CharUtils.toString(CharVariantConst.COMMA));
         if (ArrayUtils.isEmpty(params)) {
             joiner.add(StringVariantConst.NULL);
@@ -100,10 +119,21 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
         }
         StringBuilder builder = new StringBuilder();
         builder.append(StringUtils.abbreviate(joiner.toString(), maxKeyLength - minParamLength));
-        String content = !wrapParentheses ? builder.toString() : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, builder.toString(), CharVariantConst.PARENTHESIS_RIGHT);
-        if (!appendHashCode) {
+        String content = !paramParentheses ? builder.toString() : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, builder.toString(), CharVariantConst.PARENTHESIS_RIGHT);
+        if (!paramHash) {
             return content;
         }
         return StringUtils.join(content, String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(Arrays.deepHashCode(params))));
+    }
+
+    private void processAnnotation(@Nonnull PlainParamKeyFormat annotation) {
+        super.setPrefix(annotation.prefix());
+        super.setSuffix(annotation.suffix());
+        super.setClazzName(annotation.clazzName());
+        super.setShortClazzName(annotation.shortClazzName());
+        super.setMethodHash(annotation.methodHash());
+        maxKeyLength = annotation.maxKeyLength();
+        paramParentheses = annotation.paramParentheses();
+        paramHash = annotation.paramHash();
     }
 }

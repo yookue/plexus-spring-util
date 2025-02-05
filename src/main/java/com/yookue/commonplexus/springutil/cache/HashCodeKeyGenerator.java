@@ -17,10 +17,14 @@
 package com.yookue.commonplexus.springutil.cache;
 
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.core.annotation.AnnotationUtils;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
@@ -39,11 +43,33 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("unused")
 public class HashCodeKeyGenerator extends AbstractKeyGenerator {
-    private boolean wrapParentheses = true;
+    private boolean paramParentheses = true;
 
     @Override
-    protected String resolveParams(@Nullable Object... params) {
+    protected void beforeGenerate(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
+        Class<?> targetClass = AopUtils.getTargetClass(target);
+        HashCodeKeyFormat clazzAnnotation = AnnotationUtils.findAnnotation(targetClass, HashCodeKeyFormat.class);
+        if (clazzAnnotation != null) {
+            processAnnotation(clazzAnnotation);
+        }
+        HashCodeKeyFormat methodAnnotation = AnnotationUtils.findAnnotation(method, HashCodeKeyFormat.class);
+        if (methodAnnotation != null) {
+            processAnnotation(methodAnnotation);
+        }
+    }
+
+    @Override
+    protected String resolveParams(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
         String result = ArrayUtils.isEmpty(params) ? StringVariantConst.NULL : String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(Arrays.deepHashCode(params)));
-        return !wrapParentheses ? result : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, CharVariantConst.PARENTHESIS_RIGHT, result);
+        return !paramParentheses ? result : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, CharVariantConst.PARENTHESIS_RIGHT, result);
+    }
+
+    private void processAnnotation(@Nonnull HashCodeKeyFormat annotation) {
+        super.setPrefix(annotation.prefix());
+        super.setSuffix(annotation.suffix());
+        super.setClazzName(annotation.clazzName());
+        super.setShortClazzName(annotation.shortClazzName());
+        super.setMethodHash(annotation.methodHash());
+        paramParentheses = annotation.paramParentheses();
     }
 }

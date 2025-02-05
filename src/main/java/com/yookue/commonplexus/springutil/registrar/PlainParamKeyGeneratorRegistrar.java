@@ -50,9 +50,14 @@ public class PlainParamKeyGeneratorRegistrar implements ImportAware {
     @ConditionalOnMissingBean(name = KEY_GENERATOR)
     public PlainParamKeyGenerator plainParamKeyGenerator() {
         PlainParamKeyGenerator result = new PlainParamKeyGenerator();
+        result.setPrefix(attributes.getString("prefix"));    // $NON-NLS-1$
+        result.setSuffix(attributes.getString("suffix"));    // $NON-NLS-1$
+        result.setClazzName(attributes.getBoolean("clazzName"));    // $NON-NLS-1$
+        result.setShortClazzName(attributes.getBoolean("shortClazzName"));    // $NON-NLS-1$
+        result.setMethodHash(attributes.getBoolean("methodHash"));    // $NON-NLS-1$
         result.setMaxKeyLength(attributes.getNumber("maxKeyLength"));    // $NON-NLS-1$
-        result.setWrapParentheses(attributes.getBoolean("wrapParentheses"));    // $NON-NLS-1$
-        result.setAppendHashCode(attributes.getBoolean("appendHashCode"));    // $NON-NLS-1$
+        result.setParamParentheses(attributes.getBoolean("paramParentheses"));    // $NON-NLS-1$
+        result.setParamHash(attributes.getBoolean("paramHash"));    // $NON-NLS-1$
         return result;
     }
 }

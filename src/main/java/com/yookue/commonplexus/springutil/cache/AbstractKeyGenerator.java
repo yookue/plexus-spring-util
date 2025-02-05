@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.cache.interceptor.KeyGenerator;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,32 +49,41 @@ import lombok.Setter;
 public abstract class AbstractKeyGenerator implements KeyGenerator {
     private String prefix;
     private String suffix;
-    private boolean prependClassName = false;
-    private boolean useShortClassName = true;
-    private boolean appendMethodHash = false;
+    private boolean clazzName = false;
+    private boolean shortClazzName = true;
+    private boolean methodHash = false;
 
     @Nonnull
     @Override
     public Object generate(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
+        beforeGenerate(target, method, params);
         StringBuilder builder = new StringBuilder();
         if (StringUtils.isNotBlank(prefix)) {
             builder.append(StringUtilsWraps.appendIfMissing(prefix, CharVariantConst.COLON));
         }
-        if (prependClassName) {
+        if (clazzName) {
             Class<?> targetClass = AopUtils.getTargetClass(target);
-            String className = useShortClassName ? ClassUtils.getShortClassName(targetClass) : targetClass.getCanonicalName();
+            String className = shortClazzName ? ClassUtils.getShortClassName(targetClass) : targetClass.getCanonicalName();
             builder.append(className).append(CharVariantConst.COLON);
         }
         builder.append(method.getName());
-        if (appendMethodHash) {
-            builder.append(CharVariantConst.SQUARE_BRACKET_LEFT).append(method.hashCode()).append(CharVariantConst.SQUARE_BRACKET_RIGHT);
+        if (methodHash) {
+            builder.append(String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(method.hashCode())));
         }
-        StringUtilsWraps.ifNotBlank(resolveParams(params), builder::append);
+        StringUtilsWraps.ifNotBlank(resolveParams(target, method, params), builder::append);
         if (StringUtils.isNotBlank(suffix)) {
             builder.append(StringUtilsWraps.prependIfMissing(suffix, CharVariantConst.COLON));
         }
-        return builder.toString();
+        return afterGenerate(builder.toString());
     }
 
-    protected abstract String resolveParams(@Nullable Object... params);
+    @SuppressWarnings("unused")
+    protected void beforeGenerate(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
+    }
+
+    protected abstract String resolveParams(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params);
+
+    protected String afterGenerate(@Nullable String generated) {
+        return generated;
+    }
 }
