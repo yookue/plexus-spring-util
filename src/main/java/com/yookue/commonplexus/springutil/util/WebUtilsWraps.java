@@ -465,9 +465,7 @@ public abstract class WebUtilsWraps {
     }
 
     public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value) {
-        if (request != null && StringUtils.isNotBlank(name)) {
-            WebUtils.setSessionAttribute(request, name, value);
-        }
+        setSessionAttribute(request, name, value, true);
     }
 
     public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value, boolean createIfNull) {
@@ -475,12 +473,17 @@ public abstract class WebUtilsWraps {
             return;
         }
         HttpSession session = request.getSession(createIfNull && value != null);
-        if (session == null) {
+        if (session != null) {
+            session.setAttribute(name, value);
+        }
+    }
+
+    public static void removeSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name) {
+        if (request == null || StringUtils.isBlank(name)) {
             return;
         }
-        if (value != null) {
-            session.setAttribute(name, value);
-        } else {
+        HttpSession session = request.getSession();
+        if (session != null) {
             session.removeAttribute(name);
         }
     }
