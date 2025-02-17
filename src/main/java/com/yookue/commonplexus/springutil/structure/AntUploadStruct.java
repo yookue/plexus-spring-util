@@ -18,8 +18,8 @@ package com.yookue.commonplexus.springutil.structure;
 
 
 import java.io.Serializable;
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigInteger;
+import org.springframework.http.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,35 +27,23 @@ import lombok.experimental.Accessors;
 
 
 /**
- * Structure for Route of Ant Design
+ * Structure for Upload of Ant Design
  *
  * @author David Hsing
- * @reference "https://umijs.org/docs/guides/routes"
+ * @reference "https://ant.design/components/upload"
  */
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @SuppressWarnings({"unused", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public class AntRouteStruct implements Serializable {
-    private String path;
+public class AntUploadStruct implements Serializable {
+    private String uid;
     private String name;
-    private String icon;
-    private String locale;
-    private String redirect;
-    private String target;
-    private String component;
-
-    private Boolean disabled;
-    private Boolean flatMenu;
-    private Boolean layout;
-    private Boolean hideInMenu;
-    private Boolean hideInBreadcrumb;
-    private Boolean hideChildrenInMenu;
-
-    @JsonProperty(value = "authority")
-    private List<String> authorities;
-
-    private List<AntRouteStruct> routes;
-    private List<String> wrappers;
+    private BigInteger size;
+    private Long lastModified;
+    private Float percent;
+    private String url;
+    private String thumbUrl;
+    private MediaType type;
 }

@@ -27,7 +27,7 @@ import lombok.experimental.Accessors;
 
 
 /**
- * Structure for Table of Ant Design Pro
+ * Structure for Table of Ant Design
  *
  * @author David Hsing
  * @reference "https://ant.design/components/table"

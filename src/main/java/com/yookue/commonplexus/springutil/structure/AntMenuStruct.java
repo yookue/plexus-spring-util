@@ -27,7 +27,7 @@ import lombok.experimental.Accessors;
 
 
 /**
- * Structure for Menu of Ant Design Pro
+ * Structure for Menu of Ant Design
  *
  * @author David Hsing
  * @reference "https://procomponents.ant.design/components/layout#menudataitem"
