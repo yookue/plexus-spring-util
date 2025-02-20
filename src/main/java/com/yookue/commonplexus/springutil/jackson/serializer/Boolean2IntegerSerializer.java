@@ -43,6 +43,6 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 public class Boolean2IntegerSerializer extends JsonSerializer<Boolean> {
     @Override
     public void serialize(@Nullable Boolean value, @Nonnull JsonGenerator generator, @Nullable SerializerProvider provider) {
-        ObjectUtilsWraps.ifNotNull(BooleanUtils.toIntegerObject(value), Failable.asConsumer(generator::writeNumber));
+        ObjectUtilsWraps.ifNotNull(BooleanUtils.toInteger(value), Failable.asConsumer(generator::writeNumber));
     }
 }

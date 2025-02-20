@@ -158,7 +158,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Double getDoubleCookie(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Double defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toDoubleObject(getStringCookieTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toDouble(getStringCookieTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -168,7 +168,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Float getFloatCookie(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Float defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toFloatObject(getStringCookieTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toFloat(getStringCookieTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -178,7 +178,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Integer getIntegerCookie(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Integer defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toIntegerObject(getStringCookieTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toInteger(getStringCookieTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -188,7 +188,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Long getLongCookie(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Long defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toLongObject(getStringCookieTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toLong(getStringCookieTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -198,7 +198,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Short getShortCookie(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Short defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toShortObject(getStringCookieTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toShort(getStringCookieTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -296,7 +296,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Double getDoubleHeader(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Double defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toDoubleObject(getStringHeaderTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toDouble(getStringHeaderTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -310,7 +310,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = getHeaderValues(request, name);
-        Double[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toDoubleObject).toArray(Double[]::new);
+        Double[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toDouble).toArray(Double[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -321,7 +321,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Float getFloatHeader(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Float defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toFloatObject(getStringHeaderTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toFloat(getStringHeaderTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -335,7 +335,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = getHeaderValues(request, name);
-        Float[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toFloatObject).toArray(Float[]::new);
+        Float[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toFloat).toArray(Float[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -346,7 +346,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Integer getIntegerHeader(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Integer defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toIntegerObject(getStringHeaderTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toInteger(getStringHeaderTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -360,7 +360,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = getHeaderValues(request, name);
-        Integer[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toIntegerObject).toArray(Integer[]::new);
+        Integer[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toInteger).toArray(Integer[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -371,7 +371,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Long getLongHeader(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Long defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toLongObject(getStringHeaderTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toLong(getStringHeaderTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -385,7 +385,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = getHeaderValues(request, name);
-        Long[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toLongObject).toArray(Long[]::new);
+        Long[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toLong).toArray(Long[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -396,7 +396,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Short getShortHeader(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Short defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toShortObject(getStringHeaderTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toShort(getStringHeaderTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -410,7 +410,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = getHeaderValues(request, name);
-        Short[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toShortObject).toArray(Short[]::new);
+        Short[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toShort).toArray(Short[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -549,7 +549,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Double getDoubleParameter(@Nullable ServletRequest request, @Nullable String name, @Nullable Double defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toDoubleObject(getStringParameterTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toDouble(getStringParameterTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -563,7 +563,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = request.getParameterValues(name);
-        Double[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toDoubleObject).toArray(Double[]::new);
+        Double[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toDouble).toArray(Double[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -574,7 +574,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Float getFloatParameter(@Nullable ServletRequest request, @Nullable String name, @Nullable Float defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toFloatObject(getStringParameterTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toFloat(getStringParameterTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -588,7 +588,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = request.getParameterValues(name);
-        Float[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toFloatObject).toArray(Float[]::new);
+        Float[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toFloat).toArray(Float[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -599,7 +599,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Integer getIntegerParameter(@Nullable ServletRequest request, @Nullable String name, @Nullable Integer defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toIntegerObject(getStringParameterTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toInteger(getStringParameterTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -613,7 +613,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = request.getParameterValues(name);
-        Integer[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toIntegerObject).toArray(Integer[]::new);
+        Integer[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toInteger).toArray(Integer[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -624,7 +624,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Long getLongParameter(@Nullable ServletRequest request, @Nullable String name, @Nullable Long defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toLongObject(getStringParameterTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toLong(getStringParameterTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -638,7 +638,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = request.getParameterValues(name);
-        Long[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toLongObject).toArray(Long[]::new);
+        Long[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toLong).toArray(Long[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
@@ -649,7 +649,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Short getShortParameter(@Nullable ServletRequest request, @Nullable String name, @Nullable Short defaultValue) {
-        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toShortObject(getStringParameterTrimming(request, name)), defaultValue);
+        return ObjectUtils.defaultIfNull(NumberUtilsWraps.toShort(getStringParameterTrimming(request, name)), defaultValue);
     }
 
     @Nullable
@@ -663,7 +663,7 @@ public abstract class RequestParamWraps {
             return defaultValues;
         }
         String[] values = request.getParameterValues(name);
-        Short[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toShortObject).toArray(Short[]::new);
+        Short[] result = (values == null) ? null : Arrays.stream(values).map(NumberUtilsWraps::toShort).toArray(Short[]::new);
         return ObjectUtils.defaultIfNull(result, defaultValues);
     }
 
