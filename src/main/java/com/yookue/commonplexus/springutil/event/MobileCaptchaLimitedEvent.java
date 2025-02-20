@@ -24,14 +24,14 @@ import com.yookue.commonplexus.springutil.structure.MobileCaptchaStruct;
 
 
 /**
- * Event when the mobile captcha been sent
+ * Event when the mobile captcha sending is limited
  *
  * @author David Hsing
- * @see com.yookue.commonplexus.springutil.exception.MobileCaptchaSendException
+ * @see com.yookue.commonplexus.springutil.exception.MobileCaptchaLimitException
  */
 @SuppressWarnings("unused")
-public class MobileCaptchaSentEvent extends ApplicationEvent {
-    public MobileCaptchaSentEvent(@Nonnull MobileCaptchaStruct struct) {
+public class MobileCaptchaLimitedEvent extends ApplicationEvent {
+    public MobileCaptchaLimitedEvent(@Nonnull MobileCaptchaStruct struct) {
         super(struct);
     }
 
