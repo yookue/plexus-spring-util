@@ -61,16 +61,16 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("unused")
 public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationProcessingFilter implements BeanFactoryAware {
-    public static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";    // $NON-NLS-1$
     public static final String SPRING_SECURITY_FORM_CAPTCHA_KEY = "captcha";    // $NON-NLS-1$
+    public static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";    // $NON-NLS-1$
     public static final String SPRING_SECURITY_FORM_DIAL_KEY = "dial";    // $NON-NLS-1$
     private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/login", HttpMethod.POST.name());    // $NON-NLS-1$
 
     @Getter
-    private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
+    private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
 
     @Getter
-    private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
+    private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
 
     @Getter
     private String dialParameter = SPRING_SECURITY_FORM_DIAL_KEY;
@@ -128,7 +128,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         if (StringUtils.isBlank(captcha)) {
             throw new IllegalAuthenticationException(super.messages.getMessage("MobileCaptchaAuthenticationFilter.illegalCaptcha", "Illegal captcha"));    // $NON-NLS-1$ // $NON-NLS-2$
         }
-        preAuthentication(wrapper, mobile, captcha, dial);
+        preAuthentication(wrapper, captcha, mobile, dial);
         MobileCaptchaAuthenticationToken token = MobileCaptchaAuthenticationToken.unauthenticated(mobile, captcha, dial);
         setDetails(wrapper, token);
         return super.getAuthenticationManager().authenticate(token);
@@ -167,7 +167,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
      * Override to perform additional actions, such as logging, etc
      */
     @SuppressWarnings("EmptyMethod")
-    protected void preAuthentication(@Nonnull HttpServletRequest request, @Nonnull String mobile, @Nonnull String captcha, @Nullable String dial) throws AuthenticationException {
+    protected void preAuthentication(@Nonnull HttpServletRequest request, @Nonnull String captcha, @Nonnull String mobile, @Nullable String dial) throws AuthenticationException {
     }
 
     protected void setDetails(@Nonnull HttpServletRequest request, @Nonnull MobileCaptchaAuthenticationToken token) {
