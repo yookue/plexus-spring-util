@@ -24,15 +24,8 @@ import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -73,7 +66,7 @@ public abstract class RedisConfigWraps {
             result = result.entryTtl(cacheProperties.getRedis().getTimeToLive());
         }
         result = result.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()));
-        result = result.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jacksonJsonSerializer(jacksonProperties)));
+        result = result.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(JacksonRedisWraps.jsonObjectSerializer(jacksonProperties)));
         return result;
     }
 
@@ -102,45 +95,5 @@ public abstract class RedisConfigWraps {
     public static RedisCacheManager cacheManager(@Nullable RedisConnectionFactory factory, @Nullable CacheProperties cacheProperties, @Nullable JacksonProperties jacksonProperties) {
         RedisCacheManager.RedisCacheManagerBuilder builder = cacheManagerBuilder(factory, cacheProperties, jacksonProperties);
         return (builder == null) ? null : builder.build();
-    }
-
-    @Nonnull
-    public static Jackson2JsonRedisSerializer<Object> jacksonJsonSerializer() {
-        return jacksonJsonSerializer(null);
-    }
-
-    @Nonnull
-    public static Jackson2JsonRedisSerializer<Object> jacksonJsonSerializer(@Nullable JacksonProperties properties) {
-        ObjectMapper mapper = JacksonConfigWraps.jsonObjectMapper(properties);
-        mapper = mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        mapper = mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL);
-        return new Jackson2JsonRedisSerializer<>(mapper, Object.class);
-    }
-
-    public static RedisTemplate<String, Object> jacksonJsonSerializerTemplate(@Nullable RedisConnectionFactory factory) {
-        return jacksonJsonSerializerTemplate(factory, null);
-    }
-
-    public static RedisTemplate<String, Object> jacksonJsonSerializerTemplate(@Nullable RedisConnectionFactory factory, @Nullable JacksonProperties properties) {
-        return objectValueSerializerTemplate(factory, jacksonJsonSerializer(properties));
-    }
-
-    public static RedisTemplate<String, Object> genericJsonSerializerTemplate(@Nullable RedisConnectionFactory factory) {
-        return objectValueSerializerTemplate(factory, new GenericJackson2JsonRedisSerializer());
-    }
-
-    public static RedisTemplate<String, Object> objectValueSerializerTemplate(@Nullable RedisConnectionFactory factory, @Nullable RedisSerializer<Object> valueSerializer) {
-        if (factory == null || valueSerializer == null) {
-            return null;
-        }
-        RedisSerializer<?> stringSerializer = new StringRedisSerializer();
-        RedisTemplate<String, Object> result = new RedisTemplate<>();
-        result.setConnectionFactory(factory);
-        result.setKeySerializer(stringSerializer);
-        result.setHashKeySerializer(stringSerializer);
-        result.setValueSerializer(valueSerializer);
-        result.setHashValueSerializer(valueSerializer);
-        result.afterPropertiesSet();
-        return result;
     }
 }
