@@ -24,6 +24,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.aop.support.AopUtils;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
 
@@ -74,6 +75,11 @@ public abstract class AopUtilsWraps {
 
     public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectedType, @Nullable T defaultValue) {
         return ObjectUtilsWraps.castAs(getParameter(point, index), expectedType, defaultValue);
+    }
+
+    @Nullable
+    public static Class<?> getTargetClass(@Nullable Object candidate) {
+        return (candidate == null) ? null : AopUtils.getTargetClass(candidate);
     }
 
     @Nullable
