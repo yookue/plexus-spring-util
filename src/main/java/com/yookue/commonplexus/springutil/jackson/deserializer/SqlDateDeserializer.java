@@ -55,6 +55,6 @@ public class SqlDateDeserializer extends JsonDeserializer<Date> {
             return null;
         }
         java.util.Date utilDate = UtilDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
-        return (utilDate == null) ? null : SqlDateWraps.castFromUtilDate(utilDate);
+        return (utilDate == null) ? null : SqlDateWraps.castOfUtilDate(utilDate);
     }
 }

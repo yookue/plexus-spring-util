@@ -140,22 +140,22 @@ public abstract class BeanUtilsWraps {
 
     @Nullable
     public static Properties beanToProperties(@Nullable Object bean) {
-        return PropertyPlainWraps.fromMap(beanToMap(bean));
+        return PropertyPlainWraps.ofMap(beanToMap(bean));
     }
 
     @Nullable
     public static Properties beanToProperties(@Nullable Object bean, @Nullable Collection<String> excludes) {
-        return PropertyPlainWraps.fromMap(beanToMap(bean, excludes));
+        return PropertyPlainWraps.ofMap(beanToMap(bean, excludes));
     }
 
     @Nullable
     public static Properties beanToProperties(@Nullable Object bean, boolean exclude, @Nullable String... fields) {
-        return PropertyPlainWraps.fromMap(beanToMap(bean, exclude, fields));
+        return PropertyPlainWraps.ofMap(beanToMap(bean, exclude, fields));
     }
 
     @Nullable
     public static Properties beanToProperties(@Nullable Object bean, boolean exclude, @Nullable Collection<String> fields) {
-        return PropertyPlainWraps.fromMap(beanToMap(bean, exclude, fields));
+        return PropertyPlainWraps.ofMap(beanToMap(bean, exclude, fields));
     }
 
     public static void mapToBean(@Nullable Map<?, ?> map, @Nullable Object bean) throws BeansException {

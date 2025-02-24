@@ -41,6 +41,6 @@ import com.yookue.commonplexus.javaseutil.util.SqlDateWraps;
 public class SqlTimestamp2SqlDateDeserializer extends SqlTimestamp2UtilDateDeserializer {
     @Override
     public Date deserialize(@Nullable JsonParser parser, @Nullable DeserializationContext context) throws IOException {
-        return SqlDateWraps.castFromUtilDate(super.deserialize(parser, context));
+        return SqlDateWraps.castOfUtilDate(super.deserialize(parser, context));
     }
 }

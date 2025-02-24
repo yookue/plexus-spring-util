@@ -17,6 +17,8 @@
 package com.yookue.commonplexus.springutil.util;
 
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
+import com.yookue.commonplexus.javaseutil.util.DurationUtilsWraps;
+import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
 
 /**
@@ -119,25 +123,112 @@ public abstract class RedisTemplateWraps {
         return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().get(key);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @Nullable
+    public static <K, T> T getValueAs(@Nullable RedisTemplate<K, ?> template, @Nullable K key, @Nullable Class<T> expectedType) {
+        return ObjectUtilsWraps.castAs(getValue(template, key), expectedType);
+    }
+
+    @Nullable
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> V getValueAndDelete(@Nullable RedisTemplate<K, V> template, @Nullable K key) {
+        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().getAndDelete(key);
+    }
+
+    @Nullable
+    public static <K, V> V getValueAndExpire(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable Long timeout, @Nullable ChronoUnit unit) {
+        return getValueAndExpire(template, key, DurationUtilsWraps.ofChronoUnit(timeout, unit));
+    }
+
+    @Nullable
+    public static <K, V> V getValueAndExpire(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable Long timeout, @Nullable TimeUnit unit) {
+        return getValueAndExpire(template, key, DurationUtilsWraps.ofTimeUnit(timeout, unit));
+    }
+
+    @Nullable
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> V getValueAndExpire(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable Duration timeout) {
+        if (ObjectUtils.anyNull(template, key)) {
+            return null;
+        }
+        return (timeout == null) ? template.opsForValue().get(key) : template.opsForValue().getAndExpire(key, timeout);
+    }
+
+    @Nullable
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> V getValueAndPersist(@Nullable RedisTemplate<K, V> template, @Nullable K key) {
+        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().getAndPersist(key);
+    }
+
+    @Nullable
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> V getValueAndSet(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value) {
+        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().getAndSet(key, value);
+    }
+
+    @SuppressWarnings("DataFlowIssue")
     public static <K, V> void setValue(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value) {
-        if (ObjectUtils.allNotNull(template, key, value)) {
+        if (ObjectUtils.allNotNull(template, key)) {
             template.opsForValue().set(key, value);
         }
     }
 
-    public static <K, V> void setValueExpiring(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, long seconds) {
-        setValueExpiring(template, key, value, TimeUnit.SECONDS, seconds);
+    public static <K, V> void setValue(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Long timeout, @Nullable ChronoUnit unit) {
+        setValue(template, key, value, DurationUtilsWraps.ofChronoUnit(timeout, unit));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
-    public static <K, V> void setValueExpiring(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable TimeUnit unit, long ttl) {
-        if (ObjectUtils.anyNull(template, key, value)) {
+    public static <K, V> void setValue(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Long timeout, @Nullable TimeUnit unit) {
+        setValue(template, key, value, DurationUtilsWraps.ofTimeUnit(timeout, unit));
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> void setValue(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Duration timeout) {
+        if (ObjectUtils.anyNull(template, key)) {
             return;
         }
-        template.opsForValue().set(key, value);
-        if (unit != null && ttl > 0) {
-            template.expire(key, ttl, unit);
+        if (timeout == null) {
+            template.opsForValue().set(key, value);
+        } else {
+            template.opsForValue().set(key, value, timeout);
+        }
+    }
+
+    public static <K, V> boolean setIfAbsent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Long timeout, @Nullable TimeUnit unit) {
+        return setIfAbsent(template, key, value, DurationUtilsWraps.ofTimeUnit(timeout, unit));
+    }
+
+    public static <K, V> boolean setIfAbsent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Long timeout, @Nullable ChronoUnit unit) {
+        return setIfAbsent(template, key, value, DurationUtilsWraps.ofChronoUnit(timeout, unit));
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> boolean setIfAbsent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Duration timeout) {
+        if (ObjectUtils.anyNull(template, key)) {
+            return false;
+        }
+        if (timeout == null) {
+            return BooleanUtils.isTrue(template.opsForValue().setIfAbsent(key, value));
+        } else {
+            return BooleanUtils.isTrue(template.opsForValue().setIfAbsent(key, value, timeout));
+        }
+    }
+
+    public static <K, V> boolean setIfPresent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Long timeout, @Nullable TimeUnit unit) {
+        return setIfPresent(template, key, value, DurationUtilsWraps.ofTimeUnit(timeout, unit));
+    }
+
+    public static <K, V> boolean setIfPresent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Long timeout, @Nullable ChronoUnit unit) {
+        return setIfPresent(template, key, value, DurationUtilsWraps.ofChronoUnit(timeout, unit));
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> boolean setIfPresent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Duration timeout) {
+        if (ObjectUtils.anyNull(template, key)) {
+            return false;
+        }
+        if (timeout == null) {
+            return BooleanUtils.isTrue(template.opsForValue().setIfPresent(key, value));
+        } else {
+            return BooleanUtils.isTrue(template.opsForValue().setIfPresent(key, value, timeout));
         }
     }
 }
