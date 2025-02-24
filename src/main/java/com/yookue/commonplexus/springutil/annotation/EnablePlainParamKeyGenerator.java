@@ -77,9 +77,16 @@ public @interface EnablePlainParamKeyGenerator {
     boolean shortClazzName() default true;
 
     /**
-     * Returns whether to use the hash code of the method or not
+     * Returns whether to use the method name or not
      *
-     * @return whether to use the hash code of the method or not
+     * @return whether to use the method name or not
+     */
+    boolean methodName() default true;
+
+    /**
+     * Returns whether to use the method hash code or not
+     *
+     * @return whether to use the method hash code or not
      */
     boolean methodHash() default false;
 

@@ -48,12 +48,14 @@ public class PlainParamKeyGeneratorRegistrar implements ImportAware {
 
     @Bean(name = KEY_GENERATOR)
     @ConditionalOnMissingBean(name = KEY_GENERATOR)
+    @SuppressWarnings("DuplicatedCode")
     public PlainParamKeyGenerator plainParamKeyGenerator() {
         PlainParamKeyGenerator result = new PlainParamKeyGenerator();
         result.setPrefix(attributes.getString("prefix"));    // $NON-NLS-1$
         result.setSuffix(attributes.getString("suffix"));    // $NON-NLS-1$
         result.setClazzName(attributes.getBoolean("clazzName"));    // $NON-NLS-1$
         result.setShortClazzName(attributes.getBoolean("shortClazzName"));    // $NON-NLS-1$
+        result.setMethodName(attributes.getBoolean("methodName"));    // $NON-NLS-1$
         result.setMethodHash(attributes.getBoolean("methodHash"));    // $NON-NLS-1$
         result.setMaxKeyLength(attributes.getNumber("maxKeyLength"));    // $NON-NLS-1$
         result.setParamParentheses(attributes.getBoolean("paramParentheses"));    // $NON-NLS-1$

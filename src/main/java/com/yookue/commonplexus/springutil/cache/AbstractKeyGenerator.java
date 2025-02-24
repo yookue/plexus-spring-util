@@ -51,6 +51,7 @@ public abstract class AbstractKeyGenerator implements KeyGenerator {
     private String suffix;
     private boolean clazzName = false;
     private boolean shortClazzName = true;
+    private boolean methodName = true;
     private boolean methodHash = false;
 
     @Nonnull
@@ -66,7 +67,9 @@ public abstract class AbstractKeyGenerator implements KeyGenerator {
             String className = shortClazzName ? ClassUtils.getShortClassName(targetClass) : targetClass.getCanonicalName();
             builder.append(className).append(CharVariantConst.COLON);
         }
-        builder.append(method.getName());
+        if (methodName) {
+            builder.append(method.getName());
+        }
         if (methodHash) {
             builder.append(String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(method.hashCode())));
         }
