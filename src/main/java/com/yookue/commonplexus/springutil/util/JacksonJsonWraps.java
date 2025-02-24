@@ -27,6 +27,7 @@ import java.io.Writer;
 import java.net.URL;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -902,5 +903,155 @@ public abstract class JacksonJsonWraps {
             mapper.acceptJsonFormatVisitor(type, visitor);
         } catch (Exception ignored) {
         }
+    }
+
+    public static Boolean getSubNodeAsBoolean(@Nullable JsonNode node, int index) {
+        return getSubNodeAsBoolean(node, index, null);
+    }
+
+    public static Boolean getSubNodeAsBoolean(@Nullable JsonNode node, int index, Boolean defaultValue) {
+        if (node == null || index < 0) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(index);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asBoolean() : subNode.asBoolean(defaultValue);
+    }
+
+    public static Boolean getSubNodeAsBoolean(@Nullable JsonNode node, String fieldName) {
+        return getSubNodeAsBoolean(node, fieldName, null);
+    }
+
+    public static Boolean getSubNodeAsBoolean(@Nullable JsonNode node, String fieldName, Boolean defaultValue) {
+        if (node == null || StringUtils.isBlank(fieldName)) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(fieldName);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asBoolean() : subNode.asBoolean(defaultValue);
+    }
+
+    public static Double getSubNodeAsDouble(@Nullable JsonNode node, int index) {
+        return getSubNodeAsDouble(node, index, null);
+    }
+
+    public static Double getSubNodeAsDouble(@Nullable JsonNode node, int index, Double defaultValue) {
+        if (node == null || index < 0) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(index);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asDouble() : subNode.asDouble(defaultValue);
+    }
+
+    public static Double getSubNodeAsDouble(@Nullable JsonNode node, String fieldName) {
+        return getSubNodeAsDouble(node, fieldName, null);
+    }
+
+    public static Double getSubNodeAsDouble(@Nullable JsonNode node, String fieldName, Double defaultValue) {
+        if (node == null || StringUtils.isBlank(fieldName)) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(fieldName);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asDouble() : subNode.asDouble(defaultValue);
+    }
+
+    public static Integer getSubNodeAsInteger(@Nullable JsonNode node, int index) {
+        return getSubNodeAsInteger(node, index, null);
+    }
+
+    public static Integer getSubNodeAsInteger(@Nullable JsonNode node, int index, Integer defaultValue) {
+        if (node == null || index < 0) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(index);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asInt() : subNode.asInt(defaultValue);
+    }
+
+    public static Integer getSubNodeAsInteger(@Nullable JsonNode node, String fieldName) {
+        return getSubNodeAsInteger(node, fieldName, null);
+    }
+
+    public static Integer getSubNodeAsInteger(@Nullable JsonNode node, String fieldName, Integer defaultValue) {
+        if (node == null || StringUtils.isBlank(fieldName)) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(fieldName);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asInt() : subNode.asInt(defaultValue);
+    }
+
+    public static Long getSubNodeAsLong(@Nullable JsonNode node, int index) {
+        return getSubNodeAsLong(node, index, null);
+    }
+
+    public static Long getSubNodeAsLong(@Nullable JsonNode node, int index, Long defaultValue) {
+        if (node == null || index < 0) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(index);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asLong() : subNode.asLong(defaultValue);
+    }
+
+    public static Long getSubNodeAsLong(@Nullable JsonNode node, String fieldName) {
+        return getSubNodeAsLong(node, fieldName, null);
+    }
+
+    public static Long getSubNodeAsLong(@Nullable JsonNode node, String fieldName, Long defaultValue) {
+        if (node == null || StringUtils.isBlank(fieldName)) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(fieldName);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asLong() : subNode.asLong(defaultValue);
+    }
+
+    public static String getSubNodeAsString(@Nullable JsonNode node, int index) {
+        return getSubNodeAsString(node, index, null);
+    }
+
+    public static String getSubNodeAsString(@Nullable JsonNode node, int index, String defaultValue) {
+        if (node == null || index < 0) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(index);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asText() : subNode.asText(defaultValue);
+    }
+
+    public static String getSubNodeAsString(@Nullable JsonNode node, String fieldName) {
+        return getSubNodeAsString(node, fieldName, null);
+    }
+
+    public static String getSubNodeAsString(@Nullable JsonNode node, String fieldName, String defaultValue) {
+        if (node == null || StringUtils.isBlank(fieldName)) {
+            return defaultValue;
+        }
+        JsonNode subNode = node.get(fieldName);
+        if (subNode == null) {
+            return defaultValue;
+        }
+        return (defaultValue == null) ? subNode.asText() : subNode.asText(defaultValue);
     }
 }
