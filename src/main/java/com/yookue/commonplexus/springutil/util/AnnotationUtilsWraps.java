@@ -102,7 +102,6 @@ public abstract class AnnotationUtilsWraps {
      * @return a {@link com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct} that contains all the annotations, on the given method or the method owner class
      */
     @Nonnull
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static BooleanDataStruct<MultiValueMap<Class<? extends Annotation>, ElementType>> allPresentAnywhereEx(@Nullable Method method, @Nullable Collection<Class<? extends Annotation>> annotations) {
         BooleanDataStruct<MultiValueMap<Class<? extends Annotation>, ElementType>> result = new BooleanDataStruct<>();
         MultiValueMap<Class<? extends Annotation>, ElementType> mappings = getAnnotationsAnywhereEx(method, annotations);
@@ -147,7 +146,6 @@ public abstract class AnnotationUtilsWraps {
      * @return a {@link com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct} that contains any of the annotations, on the given method or the method owner class
      */
     @Nonnull
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static BooleanDataStruct<MultiValueMap<Class<? extends Annotation>, ElementType>> anyPresentAnywhereEx(@Nullable Method method, @Nullable Collection<Class<? extends Annotation>> annotations) {
         BooleanDataStruct<MultiValueMap<Class<? extends Annotation>, ElementType>> result = new BooleanDataStruct<>();
         MultiValueMap<Class<? extends Annotation>, ElementType> mappings = getAnnotationsAnywhereEx(method, annotations);
@@ -200,7 +198,7 @@ public abstract class AnnotationUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <A extends Annotation> A getAnnotationAnywhere(@Nullable Method method, @Nullable Class<A> annotation) {
         if (ObjectUtils.anyNull(method, annotation)) {
             return null;
@@ -244,7 +242,7 @@ public abstract class AnnotationUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static Object getAnnotationAttribute(@Nullable AnnotatedElement element, @Nullable Class<? extends Annotation> annotation, @Nullable String attribute) {
         if (ObjectUtils.anyNull(element, annotation) || StringUtils.isBlank(attribute)) {
             return null;

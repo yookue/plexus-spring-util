@@ -147,7 +147,7 @@ public abstract class StringUtilsWraps {
      * @see org.springframework.util.StringUtils#splitArrayElementsIntoProperties
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static Properties splitKeyValuesIntoProperties(@Nullable String text, @Nullable CharSequence groupDelimiter, @Nullable CharSequence keyValueDelimiter, @Nullable CharSequence charsToDelete) {
         if (!StringUtils.hasText(text) || !StringUtils.hasLength(groupDelimiter)) {
             return null;

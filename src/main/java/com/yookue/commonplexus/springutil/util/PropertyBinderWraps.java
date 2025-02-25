@@ -108,7 +108,7 @@ public abstract class PropertyBinderWraps {
      *
      * @reference "https://developer.aliyun.com/article/654834"
      */
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean equals(@Nullable CharSequence property1, @Nullable CharSequence property2) {
         if (StringUtils.equals(property1, property2)) {
             return true;

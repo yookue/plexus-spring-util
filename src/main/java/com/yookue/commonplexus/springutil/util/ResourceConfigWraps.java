@@ -46,7 +46,7 @@ public abstract class ResourceConfigWraps {
     /**
      * @see org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.ResourceChainResourceHandlerRegistrationCustomizer#configureResourceChain
      */
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void configResourceChain(@Nullable WebProperties.Resources.Chain chain, @Nullable ResourceChainRegistration registration) {
         if (ObjectUtils.anyNull(chain, registration)) {
             return;
@@ -58,7 +58,7 @@ public abstract class ResourceConfigWraps {
         }
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void configResourceCache(@Nullable WebProperties.Resources resources, @Nullable ResourceHandlerRegistration registration) {
         if (ObjectUtils.anyNull(resources, registration)) {
             return;

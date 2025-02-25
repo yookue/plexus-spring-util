@@ -65,7 +65,7 @@ public class MultitudeObjectProvider<T> implements ObjectProvider<T> {
 
     @Nonnull
     @Override
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public T getObject() throws BeansException {
         if (ArrayUtils.isEmpty(values)) {
             throw new FatalBeanException("No inside objects available");
@@ -101,7 +101,7 @@ public class MultitudeObjectProvider<T> implements ObjectProvider<T> {
 
     @Nonnull
     @Override
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public Stream<T> stream() {
         return ArrayUtils.isEmpty(values) ? Stream.empty() : Stream.of(values);
     }

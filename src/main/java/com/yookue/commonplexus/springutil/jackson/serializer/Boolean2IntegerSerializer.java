@@ -17,14 +17,13 @@
 package com.yookue.commonplexus.springutil.jackson.serializer;
 
 
+import java.io.IOException;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.function.Failable;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
 
 /**
@@ -42,7 +41,9 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 @SuppressWarnings("unused")
 public class Boolean2IntegerSerializer extends JsonSerializer<Boolean> {
     @Override
-    public void serialize(@Nullable Boolean value, @Nonnull JsonGenerator generator, @Nullable SerializerProvider provider) {
-        ObjectUtilsWraps.ifNotNull(BooleanUtils.toInteger(value), Failable.asConsumer(generator::writeNumber));
+    public void serialize(@Nullable Boolean value, @Nonnull JsonGenerator generator, @Nullable SerializerProvider provider) throws IOException {
+        if (value != null) {
+            generator.writeNumber(BooleanUtils.toInteger(value));
+        }
     }
 }

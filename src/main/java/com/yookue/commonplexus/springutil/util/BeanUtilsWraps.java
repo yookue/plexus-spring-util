@@ -60,7 +60,7 @@ public abstract class BeanUtilsWraps {
         copyProperties(source, target, exclude, ArrayUtilsWraps.asList(fields));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void copyProperties(@Nullable Object source, @Nullable Object target, boolean exclude, @Nullable Collection<String> fields) throws BeansException {
         if (source == null || target == null || (!exclude && CollectionUtils.isEmpty(fields))) {
             return;
@@ -78,7 +78,7 @@ public abstract class BeanUtilsWraps {
         BeanUtils.copyProperties(source, target, ignored);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void copyPropertiesQuietly(@Nullable Object source, @Nullable Object target, @Nullable String... excludes) {
         if (source == null || target == null) {
             return;
@@ -199,7 +199,7 @@ public abstract class BeanUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T instantiateClassQuietly(@Nullable Constructor<T> constructor, @Nullable Object... args) {
         if (constructor == null || ArrayUtils.isEmpty(args)) {
             return null;

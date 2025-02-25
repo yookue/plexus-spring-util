@@ -122,7 +122,7 @@ public abstract class WebUtilsWraps {
      * @see org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap
      * @see org.springframework.web.servlet.DispatcherServlet#doService
      */
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void addInputFlashAttribute(@Nullable HttpServletRequest request, @Nullable HttpServletResponse response, @Nullable String name, @Nullable Object value) {
         if (ObjectUtils.anyNull(request, response) || StringUtils.isBlank(name)) {
             return;
@@ -182,7 +182,7 @@ public abstract class WebUtilsWraps {
         forwardRequest(request, response, path, attributes, null);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void forwardRequest(@Nullable HttpServletRequest request, @Nullable HttpServletResponse response, @Nullable String path, @Nullable Map<String, Object> attributes, @Nullable Integer status) throws ServletException, IOException {
         if (ObjectUtils.anyNull(request, response) || response.isCommitted() || StringUtils.isBlank(path)) {
             return;
@@ -402,7 +402,7 @@ public abstract class WebUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getRequestAttributeAs(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Class<T> expectedType) {
         if (ObjectUtils.anyNull(request, expectedType) || StringUtils.isBlank(name)) {
             return null;
@@ -456,7 +456,7 @@ public abstract class WebUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getSessionAttributeAs(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Class<T> expectedType) {
         if (ObjectUtils.anyNull(request, expectedType) || StringUtils.isBlank(name)) {
             return null;
@@ -498,7 +498,7 @@ public abstract class WebUtilsWraps {
      * @see org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController#getErrorAttributes
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static Map<String, Object> getServletErrorAttributes(@Nullable HttpServletRequest request, @Nullable ErrorAttributeOptions options) {
         if (ObjectUtils.anyNull(request, options)) {
             return null;
@@ -666,7 +666,7 @@ public abstract class WebUtilsWraps {
         return view != null && StringUtils.startsWithIgnoreCase(view.getViewName(), UrlBasedViewResolver.REDIRECT_URL_PREFIX);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean saveMultipartFile(@Nullable MultipartFile multipart, @Nullable File output, boolean append) throws IllegalArgumentException, IOException {
         if (ObjectUtils.anyNull(multipart, output)) {
             return false;
@@ -684,7 +684,7 @@ public abstract class WebUtilsWraps {
         return false;
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static long saveServletPart(@Nullable Part part, @Nullable File output, boolean append) throws IllegalArgumentException, IOException {
         if (ObjectUtils.anyNull(part, output)) {
             return 0L;
@@ -693,7 +693,7 @@ public abstract class WebUtilsWraps {
         return saveServletPart(part, FileUtils.openOutputStream(output, append), IOUtils.DEFAULT_BUFFER_SIZE);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static long saveServletPart(@Nullable Part part, @Nullable OutputStream output, int bufferSize) throws IllegalArgumentException, IOException {
         if (ObjectUtils.anyNull(part, output) || bufferSize < 0) {
             return 0L;

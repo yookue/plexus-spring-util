@@ -46,6 +46,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@SuppressWarnings("unused")
 public abstract class AbstractKeyGenerator implements KeyGenerator {
     private String prefix;
     private String suffix;

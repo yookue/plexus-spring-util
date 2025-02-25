@@ -61,7 +61,7 @@ public class RequestMappingStruct implements Serializable {
         this.handlerMethod = handlerMethod;
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public void addMapping(@Nullable Class<? extends Annotation> annotation, @Nullable ElementType element) {
         if (mappings == null) {
             mappings = new LinkedMultiValueMap<>();

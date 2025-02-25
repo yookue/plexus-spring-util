@@ -37,7 +37,7 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class NumberUtilsWraps {
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T extends Number> T convertNumber(@Nullable Number number, @Nullable Class<T> expectedType) {
         if (ObjectUtils.anyNull(number, expectedType)) {
             return null;

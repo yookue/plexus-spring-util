@@ -47,7 +47,6 @@ public abstract class RedisTemplateWraps {
         return countKey(template, ArrayUtilsWraps.asList(keys));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static <K> long countKey(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> keys) {
         if (template == null || CollectionUtils.isEmpty(keys)) {
             return 0;
@@ -60,7 +59,6 @@ public abstract class RedisTemplateWraps {
         return countPattern(template, ArrayUtilsWraps.asList(patterns));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static <K> long countPattern(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> patterns) {
         if (template == null || CollectionUtils.isEmpty(patterns)) {
             return 0;
@@ -73,7 +71,6 @@ public abstract class RedisTemplateWraps {
         deleteKey(template, ArrayUtilsWraps.asList(keys));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static <K> void deleteKey(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> keys) {
         if (template == null || CollectionUtils.isEmpty(keys)) {
             return;
@@ -86,7 +83,6 @@ public abstract class RedisTemplateWraps {
         deletePattern(template, ArrayUtilsWraps.asList(patterns));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public static <K> void deletePattern(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> patterns) {
         if (template == null || CollectionUtils.isEmpty(patterns)) {
             return;
@@ -94,7 +90,7 @@ public abstract class RedisTemplateWraps {
         patterns.stream().filter(Objects::nonNull).map(template::keys).filter(CollectionPlainWraps::isNotEmpty).forEach(Failable.asConsumer(template::delete));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <K> boolean existsKey(@Nullable RedisTemplate<K, ?> template, @Nullable K key) {
         return ObjectUtils.allNotNull(template, key) && BooleanUtils.isTrue(template.hasKey(key));
     }
@@ -118,7 +114,7 @@ public abstract class RedisTemplateWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <K, V> V getValue(@Nullable RedisTemplate<K, V> template, @Nullable K key) {
         return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().get(key);
     }

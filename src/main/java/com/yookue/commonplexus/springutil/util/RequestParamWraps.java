@@ -815,7 +815,7 @@ public abstract class RequestParamWraps {
         return getCookiesAsString(request, CharUtils.toString(CharVariantConst.EQUAL), SymbolVariantConst.SEMICOLON_SPACE);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static String getCookiesAsString(@Nullable HttpServletRequest request, @Nullable CharSequence keyValueDelimiter, @Nullable CharSequence groupDelimiter) {
         if (request == null || StringUtils.isAnyBlank(keyValueDelimiter, groupDelimiter)) {
             return null;
@@ -861,7 +861,7 @@ public abstract class RequestParamWraps {
         populateBean(bean, request, emptyAsNull, ArrayUtilsWraps.asList(ignoredFields));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void populateBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, @Nullable Collection<String> ignoredFields) {
         if (ObjectUtils.anyNull(bean, request)) {
             return;

@@ -49,7 +49,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class ReflectionUtilsWraps {
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void doWithDeclaredFields(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldCallback callback, @Nullable ReflectionUtils.FieldFilter filter) {
         if (ObjectUtils.anyNull(clazz, callback)) {
             return;
@@ -69,7 +69,7 @@ public abstract class ReflectionUtilsWraps {
         }
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void doWithDeclaredMethods(@Nullable Class<?> clazz, @Nullable ReflectionUtils.MethodCallback callback, @Nullable ReflectionUtils.MethodFilter filter) {
         if (ObjectUtils.anyNull(clazz, callback)) {
             return;
@@ -765,7 +765,7 @@ public abstract class ReflectionUtilsWraps {
         return isUserOverride(superclass, subclass, methodName, ArrayUtils.EMPTY_CLASS_ARRAY);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <A, B extends A> boolean isUserOverride(@Nullable Class<A> superclass, @Nullable Class<B> subclass, @Nullable String methodName, @Nullable Class<?>... paramTypes) {
         if (ObjectUtils.anyNull(superclass, subclass) || superclass == subclass || StringUtils.isBlank(methodName)) {
             return false;

@@ -62,7 +62,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class SecurityUtilsWraps {
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationPrincipalAs(@Nullable Authentication authentication, @Nullable Class<T> expectedType) {
         return ObjectUtils.anyNull(authentication, expectedType) ? null : ObjectUtilsWraps.castAs(authentication.getPrincipal(), expectedType);
     }
@@ -92,7 +92,7 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationCredentialsAs(@Nullable Authentication authentication, @Nullable Class<T> expectedType) {
         return ObjectUtils.anyNull(authentication, expectedType) ? null : ObjectUtilsWraps.castAs(authentication.getCredentials(), expectedType);
     }
@@ -103,7 +103,7 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationDetailsAs(@Nullable Authentication authentication, @Nullable Class<T> expectedType) {
         return ObjectUtils.anyNull(authentication, expectedType) ? null : ObjectUtilsWraps.castAs(authentication.getDetails(), expectedType);
     }
@@ -248,7 +248,7 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static Authentication renewAuthentication(@Nullable Authentication authentication, @Nullable Object principal, boolean renewCredentials, @Nullable Object credentials, boolean renewAuthorities, @Nullable Collection<? extends GrantedAuthority> authorities, boolean renewDetails, @Nullable Object details) throws IllegalAccessException, UnsupportedClassException {
         if (ObjectUtils.anyNull(authentication, principal)) {
             return authentication;
@@ -310,7 +310,7 @@ public abstract class SecurityUtilsWraps {
     /**
      * @see org.springframework.security.web.authentication.WebAuthenticationDetails
      */
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static void setAuthenticationDetails(@Nullable Authentication authentication, @Nullable Object details) {
         if (ObjectUtils.anyNull(authentication, details)) {
             return;

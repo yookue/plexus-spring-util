@@ -69,7 +69,7 @@ public abstract class BeanFactoryWraps {
         return allBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectedType)));
     }
@@ -78,7 +78,7 @@ public abstract class BeanFactoryWraps {
         return allBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectedType)));
     }
@@ -87,7 +87,7 @@ public abstract class BeanFactoryWraps {
         return anyBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectedType)));
     }
@@ -96,7 +96,7 @@ public abstract class BeanFactoryWraps {
         return anyBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectedType)));
     }
@@ -344,7 +344,7 @@ public abstract class BeanFactoryWraps {
      * @return a bean instance that uniquely matches the given object type, if any
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
         if (ObjectUtils.anyNull(factory, expectedType)) {
             return null;
@@ -357,7 +357,7 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Object... args) {
         if (ObjectUtils.anyNull(factory, expectedType)) {
             return null;
@@ -382,7 +382,7 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectedType) {
         if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
             return null;
@@ -395,7 +395,7 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectedType, @Nullable Class<?>... typeGenerics) {
         if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
             return null;
@@ -419,7 +419,7 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static Object getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectedType) {
         if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
             return null;
@@ -440,7 +440,7 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static Object getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Object... args) {
         if (factory == null || StringUtils.isBlank(beanName)) {
             return null;
@@ -675,13 +675,13 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
         return ObjectUtils.anyNull(factory, expectedType) ? null : factory.getBeanProvider(expectedType);
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Class<?>... typeGenerics) {
         if (ObjectUtils.anyNull(factory, expectedType)) {
             return null;
@@ -690,7 +690,7 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType) {
         return ObjectUtils.anyNull(factory, expectedType) ? null : factory.getBeanProvider(expectedType);
     }
@@ -929,7 +929,7 @@ public abstract class BeanFactoryWraps {
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static <T> Map<String, T> getBeansWithAnnotationAs(@Nullable BeanFactory factory, @Nullable Class<? extends Annotation> annotation, @Nullable Class<T> expectedType) {
         if (!(factory instanceof ListableBeanFactory) || ObjectUtils.anyNull(annotation, expectedType)) {
             return null;
@@ -1061,7 +1061,7 @@ public abstract class BeanFactoryWraps {
         return false;
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType) {
         if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
             return false;
@@ -1073,7 +1073,7 @@ public abstract class BeanFactoryWraps {
         return false;
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectedType) {
         if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
             return false;
@@ -1096,7 +1096,7 @@ public abstract class BeanFactoryWraps {
         return false;
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean registerBeanAlias(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable String beanAlias) throws IllegalStateException {
         if (!(factory instanceof AliasRegistry alias) || StringUtils.isAnyBlank(beanName, beanAlias)) {
             return false;

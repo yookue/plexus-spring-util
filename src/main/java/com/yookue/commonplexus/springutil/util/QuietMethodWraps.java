@@ -156,7 +156,7 @@ public abstract class QuietMethodWraps {
         return writeMethods(classType, buildParam, output, charset, false);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean writeMethods(@Nullable Class<?> classType, @Nullable BuildParam buildParam, @Nullable File output, @Nullable Charset charset, boolean append) throws IOException {
         if (ObjectUtils.anyNull(classType, output)) {
             return false;

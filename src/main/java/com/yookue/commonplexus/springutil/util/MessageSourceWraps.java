@@ -229,7 +229,7 @@ public abstract class MessageSourceWraps {
      * @return the first resolved message from the message source
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static String firstMessage(@Nullable MessageSource source, @Nullable MessageSourceResolvable resolvable, @Nullable Locale locale) {
         if (ObjectUtils.anyNull(source, resolvable)) {
             return null;
@@ -434,7 +434,7 @@ public abstract class MessageSourceWraps {
      * @return the first resolved message from the message source, with locale lookup
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static String firstMessageLookup(@Nullable MessageSource source, @Nullable MessageSourceResolvable resolvable, @Nullable Locale locale) {
         if (ObjectUtils.anyNull(source, resolvable)) {
             return null;
@@ -589,7 +589,7 @@ public abstract class MessageSourceWraps {
      * @return the resolved message from the message source
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static String getMessage(@Nullable MessageSource source, @Nullable MessageSourceResolvable resolvable, @Nullable Locale locale) {
         if (ObjectUtils.anyNull(source, resolvable)) {
             return null;
@@ -717,7 +717,7 @@ public abstract class MessageSourceWraps {
      * @return the resolved message from the message source, with locale lookup
      */
     @Nullable
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static String getMessageLookup(@Nullable MessageSource source, @Nullable MessageSourceResolvable resolvable, @Nullable Locale locale) {
         if (ObjectUtils.anyNull(source, resolvable)) {
             return null;

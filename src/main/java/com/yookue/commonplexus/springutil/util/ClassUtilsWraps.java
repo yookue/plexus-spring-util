@@ -296,7 +296,7 @@ public abstract class ClassUtilsWraps {
         return !isPrimitive(clazz);
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean isAssignable(@Nullable Class<?> superclass, @Nullable Class<?> subclass) {
         return ObjectUtils.allNotNull(superclass, subclass) && ClassUtils.isAssignable(superclass, subclass);
     }
@@ -309,7 +309,7 @@ public abstract class ClassUtilsWraps {
         return StringUtils.isNoneBlank(superclassName, subclassName) && isAssignable(forNameQuietly(superclassName, classLoader), forNameQuietly(subclassName, classLoader));
     }
 
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
+    @SuppressWarnings("DataFlowIssue")
     public static boolean isAssignable(@Nullable Class<?>[] superclasses, @Nullable Class<?>[] subclasses) {
         if (ArrayUtils.isEmpty(superclasses) && ArrayUtils.isEmpty(subclasses)) {
             return true;

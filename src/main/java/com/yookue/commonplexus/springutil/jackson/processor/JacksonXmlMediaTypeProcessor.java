@@ -41,7 +41,6 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class JacksonXmlMediaTypeProcessor implements BeanPostProcessor {
     @Override
-    @SuppressWarnings({"DataFlowIssue", "RedundantSuppression"})
     public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
         if (!(bean instanceof MappingJackson2HttpMessageConverter alias)) {
             return bean;
