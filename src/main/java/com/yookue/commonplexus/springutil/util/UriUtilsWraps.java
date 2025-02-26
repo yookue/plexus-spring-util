@@ -283,7 +283,7 @@ public abstract class UriUtilsWraps {
     }
 
     @Nonnull
-    public static UrlPathHelper newUrlPathHelper(@Nullable Charset defaultEncoding) {
+    public static UrlPathHelper ofUrlPathHelper(@Nullable Charset defaultEncoding) {
         UrlPathHelper result = new UrlPathHelper();
         if (defaultEncoding != null) {
             result.setDefaultEncoding(defaultEncoding.name());
@@ -292,7 +292,7 @@ public abstract class UriUtilsWraps {
     }
 
     @Nonnull
-    public static UrlPathHelper newUrlPathHelper(@Nullable String defaultEncoding) {
+    public static UrlPathHelper ofUrlPathHelper(@Nullable String defaultEncoding) {
         UrlPathHelper result = new UrlPathHelper();
         if (StringUtils.isNotBlank(defaultEncoding)) {
             result.setDefaultEncoding(defaultEncoding);

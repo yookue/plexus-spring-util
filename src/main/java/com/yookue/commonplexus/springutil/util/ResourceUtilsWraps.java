@@ -62,13 +62,13 @@ public abstract class ResourceUtilsWraps {
             return null;
         }
         if (ClassPathWraps.startsWithClasspath(location)) {
-            return newClassPathResource(location, loader);
+            return ofClassPathResource(location, loader);
         }
         if (ClassPathWraps.startsWithClasspathStar(location)) {
             return ArrayUtils.get(resolveClassPathResourcesQuietly(location, new DefaultResourceLoader(loader)), 0);
         }
         if (InetProtocolWraps.startsWithProtocol(location)) {
-            return newUrlResource(location);
+            return ofUrlResource(location);
         }
         return new FileSystemResource(location);
     }
@@ -249,49 +249,49 @@ public abstract class ResourceUtilsWraps {
     }
 
     public static boolean existsClassPathResource(@Nullable String path, @Nullable ClassLoader loader) {
-        ClassPathResource resource = newClassPathResource(path, loader);
+        ClassPathResource resource = ofClassPathResource(path, loader);
         return resource != null && resource.exists();
     }
 
     public static boolean existsClassPathResource(@Nullable String path, @Nullable Class<?> clazz) {
-        ClassPathResource resource = newClassPathResource(path, clazz);
+        ClassPathResource resource = ofClassPathResource(path, clazz);
         return resource != null && resource.exists();
     }
 
     public static boolean existsUrlResource(@Nullable String location) {
-        UrlResource resource = newUrlResource(location);
+        UrlResource resource = ofUrlResource(location);
         return resource != null && resource.exists();
     }
 
     public static boolean existsUrlResource(@Nullable String protocol, @Nullable String location) {
-        UrlResource resource = newUrlResource(protocol, location);
+        UrlResource resource = ofUrlResource(protocol, location);
         return resource != null && resource.exists();
     }
 
     public static boolean existsUrlResource(@Nullable String protocol, @Nullable String location, @Nullable String fragment) {
-        UrlResource resource = newUrlResource(protocol, location, fragment);
+        UrlResource resource = ofUrlResource(protocol, location, fragment);
         return resource != null && resource.exists();
     }
 
     @Nullable
-    public static ClassPathResource newClassPathResource(@Nullable String path) {
-        return newClassPathResource(path, (ClassLoader) null);
+    public static ClassPathResource ofClassPathResource(@Nullable String path) {
+        return ofClassPathResource(path, (ClassLoader) null);
     }
 
     @Nullable
-    public static ClassPathResource newClassPathResource(@Nullable String path, @Nullable ClassLoader loader) {
+    public static ClassPathResource ofClassPathResource(@Nullable String path, @Nullable ClassLoader loader) {
         String pathToUse = ClassPathWraps.startsWithClasspath(path) ? ClassPathWraps.removeClasspathPrefix(path) : path;
         return StringUtils.isBlank(path) ? null : new ClassPathResource(pathToUse, loader);
     }
 
     @Nullable
-    public static ClassPathResource newClassPathResource(@Nullable String path, @Nullable Class<?> clazz) {
+    public static ClassPathResource ofClassPathResource(@Nullable String path, @Nullable Class<?> clazz) {
         String pathToUse = ClassPathWraps.startsWithClasspath(path) ? ClassPathWraps.removeClasspathPrefix(path) : path;
         return StringUtils.isBlank(path) ? null : new ClassPathResource(pathToUse, clazz);
     }
 
     @Nullable
-    public static UrlResource newUrlResource(@Nullable String location) {
+    public static UrlResource ofUrlResource(@Nullable String location) {
         try {
             return StringUtils.isBlank(location) ? null : new UrlResource(location);
         } catch (Exception ignored) {
@@ -300,12 +300,12 @@ public abstract class ResourceUtilsWraps {
     }
 
     @Nullable
-    public static UrlResource newUrlResource(@Nullable String protocol, @Nullable String location) {
-        return newUrlResource(protocol, location, null);
+    public static UrlResource ofUrlResource(@Nullable String protocol, @Nullable String location) {
+        return ofUrlResource(protocol, location, null);
     }
 
     @Nullable
-    public static UrlResource newUrlResource(@Nullable String protocol, @Nullable String location, @Nullable String fragment) {
+    public static UrlResource ofUrlResource(@Nullable String protocol, @Nullable String location, @Nullable String fragment) {
         try {
             return StringUtils.isAnyBlank(protocol, location) ? null : new UrlResource(protocol, location, fragment);
         } catch (Exception ignored) {

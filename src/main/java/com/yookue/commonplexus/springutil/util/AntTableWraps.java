@@ -63,12 +63,12 @@ public abstract class AntTableWraps {
         if (bounds == null && MapPlainWraps.containsAllKeys(params, CURRENT_PAGE_PARAM, PAGE_SIZE_PARAM)) {
             int currentPage = Math.max(1, MapPlainWraps.getInteger(params, CURRENT_PAGE_PARAM, 1));
             int pageSize = Math.max(0, MapPlainWraps.getInteger(params, CURRENT_PAGE_PARAM, 0));
-            bounds = MybatisPageWraps.newPageRowBounds((currentPage - 1) * pageSize, pageSize, true);
+            bounds = MybatisPageWraps.ofRowBounds((currentPage - 1) * pageSize, pageSize, true);
         }
         AntTableStruct struct = new AntTableStruct();
         if (bounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
-            MybatisPageWraps.putPageSizeZero(cloneParams);
+            MybatisPageWraps.setZeroSize(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
             struct.setRecordsDetails(resultSets);
             struct.setRecordsTotal((long) CollectionPlainWraps.size(resultSets));

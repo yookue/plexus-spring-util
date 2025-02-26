@@ -82,7 +82,7 @@ public abstract class AntPathWraps {
         if (StringUtils.isEmpty(pattern) || CollectionUtils.isEmpty(paths)) {
             return false;
         }
-        AntPathMatcher matcher = newAntPathMatcher(separator, caseSensitive, trimTokens);
+        AntPathMatcher matcher = ofPathMatcher(separator, caseSensitive, trimTokens);
         return paths.stream().anyMatch(path -> matcher.match(pattern, path));
     }
 
@@ -127,7 +127,7 @@ public abstract class AntPathWraps {
         if (StringUtils.isEmpty(pattern) || CollectionUtils.isEmpty(paths)) {
             return false;
         }
-        AntPathMatcher matcher = newAntPathMatcher(separator, caseSensitive, trimTokens);
+        AntPathMatcher matcher = ofPathMatcher(separator, caseSensitive, trimTokens);
         return paths.stream().anyMatch(path -> matcher.matchStart(pattern, path));
     }
 
@@ -172,7 +172,7 @@ public abstract class AntPathWraps {
         if (StringUtils.isEmpty(path) || CollectionUtils.isEmpty(patterns)) {
             return false;
         }
-        AntPathMatcher matcher = newAntPathMatcher(separator, caseSensitive, trimTokens);
+        AntPathMatcher matcher = ofPathMatcher(separator, caseSensitive, trimTokens);
         return patterns.stream().anyMatch(pattern -> matcher.match(pattern, path));
     }
 
@@ -217,17 +217,17 @@ public abstract class AntPathWraps {
         if (StringUtils.isEmpty(path) || CollectionUtils.isEmpty(patterns)) {
             return false;
         }
-        AntPathMatcher matcher = newAntPathMatcher(separator, caseSensitive, trimTokens);
+        AntPathMatcher matcher = ofPathMatcher(separator, caseSensitive, trimTokens);
         return patterns.stream().anyMatch(pattern -> matcher.matchStart(pattern, path));
     }
 
     @Nonnull
-    public static AntPathMatcher newAntPathMatcher(char separator, boolean caseSensitive, boolean trimTokens) {
-        return newAntPathMatcher(CharUtils.toString(separator), caseSensitive, trimTokens);
+    public static AntPathMatcher ofPathMatcher(char separator, boolean caseSensitive, boolean trimTokens) {
+        return ofPathMatcher(CharUtils.toString(separator), caseSensitive, trimTokens);
     }
 
     @Nonnull
-    public static AntPathMatcher newAntPathMatcher(@Nullable String separator, boolean caseSensitive, boolean trimTokens) {
+    public static AntPathMatcher ofPathMatcher(@Nullable String separator, boolean caseSensitive, boolean trimTokens) {
         AntPathMatcher matcher = new AntPathMatcher(StringUtils.defaultIfBlank(separator, AntPathMatcher.DEFAULT_PATH_SEPARATOR));
         matcher.setCaseSensitive(caseSensitive);
         matcher.setTrimTokens(trimTokens);

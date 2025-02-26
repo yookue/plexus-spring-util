@@ -99,30 +99,30 @@ public abstract class DataTableWraps {
     }
 
     @Nonnull
-    public static DataTableStruct newDataTableWithContext() {
-        return newDataTableWithRequest(WebUtilsWraps.getContextServletRequest());
+    public static DataTableStruct ofTableWithContext() {
+        return ofTableWithRequest(WebUtilsWraps.getContextServletRequest());
     }
 
     @Nonnull
     @SuppressWarnings("DataFlowIssue")
-    public static DataTableStruct newDataTableWithRequest(@Nullable HttpServletRequest request) {
+    public static DataTableStruct ofTableWithRequest(@Nullable HttpServletRequest request) {
         DataTableStruct struct = new DataTableStruct();
         struct.setDrawTimes(Math.max(0, RequestParamWraps.getIntegerParameter(request, DRAW_PARAM, 0)));
         return struct;
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Integer drawTimes) {
-        return queryForDataTable(sqlSession, statementId, null, null, drawTimes);
+    public static DataTableStruct queryForTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Integer drawTimes) {
+        return queryForTable(sqlSession, statementId, null, null, drawTimes);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable Integer drawTimes) {
-        return queryForDataTable(sqlSession, statementId, params, null, drawTimes);
+    public static DataTableStruct queryForTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable Integer drawTimes) {
+        return queryForTable(sqlSession, statementId, params, null, drawTimes);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds, @Nullable Integer drawTimes) {
+    public static DataTableStruct queryForTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds, @Nullable Integer drawTimes) {
         if (StringUtils.isBlank(statementId)) {
             return null;
         }
@@ -133,11 +133,11 @@ public abstract class DataTableWraps {
         DataTableStruct struct = new DataTableStruct();
         struct.setDrawTimes(ObjectUtils.defaultIfNull(drawTimes, 0));
         if (bounds == null && MapPlainWraps.containsAllKeys(params, START_PARAM, LENGTH_PARAM)) {
-            bounds = MybatisPageWraps.getPageRowBounds(params, START_PARAM, LENGTH_PARAM, true);
+            bounds = MybatisPageWraps.getRowBounds(params, START_PARAM, LENGTH_PARAM, true);
         }
         if (bounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
-            MybatisPageWraps.putPageSizeZero(cloneParams);
+            MybatisPageWraps.setZeroSize(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
             struct.setRecordsDetails(resultSets);
             int resultSize = CollectionPlainWraps.size(resultSets);
@@ -155,70 +155,70 @@ public abstract class DataTableWraps {
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithContext(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForDataTableWithContext(sqlSession, statementId, null, null);
+    public static DataTableStruct queryForTableWithContext(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTableWithContext(sqlSession, statementId, null, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithContext(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params) {
-        return queryForDataTableWithContext(sqlSession, statementId, params, null);
+    public static DataTableStruct queryForTableWithContext(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params) {
+        return queryForTableWithContext(sqlSession, statementId, params, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithContext(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds) {
+    public static DataTableStruct queryForTableWithContext(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds) {
         HttpServletRequest request = WebUtilsWraps.getContextServletRequest();
-        return (request == null) ? null : queryForDataTableWithRequest(request, sqlSession, statementId, params, bounds);
+        return (request == null) ? null : queryForTableWithRequest(request, sqlSession, statementId, params, bounds);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForDataTableWithContextParameterized(sqlSession, statementId, false, null);
+    public static DataTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTableWithContextParameterized(sqlSession, statementId, false, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
-        return queryForDataTableWithContextParameterized(sqlSession, statementId, payloadParam, null);
+    public static DataTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
+        return queryForTableWithContextParameterized(sqlSession, statementId, payloadParam, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
+    public static DataTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
         HttpServletRequest request = WebUtilsWraps.getContextServletRequest();
-        return (request == null) ? null : queryForDataTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, paramsAction);
+        return (request == null) ? null : queryForTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, paramsAction);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithRequest(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForDataTableWithRequest(request, sqlSession, statementId, null, null);
+    public static DataTableStruct queryForTableWithRequest(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTableWithRequest(request, sqlSession, statementId, null, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithRequest(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params) {
-        return queryForDataTableWithRequest(request, sqlSession, statementId, params, null);
+    public static DataTableStruct queryForTableWithRequest(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params) {
+        return queryForTableWithRequest(request, sqlSession, statementId, params, null);
     }
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static DataTableStruct queryForDataTableWithRequest(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds) {
+    public static DataTableStruct queryForTableWithRequest(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds) {
         int drawTimes = Math.max(0, RequestParamWraps.getIntegerParameter(request, DRAW_PARAM, 0));
-        return queryForDataTable(sqlSession, statementId, params, bounds, drawTimes);
+        return queryForTable(sqlSession, statementId, params, bounds, drawTimes);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForDataTableWithRequestParameterized(request, sqlSession, statementId, false, null);
+    public static DataTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, false, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
-        return queryForDataTableWithRequestParameterized(request, sqlSession, statementId, false, null);
+    public static DataTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, false, null);
     }
 
     @Nullable
-    public static DataTableStruct queryForDataTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
+    public static DataTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
         Map<String, Object> params = RequestParamWraps.getParameterObjectMap(request, true, payloadParam);
         if (paramsAction != null) {
             params = paramsAction.apply(params);
         }
-        return queryForDataTableWithRequest(request, sqlSession, statementId, params, null);
+        return queryForTableWithRequest(request, sqlSession, statementId, params, null);
     }
 }

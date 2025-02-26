@@ -55,12 +55,12 @@ public abstract class MybatisPageWraps {
     }
 
     @Nonnull
-    public static PageRowBounds getPageRowBounds(@Nullable Map<String, Object> params, @Nullable String offsetParam, @Nullable String limitParam, boolean count) {
-        return getPageRowBounds(params, offsetParam, limitParam, null, null, count);
+    public static PageRowBounds getRowBounds(@Nullable Map<String, Object> params, @Nullable String offsetParam, @Nullable String limitParam, boolean count) {
+        return getRowBounds(params, offsetParam, limitParam, null, null, count);
     }
 
     @Nonnull
-    public static PageRowBounds getPageRowBounds(@Nullable Map<String, Object> params, @Nullable String offsetParam, @Nullable String limitParam, @Nullable Integer defaultOffset, @Nullable Integer defaultLimit, boolean count) {
+    public static PageRowBounds getRowBounds(@Nullable Map<String, Object> params, @Nullable String offsetParam, @Nullable String limitParam, @Nullable Integer defaultOffset, @Nullable Integer defaultLimit, boolean count) {
         RowBounds bounds = getRowBounds(params, offsetParam, limitParam, defaultOffset, defaultLimit);
         PageRowBounds result = new PageRowBounds(bounds.getOffset(), bounds.getLimit());
         result.setCount(count);
@@ -68,23 +68,23 @@ public abstract class MybatisPageWraps {
     }
 
     @Nonnull
-    public static PageRowBounds newPageRowBounds() {
-        return newPageRowBounds(RowBounds.NO_ROW_OFFSET, 10, true);
+    public static PageRowBounds ofRowBounds() {
+        return ofRowBounds(RowBounds.NO_ROW_OFFSET, 10, true);
     }
 
     @Nonnull
-    public static PageRowBounds newPageRowBounds(boolean count) {
-        return newPageRowBounds(RowBounds.NO_ROW_OFFSET, RowBounds.NO_ROW_LIMIT, count);
+    public static PageRowBounds ofRowBounds(boolean count) {
+        return ofRowBounds(RowBounds.NO_ROW_OFFSET, RowBounds.NO_ROW_LIMIT, count);
     }
 
     @Nonnull
-    public static PageRowBounds newPageRowBounds(int offset, int limit, boolean count) {
+    public static PageRowBounds ofRowBounds(int offset, int limit, boolean count) {
         PageRowBounds result = new PageRowBounds(Math.max(0, offset), Math.max(0, limit));
         result.setCount(count);
         return result;
     }
 
-    public static void putPageSizeZero(@Nullable Map<String, Object> params) {
+    public static void setZeroSize(@Nullable Map<String, Object> params) {
         if (params == null) {
             params = new LinkedHashMap<>(1);
         }
