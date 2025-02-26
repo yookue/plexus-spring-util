@@ -29,6 +29,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
+import com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct;
+import com.yookue.commonplexus.javaseutil.structure.BooleanTextStruct;
+import com.yookue.commonplexus.javaseutil.structure.StatusDataStruct;
+import com.yookue.commonplexus.javaseutil.structure.StatusTextStruct;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
 import com.yookue.commonplexus.springutil.constant.ResponseBodyConst;
 import lombok.AllArgsConstructor;
@@ -58,17 +62,8 @@ public class RestResponseStruct implements Serializable {
     @DateTimeFormat(pattern = TemporalFormatConst.ISO_YYYYMMDD_HHMMSS)
     private LocalDateTime timestamp = LocalDateWraps.getCurrentDateTime();
 
-    public RestResponseStruct(@Nonnull Integer status) {
-        this.status = status;
-    }
-
     public RestResponseStruct(@Nonnull HttpStatus status) {
         this.status = status.value();
-    }
-
-    public RestResponseStruct(@Nonnull Integer status, @Nullable Object data) {
-        this.status = status;
-        this.data = data;
     }
 
     public RestResponseStruct(@Nonnull HttpStatus status, @Nullable Object data) {
@@ -76,14 +71,23 @@ public class RestResponseStruct implements Serializable {
         this.data = data;
     }
 
-    public RestResponseStruct(@Nonnull Integer status, @Nullable Object data, @Nullable String message) {
-        this.status = status;
+    public RestResponseStruct(@Nonnull HttpStatus status, @Nullable Object data, @Nullable String message) {
+        this.status = status.value();
         this.data = data;
         this.message = message;
     }
 
-    public RestResponseStruct(@Nonnull HttpStatus status, @Nullable Object data, @Nullable String message) {
-        this.status = status.value();
+    public RestResponseStruct(@Nonnull Integer status) {
+        this.status = status;
+    }
+
+    public RestResponseStruct(@Nonnull Integer status, @Nullable Object data) {
+        this.status = status;
+        this.data = data;
+    }
+
+    public RestResponseStruct(@Nonnull Integer status, @Nullable Object data, @Nullable String message) {
+        this.status = status;
         this.data = data;
         this.message = message;
     }
@@ -140,11 +144,73 @@ public class RestResponseStruct implements Serializable {
         return this;
     }
 
+    @Nonnull
     public ResponseEntity<RestResponseStruct> toResponseEntity() {
         return new ResponseEntity<>(this, HttpStatus.valueOf(getStatus()));
     }
 
+    @Nonnull
     public ResponseEntity<RestResponseStruct> toResponseEntity(@Nullable MultiValueMap<String, String> headers) {
         return new ResponseEntity<>(this, headers, HttpStatus.valueOf(getStatus()));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, char delimiter) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct) {
+        return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct, char delimiter) {
+        return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText(delimiter));
     }
 }

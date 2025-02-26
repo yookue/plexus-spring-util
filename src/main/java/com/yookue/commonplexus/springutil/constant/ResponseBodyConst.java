@@ -26,12 +26,12 @@ import org.springframework.http.HttpStatus;
  * @author David Hsing
  * @see org.springframework.http.HttpStatus
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 public abstract class ResponseBodyConst {
     public static final int CODE_REFUSAL = HttpStatus.FORBIDDEN.value();
     public static final int CODE_ILLEGAL = HttpStatus.BAD_REQUEST.value();
     public static final int CODE_SUCCESS = HttpStatus.OK.value();
-    public static final int CODE_FAILURE = HttpStatus.PRECONDITION_FAILED.value();
+    public static final int CODE_FAILURE = HttpStatus.METHOD_FAILURE.value();
     public static final int CODE_TIMEOUT = HttpStatus.REQUEST_TIMEOUT.value();
 
     public static final String HTML_STATUS = "errorStatus";    // $NON-NLS-1$
