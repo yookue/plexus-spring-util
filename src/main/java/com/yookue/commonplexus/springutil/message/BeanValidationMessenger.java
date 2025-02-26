@@ -205,19 +205,19 @@ public class BeanValidationMessenger {
     @Nonnull
     public <T> BooleanTextStruct validateProperty(@Nonnull T object, @Nonnull String property, @Nullable Class<?>... groups) {
         if (StringUtils.isBlank(property)) {
-            return BooleanTextStruct.newFailure();
+            return BooleanTextStruct.ofFailure();
         }
         Set<ConstraintViolation<T>> violations = validator.validateProperty(object, property, groups);
-        return processViolationMessages(BooleanTextStruct.newSuccess(), violations);
+        return processViolationMessages(BooleanTextStruct.ofSuccess(), violations);
     }
 
     @Nonnull
     public <T> BooleanTextStruct validateValue(@Nonnull Class<T> clazz, @Nonnull String property, @Nullable Object value, @Nullable Class<?>... groups) {
         if (StringUtils.isBlank(property)) {
-            return BooleanTextStruct.newFailure();
+            return BooleanTextStruct.ofFailure();
         }
         Set<ConstraintViolation<T>> violations = validator.validateValue(clazz, property, value, groups);
-        return processViolationMessages(BooleanTextStruct.newSuccess(), violations);
+        return processViolationMessages(BooleanTextStruct.ofSuccess(), violations);
     }
 
     @Nonnull
