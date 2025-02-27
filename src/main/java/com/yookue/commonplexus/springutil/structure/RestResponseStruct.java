@@ -155,21 +155,6 @@ public class RestResponseStruct implements Serializable {
     }
 
     @Nonnull
-    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct) {
-        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
-    }
-
-    @Nonnull
-    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, char delimiter) {
-        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
-    }
-
-    @Nonnull
-    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, @Nullable String delimiter) {
-        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
-    }
-
-    @Nonnull
     public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct) {
         return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText());
     }
@@ -185,18 +170,18 @@ public class RestResponseStruct implements Serializable {
     }
 
     @Nonnull
-    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct) {
-        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText());
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
     }
 
     @Nonnull
-    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, char delimiter) {
-        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
     }
 
     @Nonnull
-    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, @Nullable String delimiter) {
-        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
     }
 
     @Nonnull
@@ -212,5 +197,20 @@ public class RestResponseStruct implements Serializable {
     @Nonnull
     public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct, @Nullable String delimiter) {
         return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, char delimiter) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
     }
 }

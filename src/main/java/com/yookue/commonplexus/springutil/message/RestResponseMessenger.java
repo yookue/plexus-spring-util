@@ -28,6 +28,8 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
+import com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct;
+import com.yookue.commonplexus.javaseutil.structure.BooleanTextStruct;
 import com.yookue.commonplexus.javaseutil.util.HtmlEscapeWraps;
 import com.yookue.commonplexus.springutil.constant.ResponseBodyConst;
 import com.yookue.commonplexus.springutil.constant.RestMessageConst;
@@ -86,6 +88,54 @@ public class RestResponseMessenger {
         if (validator != null) {
             messenger = new BeanValidationMessenger(source, validator);
         }
+    }
+
+    public RestResponseStruct fromBooleanData(@Nonnull BooleanDataStruct<?> struct) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanData(struct);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanData(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanData(struct, delimiter);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanData(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanData(struct, delimiter);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanText(struct);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct, char delimiter) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanText(struct, delimiter);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct, @Nullable String delimiter) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanText(struct, delimiter);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
     }
 
     @Nonnull
@@ -165,7 +215,7 @@ public class RestResponseMessenger {
     @Nonnull
     public RestResponseStruct newSuccessWithin(@Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs, @Nullable String defaultMessage, @Nullable Locale locale) {
         RestResponseStruct struct = new RestResponseStruct();
-        setSuccessWithData(struct, data, successCode, successArgs, defaultMessage, locale);
+        setSuccessWithin(struct, data, successCode, successArgs, defaultMessage, locale);
         return struct;
     }
 
@@ -329,24 +379,24 @@ public class RestResponseMessenger {
         setMessage(struct, code, args, defaultMessage, locale);
     }
 
-    public void setSuccessWithData(@Nonnull RestResponseStruct struct, @Nullable Object data) {
+    public void setSuccessWithin(@Nonnull RestResponseStruct struct, @Nullable Object data) {
         setSuccess(struct);
         struct.setData(data);
     }
 
-    public void setSuccessWithData(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode) {
-        setSuccessWithData(struct, data, successCode, null, null, null);
+    public void setSuccessWithin(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode) {
+        setSuccessWithin(struct, data, successCode, null, null, null);
     }
 
-    public void setSuccessWithData(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs) {
-        setSuccessWithData(struct, data, successCode, successArgs, null, null);
+    public void setSuccessWithin(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs) {
+        setSuccessWithin(struct, data, successCode, successArgs, null, null);
     }
 
-    public void setSuccessWithData(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs, @Nullable String defaultMessage) {
-        setSuccessWithData(struct, data, successCode, successArgs, defaultMessage, null);
+    public void setSuccessWithin(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs, @Nullable String defaultMessage) {
+        setSuccessWithin(struct, data, successCode, successArgs, defaultMessage, null);
     }
 
-    public void setSuccessWithData(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs, @Nullable String defaultMessage, @Nullable Locale locale) {
+    public void setSuccessWithin(@Nonnull RestResponseStruct struct, @Nullable Object data, @Nonnull String successCode, @Nullable Object[] successArgs, @Nullable String defaultMessage, @Nullable Locale locale) {
         setSuccess(struct, successCode, successArgs, defaultMessage, locale);
         struct.setData(data);
     }
