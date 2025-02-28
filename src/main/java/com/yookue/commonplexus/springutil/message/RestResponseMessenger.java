@@ -114,6 +114,30 @@ public class RestResponseMessenger {
         return result;
     }
 
+    public RestResponseStruct fromBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanDataWithout(struct);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanDataWithout(struct, delimiter);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
+    public RestResponseStruct fromBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
+        RestResponseStruct result = RestResponseStruct.ofBooleanDataWithout(struct, delimiter);
+        if (StringUtils.isEmpty(result.getMessage())) {
+            setMessage(result, struct.isSuccess() ? successCode : failureCode);
+        }
+        return result;
+    }
+
     public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct) {
         RestResponseStruct result = RestResponseStruct.ofBooleanText(struct);
         if (StringUtils.isEmpty(result.getMessage())) {

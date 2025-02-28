@@ -170,6 +170,21 @@ public class RestResponseStruct implements Serializable {
     }
 
     @Nonnull
+    public static RestResponseStruct ofBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
     public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct) {
         return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
     }
