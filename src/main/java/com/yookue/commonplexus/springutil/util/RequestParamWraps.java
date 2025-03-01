@@ -739,7 +739,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request) {
-        return getParameterObjectMap(request, false, false);
+        return getParameterObjectMap(request, true, false);
     }
 
     @Nullable
@@ -747,12 +747,21 @@ public abstract class RequestParamWraps {
         return getParameterObjectMap(request, emptyAsNull, false);
     }
 
+    /**
+     * Returns a {@link java.util.LinkedHashMap} that contains all the request parameters
+     *
+     * @param request the http servlet request to inspect
+     * @param emptyAsNull whether returns null if there isn't any parameters
+     * @param includePayload whether includes the payload parameters when the request is an ajax request
+     *
+     * @return a {@link java.util.LinkedHashMap} that contains all the request parameters
+     */
     @Nullable
     public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
-        if (request == null) {
-            return null;
-        }
         Map<String, Object> result = new LinkedHashMap<>();
+        if (request == null) {
+            return emptyAsNull ? null : result;
+        }
         MapPlainWraps.forEach(request.getParameterMap(), (key, values) -> {
             if (ArrayUtils.isEmpty(values)) {
                 result.put(key, null);
@@ -766,13 +775,13 @@ public abstract class RequestParamWraps {
         }, (key, values) -> StringUtils.isNotBlank(key));
         // Checks if the request has payload
         if (!includePayload || !WebUtilsWraps.isAjaxRequest(request)) {
-            return MapPlainWraps.emptyAsNull(result);
+            return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
         }
         // Converts the payload into map and processes it
         String content = WebUtilsWraps.getContentAsStringQuietly(request);
         Map<String, Object> payloads = JsonParserWraps.parseChildToMap(content, null);
         if (CollectionUtils.isEmpty(payloads)) {
-            return MapPlainWraps.emptyAsNull(result);
+            return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
         }
         MapPlainWraps.forEach(payloads, (key, value) -> {
             if (value instanceof String instance && emptyAsNull) {
@@ -781,7 +790,7 @@ public abstract class RequestParamWraps {
                 result.put(key, value);
             }
         }, (key, value) -> StringUtils.isNotBlank(key));
-        return MapPlainWraps.emptyAsNull(result);
+        return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
     }
 
     public static Cookie getCookie(@Nullable HttpServletRequest request, @Nullable String name) {

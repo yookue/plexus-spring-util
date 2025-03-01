@@ -216,7 +216,7 @@ public abstract class DataTableWraps {
 
     @Nullable
     public static DataTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
-        Map<String, Object> params = RequestParamWraps.getParameterObjectMap(request, true, payloadParam);
+        Map<String, Object> params = RequestParamWraps.getParameterObjectMap(request, false, payloadParam);
         if (paramsAction != null) {
             params = paramsAction.apply(params);
         }
