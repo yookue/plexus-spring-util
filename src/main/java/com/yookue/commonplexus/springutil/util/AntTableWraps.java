@@ -60,22 +60,23 @@ public abstract class AntTableWraps {
         if (StringUtils.isBlank(statementId)) {
             return null;
         }
-        if (bounds == null && MapPlainWraps.containsAllKeys(params, CURRENT_PAGE_PARAM, PAGE_SIZE_PARAM)) {
+        PageRowBounds cloneBounds = bounds;
+        if (cloneBounds == null && MapPlainWraps.containsAllKeys(params, CURRENT_PAGE_PARAM, PAGE_SIZE_PARAM)) {
             int currentPage = Math.max(1, MapPlainWraps.getInteger(params, CURRENT_PAGE_PARAM, 1));
             int pageSize = Math.max(0, MapPlainWraps.getInteger(params, CURRENT_PAGE_PARAM, 0));
-            bounds = MybatisPageWraps.ofRowBounds((currentPage - 1) * pageSize, pageSize, true);
+            cloneBounds = MybatisPageWraps.ofRowBounds((currentPage - 1) * pageSize, pageSize, true);
         }
         AntTableStruct struct = new AntTableStruct();
-        if (bounds == null) {
+        if (cloneBounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
             MybatisPageWraps.setZeroSize(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
             struct.setRecordsDetails(resultSets);
             struct.setRecordsTotal((long) CollectionPlainWraps.size(resultSets));
         } else {
-            List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, params, bounds);
+            List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, params, cloneBounds);
             struct.setRecordsDetails(resultSets);
-            struct.setRecordsTotal(bounds.getTotal());
+            struct.setRecordsTotal(cloneBounds.getTotal());
         }
         return struct;
     }

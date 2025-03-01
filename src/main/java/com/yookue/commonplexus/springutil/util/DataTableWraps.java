@@ -132,10 +132,11 @@ public abstract class DataTableWraps {
         }
         DataTableStruct struct = new DataTableStruct();
         struct.setDrawTimes(ObjectUtils.defaultIfNull(drawTimes, 0));
-        if (bounds == null && MapPlainWraps.containsAllKeys(params, START_PARAM, LENGTH_PARAM)) {
-            bounds = MybatisPageWraps.getRowBounds(params, START_PARAM, LENGTH_PARAM, true);
+        PageRowBounds cloneBounds = bounds;
+        if (cloneBounds == null && MapPlainWraps.containsAllKeys(params, START_PARAM, LENGTH_PARAM)) {
+            cloneBounds = MybatisPageWraps.getRowBounds(params, START_PARAM, LENGTH_PARAM, true);
         }
-        if (bounds == null) {
+        if (cloneBounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
             MybatisPageWraps.setZeroSize(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
@@ -145,11 +146,11 @@ public abstract class DataTableWraps {
             struct.setRecordsTotal((long) resultSize);
             struct.setRecordsFiltered((long) resultSize);
         } else {
-            List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, params, bounds);
+            List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, params, cloneBounds);
             struct.setRecordsDetails(resultSets);
             struct.setRecordsDisplay(CollectionPlainWraps.size(resultSets));
-            struct.setRecordsTotal(bounds.getTotal());
-            struct.setRecordsFiltered(bounds.getTotal());
+            struct.setRecordsTotal(cloneBounds.getTotal());
+            struct.setRecordsFiltered(cloneBounds.getTotal());
         }
         return struct;
     }
