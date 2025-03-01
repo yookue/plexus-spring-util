@@ -46,17 +46,17 @@ public abstract class AntTableWraps {
     private static final String PAGE_SIZE_PARAM = "pageSize";    // $NON-NLS-1$
 
     @Nullable
-    public static AntTableStruct queryForAntTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForAntTable(sqlSession, statementId, null, null);
+    public static AntTableStruct queryForTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTable(sqlSession, statementId, null, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForAntTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params) {
-        return queryForAntTable(sqlSession, statementId, params, null);
+    public static AntTableStruct queryForTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params) {
+        return queryForTable(sqlSession, statementId, params, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForAntTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds) {
+    public static AntTableStruct queryForTable(@Nonnull SqlSession sqlSession, @Nonnull String statementId, @Nullable Map<String, Object> params, @Nullable PageRowBounds bounds) {
         if (StringUtils.isBlank(statementId)) {
             return null;
         }
@@ -81,37 +81,37 @@ public abstract class AntTableWraps {
     }
 
     @Nullable
-    public static AntTableStruct queryForAnyTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForAnyTableWithContextParameterized(sqlSession, statementId, false, null);
+    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTableWithContextParameterized(sqlSession, statementId, false, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForAnyTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
-        return queryForAnyTableWithContextParameterized(sqlSession, statementId, payloadParam, null);
+    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
+        return queryForTableWithContextParameterized(sqlSession, statementId, payloadParam, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForAnyTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
+    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
         HttpServletRequest request = WebUtilsWraps.getContextServletRequest();
-        return (request == null) ? null : queryForAntTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, paramsAction);
+        return (request == null) ? null : queryForTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, paramsAction);
     }
 
     @Nullable
-    public static AntTableStruct queryForAntTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForAntTableWithRequestParameterized(request, sqlSession, statementId, false, null);
+    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, false, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForAntTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
-        return queryForAntTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, null);
+    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForAntTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
+    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
         Map<String, Object> params = RequestParamWraps.getParameterObjectMap(request, true, payloadParam);
         if (paramsAction != null) {
             params = paramsAction.apply(params);
         }
-        return queryForAntTable(sqlSession, statementId, params, null);
+        return queryForTable(sqlSession, statementId, params, null);
     }
 }
