@@ -737,12 +737,10 @@ public abstract class RequestParamWraps {
         return ObjectUtils.defaultIfNull(StringUtilsWraps.trimStringArray(emptyAsNull, request.getParameterValues(name)), defaultValues);
     }
 
-    @Nullable
     public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request) {
         return getParameterObjectMap(request, true, false);
     }
 
-    @Nullable
     public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull) {
         return getParameterObjectMap(request, emptyAsNull, false);
     }
@@ -756,7 +754,6 @@ public abstract class RequestParamWraps {
      *
      * @return a {@link java.util.LinkedHashMap} that contains all the request parameters
      */
-    @Nullable
     public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
         Map<String, Object> result = new LinkedHashMap<>();
         if (request == null) {
