@@ -26,10 +26,13 @@ package com.yookue.commonplexus.springutil.constant;
 @SuppressWarnings("unused")
 public abstract class AntPathConst {
     public static final String SLASH = "/";    // $NON-NLS-1$
-    public static final String SLASH_STAR = "/*";    // $NON-NLS-1$
-    public static final String SLASH_STARS = "/**";    // $NON-NLS-1$
-    public static final String STAR_SLASH = "*/";    // $NON-NLS-1$
-    public static final String STARS_SLASH = "**/";    // $NON-NLS-1$
+    public static final String STAR = "*";    // $NON-NLS-1$
+    public static final String STARS = "**";    // $NON-NLS-1$
+
+    public static final String SLASH_STAR = SLASH + STAR;
+    public static final String SLASH_STARS = SLASH + STARS;
+    public static final String STAR_SLASH = STAR +SLASH;
+    public static final String STARS_SLASH = STARS + SLASH;
 
     public static final String STARS_FAVICON_STAR = "**/favicon.*";    // $NON-NLS-1$
 
