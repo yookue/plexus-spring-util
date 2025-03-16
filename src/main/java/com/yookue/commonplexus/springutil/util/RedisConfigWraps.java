@@ -19,12 +19,15 @@ package com.yookue.commonplexus.springutil.util;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 
@@ -95,5 +98,21 @@ public abstract class RedisConfigWraps {
     public static RedisCacheManager cacheManager(@Nullable RedisConnectionFactory factory, @Nullable CacheProperties cacheProperties, @Nullable JacksonProperties jacksonProperties) {
         RedisCacheManager.RedisCacheManagerBuilder builder = cacheManagerBuilder(factory, cacheProperties, jacksonProperties);
         return (builder == null) ? null : builder.build();
+    }
+
+    @Nullable
+    @SuppressWarnings("DataFlowIssue")
+    public static <K, V> RedisTemplate<K, V> redisTemplate(@Nullable RedisConnectionFactory factory, @Nullable RedisSerializer<K> keySerializer, @Nullable RedisSerializer<V> valueSerializer) {
+        if (ObjectUtils.anyNull(factory, keySerializer, valueSerializer)) {
+            return null;
+        }
+        RedisTemplate<K, V> result = new RedisTemplate<>();
+        result.setConnectionFactory(factory);
+        result.setKeySerializer(keySerializer);
+        result.setHashKeySerializer(keySerializer);
+        result.setValueSerializer(valueSerializer);
+        result.setHashValueSerializer(valueSerializer);
+        result.afterPropertiesSet();
+        return result;
     }
 }

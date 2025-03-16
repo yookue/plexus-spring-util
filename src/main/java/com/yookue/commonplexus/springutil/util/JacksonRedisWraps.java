@@ -19,7 +19,6 @@ package com.yookue.commonplexus.springutil.util;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -65,19 +64,8 @@ public abstract class JacksonRedisWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static RedisTemplate<Object, Object> objectObjectRedisTemplate(@Nullable RedisConnectionFactory factory, @Nullable RedisSerializer<Object> keySerializer, @Nullable RedisSerializer<Object> valueSerializer) {
-        if (ObjectUtils.anyNull(factory, keySerializer, valueSerializer)) {
-            return null;
-        }
-        RedisTemplate<Object, Object> result = new RedisTemplate<>();
-        result.setConnectionFactory(factory);
-        result.setKeySerializer(keySerializer);
-        result.setHashKeySerializer(keySerializer);
-        result.setValueSerializer(valueSerializer);
-        result.setHashValueSerializer(valueSerializer);
-        result.afterPropertiesSet();
-        return result;
+        return RedisConfigWraps.redisTemplate(factory, keySerializer, valueSerializer);
     }
 
     public static RedisTemplate<String, Object> stringObjectRedisTemplate(@Nullable RedisConnectionFactory factory) {
@@ -91,18 +79,7 @@ public abstract class JacksonRedisWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static RedisTemplate<String, Object> stringObjectRedisTemplate(@Nullable RedisConnectionFactory factory, @Nullable RedisSerializer<String> keySerializer, @Nullable RedisSerializer<Object> valueSerializer) {
-        if (ObjectUtils.anyNull(factory, keySerializer, valueSerializer)) {
-            return null;
-        }
-        RedisTemplate<String, Object> result = new RedisTemplate<>();
-        result.setConnectionFactory(factory);
-        result.setKeySerializer(keySerializer);
-        result.setHashKeySerializer(keySerializer);
-        result.setValueSerializer(valueSerializer);
-        result.setHashValueSerializer(valueSerializer);
-        result.afterPropertiesSet();
-        return result;
+        return RedisConfigWraps.redisTemplate(factory, keySerializer, valueSerializer);
     }
 }
