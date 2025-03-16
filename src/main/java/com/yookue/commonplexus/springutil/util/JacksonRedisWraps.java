@@ -23,10 +23,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,7 +51,7 @@ public abstract class JacksonRedisWraps {
     }
 
     public static RedisTemplate<Object, Object> genericObjectRedisTemplate(@Nullable RedisConnectionFactory factory) {
-        RedisSerializer<Object> serializer = new GenericJackson2JsonRedisSerializer();
+        RedisSerializer<Object> serializer = RedisSerializer.json();
         return objectObjectRedisTemplate(factory, serializer, serializer);
     }
 
@@ -87,7 +85,7 @@ public abstract class JacksonRedisWraps {
     }
 
     public static RedisTemplate<String, Object> stringObjectRedisTemplate(@Nullable RedisConnectionFactory factory, @Nullable JacksonProperties properties) {
-        RedisSerializer<String> keySerializer = new StringRedisSerializer();
+        RedisSerializer<String> keySerializer = RedisSerializer.string();
         RedisSerializer<Object> valueSerializer = jsonObjectSerializer(properties);
         return stringObjectRedisTemplate(factory, keySerializer, valueSerializer);
     }
