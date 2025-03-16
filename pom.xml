@@ -25,7 +25,7 @@
     <version>3.4.3</version>
 
     <name>${project.artifactId}</name>
-    <description>Plexus Spring Util</description>
+    <description>Yookue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
     <url>https://github.com/yookue/plexus-spring-util</url>
     <inceptionYear>2016</inceptionYear>
 
