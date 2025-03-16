@@ -161,7 +161,7 @@ public abstract class JdbcUtilsWraps {
         if (StringUtils.isBlank(jdbcUrl)) {
             return null;
         }
-        int begin = StringUtils.indexOf(jdbcUrl, SymbolVariantConst.DOUBLE_SLASHES), end = StringUtils.lastIndexOf(jdbcUrl, CharVariantConst.SLASH);
+        int begin = StringUtils.indexOf(jdbcUrl, SymbolVariantConst.SLASHES), end = StringUtils.lastIndexOf(jdbcUrl, CharVariantConst.SLASH);
         if (begin != -1) {
             return (end != -1) ? StringUtils.substring(jdbcUrl, begin + 2, end) : StringUtils.substring(jdbcUrl, begin + 2);
         }
@@ -183,7 +183,7 @@ public abstract class JdbcUtilsWraps {
         if (StringUtils.isBlank(jdbcUrl)) {
             return null;
         }
-        int begin = StringUtils.indexOf(jdbcUrl, SymbolVariantConst.DOUBLE_SLASHES), end = StringUtils.indexOf(jdbcUrl, CharVariantConst.QUESTION);
+        int begin = StringUtils.indexOf(jdbcUrl, SymbolVariantConst.SLASHES), end = StringUtils.indexOf(jdbcUrl, CharVariantConst.QUESTION);
         if (begin != -1) {
             return (end != -1) ? StringUtils.substring(jdbcUrl, begin + 2, end) : StringUtils.substring(jdbcUrl, begin + 2);
         }

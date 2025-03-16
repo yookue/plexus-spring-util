@@ -46,15 +46,14 @@
         <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
         <project.build.resourceEncoding>${file.encoding}</project.build.resourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
-        <project.logo>https://yookue.github.io/assets/ico/logo-icon.svg</project.logo>
 
         <spring-boot.version>3.4.2</spring-boot.version>
 
-        <commons-beanutils2.version>2.0.0</commons-beanutils2.version>
+        <commons-beanutils2.version>2.0.1</commons-beanutils2.version>
         <commons-fileupload2.version>2.0.0-M1</commons-fileupload2.version>
         <guava.version>33.4.0-jre</guava.version>
         <javapoet.version>1.13.0</javapoet.version>
-        <joda-time.version>2.13.0</joda-time.version>
+        <joda-time.version>2.13.1</joda-time.version>
         <mybatis.version>3.5.19</mybatis.version>
         <pagehelper.version>6.1.0</pagehelper.version>
         <plexus-javase-util.version>2.0.4</plexus-javase-util.version>
