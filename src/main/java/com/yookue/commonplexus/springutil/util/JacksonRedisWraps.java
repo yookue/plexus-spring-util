@@ -26,6 +26,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +73,32 @@ public abstract class JacksonRedisWraps {
             return null;
         }
         RedisTemplate<Object, Object> result = new RedisTemplate<>();
+        result.setConnectionFactory(factory);
+        result.setKeySerializer(keySerializer);
+        result.setHashKeySerializer(keySerializer);
+        result.setValueSerializer(valueSerializer);
+        result.setHashValueSerializer(valueSerializer);
+        result.afterPropertiesSet();
+        return result;
+    }
+
+    public static RedisTemplate<String, Object> stringObjectRedisTemplate(@Nullable RedisConnectionFactory factory) {
+        return stringObjectRedisTemplate(factory, null);
+    }
+
+    public static RedisTemplate<String, Object> stringObjectRedisTemplate(@Nullable RedisConnectionFactory factory, @Nullable JacksonProperties properties) {
+        RedisSerializer<String> keySerializer = new StringRedisSerializer();
+        RedisSerializer<Object> valueSerializer = jsonObjectSerializer(properties);
+        return stringObjectRedisTemplate(factory, keySerializer, valueSerializer);
+    }
+
+    @Nullable
+    @SuppressWarnings("DataFlowIssue")
+    public static RedisTemplate<String, Object> stringObjectRedisTemplate(@Nullable RedisConnectionFactory factory, @Nullable RedisSerializer<String> keySerializer, @Nullable RedisSerializer<Object> valueSerializer) {
+        if (ObjectUtils.anyNull(factory, keySerializer, valueSerializer)) {
+            return null;
+        }
+        RedisTemplate<String, Object> result = new RedisTemplate<>();
         result.setConnectionFactory(factory);
         result.setKeySerializer(keySerializer);
         result.setHashKeySerializer(keySerializer);
