@@ -18,11 +18,12 @@ package com.yookue.commonplexus.springutil.structure;
 
 
 import java.io.Serializable;
+import org.apache.commons.lang3.tuple.Pair;
 import com.yookue.commonplexus.springutil.enumeration.SliderTriggerType;
+import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 
 /**
@@ -39,8 +40,9 @@ import lombok.experimental.Accessors;
 public class SliderCaptchaStruct implements Serializable {
     private Integer x;
     private Integer y;
-    private Integer sliderOffsetX;
     private Integer duration;
-    private SliderTriggerType targetType;
     private Integer errorCount;
+    private Integer sliderOffsetX;
+    private Pair<Integer, Integer>[] trail;
+    private SliderTriggerType targetType;
 }
