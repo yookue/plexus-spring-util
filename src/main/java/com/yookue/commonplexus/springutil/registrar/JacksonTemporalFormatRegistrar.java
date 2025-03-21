@@ -66,9 +66,9 @@ public class JacksonTemporalFormatRegistrar implements ImportAware {
     @Order(value = 100)
     public Jackson2ObjectMapperBuilderCustomizer jacksonUtilDateMapperCustomizer(@Nonnull JacksonProperties properties) {
         Assert.notNull(attributes, AssertMessageConst.NOT_NULL);
-        String dateTimeFormat = StringUtils.defaultIfBlank(attributes.getString("dateTimeFormat"), properties.getDateFormat());    // $NON-NLS-1$
+        String dateFormat = StringUtils.defaultIfBlank(attributes.getString("dateFormat"), properties.getDateFormat());    // $NON-NLS-1$
         TimeZone timeZone = ObjectUtils.defaultIfNull(properties.getTimeZone(), TimeZone.getDefault());
-        return JacksonUtilDateCustomizer.mapperCustomizer(dateTimeFormat, timeZone);
+        return JacksonUtilDateCustomizer.mapperCustomizer(dateFormat, timeZone);
     }
 
     /**
