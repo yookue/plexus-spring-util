@@ -28,12 +28,14 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.util.ClassUtils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.yookue.commonplexus.springutil.enumeration.JacksonTemporalType;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCustomizer;
@@ -53,9 +55,13 @@ public abstract class JacksonConfigWraps {
     @Nonnull
     public static Jackson2ObjectMapperBuilderCustomizer dateTimeCustomizer(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
         List<SimpleModule> modules = new ArrayList<>();
-        modules.add(JacksonUtilDateCustomizer.mapperModule(dateTimeFormat));
-        modules.add(JacksonJsr310Customizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
-        modules.add(JacksonJodaTimeCustomizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
+        modules.add(JacksonUtilDateCustomizer.mapperModule(dateFormat));
+        if (ClassUtils.isPresent(JacksonTemporalType.JODA.getValue(), null)) {
+            modules.add(JacksonJodaTimeCustomizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
+        }
+        if (ClassUtils.isPresent(JacksonTemporalType.JSR310.getValue(), null)) {
+            modules.add(JacksonJsr310Customizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
+        }
         SimpleModule[] alias = modules.stream().filter(Objects::nonNull).toArray(SimpleModule[]::new);
         return builder -> {
             builder.modulesToInstall(alias);

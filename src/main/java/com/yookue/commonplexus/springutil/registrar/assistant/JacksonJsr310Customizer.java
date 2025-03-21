@@ -26,6 +26,7 @@ import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilde
 import org.springframework.util.ClassUtils;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
+import com.yookue.commonplexus.springutil.enumeration.JacksonTemporalType;
 
 
 /**
@@ -36,7 +37,7 @@ import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 public abstract class JacksonJsr310Customizer {
     @Nullable
     public static SimpleModule mapperModule(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat) {
-        if (!ClassUtils.isPresent("com.fasterxml.jackson.datatype.jsr310.JavaTimeModule", null)) {    // $NON-NLS-1$
+        if (!ClassUtils.isPresent(JacksonTemporalType.JSR310.getValue(), null)) {
             return null;
         }
         dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
