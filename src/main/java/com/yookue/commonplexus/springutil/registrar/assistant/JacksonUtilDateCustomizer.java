@@ -35,20 +35,20 @@ import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
  */
 public abstract class JacksonUtilDateCustomizer {
     @Nonnull
-    public static SimpleModule mapperModule(@Nullable String dateTimeFormat) {
-        dateTimeFormat = StringUtils.defaultIfBlank(dateTimeFormat, TemporalFormatConst.ISO_YYYYMMDD_HHMMSS);
+    public static SimpleModule mapperModule(@Nullable String dateFormat) {
+        dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
         SimpleModule result = new SimpleModule();
-        result.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
-        result.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateTimeFormat)));
+        result.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateFormat)));
+        result.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateFormat)));
         result.addDeserializer(java.util.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer());
         result.addDeserializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer());
         return result;
     }
 
     @Nonnull
-    public static Jackson2ObjectMapperBuilderCustomizer mapperCustomizer(@Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
+    public static Jackson2ObjectMapperBuilderCustomizer mapperCustomizer(@Nullable String dateFormat, @Nullable TimeZone timeZone) {
         return builder -> {
-            builder.modulesToInstall(mapperModule(dateTimeFormat));
+            builder.modulesToInstall(mapperModule(dateFormat));
             builder.timeZone(ObjectUtils.defaultIfNull(timeZone, TimeZone.getDefault()));
         };
     }
