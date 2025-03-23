@@ -47,7 +47,7 @@ public abstract class SpringPropertyConst {
      */
     public static final String BANNER_LOCATION = "spring.banner.location";    // $NON-NLS-1$
 
-    public static final String MANAGEMENT_CONTEXTPATH = "management.context-path";    // $NON-NLS-1$
+    public static final String MANAGEMENT_CONTEXT = "management.context-path";    // $NON-NLS-1$
     public static final String MANAGEMENT_PORT = "management.port";    // $NON-NLS-1$
     public static final String MESSAGES_BASENAME = "spring.messages.basename";    // $NON-NLS-1$
 }
