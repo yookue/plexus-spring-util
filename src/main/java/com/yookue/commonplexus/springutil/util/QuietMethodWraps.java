@@ -65,7 +65,7 @@ import com.yookue.commonplexus.javaseutil.util.MethodUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.TypeUtilsWraps;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -184,7 +184,7 @@ public abstract class QuietMethodWraps {
         BooleanUtilsWraps.ifNotFalse(buildParam.docGeneratedBy, () -> docBuilder.add("$L", GENERATED_BY));    // $NON-NLS-1$
         BooleanUtilsWraps.ifTrue(buildParam.docCreatedOn, () -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("Created on $L", UtilDateWraps.formatCurrentDate());    // $NON-NLS-1$
+            docBuilder.add("Created on $L", JdkDateWraps.formatCurrentDate());    // $NON-NLS-1$
         });
         BooleanUtilsWraps.ifTrue(buildParam.docSee, () -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true, 2);

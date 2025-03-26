@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatCombo;
 import com.yookue.commonplexus.javaseutil.util.SqlDateWraps;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,7 +54,7 @@ public class SqlDateDeserializer extends JsonDeserializer<Date> {
         if (parser == null || StringUtils.isBlank(parser.getText())) {
             return null;
         }
-        java.util.Date utilDate = UtilDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
-        return (utilDate == null) ? null : SqlDateWraps.castOfUtilDate(utilDate);
+        java.util.Date date = JdkDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
+        return (date == null) ? null : SqlDateWraps.ofJdkDate(date);
     }
 }

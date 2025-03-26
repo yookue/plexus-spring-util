@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.yookue.commonplexus.springutil.enumeration.JacksonTemporalType;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
-import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCustomizer;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJdkDateCustomizer;
 
 
 /**
@@ -55,7 +55,7 @@ public abstract class JacksonConfigWraps {
     @Nonnull
     public static Jackson2ObjectMapperBuilderCustomizer dateTimeCustomizer(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat, @Nullable TimeZone timeZone) {
         List<SimpleModule> modules = new ArrayList<>();
-        modules.add(JacksonUtilDateCustomizer.mapperModule(dateFormat));
+        modules.add(JacksonJdkDateCustomizer.mapperModule(dateFormat));
         if (ClassUtils.isPresent(JacksonTemporalType.JODA.getValue(), null)) {
             modules.add(JacksonJodaTimeCustomizer.mapperModule(dateFormat, timeFormat, dateTimeFormat));
         }

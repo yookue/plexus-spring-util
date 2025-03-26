@@ -58,13 +58,11 @@ public abstract class AbstractBsonDocument implements Serializable {
     }
 
     public void setObjectId(@Nullable LocalDate date) {
-        Date utilDate = LocalDateWraps.toUtilDate(date);
-        setObjectId(utilDate);
+        setObjectId(LocalDateWraps.toJdkDate(date));
     }
 
     public void setObjectId(@Nullable LocalDateTime dateTime) {
-        Date utilDate = LocalDateWraps.toUtilDate(dateTime);
-        setObjectId(utilDate);
+        setObjectId(LocalDateWraps.toJdkDate(dateTime));
     }
 
     public void setObjectId(long milliseconds) {

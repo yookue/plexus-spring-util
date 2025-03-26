@@ -34,7 +34,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 import com.yookue.commonplexus.javaseutil.util.ListPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
 import com.yookue.commonplexus.springutil.util.HttpHeaderWraps;
 import com.yookue.commonplexus.springutil.util.MultiMapWraps;
 
@@ -101,7 +101,7 @@ public class HeaderCapableRequestWrapper extends HttpServletRequestWrapper {
         if (NumberUtils.isParsable(value)) {
             return NumberUtils.toLong(getHeader(name));
         } else {
-            Date date = UtilDateWraps.parseDateTimeGuessing(value);
+            Date date = JdkDateWraps.parseDateTimeGuessing(value);
             if (date != null) {
                 return date.getTime();
             }

@@ -39,7 +39,7 @@ import com.yookue.commonplexus.javaseutil.util.DurationUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
 import com.yookue.commonplexus.springutil.constant.AmqpHeaderConst;
 import com.yookue.commonplexus.springutil.identity.AlternativeUuidGenerator;
 
@@ -92,7 +92,7 @@ public abstract class AmqpUtilsWraps {
             properties.setContentEncoding(CharsetPlainWraps.defaultCharsetName(charset));
             properties.setDeliveryMode(mode != null ? mode : MessageDeliveryMode.PERSISTENT);
             properties.setMessageId(AlternativeUuidGenerator.getBalanceId());
-            properties.setTimestamp(UtilDateWraps.getCurrentDateTime());
+            properties.setTimestamp(JdkDateWraps.getCurrentDateTime());
             return message;
         };
     }

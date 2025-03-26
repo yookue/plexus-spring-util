@@ -24,29 +24,35 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
+import com.yookue.commonplexus.javaseutil.constant.TemporalFormatCombo;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
- * {@link com.fasterxml.jackson.databind.JsonDeserializer} for deserializing {@link java.sql.Timestamp} {@link java.lang.Long} to {@link java.util.Date}
+ * {@link com.fasterxml.jackson.databind.JsonDeserializer} for deserializing {@link java.lang.String} to  {@link java.util.Date}
  * <p>
  * Usage: annotates on bean type, fields, or methods<br/>
  * <pre><code>
- *     {@literal @}JsonDeserialize(using = SqlTimestamp2UtilDateDeserializer.class)
+ *     {@literal @}JsonDeserialize(using = JdkDateDeserializer.class)
  * </code></pre>
  *
  * @author David Hsing
  * @see com.fasterxml.jackson.databind.JsonDeserializer
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
+ * @see org.springframework.format.annotation.DateTimeFormat
  */
-@SuppressWarnings("unused")
-public class SqlTimestamp2UtilDateDeserializer extends JsonDeserializer<Date> {
+@Getter
+@Setter
+public class JdkDateDeserializer extends JsonDeserializer<Date> {
+    private String[] dateFormats = TemporalFormatCombo.ALL_DATETIME_DATES;
+
     @Override
     public Date deserialize(@Nullable JsonParser parser, @Nullable DeserializationContext context) throws IOException {
         if (parser == null || StringUtils.isBlank(parser.getText())) {
             return null;
         }
-        Long timestamp = NumberUtilsWraps.parseAsQuietly(StringUtils.trimToNull(parser.getText()), Long.class);
-        return NumberUtilsWraps.isPositive(timestamp) ? new Date(timestamp) : null;
+        return JdkDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
     }
 }

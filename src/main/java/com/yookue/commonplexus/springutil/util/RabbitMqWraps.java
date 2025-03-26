@@ -34,7 +34,7 @@ import com.yookue.commonplexus.javaseutil.util.CharsetPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.DurationUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
 import com.yookue.commonplexus.springutil.constant.AmqpHeaderConst;
 import com.yookue.commonplexus.springutil.identity.AlternativeUuidGenerator;
 
@@ -96,7 +96,7 @@ public abstract class RabbitMqWraps {
         builder.contentEncoding(CharsetPlainWraps.defaultCharsetName(charset));
         builder.deliveryMode(MessageDeliveryMode.toInt(ObjectUtils.defaultIfNull(mode, MessageDeliveryMode.PERSISTENT)));
         builder.messageId(AlternativeUuidGenerator.getBalanceId());
-        builder.timestamp(UtilDateWraps.getCurrentDateTime());
+        builder.timestamp(JdkDateWraps.getCurrentDateTime());
         return builder.build();
     }
 

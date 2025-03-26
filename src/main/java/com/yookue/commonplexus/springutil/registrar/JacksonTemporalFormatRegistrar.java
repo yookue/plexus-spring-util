@@ -35,7 +35,7 @@ import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
 import com.yookue.commonplexus.springutil.annotation.EnableJacksonTemporalFormat;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
-import com.yookue.commonplexus.springutil.registrar.assistant.JacksonUtilDateCustomizer;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJdkDateCustomizer;
 
 
 /**
@@ -64,11 +64,11 @@ public class JacksonTemporalFormatRegistrar implements ImportAware {
      */
     @Bean
     @Order(value = 100)
-    public Jackson2ObjectMapperBuilderCustomizer jacksonUtilDateMapperCustomizer(@Nonnull JacksonProperties properties) {
+    public Jackson2ObjectMapperBuilderCustomizer jacksonJdkDateMapperCustomizer(@Nonnull JacksonProperties properties) {
         Assert.notNull(attributes, AssertMessageConst.NOT_NULL);
         String dateFormat = StringUtils.defaultIfBlank(attributes.getString("dateFormat"), properties.getDateFormat());    // $NON-NLS-1$
         TimeZone timeZone = ObjectUtils.defaultIfNull(properties.getTimeZone(), TimeZone.getDefault());
-        return JacksonUtilDateCustomizer.mapperCustomizer(dateFormat, timeZone);
+        return JacksonJdkDateCustomizer.mapperCustomizer(dateFormat, timeZone);
     }
 
     /**

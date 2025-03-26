@@ -35,7 +35,7 @@ import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
+import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -99,7 +99,7 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                     continue;
                 }
                 if (param instanceof java.util.Date alias) {
-                    joiner.add(UtilDateWraps.formatDateTime(alias, TemporalFormatConst.NON_YYYYMMDD));
+                    joiner.add(JdkDateWraps.formatDateTime(alias, TemporalFormatConst.NON_YYYYMMDD));
                     continue;
                 }
                 if (param instanceof java.time.LocalDate alias) {

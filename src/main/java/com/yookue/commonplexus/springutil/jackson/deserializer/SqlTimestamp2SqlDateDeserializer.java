@@ -38,9 +38,9 @@ import com.yookue.commonplexus.javaseutil.util.SqlDateWraps;
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @SuppressWarnings("unused")
-public class SqlTimestamp2SqlDateDeserializer extends SqlTimestamp2UtilDateDeserializer {
+public class SqlTimestamp2SqlDateDeserializer extends SqlTimestamp2JdkDateDeserializer {
     @Override
     public Date deserialize(@Nullable JsonParser parser, @Nullable DeserializationContext context) throws IOException {
-        return SqlDateWraps.castOfUtilDate(super.deserialize(parser, context));
+        return SqlDateWraps.ofJdkDate(super.deserialize(parser, context));
     }
 }

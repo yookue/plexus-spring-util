@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
+import com.yookue.commonplexus.springutil.jackson.deserializer.JdkDateDeserializer;
 
 
 /**
@@ -33,14 +34,14 @@ import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
  *
  * @author David Hsing
  */
-public abstract class JacksonUtilDateCustomizer {
+public abstract class JacksonJdkDateCustomizer {
     @Nonnull
     public static SimpleModule mapperModule(@Nullable String dateFormat) {
         dateFormat = StringUtils.defaultIfBlank(dateFormat, TemporalFormatConst.ISO_YYYYMMDD);
         SimpleModule result = new SimpleModule();
         result.addSerializer(java.util.Date.class, new com.fasterxml.jackson.databind.ser.std.DateSerializer(false, new SimpleDateFormat(dateFormat)));
         result.addSerializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.serializer.SqlDateSerializer(false, new SimpleDateFormat(dateFormat)));
-        result.addDeserializer(java.util.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.UtilDateDeserializer());
+        result.addDeserializer(java.util.Date.class, new JdkDateDeserializer());
         result.addDeserializer(java.sql.Date.class, new com.yookue.commonplexus.springutil.jackson.deserializer.SqlDateDeserializer());
         return result;
     }

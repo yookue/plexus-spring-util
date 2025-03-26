@@ -24,35 +24,29 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.yookue.commonplexus.javaseutil.constant.TemporalFormatCombo;
-import com.yookue.commonplexus.javaseutil.util.UtilDateWraps;
-import lombok.Getter;
-import lombok.Setter;
+import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
 
 
 /**
- * {@link com.fasterxml.jackson.databind.JsonDeserializer} for deserializing {@link java.lang.String} to  {@link java.util.Date}
+ * {@link com.fasterxml.jackson.databind.JsonDeserializer} for deserializing {@link java.sql.Timestamp} {@link java.lang.Long} to {@link java.util.Date}
  * <p>
  * Usage: annotates on bean type, fields, or methods<br/>
  * <pre><code>
- *     {@literal @}JsonDeserialize(using = UtilDateDeserializer.class)
+ *     {@literal @}JsonDeserialize(using = SqlTimestamp2JdkDateDeserializer.class)
  * </code></pre>
  *
  * @author David Hsing
  * @see com.fasterxml.jackson.databind.JsonDeserializer
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
- * @see org.springframework.format.annotation.DateTimeFormat
  */
-@Getter
-@Setter
-public class UtilDateDeserializer extends JsonDeserializer<Date> {
-    private String[] dateFormats = TemporalFormatCombo.ALL_DATETIME_DATES;
-
+@SuppressWarnings("unused")
+public class SqlTimestamp2JdkDateDeserializer extends JsonDeserializer<Date> {
     @Override
     public Date deserialize(@Nullable JsonParser parser, @Nullable DeserializationContext context) throws IOException {
         if (parser == null || StringUtils.isBlank(parser.getText())) {
             return null;
         }
-        return UtilDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
+        Long timestamp = NumberUtilsWraps.parseAsQuietly(StringUtils.trimToNull(parser.getText()), Long.class);
+        return NumberUtilsWraps.isPositive(timestamp) ? new Date(timestamp) : null;
     }
 }

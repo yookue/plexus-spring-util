@@ -24,7 +24,7 @@ import com.yookue.commonplexus.javaseutil.converter.LocalDateConverter;
 import com.yookue.commonplexus.javaseutil.converter.LocalDateTimeConverter;
 import com.yookue.commonplexus.javaseutil.converter.LocalTimeConverter;
 import com.yookue.commonplexus.javaseutil.converter.SqlDateConverter;
-import com.yookue.commonplexus.javaseutil.converter.UtilDateConverter;
+import com.yookue.commonplexus.javaseutil.converter.JdkDateConverter;
 import com.yookue.commonplexus.javaseutil.util.ConverterUtilsWraps;
 import com.yookue.commonplexus.springutil.converter.BeanStringConverter;
 import com.yookue.commonplexus.springutil.event.BeanConverterRegisteredEvent;
@@ -46,7 +46,7 @@ public class BeanConverterPreparedListener implements ApplicationListener<Contex
     public void onApplicationEvent(@Nonnull ContextRefreshedEvent event) {
         ConverterUtilsWraps.registerNullConverter();
         ConverterUtilsWraps.registerClassConverter(String.class, new BeanStringConverter());
-        ConverterUtilsWraps.registerClassConverter(java.util.Date.class, new UtilDateConverter());
+        ConverterUtilsWraps.registerClassConverter(java.util.Date.class, new JdkDateConverter());
         ConverterUtilsWraps.registerClassConverter(java.sql.Date.class, new SqlDateConverter());
         ConverterUtilsWraps.registerClassConverter(java.time.LocalDate.class, new LocalDateConverter());
         ConverterUtilsWraps.registerClassConverter(java.time.LocalDateTime.class, new LocalDateTimeConverter());
