@@ -27,24 +27,23 @@ import lombok.Getter;
 
 
 /**
- * {@link org.springframework.security.core.Authentication} token for a mobile with a captcha
+ * {@link org.springframework.security.core.Authentication} token for jwt
  *
  * @author David Hsing
  * @see org.springframework.security.authentication.AbstractAuthenticationToken
- * @see org.springframework.security.authentication.UsernamePasswordAuthenticationToken
  */
 @Getter
 @SuppressWarnings("unused")
-public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToken {
+public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
     private Object credentials;
     private Object auxiliary;
 
-    public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials) {
+    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials) {
         this(principal, credentials, null);
     }
 
-    public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Object auxiliary) {
+    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Object auxiliary) {
         super(null);
         this.principal = principal;
         this.credentials = credentials;
@@ -52,11 +51,11 @@ public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToke
         setAuthenticated(false);
     }
 
-    public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
+    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
         this(principal, credentials, authorities, null);
     }
 
-    public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities, @Nullable Object auxiliary) {
+    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities, @Nullable Object auxiliary) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
@@ -65,23 +64,23 @@ public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToke
     }
 
     @Nonnull
-    public static MobileCaptchaAuthenticationToken authenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
-        return new MobileCaptchaAuthenticationToken(principal, credentials, authorities);
+    public static JwtAuthenticationToken authenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
+        return new JwtAuthenticationToken(principal, credentials, authorities);
     }
 
     @Nonnull
-    public static MobileCaptchaAuthenticationToken authenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities, @Nullable Object auxiliary) {
-        return new MobileCaptchaAuthenticationToken(principal, credentials, authorities, auxiliary);
+    public static JwtAuthenticationToken authenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities, @Nullable Object auxiliary) {
+        return new JwtAuthenticationToken(principal, credentials, authorities, auxiliary);
     }
 
     @Nonnull
-    public static MobileCaptchaAuthenticationToken unauthenticated(@Nonnull Object principal, @Nullable Object credentials) {
-        return new MobileCaptchaAuthenticationToken(principal, credentials);
+    public static JwtAuthenticationToken unauthenticated(@Nonnull Object principal, @Nullable Object credentials) {
+        return new JwtAuthenticationToken(principal, credentials);
     }
 
     @Nonnull
-    public static MobileCaptchaAuthenticationToken unauthenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Object auxiliary) {
-        return new MobileCaptchaAuthenticationToken(principal, credentials, auxiliary);
+    public static JwtAuthenticationToken unauthenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Object auxiliary) {
+        return new JwtAuthenticationToken(principal, credentials, auxiliary);
     }
 
     @Override
