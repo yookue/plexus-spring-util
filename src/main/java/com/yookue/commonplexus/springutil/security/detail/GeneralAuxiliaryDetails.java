@@ -54,4 +54,9 @@ public class GeneralAuxiliaryDetails extends WebAuthenticationDetails {
         }
         timestamp = LocalDateWraps.getCurrentDateTime();
     }
+
+    @Nonnull
+    public static GeneralAuxiliaryDetails ofRequest(@Nonnull HttpServletRequest request) {
+        return new GeneralAuxiliaryDetails(request);
+    }
 }

@@ -33,6 +33,6 @@ import lombok.Getter;
 public class GeneralAuxiliaryDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, GeneralAuxiliaryDetails> {
     @Override
     public GeneralAuxiliaryDetails buildDetails(@Nonnull HttpServletRequest request) {
-        return new GeneralAuxiliaryDetails(request);
+        return GeneralAuxiliaryDetails.ofRequest(request);
     }
 }
