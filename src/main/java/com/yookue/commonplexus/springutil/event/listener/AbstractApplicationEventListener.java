@@ -94,7 +94,7 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
         Assert.notNull(servletContext, AssertMessageConst.NOT_NULL);
         container = servletContext.getServerInfo();
         contextPath = StringUtils.trimToNull(servletContext.getContextPath());
-        startupTime = LocalDateWraps.ofEpochMillis(applicationContext.getStartupDate());
+        startupTime = LocalDateWraps.ofEpochMilli(applicationContext.getStartupDate());
         if (event.getSource() instanceof WebServer alias) {
             serverPort = alias.getPort();
         }

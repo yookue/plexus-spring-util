@@ -53,6 +53,6 @@ public class JdkDateDeserializer extends JsonDeserializer<Date> {
         if (parser == null || StringUtils.isBlank(parser.getText())) {
             return null;
         }
-        return JdkDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
+        return JdkDateWraps.parseDateFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
     }
 }

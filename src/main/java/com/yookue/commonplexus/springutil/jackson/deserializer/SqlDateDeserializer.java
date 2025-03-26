@@ -54,7 +54,7 @@ public class SqlDateDeserializer extends JsonDeserializer<Date> {
         if (parser == null || StringUtils.isBlank(parser.getText())) {
             return null;
         }
-        java.util.Date date = JdkDateWraps.parseDateTimeWithFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
+        java.util.Date date = JdkDateWraps.parseDateFormats(StringUtils.trimToNull(parser.getText()), dateFormats);
         return (date == null) ? null : SqlDateWraps.ofJdkDate(date);
     }
 }
