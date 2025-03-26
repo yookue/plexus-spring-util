@@ -26,12 +26,14 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.CharUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UrlPathHelper;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 
 
 /**
@@ -47,18 +49,28 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class UriUtilsWraps {
     @Nullable
-    public static String decodeUrlWithUtf8(@Nullable String url) {
+    public static String decodeUrl(@Nullable String url) {
+        return decodeUrl(url, StandardCharsets.UTF_8);
+    }
+
+    @Nullable
+    public static String decodeUrl(@Nullable String url, @Nullable Charset charset) {
         try {
-            return StringUtils.isEmpty(url) ? null : URLDecoder.decode(url, StandardCharsets.UTF_8);
+            return StringUtils.isEmpty(url) ? null : URLDecoder.decode(url, ObjectUtils.defaultIfNull(charset, StandardCharsets.UTF_8));
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static String encodeUrlWithUtf8(@Nullable String url) {
+    public static String encodeUrl(@Nullable String url) {
+        return encodeUrl(url, StandardCharsets.UTF_8);
+    }
+
+    @Nullable
+    public static String encodeUrl(@Nullable String url, @Nullable Charset charset) {
         try {
-            return StringUtils.isEmpty(url) ? null : URLEncoder.encode(url, StandardCharsets.UTF_8);
+            return StringUtils.isEmpty(url) ? null : URLEncoder.encode(url, ObjectUtils.defaultIfNull(charset, StandardCharsets.UTF_8));
         } catch (Exception ignored) {
         }
         return null;
@@ -82,16 +94,23 @@ public abstract class UriUtilsWraps {
         return (!endSlash || StringUtils.endsWith(result, CharUtils.toString(CharVariantConst.SLASH))) ? result : StringUtils.join(result, CharVariantConst.SLASH);
     }
 
-    public static String getContextPathOriginating(@Nullable HttpServletRequest request) {
-        return getContextPathOriginating(request, false);
+    public static String getContextPathOriginally(@Nullable HttpServletRequest request) {
+        return getContextPathOriginally(request, false);
     }
 
-    public static String getContextPathOriginating(@Nullable HttpServletRequest request, boolean endSlash) {
+    public static String getContextPathOriginally(@Nullable HttpServletRequest request, boolean endSlash) {
         if (request == null) {
             return null;
         }
         String result = UrlPathHelper.defaultInstance.getOriginatingContextPath(request);
         return (!endSlash || StringUtils.endsWith(result, CharUtils.toString(CharVariantConst.SLASH))) ? result : StringUtils.join(result, CharVariantConst.SLASH);
+    }
+
+    /**
+     * @return schema, host, not including the last slash
+     */
+    public static String getSchemaHost(@Nullable HttpServletRequest request) {
+        return (request == null) ? null : (request.getScheme() + SymbolVariantConst.PROTOCOL_DELIMITER + request.getServerName());
     }
 
     /**
@@ -113,7 +132,7 @@ public abstract class UriUtilsWraps {
             return null;
         }
         StringBuffer url = request.getRequestURL();
-        return url.delete(url.length() - request.getRequestURI().length(), url.length()).append(request.getContextPath()).toString();
+        return url.delete(url.length() - request.getRequestURI().length(), url.length()).append(StringUtils.defaultString(request.getContextPath())).toString();
     }
 
     @Nullable
@@ -148,19 +167,19 @@ public abstract class UriUtilsWraps {
 
     @Nullable
     public static MultiValueMap<String, String> getQueryParamsFromUri(@Nullable String uri) {
-        UriComponents components = parseComponentsFromUri(uri);
+        UriComponents components = ofUriComponentsFromUri(uri);
         return (components == null) ? null : components.getQueryParams();
     }
 
     @Nullable
     public static MultiValueMap<String, String> getQueryParamsFromUri(@Nullable URI uri) {
-        UriComponents components = parseComponentsFromUri(uri);
+        UriComponents components = ofUriComponentsFromUri(uri);
         return (components == null) ? null : components.getQueryParams();
     }
 
     @Nullable
     public static MultiValueMap<String, String> getQueryParamsFromUrl(@Nullable String url) {
-        UriComponents components = parseComponentsFromUrl(url);
+        UriComponents components = ofUriComponentsFromUrl(url);
         return (components == null) ? null : components.getQueryParams();
     }
 
@@ -168,7 +187,7 @@ public abstract class UriUtilsWraps {
         return (request == null) ? null : request.getQueryString();
     }
 
-    public static String getQueryStringOriginating(@Nullable HttpServletRequest request) {
+    public static String getQueryStringOriginally(@Nullable HttpServletRequest request) {
         return (request == null) ? null : UrlPathHelper.defaultInstance.getOriginatingQueryString(request);
     }
 
@@ -185,7 +204,7 @@ public abstract class UriUtilsWraps {
         return (request == null) ? null : UrlPathHelper.defaultInstance.getRequestUri(request);
     }
 
-    public static String getRequestUriOriginating(@Nullable HttpServletRequest request) {
+    public static String getRequestUriOriginally(@Nullable HttpServletRequest request) {
         return (request == null) ? null : UrlPathHelper.defaultInstance.getOriginatingRequestUri(request);
     }
 
@@ -206,7 +225,7 @@ public abstract class UriUtilsWraps {
         return StringUtils.isBlank(query) ? uri : StringUtils.join(uri, CharVariantConst.QUESTION, query);
     }
 
-    public static String getRequestUriQueryStringOriginating(@Nullable HttpServletRequest request) {
+    public static String getRequestUriQueryStringOriginally(@Nullable HttpServletRequest request) {
         if (request == null) {
             return null;
         }
@@ -261,7 +280,7 @@ public abstract class UriUtilsWraps {
         return (request == null) ? null : UrlPathHelper.defaultInstance.getServletPath(request);
     }
 
-    public static String getServletPathOriginating(@Nullable HttpServletRequest request) {
+    public static String getServletPathOriginally(@Nullable HttpServletRequest request) {
         return (request == null) ? null : UrlPathHelper.defaultInstance.getOriginatingServletPath(request);
     }
 
@@ -301,17 +320,17 @@ public abstract class UriUtilsWraps {
     }
 
     @Nullable
-    public static UriComponents parseComponentsFromUri(@Nullable String uri) {
+    public static UriComponents ofUriComponentsFromUri(@Nullable String uri) {
         return StringUtils.isBlank(uri) ? null : UriComponentsBuilder.fromUriString(uri).build();
     }
 
     @Nullable
-    public static UriComponents parseComponentsFromUri(@Nullable URI uri) {
+    public static UriComponents ofUriComponentsFromUri(@Nullable URI uri) {
         return (uri == null) ? null : UriComponentsBuilder.fromUri(uri).build();
     }
 
     @Nullable
-    public static UriComponents parseComponentsFromUrl(@Nullable String url) {
+    public static UriComponents ofUriComponentsFromUrl(@Nullable String url) {
         return StringUtils.isBlank(url) ? null : UriComponentsBuilder.fromUriString(url).build();
     }
 }
