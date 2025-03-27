@@ -39,7 +39,7 @@ import com.yookue.commonplexus.springutil.enumeration.JwtAlgorithmType;
  * @author David Hsing
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
-public abstract class JwtUtilsWraps {
+public abstract class JwtAuthWraps {
     @Nonnull
     public static String encodeToken(@Nullable String audience, @Nullable String issuer, @Nullable String subject, @Nullable Date timestamp, @Nullable Duration timeout, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
         JWTCreator.Builder builder = JWT.create();
