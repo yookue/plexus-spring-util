@@ -33,15 +33,9 @@ import lombok.Getter;
 @SuppressWarnings("unused")
 public enum JwtAlgorithmType implements ValueEnum<String> {
     NONE(null),    // $NON-NLS-1$
-    RS256("SHA256withRSA"),    // $NON-NLS-1$
-    RS384("SHA384withRSA"),    // $NON-NLS-1$
-    RS512("SHA512withRSA"),    // $NON-NLS-1$
     HS256("HmacSHA256"),    // $NON-NLS-1$
     HS384("HmacSHA384"),    // $NON-NLS-1$
-    HS512("HmacSHA512"),    // $NON-NLS-1$
-    ES256("SHA256withECDSA"),    // $NON-NLS-1$
-    ES384("SHA384withECDSA"),    // $NON-NLS-1$
-    ES512("SHA512withECDSA");    // $NON-NLS-1$
+    HS512("HmacSHA512");    // $NON-NLS-1$
 
     private final String value;
 }
