@@ -128,6 +128,16 @@ public abstract class SecurityUtilsWraps {
         return (!authenticated || isAuthenticationAuthenticated(authentication)) ? authentication : null;
     }
 
+    @Nullable
+    public static <T extends Authentication> T getContextAuthenticationAs(@Nullable Class<T> expectType) {
+        return getContextAuthenticationAs(false, expectType);
+    }
+
+    @Nullable
+    public static <T extends Authentication> T getContextAuthenticationAs(boolean authenticated, @Nullable Class<T> expectType) {
+        return (expectType == null) ? null : ObjectUtilsWraps.castAs(getContextAuthentication(authenticated), expectType);
+    }
+
     public static void setContextAuthentication(@Nullable Authentication authentication) {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context != null) {
