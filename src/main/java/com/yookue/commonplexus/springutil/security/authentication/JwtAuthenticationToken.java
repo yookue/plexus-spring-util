@@ -22,7 +22,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.util.Assert;
 import lombok.Getter;
 
 
@@ -36,19 +35,15 @@ import lombok.Getter;
 @SuppressWarnings("unused")
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
-    private Object credentials;
-    private Object auxiliary;
+    private final Object credentials;
+    private final Object auxiliary;
 
-    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials) {
-        this(principal, credentials, null);
+    public JwtAuthenticationToken(@Nonnull Object principal) {
+        this(principal, null, null, null);
     }
 
-    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Object auxiliary) {
-        super(null);
-        this.principal = principal;
-        this.credentials = credentials;
-        this.auxiliary = auxiliary;
-        setAuthenticated(false);
+    public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials) {
+        this(principal, credentials, null, null);
     }
 
     public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
@@ -60,39 +55,5 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
         this.principal = principal;
         this.credentials = credentials;
         this.auxiliary = auxiliary;
-        super.setAuthenticated(true);
-    }
-
-    @Nonnull
-    public static JwtAuthenticationToken authenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
-        return new JwtAuthenticationToken(principal, credentials, authorities);
-    }
-
-    @Nonnull
-    public static JwtAuthenticationToken authenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities, @Nullable Object auxiliary) {
-        return new JwtAuthenticationToken(principal, credentials, authorities, auxiliary);
-    }
-
-    @Nonnull
-    public static JwtAuthenticationToken unauthenticated(@Nonnull Object principal, @Nullable Object credentials) {
-        return new JwtAuthenticationToken(principal, credentials);
-    }
-
-    @Nonnull
-    public static JwtAuthenticationToken unauthenticated(@Nonnull Object principal, @Nullable Object credentials, @Nullable Object auxiliary) {
-        return new JwtAuthenticationToken(principal, credentials, auxiliary);
-    }
-
-    @Override
-    public void setAuthenticated(boolean authenticated) throws IllegalArgumentException {
-        Assert.isTrue(!authenticated, "Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead");
-        super.setAuthenticated(false);
-    }
-
-    @Override
-    public void eraseCredentials() {
-        super.eraseCredentials();
-        credentials = null;
-        auxiliary = null;
     }
 }
