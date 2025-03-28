@@ -129,7 +129,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
             throw new IllegalAuthenticationException(super.messages.getMessage("MobileCaptchaAuthenticationFilter.illegalCaptcha", "Illegal captcha"));    // $NON-NLS-1$ // $NON-NLS-2$
         }
         preAuthentication(wrapper, captcha, mobile, dial);
-        MobileCaptchaAuthenticationToken token = MobileCaptchaAuthenticationToken.unauthenticated(mobile, captcha, dial);
+        MobileCaptchaAuthenticationToken token = new MobileCaptchaAuthenticationToken(mobile, captcha, null, dial);
         setDetails(wrapper, token);
         return super.getAuthenticationManager().authenticate(token);
     }
