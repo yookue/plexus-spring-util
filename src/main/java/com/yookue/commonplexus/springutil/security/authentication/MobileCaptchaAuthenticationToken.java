@@ -23,6 +23,7 @@ import jakarta.annotation.Nullable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -37,24 +38,21 @@ import lombok.Getter;
 public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
     private final Object credentials;
-    private final Object auxiliary;
+
+    @Setter
+    private Object auxiliary;
 
     public MobileCaptchaAuthenticationToken(@Nonnull Object principal) {
-        this(principal, null, null, null);
+        this(principal, null, null);
     }
 
     public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials) {
-        this(principal, credentials, null, null);
+        this(principal, credentials, null);
     }
 
     public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
-        this(principal, credentials, authorities, null);
-    }
-
-    public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities, @Nullable Object auxiliary) {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
-        this.auxiliary = auxiliary;
     }
 }

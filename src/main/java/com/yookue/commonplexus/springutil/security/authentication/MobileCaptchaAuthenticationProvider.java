@@ -155,8 +155,9 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
 
     protected Authentication createSuccessAuthentication(@Nonnull Object principal, @Nonnull Authentication authentication, @Nonnull UserDetails details, @Nullable Object dial) {
         Assert.notNull(authoritiesMapper, "The authorities mapper must be set");
-        MobileCaptchaAuthenticationToken result = new MobileCaptchaAuthenticationToken(principal, authentication.getCredentials(), authoritiesMapper.mapAuthorities(details.getAuthorities()), dial);
+        MobileCaptchaAuthenticationToken result = new MobileCaptchaAuthenticationToken(principal, authentication.getCredentials(), authoritiesMapper.mapAuthorities(details.getAuthorities()));
         result.setAuthenticated(true);
+        result.setAuxiliary(dial);
         result.setDetails(authentication.getDetails());
         return result;
     }
