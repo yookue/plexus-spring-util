@@ -39,7 +39,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
     private final Object credentials;
 
     @Setter
-    private Object auxiliary;
+    private Object additive;
 
     public JwtAuthenticationToken(@Nonnull Object principal) {
         this(principal, null, null);

@@ -138,7 +138,7 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
 
     protected String determineDial(@Nullable Authentication authentication) {
         if (authentication instanceof MobileCaptchaAuthenticationToken alias) {
-            return ObjectUtilsWraps.castAs(alias.getAuxiliary(), String.class);
+            return ObjectUtilsWraps.castAs(alias.getAdditive(), String.class);
         }
         return null;
     }
@@ -157,7 +157,7 @@ public abstract class MobileCaptchaAuthenticationProvider implements Authenticat
         Assert.notNull(authoritiesMapper, "The authorities mapper must be set");
         MobileCaptchaAuthenticationToken result = new MobileCaptchaAuthenticationToken(principal, authentication.getCredentials(), authoritiesMapper.mapAuthorities(details.getAuthorities()));
         result.setAuthenticated(true);
-        result.setAuxiliary(dial);
+        result.setAdditive(dial);
         result.setDetails(authentication.getDetails());
         return result;
     }

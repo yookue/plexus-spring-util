@@ -134,7 +134,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         }
         preAuthentication(wrapper, captcha, mobile, dial);
         MobileCaptchaAuthenticationToken token = new MobileCaptchaAuthenticationToken(mobile, captcha, null);
-        token.setAuxiliary(dial);
+        token.setAdditive(dial);
         setDetails(wrapper, token);
         return super.getAuthenticationManager().authenticate(token);
     }

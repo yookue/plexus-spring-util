@@ -40,7 +40,7 @@ public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToke
     private final Object credentials;
 
     @Setter
-    private Object auxiliary;
+    private Object additive;
 
     public MobileCaptchaAuthenticationToken(@Nonnull Object principal) {
         this(principal, null, null);
