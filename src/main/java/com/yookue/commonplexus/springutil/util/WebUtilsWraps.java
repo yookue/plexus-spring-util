@@ -403,11 +403,11 @@ public abstract class WebUtilsWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getRequestAttributeAs(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(request, expectedType) || StringUtils.isBlank(name)) {
+    public static <T> T getRequestAttributeAs(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(request, expectType) || StringUtils.isBlank(name)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(request.getAttribute(name), expectedType);
+        return ObjectUtilsWraps.castAs(request.getAttribute(name), expectType);
     }
 
     public static List<String> getRequestAttributeNames(@Nullable HttpServletRequest request) {
@@ -457,11 +457,11 @@ public abstract class WebUtilsWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getSessionAttributeAs(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(request, expectedType) || StringUtils.isBlank(name)) {
+    public static <T> T getSessionAttributeAs(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(request, expectType) || StringUtils.isBlank(name)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(WebUtils.getSessionAttribute(request, name), expectedType);
+        return ObjectUtilsWraps.castAs(WebUtils.getSessionAttribute(request, name), expectType);
     }
 
     public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value) {
@@ -562,14 +562,14 @@ public abstract class WebUtilsWraps {
         return (status == null) ? null : HttpStatus.resolve(status);
     }
 
-    public static <T extends ServletRequestWrapper> T getServletRequestWrapper(@Nullable HttpServletRequest request, @Nullable Class<T> expectedType) {
-        if (!(request instanceof ServletRequestWrapper alias) || expectedType == null) {
+    public static <T extends ServletRequestWrapper> T getServletRequestWrapper(@Nullable HttpServletRequest request, @Nullable Class<T> expectType) {
+        if (!(request instanceof ServletRequestWrapper alias) || expectType == null) {
             return null;
         }
         ServletRequest wrapper = alias.getRequest();
         while (wrapper instanceof ServletRequestWrapper subAlias) {
-            if (ClassUtils.isAssignableValue(expectedType, wrapper)) {
-                return ObjectUtilsWraps.castAs(wrapper, expectedType);
+            if (ClassUtils.isAssignableValue(expectType, wrapper)) {
+                return ObjectUtilsWraps.castAs(wrapper, expectType);
             }
             wrapper = subAlias.getRequest();
         }

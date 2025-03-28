@@ -417,35 +417,35 @@ public abstract class ReflectionUtilsWraps {
     }
 
     @Nullable
-    public static <T> T getFieldAs(@Nullable Field field, @Nullable Object target, @Nullable Class<T> expectedType) {
-        return getFieldAs(field, false, target, expectedType);
+    public static <T> T getFieldAs(@Nullable Field field, @Nullable Object target, @Nullable Class<T> expectType) {
+        return getFieldAs(field, false, target, expectType);
     }
 
     @Nullable
-    public static <T> T getFieldAs(@Nullable Field field, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(field, expectedType)) {
+    public static <T> T getFieldAs(@Nullable Field field, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(field, expectType)) {
             return null;
         }
         if (makeAccessible) {
             makeAccessible(field);
         }
-        return ObjectUtilsWraps.castAs(getField(field, target), expectedType);
+        return ObjectUtilsWraps.castAs(getField(field, target), expectType);
     }
 
     @Nullable
-    public static <T> T getFieldAs(@Nullable Class<?> clazz, @Nullable String fieldName, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(clazz, expectedType) || StringUtils.isBlank(fieldName)) {
+    public static <T> T getFieldAs(@Nullable Class<?> clazz, @Nullable String fieldName, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(clazz, expectType) || StringUtils.isBlank(fieldName)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(getField(clazz, fieldName, makeAccessible, target), expectedType);
+        return ObjectUtilsWraps.castAs(getField(clazz, fieldName, makeAccessible, target), expectType);
     }
 
     @Nullable
-    public static <T> T getFieldAs(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(clazz, expectedType) || StringUtils.isBlank(fieldName)) {
+    public static <T> T getFieldAs(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(clazz, expectType) || StringUtils.isBlank(fieldName)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(getField(clazz, fieldName, fieldType, makeAccessible, target), expectedType);
+        return ObjectUtilsWraps.castAs(getField(clazz, fieldName, fieldType, makeAccessible, target), expectType);
     }
 
     @Nullable
@@ -725,36 +725,36 @@ public abstract class ReflectionUtilsWraps {
     }
 
     @Nullable
-    public static <T> T invokeMethodAs(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectedType) {
-        return invokeMethodAs(clazz, methodName, false, target, ArrayUtils.EMPTY_OBJECT_ARRAY, expectedType);
+    public static <T> T invokeMethodAs(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
+        return invokeMethodAs(clazz, methodName, false, target, ArrayUtils.EMPTY_OBJECT_ARRAY, expectType);
     }
 
     @Nullable
-    public static <T> T invokeMethodAs(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Object[] args, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(clazz, expectedType) || StringUtils.isBlank(methodName)) {
+    public static <T> T invokeMethodAs(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(clazz, expectType) || StringUtils.isBlank(methodName)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(invokeMethod(clazz, methodName, makeAccessible, target, args), expectedType);
+        return ObjectUtilsWraps.castAs(invokeMethod(clazz, methodName, makeAccessible, target, args), expectType);
     }
 
     @Nullable
-    public static <T> T invokeMethodAs(@Nullable Method method, @Nullable Object target, @Nullable Class<T> expectedType) {
-        return invokeMethodAs(method, target, ArrayUtils.EMPTY_OBJECT_ARRAY, expectedType);
+    public static <T> T invokeMethodAs(@Nullable Method method, @Nullable Object target, @Nullable Class<T> expectType) {
+        return invokeMethodAs(method, target, ArrayUtils.EMPTY_OBJECT_ARRAY, expectType);
     }
 
     @Nullable
-    public static <T> T invokeMethodAs(@Nullable Method method, @Nullable Object target, @Nullable Object[] args, @Nullable Class<T> expectedType) {
-        return ObjectUtils.anyNull(method, expectedType) ? null : ObjectUtilsWraps.castAs(invokeMethod(method, target, args), expectedType);
+    public static <T> T invokeMethodAs(@Nullable Method method, @Nullable Object target, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(method, expectType) ? null : ObjectUtilsWraps.castAs(invokeMethod(method, target, args), expectType);
     }
 
     @Nullable
-    public static <T> T invokeMethodAs(@Nullable Object target, @Nullable String methodName, @Nullable Object[] args, @Nullable Class<T> expectedType) {
-        return invokeMethodAs(target, methodName, false, args, expectedType);
+    public static <T> T invokeMethodAs(@Nullable Object target, @Nullable String methodName, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        return invokeMethodAs(target, methodName, false, args, expectType);
     }
 
     @Nullable
-    public static <T> T invokeMethodAs(@Nullable Object target, @Nullable String methodName, boolean makeAccessible, @Nullable Object[] args, @Nullable Class<T> expectedType) {
-        return ObjectUtils.anyNull(target, methodName, expectedType) ? null : ObjectUtilsWraps.castAs(invokeMethod(target, methodName, makeAccessible, args), expectedType);
+    public static <T> T invokeMethodAs(@Nullable Object target, @Nullable String methodName, boolean makeAccessible, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(target, methodName, expectType) ? null : ObjectUtilsWraps.castAs(invokeMethod(target, methodName, makeAccessible, args), expectType);
     }
 
     public static boolean isUserDefined(@Nullable Method method) {

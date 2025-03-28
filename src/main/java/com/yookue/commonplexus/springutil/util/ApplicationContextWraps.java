@@ -133,12 +133,12 @@ public abstract class ApplicationContextWraps {
     }
 
     @Nullable
-    public static <T> T getServletContextAttributeAs(@Nullable ApplicationContext context, @Nullable String name, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(context, expectedType) || StringUtils.isBlank(name)) {
+    public static <T> T getServletContextAttributeAs(@Nullable ApplicationContext context, @Nullable String name, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(context, expectType) || StringUtils.isBlank(name)) {
             return null;
         }
         Object value = getServletContextAttribute(context, name);
-        return (value == null) ? null : ObjectUtilsWraps.castAs(value, expectedType);
+        return (value == null) ? null : ObjectUtilsWraps.castAs(value, expectType);
     }
 
     public static boolean setServletContextAttribute(@Nullable ApplicationContext context, @Nullable String name, @Nullable Object value) {

@@ -38,77 +38,77 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 public abstract class NumberUtilsWraps {
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T extends Number> T convertNumber(@Nullable Number number, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(number, expectedType)) {
+    public static <T extends Number> T convertNumber(@Nullable Number number, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(number, expectType)) {
             return null;
         }
         try {
-            return org.springframework.util.NumberUtils.convertNumberToTargetClass(number, expectedType);
+            return org.springframework.util.NumberUtils.convertNumberToTargetClass(number, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
-    public static <T extends Number> boolean isNumberParsable(@Nullable String value, @Nullable Class<T> expectedType) {
-        return parseNumber(value, expectedType, null) != null;
+    public static <T extends Number> boolean isNumberParsable(@Nullable String value, @Nullable Class<T> expectType) {
+        return parseNumber(value, expectType, null) != null;
     }
 
-    public static <T extends Number> boolean isNumberParsable(@Nullable String value, @Nullable Class<T> expectedType, @Nullable NumberFormat format) {
-        return parseNumber(value, expectedType, format) != null;
-    }
-
-    @Nullable
-    public static <T extends Number> T parseNumber(@Nullable String value, @Nullable Class<T> expectedType) {
-        return parseNumber(value, expectedType, null);
+    public static <T extends Number> boolean isNumberParsable(@Nullable String value, @Nullable Class<T> expectType, @Nullable NumberFormat format) {
+        return parseNumber(value, expectType, format) != null;
     }
 
     @Nullable
-    public static <T extends Number> T parseNumber(@Nullable String value, @Nullable Class<T> expectedType, @Nullable NumberFormat format) {
-        if (StringUtils.isBlank(value) || expectedType == null) {
+    public static <T extends Number> T parseNumber(@Nullable String value, @Nullable Class<T> expectType) {
+        return parseNumber(value, expectType, null);
+    }
+
+    @Nullable
+    public static <T extends Number> T parseNumber(@Nullable String value, @Nullable Class<T> expectType, @Nullable NumberFormat format) {
+        if (StringUtils.isBlank(value) || expectType == null) {
             return null;
         }
         try {
-            return org.springframework.util.NumberUtils.parseNumber(value, expectedType, format);
+            return org.springframework.util.NumberUtils.parseNumber(value, expectType, format);
         } catch (Exception ignored) {
         }
         return null;
     }
 
-    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectedType, @Nullable String... values) {
-        return maxParsableNumber(expectedType, ArrayUtilsWraps.asList(values));
+    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectType, @Nullable String... values) {
+        return maxParsableNumber(expectType, ArrayUtilsWraps.asList(values));
     }
 
-    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectedType, @Nullable Collection<String> values) {
-        return maxParsableNumber(expectedType, null, values);
+    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectType, @Nullable Collection<String> values) {
+        return maxParsableNumber(expectType, null, values);
     }
 
-    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectedType, @Nullable NumberFormat format, @Nullable String... values) {
-        return maxParsableNumber(expectedType, format, ArrayUtilsWraps.asList(values));
+    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectType, @Nullable NumberFormat format, @Nullable String... values) {
+        return maxParsableNumber(expectType, format, ArrayUtilsWraps.asList(values));
     }
 
-    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectedType, @Nullable NumberFormat format, @Nullable Collection<String> values) {
-        if (expectedType == null || CollectionUtils.isEmpty(values)) {
+    public static <T extends Number & Comparable<? super T>> T maxParsableNumber(@Nullable Class<T> expectType, @Nullable NumberFormat format, @Nullable Collection<String> values) {
+        if (expectType == null || CollectionUtils.isEmpty(values)) {
             return null;
         }
-        return values.stream().filter(NumberUtils::isParsable).distinct().map(element -> parseNumber(element, expectedType, format)).max(ObjectUtils::compare).orElse(null);
+        return values.stream().filter(NumberUtils::isParsable).distinct().map(element -> parseNumber(element, expectType, format)).max(ObjectUtils::compare).orElse(null);
     }
 
-    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectedType, @Nullable String... values) {
-        return minParsableNumber(expectedType, ArrayUtilsWraps.asList(values));
+    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectType, @Nullable String... values) {
+        return minParsableNumber(expectType, ArrayUtilsWraps.asList(values));
     }
 
-    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectedType, @Nullable Collection<String> values) {
-        return minParsableNumber(expectedType, null, values);
+    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectType, @Nullable Collection<String> values) {
+        return minParsableNumber(expectType, null, values);
     }
 
-    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectedType, @Nullable NumberFormat format, @Nullable String... values) {
-        return minParsableNumber(expectedType, format, ArrayUtilsWraps.asList(values));
+    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectType, @Nullable NumberFormat format, @Nullable String... values) {
+        return minParsableNumber(expectType, format, ArrayUtilsWraps.asList(values));
     }
 
-    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectedType, @Nullable NumberFormat format, @Nullable Collection<String> values) {
-        if (expectedType == null || CollectionUtils.isEmpty(values)) {
+    public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectType, @Nullable NumberFormat format, @Nullable Collection<String> values) {
+        if (expectType == null || CollectionUtils.isEmpty(values)) {
             return null;
         }
-        return values.stream().filter(NumberUtils::isParsable).distinct().map(element -> parseNumber(element, expectedType, format)).min(ObjectUtils::compare).orElse(null);
+        return values.stream().filter(NumberUtils::isParsable).distinct().map(element -> parseNumber(element, expectType, format)).min(ObjectUtils::compare).orElse(null);
     }
 }

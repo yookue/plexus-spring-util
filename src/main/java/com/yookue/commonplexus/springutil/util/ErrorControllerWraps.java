@@ -55,12 +55,12 @@ public abstract class ErrorControllerWraps {
     }
 
     @Nullable
-    public static <C extends AbstractErrorController, T> T getErrorAttributeAs(@Nullable C controller, @Nullable HttpServletRequest request, @Nullable ErrorAttributeOptions options, @Nullable String attribute, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(controller, request, options, expectedType) || StringUtils.isBlank(attribute)) {
+    public static <C extends AbstractErrorController, T> T getErrorAttributeAs(@Nullable C controller, @Nullable HttpServletRequest request, @Nullable ErrorAttributeOptions options, @Nullable String attribute, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(controller, request, options, expectType) || StringUtils.isBlank(attribute)) {
             return null;
         }
         Map<String, Object> attributes = getErrorAttributes(controller, request, options);
-        return MapPlainWraps.getObjectAs(attributes, attribute, expectedType);
+        return MapPlainWraps.getObjectAs(attributes, attribute, expectType);
     }
 
     @Nullable

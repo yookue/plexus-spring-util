@@ -31,11 +31,11 @@ import org.springframework.util.ClassUtils;
  */
 @SuppressWarnings("unused")
 public class BeanTypeMismatchException extends BeansException {
-    public BeanTypeMismatchException(@Nonnull String beanName, @Nonnull Class<?> expectedType) {
-        super(String.format("Bean named '%s' is expected to be of type '%s'", beanName, ClassUtils.getQualifiedName(expectedType)));    // $NON-NLS-1$
+    public BeanTypeMismatchException(@Nonnull String beanName, @Nonnull Class<?> expectType) {
+        super(String.format("Bean named '%s' is expected to be of type '%s'", beanName, ClassUtils.getQualifiedName(expectType)));    // $NON-NLS-1$
     }
 
-    public BeanTypeMismatchException(@Nonnull String beanName, @Nonnull String expectedType) {
-        super(String.format("Bean named '%s' is expected to be of type '%s'", beanName, expectedType));    // $NON-NLS-1$
+    public BeanTypeMismatchException(@Nonnull String beanName, @Nonnull String expectType) {
+        super(String.format("Bean named '%s' is expected to be of type '%s'", beanName, expectType));    // $NON-NLS-1$
     }
 }

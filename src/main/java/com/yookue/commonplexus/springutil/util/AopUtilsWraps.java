@@ -69,12 +69,12 @@ public abstract class AopUtilsWraps {
         return (point == null || index < 0) ? defaultValue : ArrayUtils.get(point.getArgs(), index, defaultValue);
     }
 
-    public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectedType) {
-        return getParameterAs(point, index, expectedType, null);
+    public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectType) {
+        return getParameterAs(point, index, expectType, null);
     }
 
-    public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectedType, @Nullable T defaultValue) {
-        return ObjectUtilsWraps.castAs(getParameter(point, index), expectedType, defaultValue);
+    public static <T> T getParameterAs(@Nullable JoinPoint point, int index, @Nullable Class<T> expectType, @Nullable T defaultValue) {
+        return ObjectUtilsWraps.castAs(getParameter(point, index), expectType, defaultValue);
     }
 
     @Nullable

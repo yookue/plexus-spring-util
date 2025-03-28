@@ -60,12 +60,12 @@ public abstract class CacheUtilsWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getCacheValueAs(@Nullable CacheManager manager, @Nullable String name, @Nullable String key, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(manager, expectedType) || StringUtils.isAnyEmpty(name, key)) {
+    public static <T> T getCacheValueAs(@Nullable CacheManager manager, @Nullable String name, @Nullable String key, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(manager, expectType) || StringUtils.isAnyEmpty(name, key)) {
             return null;
         }
         Cache cache = manager.getCache(name);
-        return (cache == null) ? null : cache.get(key, expectedType);
+        return (cache == null) ? null : cache.get(key, expectType);
     }
 
     @Nullable

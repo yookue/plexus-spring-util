@@ -63,8 +63,8 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 public abstract class SecurityUtilsWraps {
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getAuthenticationPrincipalAs(@Nullable Authentication authentication, @Nullable Class<T> expectedType) {
-        return ObjectUtils.anyNull(authentication, expectedType) ? null : ObjectUtilsWraps.castAs(authentication.getPrincipal(), expectedType);
+    public static <T> T getAuthenticationPrincipalAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(authentication, expectType) ? null : ObjectUtilsWraps.castAs(authentication.getPrincipal(), expectType);
     }
 
     @Nullable
@@ -93,8 +93,8 @@ public abstract class SecurityUtilsWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getAuthenticationCredentialsAs(@Nullable Authentication authentication, @Nullable Class<T> expectedType) {
-        return ObjectUtils.anyNull(authentication, expectedType) ? null : ObjectUtilsWraps.castAs(authentication.getCredentials(), expectedType);
+    public static <T> T getAuthenticationCredentialsAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(authentication, expectType) ? null : ObjectUtilsWraps.castAs(authentication.getCredentials(), expectType);
     }
 
     @Nullable
@@ -104,8 +104,8 @@ public abstract class SecurityUtilsWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getAuthenticationDetailsAs(@Nullable Authentication authentication, @Nullable Class<T> expectedType) {
-        return ObjectUtils.anyNull(authentication, expectedType) ? null : ObjectUtilsWraps.castAs(authentication.getDetails(), expectedType);
+    public static <T> T getAuthenticationDetailsAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(authentication, expectType) ? null : ObjectUtilsWraps.castAs(authentication.getDetails(), expectType);
     }
 
     @Nullable
@@ -153,23 +153,23 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectedType) {
-        return getContextAuthenticationPrincipalAs(expectedType, false);
+    public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectType) {
+        return getContextAuthenticationPrincipalAs(expectType, false);
     }
 
     @Nullable
-    public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectedType, boolean authenticated) {
-        return getAuthenticationPrincipalAs(getContextAuthentication(authenticated), expectedType);
+    public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectType, boolean authenticated) {
+        return getAuthenticationPrincipalAs(getContextAuthentication(authenticated), expectType);
     }
 
     @Nullable
-    public static <T> T getContextAuthenticationDetailsAs(@Nullable Class<T> expectedType) {
-        return getContextAuthenticationDetailsAs(expectedType, false);
+    public static <T> T getContextAuthenticationDetailsAs(@Nullable Class<T> expectType) {
+        return getContextAuthenticationDetailsAs(expectType, false);
     }
 
     @Nullable
-    public static <T> T getContextAuthenticationDetailsAs(@Nullable Class<T> expectedType, boolean authenticated) {
-        return getAuthenticationDetailsAs(getContextAuthentication(authenticated), expectedType);
+    public static <T> T getContextAuthenticationDetailsAs(@Nullable Class<T> expectType, boolean authenticated) {
+        return getAuthenticationDetailsAs(getContextAuthentication(authenticated), expectType);
     }
 
     @Nullable

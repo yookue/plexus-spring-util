@@ -120,8 +120,8 @@ public abstract class RedisTemplateWraps {
     }
 
     @Nullable
-    public static <K, T> T getValueAs(@Nullable RedisTemplate<K, ?> template, @Nullable K key, @Nullable Class<T> expectedType) {
-        return ObjectUtilsWraps.castAs(getValue(template, key), expectedType);
+    public static <K, T> T getValueAs(@Nullable RedisTemplate<K, ?> template, @Nullable K key, @Nullable Class<T> expectType) {
+        return ObjectUtilsWraps.castAs(getValue(template, key), expectType);
     }
 
     @Nullable

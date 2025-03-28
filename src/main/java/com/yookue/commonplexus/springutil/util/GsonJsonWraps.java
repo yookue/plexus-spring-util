@@ -37,84 +37,84 @@ import com.google.gson.stream.JsonWriter;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class GsonJsonWraps {
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable JsonElement json, @Nullable Class<T> classOfT) {
-        if (instance == null || classOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable JsonElement json, @Nullable Class<T> expectType) {
+        if (instance == null || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(json, classOfT);
+            return instance.fromJson(json, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable String json, @Nullable Class<T> classOfT) {
-        if (instance == null || classOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable String json, @Nullable Class<T> expectType) {
+        if (instance == null || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(json, classOfT);
+            return instance.fromJson(json, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable String json, @Nullable Type typeOfT) {
-        if (instance == null || StringUtils.isBlank(json) || typeOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable String json, @Nullable Type expectType) {
+        if (instance == null || StringUtils.isBlank(json) || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(json, typeOfT);
+            return instance.fromJson(json, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable JsonElement json, @Nullable Type typeOfT) {
-        if (instance == null || typeOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable JsonElement json, @Nullable Type expectType) {
+        if (instance == null || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(json, typeOfT);
+            return instance.fromJson(json, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable JsonReader reader, @Nullable Type typeOfT) {
-        if (instance == null || reader == null || typeOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable JsonReader reader, @Nullable Type expectType) {
+        if (instance == null || reader == null || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(reader, typeOfT);
+            return instance.fromJson(reader, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable Reader json, @Nullable Type typeOfT) {
-        if (instance == null || json == null || typeOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable Reader json, @Nullable Type expectType) {
+        if (instance == null || json == null || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(json, typeOfT);
+            return instance.fromJson(json, expectType);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T fromJson(@Nullable Gson instance, @Nullable Reader json, @Nullable Class<T> classOfT) {
-        if (instance == null || json == null || classOfT == null) {
+    public static <T> T fromJson(@Nullable Gson instance, @Nullable Reader json, @Nullable Class<T> expectType) {
+        if (instance == null || json == null || expectType == null) {
             return null;
         }
         try {
-            return instance.fromJson(json, classOfT);
+            return instance.fromJson(json, expectType);
         } catch (Exception ignored) {
         }
         return null;

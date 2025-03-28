@@ -25,7 +25,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -42,6 +44,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.RegexVariantConst;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;
 import com.yookue.commonplexus.springutil.security.exception.IllegalAuthenticationException;
 import com.yookue.commonplexus.springutil.util.JsonParserWraps;
@@ -139,6 +143,8 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         String result = RequestParamWraps.getStringParameterTrimming(request, mobileParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
+            content = RegExUtils.removeAll(content, RegexVariantConst.LINE_SEPARATOR);
+            content = RegExUtils.replaceAll(content, RegexVariantConst.COMMA_CURLY_BRACKET, CharUtils.toString(CharVariantConst.CURLY_BRACKET_RIGHT));
             result = JsonParserWraps.findNodeValueAsString(content, mobileParameter, beanFactory);
         }
         return result;
@@ -148,6 +154,8 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         String result = RequestParamWraps.getStringParameterTrimming(request, captchaParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
+            content = RegExUtils.removeAll(content, RegexVariantConst.LINE_SEPARATOR);
+            content = RegExUtils.replaceAll(content, RegexVariantConst.COMMA_CURLY_BRACKET, CharUtils.toString(CharVariantConst.CURLY_BRACKET_RIGHT));
             result = JsonParserWraps.findNodeValueAsString(content, captchaParameter, beanFactory);
         }
         return result;

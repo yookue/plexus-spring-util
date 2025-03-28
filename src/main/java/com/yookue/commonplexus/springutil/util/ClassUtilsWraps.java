@@ -106,18 +106,18 @@ public abstract class ClassUtilsWraps {
     }
 
     @Nullable
-    public static <T> Class<T> forNameAs(@Nullable String className, @Nullable Class<T> expectedType) throws ClassNotFoundException, LinkageError {
-        return forNameAs(className, null, expectedType);
+    public static <T> Class<T> forNameAs(@Nullable String className, @Nullable Class<T> expectType) throws ClassNotFoundException, LinkageError {
+        return forNameAs(className, null, expectType);
     }
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <T> Class<T> forNameAs(@Nullable String className, @Nullable ClassLoader classLoader, @Nullable Class<T> expectedType) throws ClassNotFoundException, LinkageError {
-        if (StringUtils.isBlank(className) || expectedType == null) {
+    public static <T> Class<T> forNameAs(@Nullable String className, @Nullable ClassLoader classLoader, @Nullable Class<T> expectType) throws ClassNotFoundException, LinkageError {
+        if (StringUtils.isBlank(className) || expectType == null) {
             return null;
         }
         Class<?> result = ClassUtils.forName(className, classLoader);
-        return ClassUtils.isAssignable(expectedType, result) ? (Class<T>) result : null;
+        return ClassUtils.isAssignable(expectType, result) ? (Class<T>) result : null;
     }
 
     @Nullable
@@ -135,14 +135,14 @@ public abstract class ClassUtilsWraps {
     }
 
     @Nullable
-    public static <T> Class<? extends T> forNameAsQuietly(@Nullable String className, @Nullable Class<T> expectedType) {
-        return forNameAsQuietly(className, null, expectedType);
+    public static <T> Class<? extends T> forNameAsQuietly(@Nullable String className, @Nullable Class<T> expectType) {
+        return forNameAsQuietly(className, null, expectType);
     }
 
     @Nullable
-    public static <T> Class<T> forNameAsQuietly(@Nullable String className, @Nullable ClassLoader classLoader, @Nullable Class<T> expectedType) {
+    public static <T> Class<T> forNameAsQuietly(@Nullable String className, @Nullable ClassLoader classLoader, @Nullable Class<T> expectType) {
         try {
-            return forNameAs(className, classLoader, expectedType);
+            return forNameAs(className, classLoader, expectType);
         } catch (Exception ignored) {
         }
         return null;

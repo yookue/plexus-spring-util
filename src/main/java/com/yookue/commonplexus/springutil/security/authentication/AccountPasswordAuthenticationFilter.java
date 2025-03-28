@@ -25,7 +25,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -42,6 +44,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.SecurityContextRepository;
+import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.RegexVariantConst;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;
 import com.yookue.commonplexus.springutil.security.exception.IllegalAuthenticationException;
 import com.yookue.commonplexus.springutil.util.JsonParserWraps;
@@ -123,6 +127,8 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
         String result = RequestParamWraps.getStringParameterTrimming(request, super.getUsernameParameter());
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
+            content = RegExUtils.removeAll(content, RegexVariantConst.LINE_SEPARATOR);
+            content = RegExUtils.replaceAll(content, RegexVariantConst.COMMA_CURLY_BRACKET, CharUtils.toString(CharVariantConst.CURLY_BRACKET_RIGHT));
             result = JsonParserWraps.findNodeValueAsString(content, super.getUsernameParameter(), beanFactory);
         }
         return result;
@@ -132,6 +138,8 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
         String result = RequestParamWraps.getStringParameterTrimming(request, super.getPasswordParameter());
         if (StringUtils.isEmpty(result) && restCompatible) {
             String content = WebUtilsWraps.getContentAsStringTrimmingQuietly(request, true);
+            content = RegExUtils.removeAll(content, RegexVariantConst.LINE_SEPARATOR);
+            content = RegExUtils.replaceAll(content, RegexVariantConst.COMMA_CURLY_BRACKET, CharUtils.toString(CharVariantConst.CURLY_BRACKET_RIGHT));
             result = JsonParserWraps.findNodeValueAsString(content, super.getPasswordParameter(), beanFactory);
         }
         return result;

@@ -126,11 +126,11 @@ public abstract class AmqpUtilsWraps {
     }
 
     @Nullable
-    public static <T> T getHeaderAs(@Nullable Message message, @Nullable String header, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(message, expectedType) || StringUtils.isBlank(header)) {
+    public static <T> T getHeaderAs(@Nullable Message message, @Nullable String header, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(message, expectType) || StringUtils.isBlank(header)) {
             return null;
         }
-        return MapPlainWraps.getObjectAs(getHeaders(message), header, expectedType);
+        return MapPlainWraps.getObjectAs(getHeaders(message), header, expectType);
     }
 
     public static Map<String, Object> getHeaders(@Nullable Message message) {

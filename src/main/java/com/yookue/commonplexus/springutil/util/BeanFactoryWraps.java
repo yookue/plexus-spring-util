@@ -65,47 +65,47 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class BeanFactoryWraps {
-    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, @Nullable String... beanNames) {
-        return allBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
+    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, @Nullable String... beanNames) {
+        return allBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, @Nullable Collection<String> beanNames) {
-        return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectedType)));
+    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, @Nullable Collection<String> beanNames) {
+        return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectType)));
     }
 
-    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, @Nullable String... beanNames) {
-        return allBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
-    }
-
-    @SuppressWarnings("DataFlowIssue")
-    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, @Nullable Collection<String> beanNames) {
-        return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectedType)));
-    }
-
-    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, @Nullable String... beanNames) {
-        return anyBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
+    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, @Nullable String... beanNames) {
+        return allBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, @Nullable Collection<String> beanNames) {
-        return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectedType)));
+    public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, @Nullable Collection<String> beanNames) {
+        return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectType)));
     }
 
-    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, @Nullable String... beanNames) {
-        return anyBeansMatchType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
+    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, @Nullable String... beanNames) {
+        return anyBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, @Nullable Collection<String> beanNames) {
-        return ObjectUtils.allNotNull(factory, expectedType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectedType)));
+    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, @Nullable Collection<String> beanNames) {
+        return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectType)));
+    }
+
+    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, @Nullable String... beanNames) {
+        return anyBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, @Nullable Collection<String> beanNames) {
+        return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectType)));
     }
 
     /**
      * Return a bean instance that uniquely matches the given object type
      *
      * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param expectedType the class of the bean to instantiate
+     * @param expectType the class of the bean to instantiate
      * @param autowireMode by name or type, using the constants in the interface of {@link org.springframework.beans.factory.config.AutowireCapableBeanFactory}
      * @param dependencyCheck whether to perform a dependency check for object
      *
@@ -115,29 +115,29 @@ public abstract class BeanFactoryWraps {
      * @see org.springframework.beans.factory.config.AutowireCapableBeanFactory#autowire
      */
     @Nullable
-    public static Object autowireBeanType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, int autowireMode, boolean dependencyCheck) throws BeansException {
-        if (!(factory instanceof AutowireCapableBeanFactory alias) || expectedType == null) {
+    public static Object autowireBeanType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, int autowireMode, boolean dependencyCheck) throws BeansException {
+        if (!(factory instanceof AutowireCapableBeanFactory alias) || expectType == null) {
             return null;
         }
-        return alias.autowire(expectedType, autowireMode, dependencyCheck);
+        return alias.autowire(expectType, autowireMode, dependencyCheck);
     }
 
     @Nullable
-    public static Object autowireBeanTypeQuietly(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, int autowireMode, boolean dependencyCheck) {
+    public static Object autowireBeanTypeQuietly(@Nullable BeanFactory factory, @Nullable Class<?> expectType, int autowireMode, boolean dependencyCheck) {
         try {
-            return autowireBeanType(factory, expectedType, autowireMode, dependencyCheck);
+            return autowireBeanType(factory, expectType, autowireMode, dependencyCheck);
         } catch (Exception ignored) {
         }
         return null;
     }
 
     @Nullable
-    public static <T> T createBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        if (!(factory instanceof AutowireCapableBeanFactory alias) || expectedType == null) {
+    public static <T> T createBean(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
+        if (!(factory instanceof AutowireCapableBeanFactory alias) || expectType == null) {
             return null;
         }
         try {
-            return alias.createBean(expectedType);
+            return alias.createBean(expectType);
         } catch (Exception ignored) {
         }
         return null;
@@ -183,16 +183,16 @@ public abstract class BeanFactoryWraps {
         return factory != null && StringUtils.isNotBlank(beanName) && factory.containsBean(beanName);
     }
 
-    public static <T> boolean containsBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        return getBean(factory, expectedType) != null;
+    public static <T> boolean containsBean(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
+        return getBean(factory, expectType) != null;
     }
 
-    public static <T> boolean containsBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Object... args) {
-        return getBean(factory, expectedType, args) != null;
+    public static <T> boolean containsBean(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable Object... args) {
+        return getBean(factory, expectType, args) != null;
     }
 
-    public static <T> boolean containsBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectedType) {
-        return getBean(factory, beanName, expectedType) != null;
+    public static <T> boolean containsBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectType) {
+        return getBean(factory, beanName, expectType) != null;
     }
 
     public static boolean containsBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Object... args) {
@@ -231,17 +231,17 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    public static <T> T firstBeanOfName(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable String... beanNames) {
-        return firstBeanOfName(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
+    public static <T> T firstBeanOfName(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable String... beanNames) {
+        return firstBeanOfName(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
     @Nullable
-    public static <T> T firstBeanOfName(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Collection<String> beanNames) {
-        if (factory == null || expectedType == null || CollectionPlainWraps.isEmpty(beanNames)) {
+    public static <T> T firstBeanOfName(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable Collection<String> beanNames) {
+        if (factory == null || expectType == null || CollectionPlainWraps.isEmpty(beanNames)) {
             return null;
         }
         for (String beanName : beanNames) {
-            T result = getBean(factory, beanName, expectedType);
+            T result = getBean(factory, beanName, expectType);
             if (result != null) {
                 return result;
             }
@@ -288,35 +288,20 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        ObjectProvider<T> provider = getBeanProvider(factory, expectedType);
+    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
+        ObjectProvider<T> provider = getBeanProvider(factory, expectType);
         return (provider == null || !provider.iterator().hasNext()) ? null : provider.iterator().next();
     }
 
     @Nullable
-    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Class<?>... typeGenerics) {
-        ObjectProvider<T> provider = getBeanProvider(factory, expectedType, typeGenerics);
+    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable Class<?>... typeGenerics) {
+        ObjectProvider<T> provider = getBeanProvider(factory, expectType, typeGenerics);
         return (provider == null || !provider.iterator().hasNext()) ? null : provider.iterator().next();
     }
 
     @Nullable
-    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType) {
-        ObjectProvider<T> provider = getBeanProvider(factory, expectedType);
-        return (provider == null || !provider.iterator().hasNext()) ? null : provider.iterator().next();
-    }
-
-    /**
-     * Returns an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
-     *
-     * @param factory the bean factory to look for
-     * @param expectedType type the bean must match; can be an interface or superclass
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
-     *
-     * @return an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
-     */
-    @Nullable
-    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean allowEagerInit) {
-        ObjectProvider<T> provider = getBeanProvider(factory, expectedType, allowEagerInit);
+    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType) {
+        ObjectProvider<T> provider = getBeanProvider(factory, expectType);
         return (provider == null || !provider.iterator().hasNext()) ? null : provider.iterator().next();
     }
 
@@ -324,14 +309,29 @@ public abstract class BeanFactoryWraps {
      * Returns an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
      * @param factory the bean factory to look for
-     * @param expectedType the type of bean to match, can be a generic type declaration
+     * @param expectType type the bean must match; can be an interface or superclass
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
     @Nullable
-    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, boolean allowEagerInit) {
-        ObjectProvider<T> provider = getBeanProvider(factory, expectedType, allowEagerInit);
+    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, boolean allowEagerInit) {
+        ObjectProvider<T> provider = getBeanProvider(factory, expectType, allowEagerInit);
+        return (provider == null || !provider.iterator().hasNext()) ? null : provider.iterator().next();
+    }
+
+    /**
+     * Returns an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
+     *
+     * @param factory the bean factory to look for
+     * @param expectType the type of bean to match, can be a generic type declaration
+     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     *
+     * @return an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
+     */
+    @Nullable
+    public static <T> T firstBeanOfType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, boolean allowEagerInit) {
+        ObjectProvider<T> provider = getBeanProvider(factory, expectType, allowEagerInit);
         return (provider == null || !provider.iterator().hasNext()) ? null : provider.iterator().next();
     }
 
@@ -339,18 +339,18 @@ public abstract class BeanFactoryWraps {
      * Return a bean instance that uniquely matches the given object type, if any
      *
      * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param expectedType type the bean must match; can be an interface or superclass
+     * @param expectType type the bean must match; can be an interface or superclass
      *
      * @return a bean instance that uniquely matches the given object type, if any
      */
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(factory, expectedType)) {
+    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(factory, expectType)) {
             return null;
         }
         try {
-            return factory.getBean(expectedType);
+            return factory.getBean(expectType);
         } catch (Exception ignored) {
         }
         return null;
@@ -358,12 +358,12 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Object... args) {
-        if (ObjectUtils.anyNull(factory, expectedType)) {
+    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable Object... args) {
+        if (ObjectUtils.anyNull(factory, expectType)) {
             return null;
         }
         try {
-            return ArrayUtils.isEmpty(args) ? factory.getBean(expectedType) : factory.getBean(expectedType, args);
+            return ArrayUtils.isEmpty(args) ? factory.getBean(expectType) : factory.getBean(expectType, args);
         } catch (Exception ignored) {
         }
         return null;
@@ -383,12 +383,12 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
+    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return null;
         }
         try {
-            return factory.getBean(beanName, expectedType);
+            return factory.getBean(beanName, expectType);
         } catch (Exception ignored) {
         }
         return null;
@@ -396,21 +396,21 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectedType, @Nullable Class<?>... typeGenerics) {
-        if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
+    public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectType, @Nullable Class<?>... typeGenerics) {
+        if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return null;
         }
         try {
             if (ArrayUtils.isEmpty(typeGenerics)) {
-                return factory.getBean(beanName, expectedType);
+                return factory.getBean(beanName, expectType);
             }
-            String[] foundNames = getBeanNamesForType(factory, ResolvableType.forClassWithGenerics(expectedType, typeGenerics));
+            String[] foundNames = getBeanNamesForType(factory, ResolvableType.forClassWithGenerics(expectType, typeGenerics));
             if (ArrayUtils.isEmpty(foundNames)) {
                 return null;
             }
             for (String foundName : foundNames) {
                 if (StringUtils.equals(foundName, beanName)) {
-                    return factory.getBean(beanName, expectedType);
+                    return factory.getBean(beanName, expectType);
                 }
             }
         } catch (Exception ignored) {
@@ -420,12 +420,12 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static Object getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectedType) {
-        if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
+    public static Object getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectType) {
+        if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return null;
         }
         try {
-            String[] foundNames = getBeanNamesForType(factory, expectedType);
+            String[] foundNames = getBeanNamesForType(factory, expectType);
             if (ArrayUtils.isEmpty(foundNames)) {
                 return null;
             }
@@ -676,163 +676,163 @@ public abstract class BeanFactoryWraps {
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        return ObjectUtils.anyNull(factory, expectedType) ? null : factory.getBeanProvider(expectedType);
+    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(factory, expectType) ? null : factory.getBeanProvider(expectType);
     }
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Class<?>... typeGenerics) {
-        if (ObjectUtils.anyNull(factory, expectedType)) {
+    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable Class<?>... typeGenerics) {
+        if (ObjectUtils.anyNull(factory, expectType)) {
             return null;
         }
-        return ArrayUtils.isEmpty(typeGenerics) ? factory.getBeanProvider(expectedType) : factory.getBeanProvider(ResolvableType.forClassWithGenerics(expectedType, typeGenerics));
+        return ArrayUtils.isEmpty(typeGenerics) ? factory.getBeanProvider(expectType) : factory.getBeanProvider(ResolvableType.forClassWithGenerics(expectType, typeGenerics));
     }
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType) {
-        return ObjectUtils.anyNull(factory, expectedType) ? null : factory.getBeanProvider(expectedType);
+    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectType) {
+        return ObjectUtils.anyNull(factory, expectType) ? null : factory.getBeanProvider(expectType);
     }
 
     /**
      * Returns a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
      * @param factory the bean factory to look for
-     * @param expectedType type the bean must match; can be an interface or superclass
+     * @param expectType type the bean must match; can be an interface or superclass
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
     @Nullable
-    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory alias) || expectedType == null) {
+    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectType, boolean allowEagerInit) {
+        if (!(factory instanceof ListableBeanFactory alias) || expectType == null) {
             return null;
         }
-        return alias.getBeanProvider(expectedType, allowEagerInit);
+        return alias.getBeanProvider(expectType, allowEagerInit);
     }
 
     /**
      * Returns a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
      * @param factory the bean factory to look for
-     * @param expectedType the type of bean to match, can be a generic type declaration
+     * @param expectType the type of bean to match, can be a generic type declaration
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
     @Nullable
-    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory alias) || expectedType == null) {
+    public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, boolean allowEagerInit) {
+        if (!(factory instanceof ListableBeanFactory alias) || expectType == null) {
             return null;
         }
-        return alias.getBeanProvider(expectedType, allowEagerInit);
+        return alias.getBeanProvider(expectType, allowEagerInit);
     }
 
     /**
      * Returns the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
      * @param factory the bean factory to look for
-     * @param expectedType the type of bean to match, can be a generic type declaration
+     * @param expectType the type of bean to match, can be a generic type declaration
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
     @Nullable
-    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType) {
-        return getBeanNamesForType(factory, expectedType, true, true);
+    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType) {
+        return getBeanNamesForType(factory, expectType, true, true);
     }
 
     /**
      * Returns the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
      * @param factory the bean factory to look for
-     * @param expectedType the type of bean to match, can be a generic type declaration
+     * @param expectType the type of bean to match, can be a generic type declaration
      * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
     @Nullable
-    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable ResolvableType expectedType, boolean includeNonSingletons, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory alias) || expectedType == null) {
+    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, boolean includeNonSingletons, boolean allowEagerInit) {
+        if (!(factory instanceof ListableBeanFactory alias) || expectType == null) {
             return null;
         }
-        return alias.getBeanNamesForType(expectedType, includeNonSingletons, allowEagerInit);
+        return alias.getBeanNamesForType(expectType, includeNonSingletons, allowEagerInit);
     }
 
     /**
      * Return the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all bean names
+     * @param expectType the class or interface to match, or {@code null} for all bean names
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
     @Nullable
-    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType) {
-        return getBeanNamesForType(factory, expectedType, true, true);
+    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable Class<?> expectType) {
+        return getBeanNamesForType(factory, expectType, true, true);
     }
 
     /**
      * Returns the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all bean names
+     * @param expectType the class or interface to match, or {@code null} for all bean names
      * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
     @Nullable
-    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable Class<?> expectedType, boolean includeNonSingletons, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory alias) || expectedType == null) {
+    public static String[] getBeanNamesForType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, boolean includeNonSingletons, boolean allowEagerInit) {
+        if (!(factory instanceof ListableBeanFactory alias) || expectType == null) {
             return null;
         }
-        return alias.getBeanNamesForType(expectedType, includeNonSingletons, allowEagerInit);
+        return alias.getBeanNamesForType(expectType, includeNonSingletons, allowEagerInit);
     }
 
     /**
      * Returns the bean instances that match the given object type (including subclasses)
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all concrete beans
+     * @param expectType the class or interface to match, or {@code null} for all concrete beans
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType) {
-        return getBeansOfType(factory, expectedType, true, true);
+    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
+        return getBeansOfType(factory, expectType, true, true);
     }
 
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all concrete beans
+     * @param expectType the class or interface to match, or {@code null} for all concrete beans
      * @param beanNames the bean names that should match
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable String... beanNames) {
-        return getBeansOfType(factory, expectedType, ArrayUtilsWraps.asList(beanNames));
+    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable String... beanNames) {
+        return getBeansOfType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all concrete beans
+     * @param expectType the class or interface to match, or {@code null} for all concrete beans
      * @param beanNames the bean names that should match
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, @Nullable Collection<String> beanNames) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null || CollectionUtils.isEmpty(beanNames)) {
+    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, @Nullable Collection<String> beanNames) {
+        if (!(factory instanceof ListableBeanFactory) || expectType == null || CollectionUtils.isEmpty(beanNames)) {
             return null;
         }
-        Map<String, T> result = getBeansOfType(factory, expectedType);
+        Map<String, T> result = getBeansOfType(factory, expectType);
         if (!CollectionUtils.isEmpty(result)) {
             MapPlainWraps.removeIfKey(result, element -> !beanNames.contains(element));
         }
@@ -843,19 +843,19 @@ public abstract class BeanFactoryWraps {
      * Returns the bean instances that match the given object type (including subclasses)
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all concrete beans
+     * @param expectType the class or interface to match, or {@code null} for all concrete beans
      * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean includeNonSingletons, boolean allowEagerInit) {
-        if (!(factory instanceof ListableBeanFactory alias) || expectedType == null) {
+    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, boolean includeNonSingletons, boolean allowEagerInit) {
+        if (!(factory instanceof ListableBeanFactory alias) || expectType == null) {
             return null;
         }
         try {
-            return alias.getBeansOfType(expectedType, includeNonSingletons, allowEagerInit);
+            return alias.getBeansOfType(expectType, includeNonSingletons, allowEagerInit);
         } catch (Exception ignored) {
         }
         return null;
@@ -865,7 +865,7 @@ public abstract class BeanFactoryWraps {
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all concrete beans
+     * @param expectType the class or interface to match, or {@code null} for all concrete beans
      * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      * @param beanNames the bean names that should match
@@ -873,15 +873,15 @@ public abstract class BeanFactoryWraps {
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean includeNonSingletons, boolean allowEagerInit, @Nullable String... beanNames) {
-        return getBeansOfType(factory, expectedType, includeNonSingletons, allowEagerInit, ArrayUtilsWraps.asList(beanNames));
+    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, boolean includeNonSingletons, boolean allowEagerInit, @Nullable String... beanNames) {
+        return getBeansOfType(factory, expectType, includeNonSingletons, allowEagerInit, ArrayUtilsWraps.asList(beanNames));
     }
 
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
      * @param factory the bean factory to look for
-     * @param expectedType the class or interface to match, or {@code null} for all concrete beans
+     * @param expectType the class or interface to match, or {@code null} for all concrete beans
      * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
      * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      * @param beanNames the bean names that should match
@@ -889,11 +889,11 @@ public abstract class BeanFactoryWraps {
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectedType, boolean includeNonSingletons, boolean allowEagerInit, @Nullable Collection<String> beanNames) {
-        if (!(factory instanceof ListableBeanFactory) || expectedType == null || CollectionUtils.isEmpty(beanNames)) {
+    public static <T> Map<String, T> getBeansOfType(@Nullable BeanFactory factory, @Nullable Class<T> expectType, boolean includeNonSingletons, boolean allowEagerInit, @Nullable Collection<String> beanNames) {
+        if (!(factory instanceof ListableBeanFactory) || expectType == null || CollectionUtils.isEmpty(beanNames)) {
             return null;
         }
-        Map<String, T> result = getBeansOfType(factory, expectedType, includeNonSingletons, allowEagerInit);
+        Map<String, T> result = getBeansOfType(factory, expectType, includeNonSingletons, allowEagerInit);
         if (!CollectionUtils.isEmpty(result)) {
             MapPlainWraps.removeIfKey(result, element -> !beanNames.contains(element));
         }
@@ -921,7 +921,7 @@ public abstract class BeanFactoryWraps {
     }
 
     /**
-     * Find all beans which are annotated with the supplied {@code annotation}, casting to {@code expectedType}
+     * Find all beans which are annotated with the supplied {@code annotation}, casting to {@code expectType}
      *
      * @param factory the bean factory to look for
      * @param annotation the type of annotation to look for (at class, interface or factory method level of the specified bean)
@@ -930,8 +930,8 @@ public abstract class BeanFactoryWraps {
      */
     @Nullable
     @SuppressWarnings("DataFlowIssue")
-    public static <T> Map<String, T> getBeansWithAnnotationAs(@Nullable BeanFactory factory, @Nullable Class<? extends Annotation> annotation, @Nullable Class<T> expectedType) {
-        if (!(factory instanceof ListableBeanFactory) || ObjectUtils.anyNull(annotation, expectedType)) {
+    public static <T> Map<String, T> getBeansWithAnnotationAs(@Nullable BeanFactory factory, @Nullable Class<? extends Annotation> annotation, @Nullable Class<T> expectType) {
+        if (!(factory instanceof ListableBeanFactory) || ObjectUtils.anyNull(annotation, expectType)) {
             return null;
         }
         Map<String, Object> nameBeans = getBeansWithAnnotation(factory, annotation);
@@ -940,8 +940,8 @@ public abstract class BeanFactoryWraps {
         }
         Map<String, T> result = new LinkedHashMap<>();
         for (Map.Entry<String, Object> entry : nameBeans.entrySet()) {
-            if (ClassUtils.isAssignableValue(expectedType, entry.getValue())) {
-                result.put(entry.getKey(), ObjectUtilsWraps.castAs(entry.getValue(), expectedType));
+            if (ClassUtils.isAssignableValue(expectType, entry.getValue())) {
+                result.put(entry.getKey(), ObjectUtilsWraps.castAs(entry.getValue(), expectType));
             }
         }
         return result.isEmpty() ? null : result;
@@ -1062,24 +1062,24 @@ public abstract class BeanFactoryWraps {
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType) {
-        if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
+    public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectType) {
+        if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return false;
         }
         try {
-            return factory.isTypeMatch(beanName, expectedType);
+            return factory.isTypeMatch(beanName, expectType);
         } catch (Exception ignored) {
         }
         return false;
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectedType) {
-        if (ObjectUtils.anyNull(factory, expectedType) || StringUtils.isBlank(beanName)) {
+    public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectType) {
+        if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return false;
         }
         try {
-            return factory.isTypeMatch(beanName, expectedType);
+            return factory.isTypeMatch(beanName, expectType);
         } catch (Exception ignored) {
         }
         return false;
@@ -1113,20 +1113,20 @@ public abstract class BeanFactoryWraps {
         return false;
     }
 
-    public static boolean registerBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType) throws BeanDefinitionStoreException {
-        return registerBeanDefinition(factory, beanName, expectedType, null);
+    public static boolean registerBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectType) throws BeanDefinitionStoreException {
+        return registerBeanDefinition(factory, beanName, expectType, null);
     }
 
     /**
      * @see org.springframework.beans.factory.support.BeanDefinitionRegistry
      * @see org.springframework.beans.factory.support.BeanDefinitionBuilder
      */
-    public static boolean registerBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType, @Nullable String parentName) throws BeanDefinitionStoreException {
-        if (!(factory instanceof BeanDefinitionRegistry alias) || StringUtils.isBlank(beanName) || expectedType == null) {
+    public static boolean registerBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectType, @Nullable String parentName) throws BeanDefinitionStoreException {
+        if (!(factory instanceof BeanDefinitionRegistry alias) || StringUtils.isBlank(beanName) || expectType == null) {
             return false;
         }
         AbstractBeanDefinition definition = StringUtils.isBlank(parentName) ? new RootBeanDefinition() : new GenericBeanDefinition();
-        definition.setBeanClass(expectedType);
+        definition.setBeanClass(expectType);
         if (StringUtils.isNotBlank(parentName)) {
             definition.setParentName(parentName);
         }
@@ -1134,13 +1134,13 @@ public abstract class BeanFactoryWraps {
         return true;
     }
 
-    public static boolean registerBeanDefinitionQuietly(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType) {
-        return registerBeanDefinitionQuietly(factory, beanName, expectedType, null);
+    public static boolean registerBeanDefinitionQuietly(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectType) {
+        return registerBeanDefinitionQuietly(factory, beanName, expectType, null);
     }
 
-    public static boolean registerBeanDefinitionQuietly(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectedType, @Nullable String parentName) {
+    public static boolean registerBeanDefinitionQuietly(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectType, @Nullable String parentName) {
         try {
-            return registerBeanDefinition(factory, beanName, expectedType, parentName);
+            return registerBeanDefinition(factory, beanName, expectType, parentName);
         } catch (Exception ignored) {
         }
         return false;

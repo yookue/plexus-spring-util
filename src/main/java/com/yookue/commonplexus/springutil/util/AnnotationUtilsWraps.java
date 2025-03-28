@@ -251,11 +251,11 @@ public abstract class AnnotationUtilsWraps {
     }
 
     @Nullable
-    public static <T> T getAnnotationAttributeAs(@Nullable AnnotatedElement element, @Nullable Class<? extends Annotation> annotation, @Nullable String attribute, @Nullable Class<T> expectedType) {
-        if (ObjectUtils.anyNull(element, annotation, expectedType) || StringUtils.isBlank(attribute)) {
+    public static <T> T getAnnotationAttributeAs(@Nullable AnnotatedElement element, @Nullable Class<? extends Annotation> annotation, @Nullable String attribute, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(element, annotation, expectType) || StringUtils.isBlank(attribute)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(getAnnotationAttribute(element, annotation, attribute), expectedType);
+        return ObjectUtilsWraps.castAs(getAnnotationAttribute(element, annotation, attribute), expectType);
     }
 
     public static String getAnnotationAttributeAsString(@Nullable AnnotatedElement element, @Nullable Class<? extends Annotation> annotation, @Nullable String attribute) {
