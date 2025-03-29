@@ -19,6 +19,7 @@ package com.yookue.commonplexus.springutil.security.detail;
 
 import java.time.LocalDateTime;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -55,8 +56,7 @@ public class GeneralAuxiliaryDetails extends WebAuthenticationDetails {
         timestamp = LocalDateWraps.getCurrentDateTime();
     }
 
-    @Nonnull
-    public static GeneralAuxiliaryDetails ofRequest(@Nonnull HttpServletRequest request) {
-        return new GeneralAuxiliaryDetails(request);
+    public static GeneralAuxiliaryDetails ofRequest(@Nullable HttpServletRequest request) {
+        return (request == null) ? null : new GeneralAuxiliaryDetails(request);
     }
 }
