@@ -20,28 +20,19 @@ package com.yookue.commonplexus.springutil.security.authentication;
 import java.util.Collection;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import lombok.Getter;
-import lombok.Setter;
 
 
 /**
- * {@link org.springframework.security.core.Authentication} token for a mobile with a captcha
+ * {@link org.springframework.security.core.Authentication} token for mobile with captcha
  *
  * @author David Hsing
  * @see org.springframework.security.authentication.AbstractAuthenticationToken
- * @see org.springframework.security.authentication.UsernamePasswordAuthenticationToken
  */
 @Getter
 @SuppressWarnings("unused")
-public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToken {
-    private final Object principal;
-    private final Object credentials;
-
-    @Setter
-    private Object additive;
-
+public class MobileCaptchaAuthenticationToken extends AbstractAdditiveAuthenticationToken {
     public MobileCaptchaAuthenticationToken(@Nonnull Object principal) {
         this(principal, null, null);
     }
@@ -51,8 +42,6 @@ public class MobileCaptchaAuthenticationToken extends AbstractAuthenticationToke
     }
 
     public MobileCaptchaAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
-        super(authorities);
-        this.principal = principal;
-        this.credentials = credentials;
+        super(principal, credentials, authorities);
     }
 }

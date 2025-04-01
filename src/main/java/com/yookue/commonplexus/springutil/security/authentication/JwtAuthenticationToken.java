@@ -20,10 +20,8 @@ package com.yookue.commonplexus.springutil.security.authentication;
 import java.util.Collection;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import lombok.Getter;
-import lombok.Setter;
 
 
 /**
@@ -34,24 +32,16 @@ import lombok.Setter;
  */
 @Getter
 @SuppressWarnings("unused")
-public class JwtAuthenticationToken extends AbstractAuthenticationToken {
-    private final Object principal;
-    private final Object credentials;
-
-    @Setter
-    private Object additive;
-
+public class JwtAuthenticationToken extends AbstractAdditiveAuthenticationToken {
     public JwtAuthenticationToken(@Nonnull Object principal) {
-        this(principal, null, null);
+        super(principal, null, null);
     }
 
     public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials) {
-        this(principal, credentials, null);
+        super(principal, credentials, null);
     }
 
     public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
-        super(authorities);
-        this.principal = principal;
-        this.credentials = credentials;
+        super(principal, credentials, authorities);
     }
 }
