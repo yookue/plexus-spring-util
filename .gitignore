@@ -5,6 +5,10 @@
 # Log file
 *.log
 
+# Apple files
+*/._*
+*/.DS_Store
+
 # BlueJ files
 *.ctxt
 
@@ -30,7 +34,6 @@ tmp/
 *.bak
 *.swp
 *~.nib
-*/.DS_Store
 */thumbs.db
 
 # Eclipse
