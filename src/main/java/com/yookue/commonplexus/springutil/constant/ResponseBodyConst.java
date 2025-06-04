@@ -48,7 +48,7 @@ public abstract class ResponseBodyConst {
     public static final String REST_MESSAGE = "message";    // $NON-NLS-1$
     public static final String REST_ADDITIVE = "additive";    // $NON-NLS-1$
     public static final String REST_DURATION = "duration";    // $NON-NLS-1$
-    public static final String REST_REDIRECT = "redirect";    // $NON-NLS-1$
     public static final String REST_REMINDER = "reminder";    // $NON-NLS-1$
+    public static final String REST_URL = "url";    // $NON-NLS-1$
     public static final String REST_TIMESTAMP = "timestamp";    // $NON-NLS-1$
 }

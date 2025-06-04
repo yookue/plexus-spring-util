@@ -60,8 +60,8 @@ public class RestResponseStruct implements Serializable {
     private String message;
     private String additive;
     private Duration duration;
-    private String redirect;
     private PromptReminderType reminder;
+    private String url;
 
     @DateTimeFormat(pattern = TemporalFormatConst.ISO_YYYYMMDD_HHMMSS)
     private LocalDateTime timestamp = LocalDateWraps.getCurrentDateTime();
