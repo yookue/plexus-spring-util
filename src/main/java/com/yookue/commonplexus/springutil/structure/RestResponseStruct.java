@@ -30,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 import com.yookue.commonplexus.javaseutil.constant.TemporalFormatConst;
+import com.yookue.commonplexus.javaseutil.enumeration.PromptReminderType;
 import com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct;
 import com.yookue.commonplexus.javaseutil.structure.BooleanTextStruct;
 import com.yookue.commonplexus.javaseutil.structure.StatusDataStruct;
@@ -58,8 +59,9 @@ public class RestResponseStruct implements Serializable {
     private Object data;
     private String message;
     private String additive;
-    private String redirect;
     private Duration duration;
+    private String redirect;
+    private PromptReminderType reminder;
 
     @DateTimeFormat(pattern = TemporalFormatConst.ISO_YYYYMMDD_HHMMSS)
     private LocalDateTime timestamp = LocalDateWraps.getCurrentDateTime();
