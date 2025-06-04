@@ -18,6 +18,7 @@ package com.yookue.commonplexus.springutil.structure;
 
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import jakarta.annotation.Nonnull;
@@ -35,10 +36,10 @@ import com.yookue.commonplexus.javaseutil.structure.StatusDataStruct;
 import com.yookue.commonplexus.javaseutil.structure.StatusTextStruct;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
 import com.yookue.commonplexus.springutil.constant.ResponseBodyConst;
+import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 
 /**
@@ -57,7 +58,8 @@ public class RestResponseStruct implements Serializable {
     private Object data;
     private String message;
     private String additive;
-    private String reminder;
+    private String redirect;
+    private Duration duration;
 
     @DateTimeFormat(pattern = TemporalFormatConst.ISO_YYYYMMDD_HHMMSS)
     private LocalDateTime timestamp = LocalDateWraps.getCurrentDateTime();
