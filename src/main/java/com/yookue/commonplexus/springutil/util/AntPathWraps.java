@@ -33,7 +33,7 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
  *
  * @author David Hsing
  * @see org.springframework.util.AntPathMatcher
- * @see org.springframework.security.web.util.matcher.AntPathRequestMatcher
+ * @see org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class AntPathWraps {

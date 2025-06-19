@@ -16,7 +16,7 @@
 
 
 /**
- * Support for message source
+ * Support for message sources
  */
 
 package com.yookue.commonplexus.springutil.message;

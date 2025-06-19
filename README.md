@@ -23,15 +23,21 @@ Yookue plexus-spring-util is a packages of utility classes for Spring's hierarch
 | cache       | Cache enhancement for Spring cache                                                   |
 | cglib       | Enhanced component for cglib, such as bean copier                                    |
 | constant    | Miscellaneous constants                                                              |
+| context     | Support for Spring contexts                                                          |
 | enumeration | Useful enumerations                                                                  |
 | event       | Customized event and listener                                                        |
 | exception   | Extended exception for throwing customized needs                                     |
 | filter      | Additional filter for Spring                                                         |
 | general     | General entity and bson document                                                     |
 | identity    | Helps to generate identifiers, typically UUID                                        |
+| interceptor | Web interceptor classes                                                              |
 | jackson     | Extra component for jackson, including serializer, deserializer, strategy, processor |
-| message     | Other message source beans                                                           |
+| message     | Support for message sources                                                          |
+| processor   | Implemented classes of processors                                                    |
+| registrar   | Support for registrars                                                               |
+| resolver    | Support for resolvers                                                                |
 | security    | Extended classes for Spring security                                                 |
+| servlet     | Support for servlets                                                                 |
 | structure   | Various structs to represents data combinations                                      |
 | support     | Components that extends from Spring to provide some particular purposes              |
 | util        | Powerful utilities that may speed up your development                                |
@@ -53,7 +59,11 @@ See the `NOTICE.txt` file for required notices and attributions.
 
 ## Donation
 
-You like this package? Then [donate to Yookue](https://yookue.com/public/donate) to support the development.
+You like this package? Then [donate to us](https://yookue.com/donation) to support the development.
+
+## Copyright
+
+Beijing Yookue Network Technology Ltd.
 
 ## Website
 

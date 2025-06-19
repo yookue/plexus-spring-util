@@ -43,7 +43,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.context.SecurityContextRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.RegexVariantConst;
 import com.yookue.commonplexus.javaseutil.util.FieldUtilsWraps;
@@ -68,7 +68,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
     public static final String SPRING_SECURITY_FORM_CAPTCHA_KEY = "captcha";    // $NON-NLS-1$
     public static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";    // $NON-NLS-1$
     public static final String SPRING_SECURITY_FORM_DIAL_KEY = "dial";    // $NON-NLS-1$
-    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/login", HttpMethod.POST.name());    // $NON-NLS-1$
+    private static final PathPatternRequestMatcher PATH_PATTERN_REQUEST_MATCHER = PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.POST, "/login");    // $NON-NLS-1$
 
     @Getter
     private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
@@ -94,11 +94,11 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
     protected BeanFactory beanFactory;
 
     public MobileCaptchaAuthenticationFilter() {
-        super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
+        super(PATH_PATTERN_REQUEST_MATCHER);
     }
 
     public MobileCaptchaAuthenticationFilter(@Nonnull AuthenticationManager manager) {
-        super(DEFAULT_ANT_PATH_REQUEST_MATCHER, manager);
+        super(PATH_PATTERN_REQUEST_MATCHER, manager);
     }
 
     /**

@@ -16,7 +16,7 @@
 
 
 /**
- * Support for servlet
+ * Support for servlets
  */
 
 package com.yookue.commonplexus.springutil.servlet;

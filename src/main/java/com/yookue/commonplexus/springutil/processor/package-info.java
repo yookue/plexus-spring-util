@@ -16,7 +16,7 @@
 
 
 /**
- * Implemented classes of processor
+ * Implemented classes of processors
  */
 
 package com.yookue.commonplexus.springutil.processor;

@@ -16,7 +16,7 @@
 
 
 /**
- * Implemented classes of resolver
+ * Implemented classes of resolvers
  */
 
 package com.yookue.commonplexus.springutil.resolver;

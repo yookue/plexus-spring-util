@@ -16,7 +16,7 @@
 
 
 /**
- * Support for Spring context
+ * Support for Spring contexts
  */
 
 package com.yookue.commonplexus.springutil.context;
