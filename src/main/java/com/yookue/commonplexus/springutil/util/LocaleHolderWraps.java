@@ -42,8 +42,33 @@ public abstract class LocaleHolderWraps {
         return !LocalePlainWraps.equalsLanguage(LocaleContextHolder.getLocale(), Locale.CHINESE);
     }
 
+    /**
+     * Returns a well-formed IETF BCP 47 language tag representing the context locale
+     *
+     * <p>Examples: <ul>
+     * <li><tt>en-US</tt></li>
+     * <li><tt>zh-CN</tt></li>
+     *
+     * @return a BCP47 language tag representing the context locale
+     */
     @Nonnull
     public static String toLanguageTag() {
         return LocaleContextHolder.getLocale().toLanguageTag();
+    }
+
+    /**
+     * Returns a well-formed IETF BCP 47 language tag representing the locale, or from the context locale
+     *
+     * <p>Examples: <ul>
+     * <li><tt>en-US</tt></li>
+     * <li><tt>zh-CN</tt></li>
+     *
+     * @param locale the source locale to convert
+     *
+     * @return a BCP47 language tag representing the locale, or from the context locale
+     */
+    @Nonnull
+    public static String toLanguageTagContextual(@Nullable Locale locale) {
+        return (locale != null) ? locale.toLanguageTag() : LocaleContextHolder.getLocale().toLanguageTag();
     }
 }
