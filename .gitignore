@@ -1,13 +1,13 @@
 ﻿
+# macOS
+**/._*
+**/.DS_Store
+
 # Compiled class file
 *.class
 
 # Log file
 *.log
-
-# Apple files
-*/._*
-*/.DS_Store
 
 # BlueJ files
 *.ctxt
