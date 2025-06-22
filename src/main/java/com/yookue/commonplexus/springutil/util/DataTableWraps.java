@@ -138,7 +138,7 @@ public abstract class DataTableWraps {
         }
         if (cloneBounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
-            MybatisPageWraps.setZeroSize(cloneParams);
+            MybatisPageWraps.disablePagination(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
             struct.setRecordsDetails(resultSets);
             int resultSize = CollectionPlainWraps.size(resultSets);

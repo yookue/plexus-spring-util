@@ -112,10 +112,10 @@ import com.yookue.commonplexus.springutil.constant.SpringAttributeConst;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocReference", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class WebUtilsWraps {
     /**
-     * Add an attribute to a http request instance
+     * Add an attribute to an http request instance
      *
-     * @param request a http request instance
-     * @param response a http response instance, must not be null when {@code input} is true
+     * @param request an http request instance
+     * @param response an http response instance, must not be null when {@code input} is true
      * @param name the attribute name
      * @param value the attribute value
      *

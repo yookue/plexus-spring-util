@@ -17,28 +17,38 @@
 package com.yookue.commonplexus.springutil.structure;
 
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
+import com.yookue.commonplexus.javaseutil.structure.ChildrenTreeStruct;
 import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
+
+
+
+
 /**
- * Structure for Table of Ant Design
+ * Structure for Tree of Ant Design
  *
  * @author David Hsing
- * @reference "https://ant.design/components/table"
- * @reference "https://procomponents.ant.design/components/table#request"
+ * @reference "https://ant.design/components/tree"
  */
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = true)
 @SuppressWarnings({"unused", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public class AntTableStruct implements Serializable {
-    private List<Map<String, Object>> recordsDetails;
-    private Long recordsTotal = 0L;
+public class AntTreeStruct extends ChildrenTreeStruct<AntTreeStruct> {
+    private String key;
+    private Boolean checkable;
+    private Boolean disableCheckbox;
+    private Boolean disabled;
+    private String icon;
+    private Boolean isLeaf;
+    private Boolean selectable;
+    private String title;
+    private String value;
 }

@@ -84,7 +84,7 @@ public abstract class MybatisPageWraps {
         return result;
     }
 
-    public static void setZeroSize(@Nullable Map<String, Object> params) {
+    public static void disablePagination(@Nullable Map<String, Object> params) {
         if (params == null) {
             params = new LinkedHashMap<>(1);
         }

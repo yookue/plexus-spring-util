@@ -17,28 +17,29 @@
 package com.yookue.commonplexus.springutil.structure;
 
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
+import com.yookue.commonplexus.javaseutil.structure.ChildrenTreeStruct;
 import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
 /**
- * Structure for Table of Ant Design
+ * Structure for Cascader of Ant Design
  *
  * @author David Hsing
- * @reference "https://ant.design/components/table"
- * @reference "https://procomponents.ant.design/components/table#request"
+ * @reference "https://ant.design/components/cascader"
  */
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = true)
 @SuppressWarnings({"unused", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public class AntTableStruct implements Serializable {
-    private List<Map<String, Object>> recordsDetails;
-    private Long recordsTotal = 0L;
+public class AntCascaderStruct extends ChildrenTreeStruct<AntCascaderStruct> {
+    private String label;
+    private String value;
+    private Boolean disabled;
+    private Boolean isLeaf;
 }

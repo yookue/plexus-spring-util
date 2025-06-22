@@ -139,6 +139,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         return super.getAuthenticationManager().authenticate(token);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     protected String obtainMobile(@Nonnull HttpServletRequest request) {
         String result = RequestParamWraps.getStringParameterTrimming(request, mobileParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {
@@ -150,6 +151,7 @@ public class MobileCaptchaAuthenticationFilter extends AbstractAuthenticationPro
         return result;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     protected String obtainCaptcha(@Nonnull HttpServletRequest request) {
         String result = RequestParamWraps.getStringParameterTrimming(request, captchaParameter);
         if (StringUtils.isEmpty(result) && restCompatible) {

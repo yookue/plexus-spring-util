@@ -17,13 +17,14 @@
 package com.yookue.commonplexus.springutil.structure;
 
 
-import java.io.Serializable;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yookue.commonplexus.javaseutil.structure.ChildrenTreeStruct;
+import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 
 /**
@@ -36,8 +37,9 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = true)
 @SuppressWarnings({"unused", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public class AntMenuStruct implements Serializable {
+public class AntMenuStruct extends ChildrenTreeStruct<AntMenuStruct> {
     private String path;
     private String name;
     private String icon;
@@ -54,6 +56,4 @@ public class AntMenuStruct implements Serializable {
 
     @JsonProperty(value = "authority")
     private List<String> authorities;
-
-    private List<AntMenuStruct> children;
 }
