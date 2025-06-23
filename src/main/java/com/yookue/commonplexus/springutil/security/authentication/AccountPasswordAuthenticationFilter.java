@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.security.authentication;
 
 
 import java.io.IOException;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -74,7 +74,7 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
     private boolean rememberMe = false;
 
     @Getter
-    private Function<AbstractAuthenticationEvent, AbstractAuthenticationEvent> authenticationSuccessTransition;
+    private UnaryOperator<AbstractAuthenticationEvent> successEventTransition;
 
     protected BeanFactory beanFactory;
 
@@ -162,7 +162,7 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
     @Override
     @SuppressWarnings("DuplicatedCode")
     protected void successfulAuthentication(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response, @Nonnull FilterChain chain, @Nonnull Authentication authentication) throws IOException, ServletException {
-        if (authenticationSuccessTransition == null) {
+        if (successEventTransition == null) {
             super.successfulAuthentication(request, response, chain, authentication);
             return;
         }
@@ -177,7 +177,7 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
             super.getRememberMeServices().loginSuccess(request, response, authentication);
         }
         AbstractAuthenticationEvent source = rememberMe ? new InteractiveAuthenticationSuccessEvent(authentication, this.getClass()) : new AuthenticationSuccessEvent(authentication);
-        AbstractAuthenticationEvent event = authenticationSuccessTransition.apply(source);
+        AbstractAuthenticationEvent event = successEventTransition.apply(source);
         if (ObjectUtils.allNotNull(event, super.eventPublisher)) {
             super.eventPublisher.publishEvent(event);
         }

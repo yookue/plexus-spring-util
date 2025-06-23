@@ -71,11 +71,11 @@ public class PropertiesAuthenticationEventPublisher implements AuthenticationEve
 
     @Getter
     @Setter
-    private Consumer<PropertiesCapableEvent> authenticationSuccessTransition;
+    private Consumer<PropertiesCapableEvent> successEventConsumer;
 
     @Getter
     @Setter
-    private Consumer<PropertiesCapableEvent> authenticationFailureTransition;
+    private Consumer<PropertiesCapableEvent> failureEventConsumer;
 
     @Setter
     protected ApplicationEventPublisher applicationEventPublisher;
@@ -89,8 +89,8 @@ public class PropertiesAuthenticationEventPublisher implements AuthenticationEve
     @Override
     public void publishAuthenticationSuccess(@Nonnull Authentication authentication) {
         PropertiesAuthenticationSuccessEvent event = new PropertiesAuthenticationSuccessEvent(authentication);
-        if (authenticationSuccessTransition != null) {
-            authenticationSuccessTransition.accept(event);
+        if (successEventConsumer != null) {
+            successEventConsumer.accept(event);
         }
         publishEvent(event);
     }
@@ -102,8 +102,8 @@ public class PropertiesAuthenticationEventPublisher implements AuthenticationEve
             throw new IllegalArgumentException(String.format("Authentication exception class %s has no suitable event", exception.getClass().getName()));    // $NON-NLS-1$
         }
         AbstractAuthenticationEvent event = ConstructorUtilsWraps.newInstance(constructor, authentication, exception);
-        if (event instanceof PropertiesCapableEvent alias && authenticationFailureTransition != null) {
-            authenticationFailureTransition.accept(alias);
+        if (event instanceof PropertiesCapableEvent alias && failureEventConsumer != null) {
+            failureEventConsumer.accept(alias);
         }
         publishEvent(event);
     }
