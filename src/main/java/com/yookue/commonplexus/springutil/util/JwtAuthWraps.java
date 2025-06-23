@@ -19,6 +19,7 @@ package com.yookue.commonplexus.springutil.util;
 
 import java.time.Duration;
 import java.util.Date;
+import java.util.function.Consumer;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
@@ -41,6 +42,27 @@ import com.yookue.commonplexus.springutil.enumeration.JwtAlgorithmType;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class JwtAuthWraps {
     @Nonnull
+    @SuppressWarnings("DuplicatedCode")
+    public static String encodeToken(@Nullable Consumer<JWTCreator.Builder> callback, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
+        JWTCreator.Builder builder = JWT.create();
+        builder.withJWTId(JdkUuidGenerator.getPopularId());
+        if (callback != null) {
+            callback.accept(builder);
+        }
+        JwtAlgorithmType algorithmAlias = ObjectUtils.defaultIfNull(algorithm, JwtAlgorithmType.HS256);
+        if (algorithmAlias != JwtAlgorithmType.NONE) {
+            Assert.notNull(secret, "The secret must not be null");
+        }
+        return switch (algorithmAlias) {
+            case NONE -> builder.sign(Algorithm.none());
+            case HS256 -> builder.sign(Algorithm.HMAC256(secret));
+            case HS384 -> builder.sign(Algorithm.HMAC384(secret));
+            case HS512 -> builder.sign(Algorithm.HMAC512(secret));
+        };
+    }
+
+    @Nonnull
+    @SuppressWarnings("DuplicatedCode")
     public static String encodeToken(@Nullable String audience, @Nullable String issuer, @Nullable String subject, @Nullable Date timestamp, @Nullable Duration timeout, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
         JWTCreator.Builder builder = JWT.create();
         builder.withJWTId(JdkUuidGenerator.getPopularId());
