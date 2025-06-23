@@ -47,10 +47,12 @@ import lombok.Setter;
  *
  * @author Chris Nokleberg
  * @author David Hsing
+ *
+ * @see org.springframework.cglib.beans.BeanCopier
+ *
  * @reference "https://juejin.cn/post/7018550830466859015"
  * @reference "https://blog.csdn.net/qq1805696978/article/details/123880615"
  * @reference "https://github.com/spring-projects/spring-framework/tree/main/spring-core/src/main/java/org/springframework/cglib/beans"
- * @see org.springframework.cglib.beans.BeanCopier
  */
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class EnhancedBeanCopier {

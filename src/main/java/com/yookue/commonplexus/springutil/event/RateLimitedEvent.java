@@ -26,6 +26,7 @@ import org.springframework.context.ApplicationEvent;
  * Event when request rate is limited
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.exception.RateLimitedException
  */
 @SuppressWarnings("unused")

@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Needs a predefined bean of {@link com.yookue.commonplexus.springutil.advice.TextualResponseBodyAdvice}
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.bind.annotation.ResponseBody
  * @see com.yookue.commonplexus.springutil.advice.TextualResponseBodyAdvice
  */

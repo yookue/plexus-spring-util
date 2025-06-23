@@ -32,6 +32,7 @@ import lombok.ToString;
  * {@link org.springframework.security.web.header.HeaderWriter} for custom header
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.header.HeaderWriter
  */
 @NoArgsConstructor

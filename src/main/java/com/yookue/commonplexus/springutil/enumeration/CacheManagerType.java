@@ -27,6 +27,7 @@ import lombok.ToString;
  * Enumerations of Spring cache types
  *
  * @author David Hsing
+ *
  * @see org.springframework.boot.autoconfigure.cache.CacheProperties
  */
 @AllArgsConstructor

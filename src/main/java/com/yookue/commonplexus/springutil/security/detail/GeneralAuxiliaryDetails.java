@@ -35,6 +35,7 @@ import lombok.ToString;
  * {@link org.springframework.security.web.authentication.WebAuthenticationDetails} for general auxiliary details
  *
  * @author David Hsing
+ *
  * @reference "https://www.cnblogs.com/phoenix-smile/p/5666686.html"
  */
 @Getter

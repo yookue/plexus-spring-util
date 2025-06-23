@@ -31,6 +31,7 @@ import lombok.NoArgsConstructor;
  * Structure for Menu of Ant Design
  *
  * @author David Hsing
+ *
  * @reference "https://procomponents.ant.design/components/layout#menudataitem"
  */
 @Accessors(chain = true)

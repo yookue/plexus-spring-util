@@ -37,6 +37,7 @@ import lombok.Setter;
  * </code></pre>
  *
  * @author David Hsing
+ *
  * @see com.fasterxml.jackson.databind.JsonSerializer
  * @see com.fasterxml.jackson.databind.annotation.JsonSerialize
  */

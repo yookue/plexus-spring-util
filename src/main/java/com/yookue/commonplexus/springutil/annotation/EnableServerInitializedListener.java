@@ -31,6 +31,7 @@ import com.yookue.commonplexus.springutil.registrar.ServerInitializedListenerReg
  * Annotation that enables a {@link org.springframework.boot.web.context.WebServerInitializedEvent} listener
  *
  * @author David Hsing
+ *
  * @see org.springframework.boot.web.context.WebServerInitializedEvent
  * @see com.yookue.commonplexus.springutil.registrar.ServerInitializedListenerRegistrar
  */

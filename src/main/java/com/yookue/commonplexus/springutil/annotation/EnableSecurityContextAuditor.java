@@ -33,6 +33,7 @@ import com.yookue.commonplexus.springutil.registrar.SecurityContextAuditorRegist
  * Annotation that enables a {@link com.yookue.commonplexus.springutil.audit.SecurityContextAuditorAware}
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.audit.SecurityContextAuditorAware
  * @see com.yookue.commonplexus.springutil.registrar.SecurityContextAuditorRegistrar
  */

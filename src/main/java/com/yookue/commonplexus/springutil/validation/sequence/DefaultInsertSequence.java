@@ -26,6 +26,7 @@ import com.yookue.commonplexus.springutil.validation.group.InsertGroup;
  * Validation sequence for default and persistence insert
  *
  * @author David Hsing
+ *
  * @see jakarta.validation.Validator
  * @see org.springframework.validation.Validator
  * @see jakarta.validation.Valid

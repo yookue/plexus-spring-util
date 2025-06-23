@@ -32,13 +32,15 @@ import org.springframework.util.CollectionUtils;
  * {@link org.springframework.context.ApplicationContextInitializer} with {@link org.springframework.core.env.PropertySource}
  *
  * @author David Hsing
+ *
  * @see org.springframework.core.env.MapPropertySource
  * @see org.springframework.core.env.PropertiesPropertySource
  * @see org.springframework.core.io.support.ResourcePropertySource
  * @see "org.springframework.test.context.ContextConfiguration"
- * @see "https://www.jianshu.com/p/1c798a6c56be"
+ *
+ * @reference "https://www.jianshu.com/p/1c798a6c56be"
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class PropertySourceContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     @Override
     public void initialize(@Nonnull ConfigurableApplicationContext context) {

@@ -30,6 +30,7 @@ import com.yookue.commonplexus.javaseutil.util.IteratorPlainWraps;
  * Utilities for {@link org.springframework.beans.factory.ObjectProvider}
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.factory.ObjectProvider
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

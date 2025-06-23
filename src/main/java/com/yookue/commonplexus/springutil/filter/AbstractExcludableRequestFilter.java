@@ -38,6 +38,7 @@ import lombok.Setter;
  * {@link jakarta.servlet.Filter} with excluding ant paths capable
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.filter.OncePerRequestFilter
  * @see org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter
  */

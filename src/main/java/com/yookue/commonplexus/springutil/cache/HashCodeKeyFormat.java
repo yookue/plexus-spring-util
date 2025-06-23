@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
  * Specifies the local cache key generator format
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.annotation.EnableHashCodeKeyGenerator
  */
 @Target(value = {ElementType.TYPE, ElementType.METHOD})

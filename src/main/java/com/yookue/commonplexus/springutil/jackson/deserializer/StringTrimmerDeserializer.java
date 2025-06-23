@@ -38,10 +38,12 @@ import lombok.Setter;
  * </code></pre>
  *
  * @author David Hsing
- * @reference "https://stackoverflow.com/questions/40180185/spring-controller-advice-to-trim-json-data"
+ *
  * @see com.fasterxml.jackson.databind.JsonDeserializer
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
  * @see org.springframework.beans.propertyeditors.StringTrimmerEditor
+ *
+ * @reference "https://stackoverflow.com/questions/40180185/spring-controller-advice-to-trim-json-data"
  */
 @NoArgsConstructor
 @AllArgsConstructor

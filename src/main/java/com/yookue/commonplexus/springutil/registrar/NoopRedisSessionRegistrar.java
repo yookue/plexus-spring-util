@@ -26,6 +26,7 @@ import org.springframework.session.data.redis.config.ConfigureRedisAction;
  * Registrar of a {@link org.springframework.session.data.redis.config.ConfigureRedisAction} with no operations
  *
  * @author David Hsing
+ *
  * @reference "http://www.jianshu.com/p/5d6c7772ad87"
  */
 @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})

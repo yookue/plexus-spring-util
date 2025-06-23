@@ -104,6 +104,7 @@ import com.yookue.commonplexus.springutil.constant.SpringAttributeConst;
  * Utilities for {@link org.springframework.web.util.WebUtils}
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.util.WebUtils
  * @see org.springframework.web.cors.CorsUtils
  * @see org.springframework.web.context.request.async.WebAsyncUtils
@@ -259,8 +260,9 @@ public abstract class WebUtilsWraps {
     }
 
     /**
-     * @reference "http://blog.csdn.net/lidachao01/article/details/53638718"
      * @see org.springframework.web.util.ContentCachingRequestWrapper
+     *
+     * @reference "http://blog.csdn.net/lidachao01/article/details/53638718"
      */
     public static String getContentAsString(@Nullable HttpServletRequest request) throws IOException {
         if (request == null) {
@@ -367,9 +369,10 @@ public abstract class WebUtilsWraps {
     }
 
     /**
-     * @reference "http://www.cnblogs.com/ITtangtang/p/3927768.html"
      * @see "org.apache.http.conn.util.InetAddressWraps"
      * @see "com.alibaba.druid.util.DruidWebUtils#getRemoteAddr(HttpServletRequest)"
+     *
+     * @reference "http://www.cnblogs.com/ITtangtang/p/3927768.html"
      */
     public static String getRemoteAddress(@Nullable HttpServletRequest request) throws UnknownHostException {
         if (request == null) {

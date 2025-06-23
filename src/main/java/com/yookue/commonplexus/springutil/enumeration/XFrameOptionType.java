@@ -26,9 +26,11 @@ import lombok.Getter;
  * Enumerations of Spring Security "X-Frame-Options" header types
  *
  * @author David Hsing
+ *
+ * @see org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter.XFrameOptionsMode
+ *
  * @reference "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options"
  * @reference "https://html.spec.whatwg.org/multipage/document-lifecycle.html#the-x-frame-options-header"
- * @see org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter.XFrameOptionsMode
  */
 @AllArgsConstructor
 @Getter

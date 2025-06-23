@@ -38,6 +38,7 @@ import lombok.Setter;
  * {@link org.springframework.security.web.session.HttpSessionEventPublisher} that publishes {@link org.springframework.security.core.session.AbstractSessionEvent} to the container
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.session.HttpSessionEventPublisher
  * @see org.springframework.security.core.session.AbstractSessionEvent
  */

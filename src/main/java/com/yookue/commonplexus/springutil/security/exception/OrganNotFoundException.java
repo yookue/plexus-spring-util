@@ -25,6 +25,7 @@ import lombok.experimental.StandardException;
  * Thrown to indicate that the requested organ is not found
  *
  * @author David Hsing
+ *
  * @see javax.security.auth.login.AccountNotFoundException
  * @see org.springframework.security.core.userdetails.UsernameNotFoundException
  */

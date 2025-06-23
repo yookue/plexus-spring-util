@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.registrar.SessionEventPublisherRegistr
  * Annotation that enables a {@link org.springframework.security.web.session.HttpSessionEventPublisher}
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.session.HttpSessionEventPublisher
  * @see com.yookue.commonplexus.springutil.registrar.SessionEventPublisherRegistrar
  */

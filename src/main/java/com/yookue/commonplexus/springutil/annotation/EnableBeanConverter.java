@@ -33,6 +33,7 @@ import com.yookue.commonplexus.springutil.registrar.BeanConverterRegistrar;
  * Annotation that enables object converters for apache bean utils
  *
  * @author David Hsing
+ *
  * @see org.apache.commons.beanutils2.Converter
  * @see com.yookue.commonplexus.springutil.registrar.BeanConverterRegistrar
  */

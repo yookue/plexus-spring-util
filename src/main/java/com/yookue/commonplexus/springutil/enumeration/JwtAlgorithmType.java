@@ -26,6 +26,7 @@ import lombok.Getter;
  * Enumerations of jwt algorithm types
  *
  * @author David Hsing
+ *
  * @see "com.auth0.jwt.algorithms.Algorithm"
  */
 @AllArgsConstructor

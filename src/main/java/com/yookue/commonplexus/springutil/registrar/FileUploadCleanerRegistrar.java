@@ -33,6 +33,7 @@ import com.yookue.commonplexus.springutil.annotation.EnableFileUploadCleaner;
  * Registrar of a {@link org.apache.commons.fileupload2.jakarta.JakartaFileCleaner}
  *
  * @author David Hsing
+ *
  * @reference "http://commons.apache.org/proper/commons-fileupload/using.html"
  */
 @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})

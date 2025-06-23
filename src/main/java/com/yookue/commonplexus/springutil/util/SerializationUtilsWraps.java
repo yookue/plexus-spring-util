@@ -26,6 +26,7 @@ import org.springframework.util.SerializationUtils;
  * Utilities for {@link org.springframework.util.SerializationUtils}
  *
  * @author David Hsing
+ *
  * @see org.springframework.util.SerializationUtils
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

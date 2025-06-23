@@ -26,6 +26,7 @@ import com.yookue.commonplexus.springutil.validation.group.UpdateGroup;
  * Validation sequence for persistence insert and update
  *
  * @author David Hsing
+ *
  * @see jakarta.validation.Validator
  * @see org.springframework.validation.Validator
  * @see jakarta.validation.Valid

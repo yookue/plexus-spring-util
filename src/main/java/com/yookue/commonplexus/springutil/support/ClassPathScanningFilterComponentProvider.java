@@ -31,6 +31,7 @@ import lombok.Setter;
  * {@link org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider} for scanning and filtering components
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
  * @see org.springframework.beans.factory.annotation.AnnotatedBeanDefinition
  */

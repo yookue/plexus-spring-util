@@ -32,6 +32,7 @@ import com.google.gson.stream.JsonWriter;
  * Utilities for {@link com.google.gson.Gson}
  *
  * @author David Hsing
+ *
  * @see com.google.gson.Gson
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

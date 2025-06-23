@@ -26,6 +26,7 @@ import org.springframework.util.ClassUtils;
  * Thrown to indicate that the requested bean type is mismatched
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.factory.BeanNotOfRequiredTypeException
  * @see org.springframework.beans.TypeMismatchException
  */

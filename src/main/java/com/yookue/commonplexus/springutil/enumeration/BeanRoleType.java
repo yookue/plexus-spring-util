@@ -26,6 +26,7 @@ import lombok.Getter;
  * Enumerations of bean role types
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.factory.config.BeanDefinition
  */
 @AllArgsConstructor

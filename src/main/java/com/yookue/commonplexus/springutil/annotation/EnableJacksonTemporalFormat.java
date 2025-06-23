@@ -34,6 +34,7 @@ import com.yookue.commonplexus.springutil.registrar.JacksonTemporalFormatRegistr
  * Annotation that customizes date time formats of jackson
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.registrar.JacksonTemporalFormatRegistrar
  */
 @Target(value = ElementType.TYPE)

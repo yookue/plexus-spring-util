@@ -47,6 +47,7 @@ import com.yookue.commonplexus.javaseutil.util.InetProtocolWraps;
  * Utilities for {@link org.springframework.util.ResourceUtils}
  *
  * @author David Hsing
+ *
  * @see org.springframework.util.ResourceUtils
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

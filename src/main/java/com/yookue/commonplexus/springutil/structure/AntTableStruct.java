@@ -30,6 +30,7 @@ import lombok.NoArgsConstructor;
  * Structure for Table of Ant Design
  *
  * @author David Hsing
+ *
  * @reference "https://ant.design/components/table"
  * @reference "https://procomponents.ant.design/components/table#request"
  */

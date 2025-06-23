@@ -17,12 +17,10 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,13 +34,11 @@ import org.springframework.security.authentication.RememberMeAuthenticationToken
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.jaas.JaasAuthenticationToken;
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.util.CollectionUtils;
@@ -55,12 +51,26 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  * Utilities for Spring Security
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.core.Authentication
  * @see org.springframework.security.core.authority.AuthorityUtils
  * @see org.springframework.security.core.context.SecurityContextHolder
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class SecurityUtilsWraps {
+    @Nullable
+    public static String getAuthenticationName(@Nullable Authentication authentication) {
+        return getAuthenticationName(authentication, false);
+    }
+
+    /**
+     * @see org.springframework.security.authentication.AbstractAuthenticationToken#getName
+     */
+    @Nullable
+    public static String getAuthenticationName(@Nullable Authentication authentication, boolean authenticated) {
+        return (authentication == null || (authenticated && !authentication.isAuthenticated())) ? null : authentication.getName();
+    }
+
     @Nullable
     @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationPrincipalAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
@@ -70,25 +80,6 @@ public abstract class SecurityUtilsWraps {
     @Nullable
     public static String getAuthenticationPrincipalAsString(@Nullable Authentication authentication) {
         return getAuthenticationPrincipalAs(authentication, String.class);
-    }
-
-    /**
-     * @see org.springframework.security.authentication.AbstractAuthenticationToken#getName
-     */
-    @Nullable
-    public static String getAuthenticationPrincipalName(@Nullable Authentication authentication) {
-        if (authentication == null || authentication.getPrincipal() == null) {
-            return null;
-        }
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof UserDetails alias) {
-            return alias.getUsername();
-        } else if (principal instanceof AuthenticatedPrincipal alias) {
-            return alias.getName();
-        } else if (principal instanceof Principal alias) {
-            return alias.getName();
-        }
-        return Objects.toString(principal, null);
     }
 
     @Nullable
@@ -125,7 +116,7 @@ public abstract class SecurityUtilsWraps {
             return null;
         }
         Authentication authentication = context.getAuthentication();
-        return (!authenticated || isAuthenticationAuthenticated(authentication)) ? authentication : null;
+        return (authentication == null || (authenticated && !authentication.isAuthenticated())) ? null : authentication;
     }
 
     @Nullable
@@ -138,28 +129,20 @@ public abstract class SecurityUtilsWraps {
         return (expectType == null) ? null : ObjectUtilsWraps.castAs(getContextAuthentication(authenticated), expectType);
     }
 
-    public static void setContextAuthentication(@Nullable Authentication authentication) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        if (context != null) {
-            context.setAuthentication(authentication);
-        }
+    @Nullable
+    public static String getContextAuthenticationName() {
+        return getContextAuthenticationName(false);
     }
 
     /**
-     * @reference "https://github.com/szerhusenBC/jwt-spring-security-demo"
      * @see org.springframework.security.authentication.jaas.JaasNameCallbackHandler#handle
+     *
+     * @reference "https://github.com/szerhusenBC/jwt-spring-security-demo"
      */
     @Nullable
     @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
-    public static String getContextAuthenticationUsername() {
-        Authentication authentication = getContextAuthentication();
-        if (authentication == null) {
-            return null;
-        }
-        if (authentication.getPrincipal() instanceof UserDetails alias) {
-            return alias.getUsername();
-        }
-        return ObjectUtilsWraps.toString(authentication.getPrincipal());
+    public static String getContextAuthenticationName(boolean authenticated) {
+        return getAuthenticationName(getContextAuthentication(authenticated), authenticated);
     }
 
     @Nullable
@@ -335,6 +318,13 @@ public abstract class SecurityUtilsWraps {
         try {
             setAuthenticationDetails(authentication, details);
         } catch (Exception ignored) {
+        }
+    }
+
+    public static void setContextAuthentication(@Nullable Authentication authentication) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context != null) {
+            context.setAuthentication(authentication);
         }
     }
 

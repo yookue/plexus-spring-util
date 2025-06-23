@@ -31,6 +31,7 @@ import com.yookue.commonplexus.springutil.registrar.ContextClosedListenerRegistr
  * Annotation that enables a {@link org.springframework.context.event.ContextClosedEvent} listener
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.event.ContextClosedEvent
  * @see com.yookue.commonplexus.springutil.registrar.ContextClosedListenerRegistrar
  */

@@ -27,6 +27,7 @@ import com.yookue.commonplexus.springutil.cglib.EnhancedBeanCopier;
  * Utilities for {@link com.yookue.commonplexus.springutil.cglib.EnhancedBeanCopier}
  *
  * @author David Hsing
+ *
  * @see org.springframework.cglib.beans.BeanCopier
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

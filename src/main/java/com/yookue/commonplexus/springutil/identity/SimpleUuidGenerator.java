@@ -28,6 +28,7 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
  * UUID generator by {@link org.springframework.util.SimpleIdGenerator}
  *
  * @author David Hsing
+ *
  * @see org.springframework.util.SimpleIdGenerator
  */
 @SuppressWarnings("unused")

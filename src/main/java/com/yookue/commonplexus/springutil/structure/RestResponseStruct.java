@@ -48,6 +48,7 @@ import lombok.NoArgsConstructor;
  * Structure for REST response
  *
  * @author David Hsing
+ *
  * @see org.springframework.http.ResponseEntity
  */
 @Accessors(chain = true)

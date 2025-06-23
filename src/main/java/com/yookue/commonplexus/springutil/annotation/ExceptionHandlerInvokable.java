@@ -28,6 +28,7 @@ import java.lang.annotation.Target;
  * Annotation that allows a {@link org.springframework.web.servlet.HandlerInterceptor} to be invoked by the exception resolver
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.servlet.HandlerInterceptor
  * @see "com.yookue.springstarter.exceptionhandler.resolver.AbstractFilterExceptionResolver"
  */

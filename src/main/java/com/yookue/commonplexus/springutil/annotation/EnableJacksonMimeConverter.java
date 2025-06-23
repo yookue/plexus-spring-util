@@ -33,6 +33,7 @@ import com.yookue.commonplexus.springutil.registrar.JacksonMimeConverterRegistra
  * Annotation that enables additional mime types for jackson message converter
  *
  * @author David Hsing
+ *
  * @see org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
  * @see com.yookue.commonplexus.springutil.registrar.JacksonMimeConverterRegistrar
  */

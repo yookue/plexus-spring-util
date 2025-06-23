@@ -43,6 +43,6 @@ public class SecurityContextAuditorAware implements AuditorAware<String> {
     @Nonnull
     @Override
     public Optional<String> getCurrentAuditor() {
-        return Optional.of(ObjectUtils.firstNonNull(SecurityUtilsWraps.getContextAuthenticationUsername(), defaultAuditor, StringUtils.EMPTY));
+        return Optional.of(ObjectUtils.firstNonNull(SecurityUtilsWraps.getContextAuthenticationName(), defaultAuditor, StringUtils.EMPTY));
     }
 }

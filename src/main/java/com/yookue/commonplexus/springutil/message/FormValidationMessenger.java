@@ -31,10 +31,12 @@ import lombok.RequiredArgsConstructor;
  * {@link org.springframework.context.support.MessageSourceAccessor} for resolving FormValidation messages
  *
  * @author David Hsing
- * @reference "https://formvalidation.io/"
- * @reference "https://old.formvalidation.io/"
+ *
  * @see org.springframework.context.MessageSource
  * @see org.springframework.context.support.MessageSourceAccessor
+ *
+ * @reference "https://formvalidation.io/"
+ * @reference "https://old.formvalidation.io/"
  */
 @RequiredArgsConstructor
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})

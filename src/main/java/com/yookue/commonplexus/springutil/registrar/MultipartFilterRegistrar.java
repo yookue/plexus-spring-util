@@ -35,6 +35,7 @@ import com.yookue.commonplexus.springutil.annotation.EnableMultipartFilter;
  * Registrar of a {@link org.springframework.web.multipart.support.MultipartFilter}
  *
  * @author David Hsing
+ *
  * @reference "https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#csrf-multipartfilter"
  */
 @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})

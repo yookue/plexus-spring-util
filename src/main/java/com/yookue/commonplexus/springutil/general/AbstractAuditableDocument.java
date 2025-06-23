@@ -37,6 +37,7 @@ import lombok.ToString;
  * Abstract bson document for Spring Data auditing
  *
  * @author David Hsing
+ *
  * @see org.springframework.data.auditing.AuditingHandler
  */
 @MappedSuperclass

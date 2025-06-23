@@ -46,6 +46,7 @@ import com.yookue.commonplexus.javaseutil.util.PropertyPlainWraps;
  * Utilities for {@link org.springframework.beans.BeanUtils}
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.BeanUtils
  * @see org.springframework.cglib.beans.BeanMap
  * @see org.springframework.cglib.beans.BeanCopier

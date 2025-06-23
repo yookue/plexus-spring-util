@@ -31,6 +31,7 @@ import lombok.Setter;
  * {@link org.springframework.security.core.Authentication} token with additive
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.AbstractAuthenticationToken
  */
 @Getter

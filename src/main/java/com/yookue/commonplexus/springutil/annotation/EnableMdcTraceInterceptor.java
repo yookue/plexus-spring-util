@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.registrar.MdcTraceInterceptorRegistrar
  * Annotation that enables a {@link com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor}
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor
  * @see com.yookue.commonplexus.springutil.registrar.MdcTraceInterceptorRegistrar
  */

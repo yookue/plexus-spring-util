@@ -33,11 +33,13 @@ import com.yookue.commonplexus.springutil.jackson.processor.JacksonXmlMediaTypeP
  * Registrar of additional mime types for jackson message converter
  *
  * @author David Hsing
- * @reference "https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-customize-the-jackson-objectmapper"
- * @reference "https://www.baeldung.com/spring-boot-jsoncomponent"
+ *
  * @see org.springframework.context.annotation.ImportAware
  * @see org.springframework.context.annotation.ImportBeanDefinitionRegistrar
  * @see org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration
+ *
+ * @reference "https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-customize-the-jackson-objectmapper"
+ * @reference "https://www.baeldung.com/spring-boot-jsoncomponent"
  */
 @SuppressWarnings({"JavadocReference", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class JacksonMimeConverterRegistrar implements ImportAware {

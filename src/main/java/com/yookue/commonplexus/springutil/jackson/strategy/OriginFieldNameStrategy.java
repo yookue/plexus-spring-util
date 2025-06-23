@@ -34,10 +34,12 @@ import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
  * </code></pre>
  *
  * @author David Hsing
- * @reference "http://stackoverflow.com/questions/18319931/custom-naming-strategy-and-jsonproperty-in-jackson"
- * @reference "http://wiki.fasterxml.com/JacksonFeaturePropertyNamingStrategy"
+ *
  * @see com.fasterxml.jackson.databind.PropertyNamingStrategy
  * @see com.fasterxml.jackson.databind.annotation.JsonNaming
+ *
+ * @reference "http://stackoverflow.com/questions/18319931/custom-naming-strategy-and-jsonproperty-in-jackson"
+ * @reference "http://wiki.fasterxml.com/JacksonFeaturePropertyNamingStrategy"
  */
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class OriginFieldNameStrategy extends PropertyNamingStrategy {

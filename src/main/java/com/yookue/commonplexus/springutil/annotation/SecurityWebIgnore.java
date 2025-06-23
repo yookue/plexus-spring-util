@@ -28,6 +28,7 @@ import java.lang.annotation.Target;
  * Annotation for customizing Spring Security with {@link org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer}
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
  */
 @Target(value = {ElementType.TYPE, ElementType.METHOD})

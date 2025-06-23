@@ -21,6 +21,7 @@ package com.yookue.commonplexus.springutil.constant;
  * Constants for ant paths
  *
  * @author David Hsing
+ *
  * @see org.springframework.util.AntPathMatcher
  */
 @SuppressWarnings("unused")

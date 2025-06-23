@@ -60,6 +60,7 @@ import lombok.Setter;
  * {@link org.springframework.security.core.Authentication} filter for a username with a password
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
  * @see org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
  */

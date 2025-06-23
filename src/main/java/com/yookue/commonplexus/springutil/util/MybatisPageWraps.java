@@ -33,9 +33,11 @@ import com.yookue.commonplexus.springutil.constant.MybatisPageConst;
  * Utilities for mybatis page helper
  *
  * @author David Hsing
+ *
+ * @see "com.github.pagehelper.util.PageObjectUtil"
+ *
  * @reference "https://github.com/pagehelper/Mybatis-PageHelper"
  * @reference "https://www.cnblogs.com/jinit/p/14841966.html"
- * @see "com.github.pagehelper.util.PageObjectUtil"
  */
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class MybatisPageWraps {

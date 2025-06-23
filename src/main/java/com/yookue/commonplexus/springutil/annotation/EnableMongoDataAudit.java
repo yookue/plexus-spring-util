@@ -37,6 +37,7 @@ import com.yookue.commonplexus.springutil.registrar.SecurityContextAuditorRegist
  * Attention: Should be used in combination with &#64;{@link com.yookue.commonplexus.springutil.annotation.EnableSecurityContextAuditor}
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.audit.MongoDataAuditProcessor
  * @see com.yookue.commonplexus.springutil.registrar.MongoDataAuditRegistrar
  * @see com.yookue.commonplexus.springutil.annotation.EnableSecurityContextAuditor

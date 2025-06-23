@@ -42,9 +42,11 @@ import com.yookue.commonplexus.springutil.structure.DataTableStruct;
  * Utilities for DataTables
  *
  * @author David Hsing
+ *
+ * @see com.yookue.commonplexus.springutil.structure.DataTableStruct
+ *
  * @reference "https://www.datatables.net/"
  * @reference "http://datatables.club/"
- * @see com.yookue.commonplexus.springutil.structure.DataTableStruct
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class DataTableWraps {

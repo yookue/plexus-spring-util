@@ -29,6 +29,7 @@ import com.yookue.commonplexus.javaseutil.util.LocalePlainWraps;
  * Utilities for {@link org.springframework.context.i18n.LocaleContextHolder}
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.i18n.LocaleContextHolder
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

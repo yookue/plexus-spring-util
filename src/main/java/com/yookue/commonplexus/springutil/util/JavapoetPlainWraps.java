@@ -30,6 +30,7 @@ import com.yookue.commonplexus.javaseutil.enumeration.LineSeparatorType;
  * Utilities for JavaPoet
  *
  * @author David Hsing
+ *
  * @see com.squareup.javapoet.JavaFile
  * @see "https://github.com/square/javapoet"
  * @see "https://www.baeldung.com/java-poet"

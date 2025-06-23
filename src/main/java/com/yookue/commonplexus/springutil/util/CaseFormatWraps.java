@@ -26,6 +26,7 @@ import com.google.common.base.CaseFormat;
  * Utilities for {@link com.google.common.base.CaseFormat}
  *
  * @author David Hsing
+ *
  * @see com.google.common.base.CaseFormat
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

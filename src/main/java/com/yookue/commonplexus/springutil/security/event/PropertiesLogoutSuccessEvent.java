@@ -30,6 +30,7 @@ import lombok.Getter;
  * {@link org.springframework.security.authentication.event.LogoutSuccessEvent} with properties capable
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.event.LogoutSuccessEvent
  */
 @Getter

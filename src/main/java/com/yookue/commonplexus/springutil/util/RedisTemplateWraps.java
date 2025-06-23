@@ -38,6 +38,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  * Utilities for operating {@link org.springframework.data.redis.core.RedisTemplate}
  *
  * @author David Hsing
+ *
  * @see org.springframework.data.redis.core.RedisTemplate
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

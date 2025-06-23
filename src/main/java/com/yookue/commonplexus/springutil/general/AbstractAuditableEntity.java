@@ -42,6 +42,7 @@ import lombok.ToString;
  * Abstract jpa entity for Spring Data auditing
  *
  * @author David Hsing
+ *
  * @see org.springframework.data.auditing.AuditingHandler
  */
 @MappedSuperclass

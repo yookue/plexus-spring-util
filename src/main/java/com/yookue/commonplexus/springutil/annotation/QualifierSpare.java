@@ -37,6 +37,7 @@ import org.springframework.core.annotation.AliasFor;
  * Same as {@link com.yookue.commonplexus.springutil.annotation.QualifierAlias}
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
  */
 @Target(value = {ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE})

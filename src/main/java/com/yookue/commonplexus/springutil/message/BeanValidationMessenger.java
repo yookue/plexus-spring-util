@@ -55,6 +55,7 @@ import lombok.extern.slf4j.Slf4j;
  * {@link org.springframework.context.support.MessageSourceAccessor} for resolving {@link jakarta.validation.Validator} messages
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.MessageSource
  * @see org.springframework.context.support.MessageSourceAccessor
  * @see org.springframework.validation.beanvalidation.SpringValidatorAdapter

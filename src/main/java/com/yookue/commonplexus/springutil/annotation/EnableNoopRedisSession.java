@@ -34,6 +34,7 @@ import com.yookue.commonplexus.springutil.registrar.NoopRedisSessionRegistrar;
  * Annotation that enables a {@link org.springframework.session.data.redis.config.ConfigureRedisAction} with no operations
  *
  * @author David Hsing
+ *
  * @see org.springframework.session.data.redis.config.ConfigureRedisAction
  * @see com.yookue.commonplexus.springutil.registrar.NoopRedisSessionRegistrar
  */

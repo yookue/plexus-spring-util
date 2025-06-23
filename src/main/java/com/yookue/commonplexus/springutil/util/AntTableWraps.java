@@ -36,9 +36,11 @@ import com.yookue.commonplexus.springutil.structure.AntTableStruct;
  * Utilities for Ant Design Pro Table
  *
  * @author David Hsing
+ *
+ * @see com.yookue.commonplexus.springutil.structure.AntTableStruct
+ *
  * @reference "https://ant.design/components/table"
  * @reference "https://procomponents.ant.design/components/table#request"
- * @see com.yookue.commonplexus.springutil.structure.AntTableStruct
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class AntTableWraps {

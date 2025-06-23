@@ -25,6 +25,7 @@ import lombok.experimental.StandardException;
  * Thrown to indicate that the requested account is unavailable
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.AccountExpiredException
  */
 @StandardException

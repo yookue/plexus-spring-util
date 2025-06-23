@@ -45,6 +45,7 @@ import lombok.Setter;
  * Listens events of {@link org.springframework.context.ApplicationEvent}
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.event.GenericApplicationListener
  */
 

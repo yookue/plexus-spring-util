@@ -25,6 +25,7 @@ import jakarta.annotation.Nullable;
  * Interface for converting {@link com.yookue.commonplexus.springutil.cglib.EnhancedBeanCopier}
  *
  * @author David Hsing
+ *
  * @see org.springframework.cglib.core.Converter
  */
 @FunctionalInterface

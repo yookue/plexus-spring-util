@@ -37,8 +37,10 @@ import lombok.Getter;
  * Abstract bson document with {@link org.bson.types.ObjectId}
  *
  * @author David Hsing
- * @reference "https://www.jianshu.com/p/463d513cca6f"
+ *
  * @see org.springframework.data.mongodb.util.json.ParameterBindingDocumentCodec
+ *
+ * @reference "https://www.jianshu.com/p/463d513cca6f"
  */
 @Getter
 @MappedSuperclass

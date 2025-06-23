@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.general.AbstractAuditableDocument;
  * {@link org.springframework.data.auditing.AuditingHandler} for mongo document
  *
  * @author David Hsing
+ *
  * @see org.springframework.data.auditing.IsNewAwareAuditingHandler
  */
 @SuppressWarnings("unused")

@@ -46,6 +46,7 @@ import lombok.extern.slf4j.Slf4j;
  * {@link org.springframework.context.support.MessageSourceAccessor} for resolving REST response messages
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.MessageSource
  * @see org.springframework.context.support.MessageSourceAccessor
  * @see com.yookue.commonplexus.springutil.structure.RestResponseStruct

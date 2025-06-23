@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
  * </code></pre>
  *
  * @author David Hsing
+ *
  * @see com.fasterxml.jackson.databind.JsonDeserializer
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
  * @see org.apache.commons.lang3.BooleanUtils#toBoolean(String)

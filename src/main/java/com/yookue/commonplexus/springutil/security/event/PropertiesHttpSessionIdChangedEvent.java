@@ -31,6 +31,7 @@ import lombok.Getter;
  * {@link org.springframework.security.web.session.HttpSessionIdChangedEvent} with properties capable
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.session.HttpSessionIdChangedEvent
  */
 @Getter

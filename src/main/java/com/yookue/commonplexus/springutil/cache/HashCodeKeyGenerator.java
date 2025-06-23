@@ -36,6 +36,7 @@ import lombok.Setter;
  * Cache key generator by hash codes
  *
  * @author David Hsing
+ *
  * @see org.springframework.cache.interceptor.KeyGenerator
  * @see org.springframework.cache.interceptor.SimpleKeyGenerator
  */

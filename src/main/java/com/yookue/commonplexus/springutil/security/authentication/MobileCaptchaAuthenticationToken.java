@@ -28,6 +28,7 @@ import lombok.Getter;
  * {@link org.springframework.security.core.Authentication} token for mobile with captcha
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.AbstractAuthenticationToken
  */
 @Getter

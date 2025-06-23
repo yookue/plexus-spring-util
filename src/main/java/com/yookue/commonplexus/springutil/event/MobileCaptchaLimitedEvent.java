@@ -27,6 +27,7 @@ import com.yookue.commonplexus.springutil.structure.MobileCaptchaStruct;
  * Event when the mobile captcha sending is limited
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.exception.MobileCaptchaLimitException
  */
 @SuppressWarnings("unused")

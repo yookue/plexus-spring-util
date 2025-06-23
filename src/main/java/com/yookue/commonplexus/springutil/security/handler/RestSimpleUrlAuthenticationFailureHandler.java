@@ -33,6 +33,7 @@ import lombok.NoArgsConstructor;
  * {@link org.springframework.security.web.authentication.AuthenticationFailureHandler} for both rest and url based requests
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler
  */
 @NoArgsConstructor

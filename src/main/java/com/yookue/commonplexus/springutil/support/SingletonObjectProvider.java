@@ -31,6 +31,7 @@ import org.springframework.beans.factory.ObjectProvider;
  * @param <T> the type of the element to hold
  *
  * @author David Hsing
+ *
  * @see org.springframework.util.function.SingletonSupplier
  * @see org.springframework.beans.factory.support.StaticListableBeanFactory
  */

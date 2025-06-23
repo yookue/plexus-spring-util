@@ -36,6 +36,7 @@ import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
  * </code></pre>
  *
  * @author David Hsing
+ *
  * @see com.fasterxml.jackson.databind.JsonDeserializer
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */

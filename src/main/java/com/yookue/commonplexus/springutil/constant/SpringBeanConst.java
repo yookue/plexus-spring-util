@@ -21,6 +21,7 @@ package com.yookue.commonplexus.springutil.constant;
  * Constants for Spring beans
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.servlet.DispatcherServlet
  */
 @SuppressWarnings({"unused", "JavadocReference"})

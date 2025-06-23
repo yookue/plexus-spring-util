@@ -44,6 +44,7 @@ import lombok.Setter;
  * Cache key generator by pain params
  *
  * @author David Hsing
+ *
  * @see org.springframework.cache.interceptor.KeyGenerator
  * @see org.springframework.cache.interceptor.SimpleKeyGenerator
  */

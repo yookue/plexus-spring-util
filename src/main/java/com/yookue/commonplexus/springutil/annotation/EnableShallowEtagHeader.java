@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.registrar.ShallowEtagHeaderRegistrar;
  * Annotation that enables a {@link org.springframework.web.filter.ShallowEtagHeaderFilter}
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.filter.ShallowEtagHeaderFilter
  * @see com.yookue.commonplexus.springutil.registrar.ShallowEtagHeaderRegistrar
  */

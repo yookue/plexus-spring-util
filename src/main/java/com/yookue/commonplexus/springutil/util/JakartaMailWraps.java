@@ -30,6 +30,7 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
  * Utilities for jakarta mail
  *
  * @author David Hsing
+ *
  * @see jakarta.mail.internet.MimeUtility
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

@@ -29,13 +29,15 @@ import com.yookue.commonplexus.springutil.constant.SpringBeanConst;
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} for mongo audit handler
  *
  * @author David Hsing
- * @reference "https://stackoverflow.com/questions/22368414/how-can-i-customize-the-auditinghandler-injected-by-spring-data-when-using-audit"
- * @reference "https://github.com/macdao/customize-auditing-handler"
+ *
  * @see org.springframework.data.auditing.config.AuditingBeanDefinitionRegistrarSupport
  * @see org.springframework.data.mapping.context.MappingContext
  * @see org.springframework.data.mongodb.core.mapping.MongoMappingContext
  * @see org.springframework.data.mongodb.config.MappingMongoConverterParser
  * @see org.springframework.data.mongodb.config.MongoAuditingRegistrar
+ *
+ * @reference "https://stackoverflow.com/questions/22368414/how-can-i-customize-the-auditinghandler-injected-by-spring-data-when-using-audit"
+ * @reference "https://github.com/macdao/customize-auditing-handler"
  */
 @SuppressWarnings({"unused", "JavadocReference", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class MongoDataAuditProcessor implements BeanFactoryPostProcessor {

@@ -26,6 +26,7 @@ import org.springframework.context.support.MessageSourceAccessor;
  * {@link org.springframework.beans.factory.Aware} for injecting a {@link org.springframework.context.support.MessageSourceAccessor} for beans
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.MessageSourceAware
  * @see com.yookue.commonplexus.springutil.processor.MessageSourceAccessorProcessor
  */

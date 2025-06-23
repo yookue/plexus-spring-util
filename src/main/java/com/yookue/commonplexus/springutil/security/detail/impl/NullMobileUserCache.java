@@ -27,6 +27,7 @@ import com.yookue.commonplexus.springutil.security.detail.MobileUserCache;
  * {@link com.yookue.commonplexus.springutil.security.detail.MobileUserCache} that performing any caching
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.core.userdetails.cache.NullUserCache
  */
 @SuppressWarnings("unused")

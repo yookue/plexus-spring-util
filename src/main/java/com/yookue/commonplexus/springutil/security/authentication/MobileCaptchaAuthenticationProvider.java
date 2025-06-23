@@ -54,6 +54,7 @@ import lombok.Setter;
  * {@link org.springframework.security.authentication.AuthenticationProvider} for a mobile with a captcha
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider
  * @see org.springframework.security.authentication.dao.DaoAuthenticationProvider
  * @see org.springframework.security.authentication.DefaultAuthenticationEventPublisher

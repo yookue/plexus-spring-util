@@ -34,6 +34,7 @@ import lombok.experimental.Accessors;
  * Structure for FormValidation
  *
  * @author David Hsing
+ *
  * @reference "https://formvalidation.io/"
  * @reference "https://old.formvalidation.io/"
  */

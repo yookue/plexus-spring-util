@@ -33,6 +33,7 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
  * @param <T> the type of the elements to hold
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.factory.support.StaticListableBeanFactory
  */
 @SuppressWarnings("unused")

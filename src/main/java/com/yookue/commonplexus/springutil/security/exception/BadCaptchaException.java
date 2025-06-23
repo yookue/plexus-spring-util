@@ -25,6 +25,7 @@ import lombok.experimental.StandardException;
  * Thrown to indicate that the requested captcha is wrong
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.BadCredentialsException
  */
 @StandardException

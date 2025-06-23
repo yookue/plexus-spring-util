@@ -29,13 +29,15 @@ import com.yookue.commonplexus.springutil.constant.SpringBeanConst;
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} for rdbms audit handler
  *
  * @author David Hsing
- * @reference "https://stackoverflow.com/questions/22368414/how-can-i-customize-the-auditinghandler-injected-by-spring-data-when-using-audit"
- * @reference "https://github.com/macdao/customize-auditing-handler"
+ *
  * @see org.springframework.data.auditing.config.AuditingBeanDefinitionRegistrarSupport
  * @see org.springframework.data.mapping.context.MappingContext
  * @see org.springframework.data.jpa.mapping.JpaMetamodelMappingContext
  * @see org.springframework.data.jpa.repository.config.AuditingBeanDefinitionParser
  * @see org.springframework.data.jpa.repository.config.JpaAuditingRegistrar
+ *
+ * @reference "https://stackoverflow.com/questions/22368414/how-can-i-customize-the-auditinghandler-injected-by-spring-data-when-using-audit"
+ * @reference "https://github.com/macdao/customize-auditing-handler"
  */
 @SuppressWarnings({"unused", "JavadocReference", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class RdbmsDataAuditProcessor implements BeanFactoryPostProcessor {

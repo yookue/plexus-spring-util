@@ -48,6 +48,7 @@ import com.yookue.commonplexus.springutil.identity.AlternativeUuidGenerator;
  * Utilities for AMQP messages
  *
  * @author David Hsing
+ *
  * @see org.springframework.amqp.core.MessagePostProcessor
  * @see org.springframework.amqp.core.MessageProperties
  */

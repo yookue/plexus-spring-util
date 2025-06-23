@@ -26,6 +26,7 @@ import lombok.Getter;
  * Abstract interruptable job for Spring quartz
  *
  * @author David Hsing
+ *
  * @see org.quartz.InterruptableJob
  * @see org.springframework.scheduling.quartz.QuartzJobBean
  */

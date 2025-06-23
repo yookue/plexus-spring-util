@@ -38,6 +38,7 @@ import com.yookue.commonplexus.springutil.registrar.PlainParamKeyGeneratorRegist
  * Specifies the global cache key generator format
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.cache.PlainParamKeyFormat
  */
 @Target(value = ElementType.TYPE)

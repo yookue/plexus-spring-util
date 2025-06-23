@@ -26,8 +26,10 @@ import lombok.Getter;
  * Enumerations of bean scope types
  *
  * @author David Hsing
- * @reference "https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes"
+ *
  * @see org.springframework.beans.factory.config.BeanDefinition
+ *
+ * @reference "https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes"
  */
 @AllArgsConstructor
 @Getter

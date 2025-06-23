@@ -31,6 +31,7 @@ import lombok.Getter;
  * {@link org.springframework.security.authentication.event.AuthenticationFailureLockedEvent} with properties capable
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.event.AuthenticationFailureLockedEvent
  */
 @Getter

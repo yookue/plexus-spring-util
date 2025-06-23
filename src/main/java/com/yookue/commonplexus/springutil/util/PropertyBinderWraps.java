@@ -39,6 +39,7 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
  * Utilities for {@link org.springframework.boot.context.properties.bind.Binder}
  *
  * @author David Hsing
+ *
  * @see org.springframework.boot.context.properties.bind.Binder
  * @see org.springframework.boot.context.properties.source.ConfigurationPropertyName
  * @see org.springframework.boot.context.properties.source.ConfigurationPropertySource

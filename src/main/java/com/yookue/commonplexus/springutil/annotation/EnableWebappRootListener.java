@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.registrar.WebappRootListenerRegistrar;
  * Annotation that enables a {@link org.springframework.web.util.WebAppRootListener}
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.util.WebAppRootListener
  * @see com.yookue.commonplexus.springutil.registrar.WebappRootListenerRegistrar
  */

@@ -34,6 +34,7 @@ import com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor;
  * Registrar of a {@link com.yookue.commonplexus.springutil.interceptor.MdcTraceInterceptor}
  *
  * @author David Hsing
+ *
  * @see org.slf4j.MDC
  */
 public class MdcTraceInterceptorRegistrar implements ImportAware, WebMvcConfigurer {

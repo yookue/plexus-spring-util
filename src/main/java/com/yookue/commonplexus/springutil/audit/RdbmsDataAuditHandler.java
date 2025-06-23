@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.general.AbstractAuditableEntity;
  * {@link org.springframework.data.auditing.AuditingHandler} for rdbms entity
  *
  * @author David Hsing
+ *
  * @see org.springframework.data.auditing.IsNewAwareAuditingHandler
  */
 @SuppressWarnings("unused")

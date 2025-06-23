@@ -26,6 +26,7 @@ import org.springframework.util.ObjectUtils;
  * Utilities for {@link org.springframework.util.ObjectUtils}
  *
  * @author David Hsing
+ *
  * @see org.springframework.util.ObjectUtils
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

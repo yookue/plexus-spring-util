@@ -21,6 +21,7 @@ package com.yookue.commonplexus.springutil.constant;
  * Constants for mybatis page helper
  *
  * @author David Hsing
+ *
  * @see "com.github.pagehelper.page.PageParams"
  */
 @SuppressWarnings("unused")

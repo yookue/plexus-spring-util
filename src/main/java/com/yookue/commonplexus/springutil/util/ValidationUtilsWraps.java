@@ -34,6 +34,7 @@ import org.springframework.validation.ObjectError;
  * Utilities for {@link org.springframework.validation.ValidationUtils}
  *
  * @author David Hsing
+ *
  * @see org.apache.commons.lang3.Validate
  * @see org.springframework.validation.ValidationUtils
  * @see org.springframework.validation.BindingResultUtils

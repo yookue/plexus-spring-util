@@ -26,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * {@link org.springframework.security.core.userdetails.UserDetails} for loading mobile user details
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.core.userdetails.UserCache
  */
 @SuppressWarnings("unused")

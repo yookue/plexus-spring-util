@@ -28,6 +28,7 @@ import java.lang.annotation.Target;
  * Annotation for customizing Spring Security with {@link org.springframework.security.web.SecurityFilterChain}
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.SecurityFilterChain
  * @see org.springframework.security.web.csrf.CsrfFilter
  */

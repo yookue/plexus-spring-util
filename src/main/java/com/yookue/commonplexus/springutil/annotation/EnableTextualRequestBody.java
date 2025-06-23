@@ -34,6 +34,7 @@ import com.yookue.commonplexus.springutil.registrar.TextualRequestBodyRegistrar;
  * With this resolver, the &#64;{@link com.yookue.commonplexus.springutil.annotation.TextualRequestBody} works properly
  *
  * @author David Hsing
+ *
  * @see com.yookue.commonplexus.springutil.resolver.TextualRequestBodyResolver
  * @see com.yookue.commonplexus.springutil.registrar.TextualRequestBodyRegistrar
  */

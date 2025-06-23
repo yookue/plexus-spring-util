@@ -32,6 +32,7 @@ import lombok.Setter;
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} for {@link org.thymeleaf.templateresolver.ITemplateResolver}
  *
  * @author David Hsing
+ *
  * @reference "https://ultraq.github.io/thymeleaf-layout-dialect/"
  */
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})

@@ -43,9 +43,11 @@ import com.yookue.commonplexus.springutil.identity.AlternativeUuidGenerator;
  * Utilities for RabbitMQ
  *
  * @author David Hsing
- * @reference "https://www.rabbitmq.com/"
+ *
  * @see com.rabbitmq.client.AMQP.BasicProperties
  * @see org.springframework.boot.autoconfigure.amqp.RabbitProperties
+ *
+ * @reference "https://www.rabbitmq.com/"
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public abstract class RabbitMqWraps {

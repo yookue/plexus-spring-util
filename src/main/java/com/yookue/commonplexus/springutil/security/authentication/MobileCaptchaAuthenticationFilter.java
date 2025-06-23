@@ -59,6 +59,7 @@ import lombok.Setter;
  * {@link org.springframework.security.core.Authentication} filter for a mobile with a captcha
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
  */
 @Getter

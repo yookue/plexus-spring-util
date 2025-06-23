@@ -35,6 +35,7 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
  * Supports "application/json", "application/problem+json", "application/x-ndjson", "application/soap+json", "application/*+json"
  *
  * @author David Hsing
+ *
  * @see "https://dzone.com/articles/customizing"
  * @see "https://stackoverflow.com/questions/34172163/spring-boot-how-to-custom-httpmessageconverter"
  */

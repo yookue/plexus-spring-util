@@ -27,6 +27,7 @@ import lombok.ToString;
  * Enumerations of slider trigger types
  *
  * @author David Hsing
+ *
  * @reference "https://github.com/caijf/rc-slider-captcha"
  */
 @AllArgsConstructor

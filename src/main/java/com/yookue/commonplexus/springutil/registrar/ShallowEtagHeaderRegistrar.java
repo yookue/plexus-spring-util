@@ -34,6 +34,7 @@ import com.yookue.commonplexus.springutil.annotation.EnableShallowEtagHeader;
  * Registrar of a {@link org.springframework.web.filter.ShallowEtagHeaderFilter}
  *
  * @author David Hsing
+ *
  * @reference "https://blog.csdn.net/cnhome/article/details/82855815"
  */
 @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})

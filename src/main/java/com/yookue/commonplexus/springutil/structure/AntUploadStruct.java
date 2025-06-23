@@ -30,6 +30,7 @@ import lombok.NoArgsConstructor;
  * Structure for Upload of Ant Design
  *
  * @author David Hsing
+ *
  * @reference "https://ant.design/components/upload"
  */
 @Accessors(chain = true)

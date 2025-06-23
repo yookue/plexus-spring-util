@@ -33,6 +33,7 @@ import lombok.Setter;
  * {@link org.springframework.beans.factory.config.BeanPostProcessor} for {@link com.yookue.commonplexus.springutil.context.MessageSourceAccessorAware}
  *
  * @author David Hsing
+ *
  * @see "org.springframework.context.support.ApplicationContextAwareProcessor"
  */
 @SuppressWarnings("unused")

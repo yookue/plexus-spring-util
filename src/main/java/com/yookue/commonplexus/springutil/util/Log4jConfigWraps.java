@@ -36,6 +36,7 @@ import org.springframework.util.ClassUtils;
  * Utilities for configuring {@link org.apache.logging.log4j.core.LoggerContext}
  *
  * @author David Hsing
+ *
  * @see org.apache.logging.log4j.core.LoggerContext
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

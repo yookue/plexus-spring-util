@@ -32,6 +32,7 @@ import lombok.Setter;
  * Default pre authentication checker of {@link org.springframework.security.core.userdetails.UserDetailsChecker}
  *
  * @author David Hsing
+ *
  * @see "org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.DefaultPreAuthenticationChecks"
  */
 @Setter

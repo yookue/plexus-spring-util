@@ -25,6 +25,7 @@ import lombok.experimental.StandardException;
  * Thrown to indicate that the requested authentication is illegal
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.InsufficientAuthenticationException
  */
 @StandardException

@@ -32,6 +32,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  * Utilities for Spring aop
  *
  * @author David Hsing
+ *
  * @see org.springframework.aop.support.AopUtils
  * @see org.springframework.aop.framework.AopProxyUtils
  * @see org.springframework.aop.config.AopNamespaceUtils

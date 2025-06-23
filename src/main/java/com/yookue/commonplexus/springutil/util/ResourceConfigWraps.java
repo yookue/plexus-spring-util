@@ -37,9 +37,11 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  * Utilities for configuring {@link org.springframework.core.io.Resource}
  *
  * @author David Hsing
- * @reference "http://www.mscharhag.com/spring/resource-versioning-with-spring-mvc"
+ *
  * @see org.springframework.core.io.Resource
  * @see org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.ResourceChainResourceHandlerRegistrationCustomizer
+ *
+ * @reference "http://www.mscharhag.com/spring/resource-versioning-with-spring-mvc"
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText", "JavadocReference"})
 public abstract class ResourceConfigWraps {

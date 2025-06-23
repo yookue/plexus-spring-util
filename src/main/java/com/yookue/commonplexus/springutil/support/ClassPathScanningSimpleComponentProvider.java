@@ -27,6 +27,7 @@ import org.springframework.core.env.Environment;
  * {@link org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider} for simple scanning components
  *
  * @author David Hsing
+ *
  * @see org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider
  */
 @SuppressWarnings("unused")

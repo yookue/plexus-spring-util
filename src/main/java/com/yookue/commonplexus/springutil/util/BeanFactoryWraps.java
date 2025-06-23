@@ -59,6 +59,7 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  * Utilities for {@link org.springframework.beans.factory.BeanFactory}
  *
  * @author David Hsing
+ *
  * @see org.springframework.beans.factory.BeanFactory
  * @see org.springframework.beans.factory.BeanFactoryUtils
  * @see org.springframework.data.jpa.util.BeanDefinitionUtils

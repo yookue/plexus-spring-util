@@ -30,6 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Utilities for {@link org.springframework.security.crypto.password.PasswordEncoder}
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.crypto.password.PasswordEncoder
  * @see org.springframework.security.crypto.factory.PasswordEncoderFactories
  * @see com.yookue.commonplexus.javaseutil.enumeration.SecurityAlgorithmType

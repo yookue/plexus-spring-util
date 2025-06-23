@@ -29,6 +29,7 @@ import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
  * Utilities for {@link org.apache.commons.lang3.ClassPathUtils}
  *
  * @author David Hsing
+ *
  * @see org.apache.commons.lang3.ClassPathUtils
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})

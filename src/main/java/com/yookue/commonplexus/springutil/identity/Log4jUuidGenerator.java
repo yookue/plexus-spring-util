@@ -27,6 +27,7 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
  * UUID generator by {@link org.apache.logging.log4j.core.util.UuidUtil}
  *
  * @author David Hsing
+ *
  * @see org.apache.logging.log4j.core.util.UuidUtil
  */
 @SuppressWarnings("unused")

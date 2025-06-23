@@ -24,6 +24,7 @@ import org.springframework.boot.web.error.ErrorAttributeOptions;
  * Constants for servlet error attribute combos
  *
  * @author David Hsing
+ *
  * @see org.springframework.boot.web.servlet.error.DefaultErrorAttributes
  */
 @SuppressWarnings("unused")

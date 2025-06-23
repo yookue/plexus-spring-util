@@ -27,6 +27,7 @@ import com.yookue.commonplexus.springutil.security.exception.MobileNotFoundExcep
  * {@link org.springframework.security.core.userdetails.UserDetails} for loading mobile user details
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.core.userdetails.UserDetails
  * @see org.springframework.security.core.userdetails.UserDetailsService
  */

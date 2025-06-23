@@ -33,6 +33,7 @@ import lombok.NoArgsConstructor;
  * Structure for DataTables
  *
  * @author David Hsing
+ *
  * @reference "https://www.datatables.net"
  * @reference "http://datatables.club"
  */

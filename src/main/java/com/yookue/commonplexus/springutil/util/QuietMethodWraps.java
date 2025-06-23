@@ -76,6 +76,7 @@ import lombok.experimental.Accessors;
  * Utilities for generating java source files that could ignore exceptions during execution
  *
  * @author David Hsing
+ *
  * @see com.squareup.javapoet.JavaFile
  * @see "https://github.com/square/javapoet"
  */

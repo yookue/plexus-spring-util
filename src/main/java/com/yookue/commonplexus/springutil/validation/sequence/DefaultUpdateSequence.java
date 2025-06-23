@@ -26,6 +26,7 @@ import com.yookue.commonplexus.springutil.validation.group.UpdateGroup;
  * Validation sequence for default and persistence update
  *
  * @author David Hsing
+ *
  * @see jakarta.validation.Validator
  * @see org.springframework.validation.Validator
  * @see jakarta.validation.Valid

@@ -27,6 +27,7 @@ import org.springframework.security.core.AuthenticationException;
  * {@link org.springframework.security.authentication.AuthenticationEventPublisher} with no operations
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.DefaultAuthenticationEventPublisher
  */
 @SuppressWarnings("unused")

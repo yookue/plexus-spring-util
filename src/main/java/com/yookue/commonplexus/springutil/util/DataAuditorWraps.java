@@ -29,6 +29,7 @@ import com.yookue.commonplexus.javaseutil.util.OptionalPlainWraps;
  * Utilities for Spring DATA JPA {@link org.springframework.data.auditing.Auditor}
  *
  * @author David Hsing
+ *
  * @see org.springframework.data.domain.AuditorAware
  * @see org.springframework.data.auditing.AuditingHandler
  */

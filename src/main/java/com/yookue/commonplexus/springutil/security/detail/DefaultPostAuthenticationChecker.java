@@ -31,6 +31,7 @@ import lombok.Setter;
  * Default post authentication checker of {@link org.springframework.security.core.userdetails.UserDetailsChecker}
  *
  * @author David Hsing
+ *
  * @see "org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.DefaultPostAuthenticationChecks"
  */
 @Setter

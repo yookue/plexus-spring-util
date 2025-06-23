@@ -30,6 +30,7 @@ import lombok.Getter;
  * {@link org.springframework.security.web.session.HttpSessionCreatedEvent} with properties capable
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.web.session.HttpSessionCreatedEvent
  */
 @Getter

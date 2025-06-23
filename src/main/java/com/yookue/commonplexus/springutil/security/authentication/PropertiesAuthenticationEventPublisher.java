@@ -62,6 +62,7 @@ import lombok.Setter;
  * {@link org.springframework.security.authentication.AuthenticationEventPublisher} with properties capable
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.authentication.DefaultAuthenticationEventPublisher
  */
 @SuppressWarnings("unused")

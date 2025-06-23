@@ -25,6 +25,7 @@ import lombok.experimental.StandardException;
  * Thrown to indicate that the requested mobile is not found
  *
  * @author David Hsing
+ *
  * @see org.springframework.security.core.userdetails.UsernameNotFoundException
  */
 @StandardException

@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
  * Needs a predefined bean of {@link com.yookue.commonplexus.springutil.resolver.TextualRequestBodyResolver}
  *
  * @author David Hsing
+ *
  * @see org.springframework.web.bind.annotation.RequestBody
  * @see com.yookue.commonplexus.springutil.resolver.TextualRequestBodyResolver
  */

@@ -35,6 +35,7 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
  * Supports "application/xml", "application/atom+xml", "application/problem+xml", "application/rss+xml", "application/xhtml+xml", "application/soap+xml", "application/*+xml"
  *
  * @author David Hsing
+ *
  * @reference "https://dzone.com/articles/customizing"
  * @reference "https://stackoverflow.com/questions/34172163/spring-boot-how-to-custom-httpmessageconverter"
  */
