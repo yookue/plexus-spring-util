@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -150,12 +151,32 @@ public class RestResponseStruct implements Serializable {
 
     @Nonnull
     public ResponseEntity<RestResponseStruct> toResponseEntity() {
-        return new ResponseEntity<>(this, HttpStatus.valueOf(getStatus()));
+        return toResponseEntityOverlay(null);
     }
 
     @Nonnull
     public ResponseEntity<RestResponseStruct> toResponseEntity(@Nullable MultiValueMap<String, String> headers) {
-        return new ResponseEntity<>(this, headers, HttpStatus.valueOf(getStatus()));
+        return toResponseEntityOverlay(headers, null);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOk() {
+        return toResponseEntityOverlay(HttpStatus.OK);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOk(@Nullable MultiValueMap<String, String> headers) {
+        return toResponseEntityOverlay(headers, HttpStatus.OK);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOverlay(@Nullable HttpStatus status) {
+        return new ResponseEntity<>(this, ObjectUtils.defaultIfNull(status, HttpStatus.valueOf(getStatus())));
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOverlay(@Nullable MultiValueMap<String, String> headers, @Nullable HttpStatus status) {
+        return new ResponseEntity<>(this, headers, ObjectUtils.defaultIfNull(status, HttpStatus.valueOf(getStatus())));
     }
 
     @Nonnull
