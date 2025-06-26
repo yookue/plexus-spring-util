@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
+import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +36,7 @@ import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.jaas.JaasAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -45,6 +47,7 @@ import org.springframework.util.CollectionUtils;
 import com.yookue.commonplexus.javaseutil.exception.UnsupportedClassException;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import com.yookue.commonplexus.springutil.security.exception.IllegalAuthenticationException;
 
 
 /**
@@ -143,6 +146,20 @@ public abstract class SecurityUtilsWraps {
     @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
     public static String getContextAuthenticationName(boolean authenticated) {
         return getAuthenticationName(getContextAuthentication(authenticated), authenticated);
+    }
+
+    @Nonnull
+    public static String getContextAuthenticationNameRequired() throws AuthenticationException {
+        return getContextAuthenticationNameRequired(true);
+    }
+
+    @Nonnull
+    public static String getContextAuthenticationNameRequired(boolean authenticated) throws AuthenticationException {
+        String result = getContextAuthenticationName(authenticated);
+        if (StringUtils.isBlank(result)) {
+            throw new IllegalAuthenticationException("Context authentication not found or authenticated");
+        }
+        return result;
     }
 
     @Nullable
