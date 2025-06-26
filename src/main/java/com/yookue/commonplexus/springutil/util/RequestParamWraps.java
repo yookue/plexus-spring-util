@@ -791,6 +791,26 @@ public abstract class RequestParamWraps {
         return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
     }
 
+    public static Map<String, Object> getContextRequestParameterObjectMap() {
+        return getContextRequestParameterObjectMap(true, false);
+    }
+
+    public static Map<String, Object> getContextRequestParameterObjectMap(boolean emptyAsNull) {
+        return getContextRequestParameterObjectMap(emptyAsNull, false);
+    }
+
+    /**
+     * Returns a {@link java.util.LinkedHashMap} that contains all the context request parameters
+     *
+     * @param emptyAsNull whether returns null if there isn't any parameters
+     * @param includePayload whether includes the payload parameters when the request is an ajax request
+     *
+     * @return a {@link java.util.LinkedHashMap} that contains all the context request parameters
+     */
+    public static Map<String, Object> getContextRequestParameterObjectMap(boolean emptyAsNull, boolean includePayload) {
+        return getParameterObjectMap(WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload);
+    }
+
     public static Cookie getCookie(@Nullable HttpServletRequest request, @Nullable String name) {
         return getCookie(request, name, null);
     }
