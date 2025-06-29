@@ -637,7 +637,7 @@ public abstract class WebUtilsWraps {
      * @return whether the {@code request} is ajax capable
      */
     public static boolean isAjaxRequest(@Nullable HttpServletRequest request) {
-        return HttpHeaderWraps.existsHeaderValueIgnoreCase(request, HttpHeaderConst.X_REQUESTED_WITH, HttpHeaderConst.XML_HTTP_REQUEST);
+        return HttpHeaderWraps.existsHeaderValueIgnoreCase(request, HttpHeaderConst.X_REQUESTED_WITH, HttpHeaderConst.XML_HTTP_REQUEST) || HttpHeaderWraps.isContentTypeApplicationJson(request) || HttpHeaderWraps.isContentTypeApplicationXml(request);
     }
 
     /**
