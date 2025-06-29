@@ -79,9 +79,7 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
         Assert.isTrue(maxKeyLength > minParamLength, "Prop 'maxParamLength' must be greater than " + minParamLength);
         // Generate cache key
         StringJoiner joiner = new StringJoiner(CharUtils.toString(CharVariantConst.COMMA));
-        if (ArrayUtils.isEmpty(params)) {
-            joiner.add(StringVariantConst.NULL);
-        } else {
+        if (ArrayUtils.isNotEmpty(params)) {
             for (Object param : params) {
                 if (param == null) {
                     joiner.add(StringVariantConst.NULL);
@@ -121,7 +119,7 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
         StringBuilder builder = new StringBuilder();
         builder.append(StringUtils.abbreviate(joiner.toString(), maxKeyLength - minParamLength));
         String content = !paramParentheses ? builder.toString() : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, builder.toString(), CharVariantConst.PARENTHESIS_RIGHT);
-        if (!paramHash) {
+        if (!paramHash || ArrayUtils.isEmpty(params)) {
             return content;
         }
         return StringUtils.join(content, String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(Arrays.deepHashCode(params))));

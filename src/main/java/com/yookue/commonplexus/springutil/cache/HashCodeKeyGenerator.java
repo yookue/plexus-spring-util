@@ -26,7 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
-import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,7 +60,7 @@ public class HashCodeKeyGenerator extends AbstractKeyGenerator {
 
     @Override
     protected String resolveParams(@Nonnull Object target, @Nonnull Method method, @Nullable Object... params) {
-        String result = ArrayUtils.isEmpty(params) ? StringVariantConst.NULL : String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(Arrays.deepHashCode(params)));
+        String result = ArrayUtils.isEmpty(params) ? null : String.format(SymbolVariantConst.HEX_ORDER_SQUARES, Math.abs(Arrays.deepHashCode(params)));
         return !paramParentheses ? result : StringUtils.join(CharVariantConst.PARENTHESIS_LEFT, CharVariantConst.PARENTHESIS_RIGHT, result);
     }
 
