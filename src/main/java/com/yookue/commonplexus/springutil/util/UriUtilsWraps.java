@@ -77,6 +77,11 @@ public abstract class UriUtilsWraps {
         return null;
     }
 
+    @Nullable
+    public static String getContextPath(@Nullable HttpServletRequest request) {
+        return getContextPath(request, false);
+    }
+
     /**
      * Returns the context path for the given request
      * <p>
@@ -87,6 +92,7 @@ public abstract class UriUtilsWraps {
      *
      * @return the context path for the given request
      */
+    @Nullable
     public static String getContextPath(@Nullable HttpServletRequest request, boolean endSlash) {
         if (request == null) {
             return null;
@@ -95,10 +101,12 @@ public abstract class UriUtilsWraps {
         return (!endSlash || StringUtils.endsWith(result, CharUtils.toString(CharVariantConst.SLASH))) ? result : StringUtils.join(result, CharVariantConst.SLASH);
     }
 
+    @Nullable
     public static String getContextPathOriginally(@Nullable HttpServletRequest request) {
         return getContextPathOriginally(request, false);
     }
 
+    @Nullable
     public static String getContextPathOriginally(@Nullable HttpServletRequest request, boolean endSlash) {
         if (request == null) {
             return null;
@@ -110,6 +118,7 @@ public abstract class UriUtilsWraps {
     /**
      * @return schema, host, not including the last slash
      */
+    @Nullable
     public static String getSchemaHost(@Nullable HttpServletRequest request) {
         return (request == null) ? null : (request.getScheme() + SymbolVariantConst.PROTOCOL_DELIMITER + request.getServerName());
     }
@@ -117,6 +126,7 @@ public abstract class UriUtilsWraps {
     /**
      * @return schema, host and port, not including the last slash
      */
+    @Nullable
     public static String getSchemaHostPort(@Nullable HttpServletRequest request) {
         if (request == null) {
             return null;
@@ -262,10 +272,6 @@ public abstract class UriUtilsWraps {
         }
         String url = request.getRequestURL().toString(), query = request.getQueryString();
         return StringUtils.isBlank(query) ? url : StringUtils.join(url, CharVariantConst.QUESTION, query);
-    }
-
-    public static String getContextPath(@Nullable HttpServletRequest request) {
-        return getContextPath(request, false);
     }
 
     /**
