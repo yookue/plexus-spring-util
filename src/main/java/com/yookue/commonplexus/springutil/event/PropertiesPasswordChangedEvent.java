@@ -18,6 +18,9 @@ package com.yookue.commonplexus.springutil.event;
 
 
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import jakarta.servlet.http.HttpServletRequest;
+import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 import lombok.Getter;
 
 
@@ -31,7 +34,17 @@ import lombok.Getter;
 public class PropertiesPasswordChangedEvent extends AbstractPropertiesCapableEvent {
     private String password;
 
-    public PropertiesPasswordChangedEvent(@Nonnull String password) {
-        super(password);
+    public PropertiesPasswordChangedEvent(@Nonnull HttpServletRequest request) {
+        super(request);
+    }
+
+    public PropertiesPasswordChangedEvent(@Nonnull HttpServletRequest request, @Nullable String password) {
+        super(request);
+        this.password = password;
+    }
+
+    @Nonnull
+    public HttpServletRequest getRawSource() {
+        return ObjectUtilsWraps.castAs(super.getSource(), HttpServletRequest.class);
     }
 }

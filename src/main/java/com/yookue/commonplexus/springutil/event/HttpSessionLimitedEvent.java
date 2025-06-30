@@ -35,7 +35,7 @@ public class HttpSessionLimitedEvent extends ApplicationEvent {
     }
 
     @Nonnull
-    public HttpSession getSession() {
+    public HttpSession getRawSource() {
         return ObjectUtilsWraps.castAs(super.getSource(), HttpSession.class);
     }
 }

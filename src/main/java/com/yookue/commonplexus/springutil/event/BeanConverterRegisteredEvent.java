@@ -20,6 +20,7 @@ package com.yookue.commonplexus.springutil.event;
 import jakarta.annotation.Nonnull;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
+import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
 
 /**
@@ -31,5 +32,10 @@ import org.springframework.context.event.ApplicationContextEvent;
 public class BeanConverterRegisteredEvent extends ApplicationContextEvent {
     public BeanConverterRegisteredEvent(@Nonnull ApplicationContext source) {
         super(source);
+    }
+
+    @Nonnull
+    public ApplicationContext getRawSource() {
+        return ObjectUtilsWraps.castAs(super.getSource(), ApplicationContext.class);
     }
 }

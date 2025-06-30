@@ -18,22 +18,30 @@ package com.yookue.commonplexus.springutil.event;
 
 
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.ApplicationEvent;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import lombok.Getter;
 
 
 /**
- * Event when request rate is limited
+ * Event when cipher is changed
  *
  * @author David Hsing
- *
- * @see com.yookue.commonplexus.springutil.exception.RateLimitedException
  */
+@Getter
 @SuppressWarnings("unused")
-public class RateLimitedEvent extends ApplicationEvent {
-    public RateLimitedEvent(@Nonnull HttpServletRequest request) {
+public class PasswordChangedEvent extends ApplicationEvent {
+    private String password;
+
+    public PasswordChangedEvent(@Nonnull HttpServletRequest request) {
         super(request);
+    }
+
+    public PasswordChangedEvent(@Nonnull HttpServletRequest request, @Nullable String password) {
+        super(request);
+        this.password = password;
     }
 
     @Nonnull
