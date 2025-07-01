@@ -31,7 +31,6 @@ import org.springframework.core.Ordered;
 import org.springframework.util.Assert;
 import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
-import com.yookue.commonplexus.javaseutil.constant.InetAddressConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.enumeration.InetProtocolType;
 import com.yookue.commonplexus.javaseutil.util.InetAddressWraps;
@@ -88,7 +87,7 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
     }
 
     private void detectEnvironment(@Nonnull E event) {
-        serverHost = StringUtils.defaultIfBlank(InetAddressWraps.getLocalIpAddressQuietly(), InetAddressConst.LOCALHOST_IPV4);
+        serverHost = InetAddressWraps.getLocalIpAddress(true);
         Assert.notNull(applicationContext, AssertMessageConst.NOT_NULL);
         applicationName = ApplicationContextWraps.getApplicationName(applicationContext);
         ServletContext servletContext = ApplicationContextWraps.getServletContext(applicationContext);
