@@ -36,6 +36,8 @@ import com.yookue.commonplexus.springutil.registrar.SecurityContextAuditorRegist
  *
  * @see com.yookue.commonplexus.springutil.audit.SecurityContextAuditorAware
  * @see com.yookue.commonplexus.springutil.registrar.SecurityContextAuditorRegistrar
+ * @see com.yookue.commonplexus.springutil.annotation.EnableRdbmsDataAudit
+ * @see com.yookue.commonplexus.springutil.annotation.EnableMongoDataAudit
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
