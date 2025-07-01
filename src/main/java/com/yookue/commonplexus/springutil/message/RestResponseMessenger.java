@@ -35,11 +35,11 @@ import com.yookue.commonplexus.springutil.constant.ResponseBodyConst;
 import com.yookue.commonplexus.springutil.constant.RestMessageConst;
 import com.yookue.commonplexus.springutil.structure.RestResponseStruct;
 import com.yookue.commonplexus.springutil.util.MessageSourceWraps;
+import lombok.extern.slf4j.Slf4j;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -91,6 +91,7 @@ public class RestResponseMessenger {
         }
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanData(@Nonnull BooleanDataStruct<?> struct) {
         RestResponseStruct result = RestResponseStruct.ofBooleanData(struct);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -99,6 +100,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanData(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
         RestResponseStruct result = RestResponseStruct.ofBooleanData(struct, delimiter);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -107,6 +109,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanData(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
         RestResponseStruct result = RestResponseStruct.ofBooleanData(struct, delimiter);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -115,6 +118,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct) {
         RestResponseStruct result = RestResponseStruct.ofBooleanDataWithout(struct);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -123,6 +127,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
         RestResponseStruct result = RestResponseStruct.ofBooleanDataWithout(struct, delimiter);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -131,6 +136,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
         RestResponseStruct result = RestResponseStruct.ofBooleanDataWithout(struct, delimiter);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -139,6 +145,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct) {
         RestResponseStruct result = RestResponseStruct.ofBooleanText(struct);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -147,6 +154,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct, char delimiter) {
         RestResponseStruct result = RestResponseStruct.ofBooleanText(struct, delimiter);
         if (StringUtils.isEmpty(result.getMessage())) {
@@ -155,6 +163,7 @@ public class RestResponseMessenger {
         return result;
     }
 
+    @Nonnull
     public RestResponseStruct fromBooleanText(@Nonnull BooleanTextStruct struct, @Nullable String delimiter) {
         RestResponseStruct result = RestResponseStruct.ofBooleanText(struct, delimiter);
         if (StringUtils.isEmpty(result.getMessage())) {
