@@ -157,7 +157,7 @@ public abstract class SecurityUtilsWraps {
     public static String getContextAuthenticationNameRequired(boolean authenticated) throws AuthenticationException {
         String result = getContextAuthenticationName(authenticated);
         if (StringUtils.isBlank(result)) {
-            throw new IllegalAuthenticationException("Context authentication not found or authenticated");
+            throw new IllegalAuthenticationException("Context authentication not found");
         }
         return result;
     }
@@ -170,6 +170,20 @@ public abstract class SecurityUtilsWraps {
     @Nullable
     public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectType, boolean authenticated) {
         return getAuthenticationPrincipalAs(getContextAuthentication(authenticated), expectType);
+    }
+
+    @Nonnull
+    public static <T> T getContextAuthenticationPrincipalRequiredAs(@Nullable Class<T> expectType) {
+        return getContextAuthenticationPrincipalRequiredAs(expectType, true);
+    }
+
+    @Nonnull
+    public static <T> T getContextAuthenticationPrincipalRequiredAs(@Nullable Class<T> expectType, boolean authenticated) {
+        T result = getAuthenticationPrincipalAs(getContextAuthentication(authenticated), expectType);
+        if (result == null) {
+            throw new IllegalAuthenticationException("Context authentication principal not found");
+        }
+        return result;
     }
 
     @Nullable
