@@ -893,13 +893,13 @@ public abstract class RequestParamWraps {
         if (CollectionUtils.isEmpty(paramValues)) {
             return;
         }
-        if (!CollectionUtils.isEmpty(ignoredFields)) {
-            ignoredFields.forEach(paramValues::remove);
-        }
+        Set<String> ignores = CollectionPlainWraps.newHashSetIfNull(ignoredFields);
+        CollectionPlainWraps.addAll(ignores, StringVariantConst.AUDIT_CREATE, StringVariantConst.AUDIT_MODIFY);
+        ignores.forEach(paramValues::remove);
         Collection<Class<? extends Annotation>> annotations = Arrays.asList(Id.class, CreatedBy.class, LastModifiedBy.class, LastModifiedDate.class, BeanCopyIgnore.class, ViewSubmitIgnore.class);
-        Set<String> fieldNames = ReflectionUtilsWraps.getFieldNamesWithAnyAnnotationsToSet(bean.getClass(), annotations);
-        if (!CollectionUtils.isEmpty(fieldNames)) {
-            fieldNames.forEach(paramValues::remove);
+        Set<String> fields = ReflectionUtilsWraps.getFieldNamesWithAnyAnnotationsToSet(bean.getClass(), annotations);
+        if (!CollectionUtils.isEmpty(fields)) {
+            fields.forEach(paramValues::remove);
         }
         BeanUtilsWraps.mapToBeanQuietly(paramValues, bean);
     }
