@@ -893,6 +893,9 @@ public abstract class RequestParamWraps {
         if (CollectionUtils.isEmpty(paramValues)) {
             return;
         }
+        if (!CollectionUtils.isEmpty(ignoredFields)) {
+            ignoredFields.forEach(paramValues::remove);
+        }
         Collection<Class<? extends Annotation>> annotations = Arrays.asList(Id.class, CreatedBy.class, LastModifiedBy.class, LastModifiedDate.class, BeanCopyIgnore.class, ViewSubmitIgnore.class);
         Set<String> fieldNames = ReflectionUtilsWraps.getFieldNamesWithAnyAnnotationsToSet(bean.getClass(), annotations);
         if (!CollectionUtils.isEmpty(fieldNames)) {
