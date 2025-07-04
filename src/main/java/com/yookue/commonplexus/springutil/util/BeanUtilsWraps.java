@@ -29,6 +29,7 @@ import java.util.Properties;
 import java.util.Set;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.BeanInstantiationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
@@ -176,6 +177,11 @@ public abstract class BeanUtilsWraps {
     }
 
     @Nullable
+    public static <T> T instantiateClass(@Nullable Class<T> clazz) throws BeanInstantiationException {
+        return (clazz == null) ? null : BeanUtils.instantiateClass(clazz);
+    }
+
+    @Nullable
     public static <T> T instantiateClassQuietly(@Nullable Class<T> clazz) {
         if (clazz == null) {
             return null;
@@ -185,6 +191,11 @@ public abstract class BeanUtilsWraps {
         } catch (Exception ignored) {
         }
         return null;
+    }
+
+    @Nullable
+    public static <T> T instantiateClass(@Nullable Class<?> clazz, Class<T> assignableTo) throws BeanInstantiationException {
+        return (clazz == null || assignableTo == null) ? null : BeanUtils.instantiateClass(clazz, assignableTo);
     }
 
     @Nullable
@@ -200,9 +211,13 @@ public abstract class BeanUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
+    public static <T> T instantiateClass(@Nullable Constructor<T> constructor, @Nullable Object... args) throws BeanInstantiationException {
+        return (constructor == null || args == null) ? null : BeanUtils.instantiateClass(constructor, args);
+    }
+
+    @Nullable
     public static <T> T instantiateClassQuietly(@Nullable Constructor<T> constructor, @Nullable Object... args) {
-        if (constructor == null || ArrayUtils.isEmpty(args)) {
+        if (constructor == null || args == null) {
             return null;
         }
         try {
