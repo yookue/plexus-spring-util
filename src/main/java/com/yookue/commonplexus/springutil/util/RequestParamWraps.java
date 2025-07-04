@@ -872,20 +872,20 @@ public abstract class RequestParamWraps {
         return StringUtils.isNotBlank(sequence) && !StringUtils.equalsAnyIgnoreCase(sequence, StringVariantConst.NULL, StringVariantConst.UNDEFINED);
     }
 
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request) {
-        populateRequestParametersToBean(bean, request, false, false, (Collection<String>) null);
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request) {
+        populateParametersToBean(bean, request, false, false, (Collection<String>) null);
     }
 
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
-        populateRequestParametersToBean(bean, request, emptyAsNull, includePayload, (Collection<String>) null);
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
+        populateParametersToBean(bean, request, emptyAsNull, includePayload, (Collection<String>) null);
     }
 
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable String... ignoredFields) {
-        populateRequestParametersToBean(bean, request, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable String... ignoredFields) {
+        populateParametersToBean(bean, request, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
         if (ObjectUtils.anyNull(bean, request)) {
             return;
         }
@@ -904,19 +904,19 @@ public abstract class RequestParamWraps {
         BeanUtilsWraps.mapToBeanQuietly(paramValues, bean);
     }
 
-    public static void populateContextRequestParametersToBean(@Nullable Object bean) {
-        populateContextRequestParametersToBean(bean, false, false, (Collection<String>) null);
+    public static void populateContextParametersToBean(@Nullable Object bean) {
+        populateContextParametersToBean(bean, false, false, (Collection<String>) null);
     }
 
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload) {
-        populateContextRequestParametersToBean(bean, emptyAsNull, includePayload, (Collection<String>) null);
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload) {
+        populateContextParametersToBean(bean, emptyAsNull, includePayload, (Collection<String>) null);
     }
 
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, @Nullable String... ignoredFields) {
-        populateContextRequestParametersToBean(bean, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, @Nullable String... ignoredFields) {
+        populateContextParametersToBean(bean, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
     }
 
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
-        populateRequestParametersToBean(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, ignoredFields);
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
+        populateParametersToBean(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, ignoredFields);
     }
 }
