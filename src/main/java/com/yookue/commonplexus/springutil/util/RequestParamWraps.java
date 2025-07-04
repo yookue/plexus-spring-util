@@ -889,19 +889,19 @@ public abstract class RequestParamWraps {
         if (ObjectUtils.anyNull(bean, request)) {
             return;
         }
-        Map<String, Object> paramValues = getParameterObjectMap(request, emptyAsNull, includePayload);
-        if (CollectionUtils.isEmpty(paramValues)) {
+        Map<String, Object> map = getParameterObjectMap(request, emptyAsNull, includePayload);
+        if (CollectionUtils.isEmpty(map)) {
             return;
         }
         Set<String> ignores = CollectionPlainWraps.newHashSetIfNull(ignoredFields);
         CollectionPlainWraps.addAll(ignores, StringVariantConst.AUDIT_CREATE, StringVariantConst.AUDIT_MODIFY);
-        ignores.forEach(paramValues::remove);
+        ignores.forEach(map::remove);
         Collection<Class<? extends Annotation>> annotations = Arrays.asList(Id.class, CreatedBy.class, LastModifiedBy.class, LastModifiedDate.class, BeanCopyIgnore.class, ViewSubmitIgnore.class);
         Set<String> fields = ReflectionUtilsWraps.getFieldNamesWithAnyAnnotationsToSet(bean.getClass(), annotations);
         if (!CollectionUtils.isEmpty(fields)) {
-            fields.forEach(paramValues::remove);
+            fields.forEach(map::remove);
         }
-        BeanUtilsWraps.mapToBeanQuietly(paramValues, bean);
+        BeanUtilsWraps.mapToBeanQuietly(map, bean);
     }
 
     public static void populateContextParametersToBean(@Nullable Object bean) {
