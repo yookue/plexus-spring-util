@@ -20,18 +20,20 @@ package com.yookue.commonplexus.springutil.jackson.serializer;
 import java.io.IOException;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import org.apache.commons.lang3.BooleanUtils;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.yookue.commonplexus.javaseutil.util.BooleanUtilsWraps;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
- * {@link com.fasterxml.jackson.databind.JsonSerializer} for serializing {@link java.lang.Boolean} to {@link java.lang.Integer} with values "1/0"
+ * {@link com.fasterxml.jackson.databind.JsonSerializer} for serializing {@link java.lang.Boolean} to {@link java.lang.String} with values "yes/no"
  * <p>
  * Usage: annotates on bean properties<br/>
  * <pre><code>
- *     {@literal @}JsonSerialize(using = Boolean2IntegerSerializer.class)
+ *     {@literal @}JsonSerialize(using = Boolean2YesNoSerializer.class)
  * </code></pre>
  *
  * @author David Hsing
@@ -39,12 +41,14 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * @see com.fasterxml.jackson.databind.JsonSerializer
  * @see com.fasterxml.jackson.databind.annotation.JsonSerialize
  */
+@Getter
+@Setter
 @SuppressWarnings("unused")
-public class Boolean2IntegerSerializer extends JsonSerializer<Boolean> {
+public class BooleanToYesNoSerializer extends JsonSerializer<Boolean> {
+    private boolean uppercase = false;
+
     @Override
     public void serialize(@Nullable Boolean value, @Nonnull JsonGenerator generator, @Nullable SerializerProvider provider) throws IOException {
-        if (value != null) {
-            generator.writeNumber(BooleanUtils.toInteger(value));
-        }
+        generator.writeString(BooleanUtilsWraps.toStringYesNo(value, uppercase));
     }
 }

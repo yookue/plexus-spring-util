@@ -44,7 +44,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("unused")
-public class Boolean2OnOffSerializer extends JsonSerializer<Boolean> {
+public class BooleanToOnOffSerializer extends JsonSerializer<Boolean> {
     private boolean uppercase = false;
 
     @Override

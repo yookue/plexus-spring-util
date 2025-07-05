@@ -29,11 +29,11 @@ import lombok.Setter;
 
 
 /**
- * {@link com.fasterxml.jackson.databind.JsonSerializer} for serializing {@link java.lang.Boolean} to {@link java.lang.String} with values "yes/no"
+ * {@link com.fasterxml.jackson.databind.JsonSerializer} for serializing {@link java.lang.Boolean} to {@link java.lang.String} with values "t/f"
  * <p>
  * Usage: annotates on bean properties<br/>
  * <pre><code>
- *     {@literal @}JsonSerialize(using = Boolean2YesNoSerializer.class)
+ *     {@literal @}JsonSerialize(using = Boolean2TFSerializer.class)
  * </code></pre>
  *
  * @author David Hsing
@@ -44,11 +44,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("unused")
-public class Boolean2YesNoSerializer extends JsonSerializer<Boolean> {
+public class BooleanToTFSerializer extends JsonSerializer<Boolean> {
     private boolean uppercase = false;
 
     @Override
     public void serialize(@Nullable Boolean value, @Nonnull JsonGenerator generator, @Nullable SerializerProvider provider) throws IOException {
-        generator.writeString(BooleanUtilsWraps.toStringYesNo(value, uppercase));
+        generator.writeString(BooleanUtilsWraps.toStringTF(value, uppercase));
     }
 }

@@ -20,11 +20,9 @@ package com.yookue.commonplexus.springutil.jackson.deserializer;
 import java.io.IOException;
 import java.util.Date;
 import jakarta.annotation.Nullable;
-import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
+import com.yookue.commonplexus.javaseutil.util.SqlDateWraps;
 
 
 /**
@@ -32,7 +30,7 @@ import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
  * <p>
  * Usage: annotates on bean type, fields, or methods<br/>
  * <pre><code>
- *     {@literal @}JsonDeserialize(using = SqlTimestamp2JdkDateDeserializer.class)
+ *     {@literal @}JsonDeserialize(using = SqlTimestamp2SqlDateDeserializer.class)
  * </code></pre>
  *
  * @author David Hsing
@@ -41,13 +39,9 @@ import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
  * @see com.fasterxml.jackson.databind.annotation.JsonDeserialize
  */
 @SuppressWarnings("unused")
-public class SqlTimestamp2JdkDateDeserializer extends JsonDeserializer<Date> {
+public class SqlTimestampToSqlDateDeserializer extends SqlTimestampToJdkDateDeserializer {
     @Override
     public Date deserialize(@Nullable JsonParser parser, @Nullable DeserializationContext context) throws IOException {
-        if (parser == null || StringUtils.isBlank(parser.getText())) {
-            return null;
-        }
-        Long timestamp = NumberUtilsWraps.parseAsQuietly(StringUtils.trimToNull(parser.getText()), Long.class);
-        return NumberUtilsWraps.isPositive(timestamp) ? new Date(timestamp) : null;
+        return SqlDateWraps.ofJdkDate(super.deserialize(parser, context));
     }
 }
