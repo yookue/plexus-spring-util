@@ -22,33 +22,26 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.apache.commons.beanutils2.ConvertUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import com.yookue.commonplexus.springutil.registrar.BeanConverterRegistrar;
+import com.yookue.commonplexus.springutil.registrar.SpringBeanConverterRegistrar;
 
 
 /**
- * Annotation that enables object converters for apache bean utils
+ * Annotation that enables object converters for spring bean utils
  *
  * @author David Hsing
  *
- * @see org.apache.commons.beanutils2.Converter
- * @see com.yookue.commonplexus.springutil.registrar.BeanConverterRegistrar
+ * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(value = ConvertUtils.class)
-@Import(value = BeanConverterRegistrar.class)
+@ConditionalOnClass(value = BeanUtils.class)
+@Import(value = SpringBeanConverterRegistrar.class)
 @SuppressWarnings("unused")
-public @interface EnableBeanConverter {
-    /**
-     * Returns whether enable publishing event after converters be registered or not
-     *
-     * @return whether enable publishing event after converters be registered or not
-     */
-    boolean publishEvent() default true;
+public @interface EnableSpringBeanConverter {
 }

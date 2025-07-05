@@ -16,7 +16,7 @@
 
 
 /**
- * Implemented classes of bean converter
+ * Implemented classes of spring beanutils converter
  */
 
-package com.yookue.commonplexus.springutil.converter;
+package com.yookue.commonplexus.springutil.converter.spring;
