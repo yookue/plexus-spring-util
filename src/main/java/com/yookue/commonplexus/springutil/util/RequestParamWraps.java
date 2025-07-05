@@ -46,6 +46,7 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
+import com.yookue.commonplexus.javaseutil.util.BeanUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.EnumerationPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.IterablePlainWraps;
@@ -791,10 +792,6 @@ public abstract class RequestParamWraps {
         return getContextRequestParameterObjectMap(true, false);
     }
 
-    public static Map<String, Object> getContextRequestParameterObjectMap(boolean emptyAsNull) {
-        return getContextRequestParameterObjectMap(emptyAsNull, false);
-    }
-
     /**
      * Returns a {@link java.util.LinkedHashMap} that contains all the context request parameters
      *
@@ -901,7 +898,7 @@ public abstract class RequestParamWraps {
         if (!CollectionUtils.isEmpty(fields)) {
             fields.forEach(map::remove);
         }
-        BeanUtilsWraps.mapToBeanQuietly(map, bean);
+        BeanUtilsWraps.mapToBeanQuietly(bean, map);
     }
 
     public static void populateContextParametersToBean(@Nullable Object bean) {

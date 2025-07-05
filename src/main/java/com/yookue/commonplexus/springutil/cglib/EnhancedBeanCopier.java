@@ -80,12 +80,12 @@ public abstract class EnhancedBeanCopier {
     public abstract void copy(@Nonnull Object from, @Nonnull Object to, @Nullable BeanCopierConverter converter);
 
 
-    interface BeanCopierKey {
+    protected interface BeanCopierKey {
         Object newInstance(@Nonnull String source, @Nonnull String target, boolean useConverter);
     }
 
 
-    public static class Generator extends AbstractClassGenerator<EnhancedBeanCopier> {
+    protected static class Generator extends AbstractClassGenerator<EnhancedBeanCopier> {
         private static final Source SOURCE = new Source(EnhancedBeanCopier.class.getName());
         private Class<?> source;
         private Class<?> target;

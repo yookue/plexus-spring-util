@@ -17,9 +17,8 @@
 package com.yookue.commonplexus.springutil.registrar;
 
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import com.yookue.commonplexus.springutil.event.listener.ApacheBeanConverterListener;
+import org.springframework.beans.factory.InitializingBean;
+import com.yookue.commonplexus.javaseutil.util.BeanUtilsWraps;
 
 
 /**
@@ -27,10 +26,9 @@ import com.yookue.commonplexus.springutil.event.listener.ApacheBeanConverterList
  *
  * @author David Hsing
  */
-public class ApacheBeanConverterRegistrar {
-    @Bean
-    @ConditionalOnMissingBean
-    public ApacheBeanConverterListener apacheBeanConverterListener() {
-        return new ApacheBeanConverterListener();
+public class ApacheBeanConverterRegistrar implements InitializingBean {
+    @Override
+    public void afterPropertiesSet() {
+        BeanUtilsWraps.registerTemporalConverters(BeanUtilsWraps.BEAN_UTILS_INSTANCE);
     }
 }

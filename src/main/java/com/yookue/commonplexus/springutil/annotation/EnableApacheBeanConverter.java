@@ -22,7 +22,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.apache.commons.beanutils2.ConvertUtils;
+import org.apache.commons.beanutils2.Converter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -31,6 +31,8 @@ import com.yookue.commonplexus.springutil.registrar.ApacheBeanConverterRegistrar
 
 /**
  * Annotation that enables object converters for apache bean utils
+ * <p>
+ * This annotation is used by utilities with {@link org.springframework.beans.BeanUtils#copyProperties(java.lang.Object, java.lang.Object)}
  *
  * @author David Hsing
  *
@@ -41,7 +43,7 @@ import com.yookue.commonplexus.springutil.registrar.ApacheBeanConverterRegistrar
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(value = ConvertUtils.class)
+@ConditionalOnClass(value = Converter.class)
 @Import(value = ApacheBeanConverterRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnableApacheBeanConverter {

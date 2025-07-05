@@ -22,25 +22,28 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.convert.converter.Converter;
 import com.yookue.commonplexus.springutil.registrar.SpringBeanConverterRegistrar;
 
 
 /**
  * Annotation that enables object converters for spring bean utils
+ * <p>
+ * This annotation is used by controller with {@link org.springframework.core.convert.ConversionService#convert(Object, Class)}
  *
  * @author David Hsing
  *
  * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+ * @see org.springframework.core.convert.ConversionService
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(value = BeanUtils.class)
+@ConditionalOnClass(value = Converter.class)
 @Import(value = SpringBeanConverterRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnableSpringBeanConverter {
