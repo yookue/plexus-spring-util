@@ -17,8 +17,8 @@
 package com.yookue.commonplexus.springutil.exception;
 
 
-import lombok.NoArgsConstructor;
 import lombok.experimental.StandardException;
+import lombok.NoArgsConstructor;
 
 
 /**

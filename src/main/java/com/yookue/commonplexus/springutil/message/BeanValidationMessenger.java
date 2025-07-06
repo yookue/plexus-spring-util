@@ -47,8 +47,8 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.RegexUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import com.yookue.commonplexus.springutil.util.MessageSourceWraps;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 
 
 /**

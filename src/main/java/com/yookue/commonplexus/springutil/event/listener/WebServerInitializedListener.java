@@ -19,9 +19,9 @@ package com.yookue.commonplexus.springutil.event.listener;
 
 import jakarta.annotation.Nonnull;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
+import lombok.extern.slf4j.Slf4j;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 
 /**

@@ -107,22 +107,22 @@ public abstract class BeanUtilsWraps {
     }
 
     @Nullable
-    public static Map<String, ?> beanToMap(@Nullable Object bean) {
+    public static Map<String, Object> beanToMap(@Nullable Object bean) {
         return beanToMap(bean, true, Collections.emptyList());
     }
 
     @Nullable
-    public static Map<String, ?> beanToMap(@Nullable Object bean, @Nullable Collection<String> excludes) {
+    public static Map<String, Object> beanToMap(@Nullable Object bean, @Nullable Collection<String> excludes) {
         return beanToMap(bean, true, excludes);
     }
 
     @Nullable
-    public static Map<String, ?> beanToMap(@Nullable Object bean, boolean exclude, @Nullable String... fields) {
+    public static Map<String, Object> beanToMap(@Nullable Object bean, boolean exclude, @Nullable String... fields) {
         return beanToMap(bean, true, ArrayUtilsWraps.asList(fields));
     }
 
     @Nullable
-    public static Map<String, ?> beanToMap(@Nullable Object bean, boolean exclude, @Nullable Collection<String> fields) {
+    public static Map<String, Object> beanToMap(@Nullable Object bean, boolean exclude, @Nullable Collection<String> fields) {
         if (bean == null || (!exclude && CollectionUtils.isEmpty(fields))) {
             return null;
         }

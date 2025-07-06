@@ -66,10 +66,10 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.TypeUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.JdkDateWraps;
+import lombok.experimental.Accessors;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 
 /**

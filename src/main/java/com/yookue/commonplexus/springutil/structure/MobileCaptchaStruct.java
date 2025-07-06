@@ -18,10 +18,10 @@ package com.yookue.commonplexus.springutil.structure;
 
 
 import java.io.Serializable;
+import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 
 /**

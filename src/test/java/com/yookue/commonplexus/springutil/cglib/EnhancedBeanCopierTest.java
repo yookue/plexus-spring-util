@@ -21,8 +21,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.cglib.core.DebuggingClassWriter;
 import com.yookue.commonplexus.javaseutil.util.StackTraceWraps;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
 
 
 /**
