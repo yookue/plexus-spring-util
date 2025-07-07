@@ -31,6 +31,7 @@ import org.springframework.core.Ordered;
 import org.springframework.util.Assert;
 import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.InetAddressConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.enumeration.InetProtocolType;
 import com.yookue.commonplexus.javaseutil.util.InetAddressWraps;
@@ -69,6 +70,12 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
     private String accessUrl;
 
     @Getter
+    private String privateUrl;
+
+    @Getter
+    private String protocol;
+
+    @Getter
     private LocalDateTime startupTime;
 
     @Getter
@@ -104,17 +111,9 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
         if (serverPort == null || serverPort <= 0) {
             return;
         }
-        // Build server url
-        StringBuilder builder = new StringBuilder();
-        builder.append(Objects.equals(serverPort, 443) ? InetProtocolType.HTTPS.getValue() : InetProtocolType.HTTP.getValue());
-        builder.append(SymbolVariantConst.PROTOCOL_DELIMITER).append(serverHost);
-        if (serverPort != 80 && serverPort != 443) {
-            builder.append(CharVariantConst.COLON).append(serverPort);
-        }
-        if (StringUtils.isNotBlank(contextPath)) {
-            builder.append(contextPath);
-        }
-        accessUrl = builder.toString();
+        protocol = Objects.equals(serverPort, 443) ? InetProtocolType.HTTPS.getValue() : InetProtocolType.HTTP.getValue();
+        accessUrl = buildServerUrl(true);
+        privateUrl = buildServerUrl(false);
     }
 
     protected abstract void handleApplicationEvent(@Nonnull E event);
@@ -125,5 +124,19 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
 
     @SuppressWarnings("EmptyMethod")
     protected void postApplicationEvent(@Nonnull E event) {
+    }
+
+    @Nonnull
+    private String buildServerUrl(boolean publication) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(protocol).append(SymbolVariantConst.PROTOCOL_DELIMITER);
+        builder.append(publication ? serverHost : InetAddressConst.LOCALHOST_IPV4);
+        if (serverPort != 80 && serverPort != 443) {
+            builder.append(CharVariantConst.COLON).append(serverPort);
+        }
+        if (StringUtils.isNotBlank(contextPath)) {
+            builder.append(contextPath);
+        }
+        return builder.toString();
     }
 }

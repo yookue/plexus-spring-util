@@ -38,7 +38,7 @@ public class WebServerInitializedListener<T extends WebServerInitializedEvent> e
     @Override
     protected void handleApplicationEvent(@Nonnull T event) {
         if (logMessage && log.isInfoEnabled()) {
-            log.info("Application '{}' server initialized on {} ({})", super.getApplicationName(), super.getAccessUrl(), super.getContainer());
+            log.info("Application '{}' server initialized on {} ({}) with {}", super.getApplicationName(), super.getAccessUrl(), super.getPrivateUrl(), super.getContainer());
         }
     }
 }
