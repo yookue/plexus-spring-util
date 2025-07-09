@@ -17,7 +17,7 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -39,7 +39,7 @@ import com.yookue.commonplexus.springutil.constant.MybatisPageConst;
  * @reference "https://github.com/pagehelper/Mybatis-PageHelper"
  * @reference "https://www.cnblogs.com/jinit/p/14841966.html"
  */
-@SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
+@SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText", "UnusedReturnValue"})
 public abstract class MybatisPageWraps {
     @Nonnull
     public static RowBounds getRowBounds(@Nullable Map<String, Object> params, @Nullable String offsetParam, @Nullable String limitParam) {
@@ -86,10 +86,19 @@ public abstract class MybatisPageWraps {
         return result;
     }
 
-    public static void disablePagination(@Nullable Map<String, Object> params) {
+    public static Map<String, Object> disablePagination(@Nullable Map<String, Object> params) {
+        return disablePagination(params, true);
+    }
+
+    public static Map<String, Object> disablePagination(@Nullable Map<String, Object> params, boolean newIfNull) {
         if (params == null) {
-            params = new LinkedHashMap<>(1);
+            return !newIfNull ? null : MapPlainWraps.newHashMapWithin(MybatisPageConst.PAGE_SIZE_ZERO, true);
         }
-        params.put(MybatisPageConst.PAGE_SIZE_ZERO, true);
+        try {
+            params.put(MybatisPageConst.PAGE_SIZE_ZERO, true);
+            return params;
+        } catch (Exception ignored) {
+            return new HashMap<>(params);
+        }
     }
 }
