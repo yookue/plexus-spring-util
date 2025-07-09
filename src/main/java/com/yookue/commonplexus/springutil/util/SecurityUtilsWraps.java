@@ -173,12 +173,12 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nonnull
-    public static <T> T getContextAuthenticationPrincipalRequiredAs(@Nullable Class<T> expectType) {
+    public static <T> T getContextAuthenticationPrincipalRequiredAs(@Nullable Class<T> expectType) throws AuthenticationException {
         return getContextAuthenticationPrincipalRequiredAs(expectType, true);
     }
 
     @Nonnull
-    public static <T> T getContextAuthenticationPrincipalRequiredAs(@Nullable Class<T> expectType, boolean authenticated) {
+    public static <T> T getContextAuthenticationPrincipalRequiredAs(@Nullable Class<T> expectType, boolean authenticated) throws AuthenticationException {
         T result = getAuthenticationPrincipalAs(getContextAuthentication(authenticated), expectType);
         if (result == null) {
             throw new IllegalAuthenticationException("Context authentication principal not found");
