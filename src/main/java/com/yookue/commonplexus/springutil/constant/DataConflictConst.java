@@ -27,6 +27,7 @@ package com.yookue.commonplexus.springutil.constant;
 public abstract class DataConflictConst {
     private static final String PREFIX = "DataConflict.";    // $NON-NLS-1$
 
+    public static final String INVALID_PARAMETER = PREFIX + "invalidParameter";    // $NON-NLS-1$
     public static final String RECORD_NOT_FOUND = PREFIX + "recordNotFound";    // $NON-NLS-1$
     public static final String CODE_AVAILABLE = PREFIX + "codeAvailable";    // $NON-NLS-1$
     public static final String CODE_UNAVAILABLE = PREFIX + "codeUnavailable";    // $NON-NLS-1$
