@@ -20,6 +20,7 @@ package com.yookue.commonplexus.springutil.constant;
 @SuppressWarnings("unused")
 public abstract class RestMessageConst {
     private static final String PREFIX = "RestMessage.";    // $NON-NLS-1$
+
     public static final String ILLEGAL_REQUEST = PREFIX + "illegalRequest";    // $NON-NLS-1$
     public static final String OPERATE_SUCCESS = PREFIX + "operateSuccess";    // $NON-NLS-1$
     public static final String OPERATE_FAILURE = PREFIX + "operateFailure";    // $NON-NLS-1$

@@ -26,6 +26,7 @@ package com.yookue.commonplexus.springutil.constant;
 @SuppressWarnings("unused")
 public abstract class MiscMessageConst {
     private static final String PREFIX = "MiscMessage.";    // $NON-NLS-1$
+
     public static final String CONNECT_TIMEOUT_TRY = PREFIX + "connectTimeoutTry";    // $NON-NLS-1$
     public static final String MALICIOUS_ACCESS_LOG = PREFIX + "maliciousAccessLog";    // $NON-NLS-1$
     public static final String NETWORK_UNSTABLE_TRY = PREFIX + "networkUnstableTry";    // $NON-NLS-1$

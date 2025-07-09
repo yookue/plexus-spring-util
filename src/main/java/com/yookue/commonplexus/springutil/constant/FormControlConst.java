@@ -26,6 +26,7 @@ package com.yookue.commonplexus.springutil.constant;
 @SuppressWarnings("unused")
 public abstract class FormControlConst {
     private static final String PREFIX = "FormControl.";    // $NON-NLS-1$
+
     public static final String OK = PREFIX + "ok";    // $NON-NLS-1$
     public static final String CANCEL = PREFIX + "cancel";    // $NON-NLS-1$
     public static final String YES = PREFIX + "yes";    // $NON-NLS-1$
