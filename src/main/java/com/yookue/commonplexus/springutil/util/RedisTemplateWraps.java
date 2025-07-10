@@ -20,16 +20,20 @@ package com.yookue.commonplexus.springutil.util;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.function.Failable;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
-import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.DurationUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
 
@@ -50,7 +54,7 @@ public abstract class RedisTemplateWraps {
 
     public static <K> long countKey(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> keys) {
         if (template == null || CollectionUtils.isEmpty(keys)) {
-            return 0;
+            return 0L;
         }
         return keys.stream().filter(element -> Objects.nonNull(element) && template.hasKey(element)).count();
     }
@@ -60,40 +64,125 @@ public abstract class RedisTemplateWraps {
         return countPattern(template, ArrayUtilsWraps.asList(patterns));
     }
 
+    /**
+     * Returns the number of matched keys which scanned by the given patterns
+     *
+     * <p>
+     * Avoid using {@link org.springframework.data.redis.core.RedisTemplate#keys(Object)} in production environments:
+     * The above command traverses all keys and may cause performance issues.
+     * It is recommended to use the SCAN command instead.
+     *
+     * <p>
+     * ScanOptions.match(pattern) supports wildcards:
+     * <ul>
+     *     <li>*: Matches any number of characters;</li>
+     *     <li>?: Matches a single character;</li>
+     *     <li>[...]: Matches any one character inside the brackets.</li>
+     * </ul>
+     *
+     * @param template The redis template to interact
+     * @param patterns The patterns to match
+     *
+     * @return the number of matched keys which scanned by the given patterns
+     */
+    @SuppressWarnings("DuplicatedCode")
     public static <K> long countPattern(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> patterns) {
         if (template == null || CollectionUtils.isEmpty(patterns)) {
-            return 0;
+            return 0L;
         }
-        return patterns.stream().filter(Objects::nonNull).map(template::keys).filter(CollectionPlainWraps::isNotEmpty).mapToLong(template::countExistingKeys).sum();
+        RedisConnection connection = getConnection(template);
+        if (connection == null) {
+            return 0L;
+        }
+        long result = 0L;
+        for (K pattern : patterns) {
+            Set<byte[]> keys = new HashSet<>();
+            ScanOptions options = ScanOptions.scanOptions().match(ObjectUtils.getDisplayString(pattern)).build();
+            try (Cursor<byte[]> cursor = connection.keyCommands().scan(options)) {
+                while (cursor.hasNext()) {
+                    keys.add(cursor.next());
+                }
+            }
+            result += keys.size();
+        }
+        return result;
     }
 
     @SafeVarargs
-    public static <K> void deleteKey(@Nullable RedisTemplate<K, ?> template, @Nullable K... keys) {
-        deleteKey(template, ArrayUtilsWraps.asList(keys));
+    public static <K> long deleteKey(@Nullable RedisTemplate<K, ?> template, @Nullable K... keys) {
+        return deleteKey(template, ArrayUtilsWraps.asList(keys));
     }
 
-    public static <K> void deleteKey(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> keys) {
+    public static <K> long deleteKey(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> keys) {
         if (template == null || CollectionUtils.isEmpty(keys)) {
-            return;
+            return 0L;
         }
-        keys.stream().filter(Objects::nonNull).forEach(Failable.asConsumer(template::delete));
+        long result = 0L;
+        for (K key : keys) {
+            if (key != null && BooleanUtils.isTrue(template.delete(key))) {
+                result++;
+            }
+        }
+        return result;
     }
 
     @SafeVarargs
-    public static <K> void deletePattern(@Nullable RedisTemplate<K, ?> template, @Nullable K... patterns) {
-        deletePattern(template, ArrayUtilsWraps.asList(patterns));
+    public static <K> long deletePattern(@Nullable RedisTemplate<K, ?> template, @Nullable K... patterns) {
+        return deletePattern(template, ArrayUtilsWraps.asList(patterns));
     }
 
-    public static <K> void deletePattern(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> patterns) {
+    /**
+     * Returns the number of deleted keys which scanned by the given patterns
+     *
+     * <p>
+     * Avoid using {@link org.springframework.data.redis.core.RedisTemplate#keys(Object)} in production environments:
+     * The above command traverses all keys and may cause performance issues.
+     * It is recommended to use the SCAN command instead.
+     *
+     * <p>
+     * ScanOptions.match(pattern) supports wildcards:
+     * <ul>
+     *     <li>*: Matches any number of characters;</li>
+     *     <li>?: Matches a single character;</li>
+     *     <li>[...]: Matches any one character inside the brackets.</li>
+     * </ul>
+     *
+     * @param template The redis template to interact
+     * @param patterns The patterns to match
+     *
+     * @return the number of deleted keys which scanned by the given patterns
+     */
+    @SuppressWarnings("DuplicatedCode")
+    public static <K> long deletePattern(@Nullable RedisTemplate<K, ?> template, @Nullable Collection<K> patterns) {
         if (template == null || CollectionUtils.isEmpty(patterns)) {
-            return;
+            return 0L;
         }
-        patterns.stream().filter(Objects::nonNull).map(template::keys).filter(CollectionPlainWraps::isNotEmpty).forEach(Failable.asConsumer(template::delete));
+        RedisConnection connection = getConnection(template);
+        if (connection == null) {
+            return 0L;
+        }
+        long result = 0L;
+        for (K pattern : patterns) {
+            Set<byte[]> keys = new HashSet<>();
+            ScanOptions options = ScanOptions.scanOptions().match(ObjectUtils.getDisplayString(pattern)).build();
+            try (Cursor<byte[]> cursor = connection.keyCommands().scan(options)) {
+                while (cursor.hasNext()) {
+                    keys.add(cursor.next());
+                }
+            }
+            if (!keys.isEmpty()) {
+                Long deleted = connection.keyCommands().del(keys.toArray(new byte[0][]));
+                if (deleted != null && deleted > 0) {
+                    result += deleted;
+                }
+            }
+        }
+        return result;
     }
 
     @SuppressWarnings("DataFlowIssue")
     public static <K> boolean existsKey(@Nullable RedisTemplate<K, ?> template, @Nullable K key) {
-        return ObjectUtils.allNotNull(template, key) && BooleanUtils.isTrue(template.hasKey(key));
+        return org.apache.commons.lang3.ObjectUtils.allNotNull(template, key) && BooleanUtils.isTrue(template.hasKey(key));
     }
 
     @SafeVarargs
@@ -115,9 +204,18 @@ public abstract class RedisTemplateWraps {
     }
 
     @Nullable
+    public static <K, V> RedisConnection getConnection(@Nullable RedisTemplate<K, V> template) {
+        if (template == null) {
+            return null;
+        }
+        RedisConnectionFactory factory = template.getConnectionFactory();
+        return (factory == null) ? null : factory.getConnection();
+    }
+
+    @Nullable
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> V getValue(@Nullable RedisTemplate<K, V> template, @Nullable K key) {
-        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().get(key);
+        return ObjectUtilsWraps.anyNull(template, key) ? null : template.opsForValue().get(key);
     }
 
     @Nullable
@@ -128,7 +226,7 @@ public abstract class RedisTemplateWraps {
     @Nullable
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> V getValueAndDelete(@Nullable RedisTemplate<K, V> template, @Nullable K key) {
-        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().getAndDelete(key);
+        return ObjectUtilsWraps.anyNull(template, key) ? null : template.opsForValue().getAndDelete(key);
     }
 
     @Nullable
@@ -144,7 +242,7 @@ public abstract class RedisTemplateWraps {
     @Nullable
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> V getValueAndExpire(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable Duration timeout) {
-        if (ObjectUtils.anyNull(template, key)) {
+        if (ObjectUtilsWraps.anyNull(template, key)) {
             return null;
         }
         return (timeout == null) ? template.opsForValue().get(key) : template.opsForValue().getAndExpire(key, timeout);
@@ -153,18 +251,18 @@ public abstract class RedisTemplateWraps {
     @Nullable
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> V getValueAndPersist(@Nullable RedisTemplate<K, V> template, @Nullable K key) {
-        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().getAndPersist(key);
+        return ObjectUtilsWraps.anyNull(template, key) ? null : template.opsForValue().getAndPersist(key);
     }
 
     @Nullable
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> V getValueAndSet(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value) {
-        return ObjectUtils.anyNull(template, key) ? null : template.opsForValue().getAndSet(key, value);
+        return ObjectUtilsWraps.anyNull(template, key) ? null : template.opsForValue().getAndSet(key, value);
     }
 
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> void setValue(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value) {
-        if (ObjectUtils.allNotNull(template, key)) {
+        if (ObjectUtilsWraps.allNotNull(template, key)) {
             template.opsForValue().set(key, value);
         }
     }
@@ -179,7 +277,7 @@ public abstract class RedisTemplateWraps {
 
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> void setValue(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Duration timeout) {
-        if (ObjectUtils.anyNull(template, key)) {
+        if (ObjectUtilsWraps.anyNull(template, key)) {
             return;
         }
         if (timeout == null) {
@@ -199,7 +297,7 @@ public abstract class RedisTemplateWraps {
 
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> boolean setIfAbsent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Duration timeout) {
-        if (ObjectUtils.anyNull(template, key)) {
+        if (ObjectUtilsWraps.anyNull(template, key)) {
             return false;
         }
         if (timeout == null) {
@@ -219,7 +317,7 @@ public abstract class RedisTemplateWraps {
 
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> boolean setIfPresent(@Nullable RedisTemplate<K, V> template, @Nullable K key, @Nullable V value, @Nullable Duration timeout) {
-        if (ObjectUtils.anyNull(template, key)) {
+        if (ObjectUtilsWraps.anyNull(template, key)) {
             return false;
         }
         if (timeout == null) {
