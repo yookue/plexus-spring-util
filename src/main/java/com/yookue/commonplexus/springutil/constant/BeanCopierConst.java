@@ -23,7 +23,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
-import com.yookue.commonplexus.javaseutil.annotation.ViewSubmitIgnore;
+import com.yookue.commonplexus.javaseutil.annotation.ViewTransferIgnore;
 
 
 /**
@@ -34,5 +34,5 @@ import com.yookue.commonplexus.javaseutil.annotation.ViewSubmitIgnore;
 @SuppressWarnings("unused")
 public abstract class BeanCopierConst {
     @SuppressWarnings("unchecked")
-    public static final Class<? extends Annotation>[] IGNORABLE_ANNOTATIONS = new Class[]{CreatedBy.class, CreatedDate.class, LastModifiedBy.class, LastModifiedDate.class, BeanCopyIgnore.class, ViewSubmitIgnore.class};
+    public static final Class<? extends Annotation>[] IGNORABLE_ANNOTATIONS = new Class[]{CreatedBy.class, CreatedDate.class, LastModifiedBy.class, LastModifiedDate.class, BeanCopyIgnore.class, ViewTransferIgnore.class};
 }

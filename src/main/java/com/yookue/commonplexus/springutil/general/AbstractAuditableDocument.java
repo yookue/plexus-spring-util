@@ -28,6 +28,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.mongodb.core.mapping.Field;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -69,9 +70,11 @@ public abstract class AbstractAuditableDocument extends AbstractBsonDocument {
 
     @Transient
     @JsonIgnore
+    @BeanCopyIgnore
     private Boolean auditCreate = Boolean.TRUE;
 
     @Transient
     @JsonIgnore
+    @BeanCopyIgnore
     private Boolean auditModify = Boolean.TRUE;
 }

@@ -32,6 +32,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
 import com.yookue.commonplexus.springutil.validation.sequence.InsertUpdateSequence;
 import lombok.Getter;
 import lombok.Setter;
@@ -80,9 +81,11 @@ public abstract class AbstractAuditableEntity implements Serializable {
 
     @Transient
     @JsonIgnore
+    @BeanCopyIgnore
     private Boolean auditCreate = Boolean.TRUE;
 
     @Transient
     @JsonIgnore
+    @BeanCopyIgnore
     private Boolean auditModify = Boolean.TRUE;
 }

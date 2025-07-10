@@ -43,7 +43,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
-import com.yookue.commonplexus.javaseutil.annotation.ViewSubmitIgnore;
+import com.yookue.commonplexus.javaseutil.annotation.ViewTransferIgnore;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
@@ -131,7 +131,7 @@ public abstract class BeanUtilsWraps {
      *     <li>Fields with {@link LastModifiedBy} annotation</li>
      *     <li>Fields with {@link LastModifiedDate} annotation</li>
      *     <li>Fields with {@link BeanCopyIgnore} annotation</li>
-     *     <li>Fields with {@link ViewSubmitIgnore} annotation</li>
+     *     <li>Fields with {@link ViewTransferIgnore} annotation</li>
      * </ul>
      *
      * @param source The source object to copy properties from

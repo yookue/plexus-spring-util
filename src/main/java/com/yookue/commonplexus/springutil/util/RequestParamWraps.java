@@ -17,7 +17,6 @@
 package com.yookue.commonplexus.springutil.util;
 
 
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -27,7 +26,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Id;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,12 +34,6 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.util.CollectionUtils;
-import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
-import com.yookue.commonplexus.javaseutil.annotation.ViewSubmitIgnore;
 import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
@@ -72,7 +64,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static String firstNonEmptyCookie(@Nullable HttpServletRequest request, @Nullable Collection<String> names) {
-        if (request == null || CollectionUtils.isEmpty(names)) {
+        if (request == null || CollectionPlainWraps.isEmpty(names)) {
             return null;
         }
         return names.stream().filter(StringUtils::isNotBlank).map(element -> getCookieValue(request, element)).filter(StringUtils::isNotEmpty).findFirst().orElse(null);
@@ -85,7 +77,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static String firstNonBlankCookie(@Nullable HttpServletRequest request, @Nullable Collection<String> names) {
-        if (request == null || CollectionUtils.isEmpty(names)) {
+        if (request == null || CollectionPlainWraps.isEmpty(names)) {
             return null;
         }
         return names.stream().filter(StringUtils::isNotBlank).map(element -> getCookieValue(request, element)).filter(StringUtils::isNotBlank).findFirst().orElse(null);
@@ -98,7 +90,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static String firstNonEmptyHeader(@Nullable HttpServletRequest request, @Nullable Collection<String> headers) {
-        if (request == null || CollectionUtils.isEmpty(headers)) {
+        if (request == null || CollectionPlainWraps.isEmpty(headers)) {
             return null;
         }
         return headers.stream().filter(StringUtils::isNotBlank).map(request::getHeader).filter(StringUtils::isNotEmpty).findFirst().orElse(null);
@@ -111,7 +103,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static String firstNonBlankHeader(@Nullable HttpServletRequest request, @Nullable Collection<String> headers) {
-        if (request == null || CollectionUtils.isEmpty(headers)) {
+        if (request == null || CollectionPlainWraps.isEmpty(headers)) {
             return null;
         }
         return headers.stream().filter(StringUtils::isNotBlank).map(request::getHeader).filter(StringUtils::isNotBlank).findFirst().orElse(null);
@@ -124,7 +116,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static String firstNonEmptyParameter(@Nullable HttpServletRequest request, @Nullable Collection<String> params) {
-        if (request == null || CollectionUtils.isEmpty(params)) {
+        if (request == null || CollectionPlainWraps.isEmpty(params)) {
             return null;
         }
         return params.stream().filter(StringUtils::isNotBlank).map(request::getParameter).filter(StringUtils::isNotEmpty).findFirst().orElse(null);
@@ -137,7 +129,7 @@ public abstract class RequestParamWraps {
 
     @Nullable
     public static String firstNonBlankParameter(@Nullable HttpServletRequest request, @Nullable Collection<String> params) {
-        if (request == null || CollectionUtils.isEmpty(params)) {
+        if (request == null || CollectionPlainWraps.isEmpty(params)) {
             return null;
         }
         return params.stream().filter(StringUtils::isNotBlank).map(request::getParameter).filter(StringUtils::isNotBlank).findFirst().orElse(null);
@@ -504,7 +496,7 @@ public abstract class RequestParamWraps {
         Map<String, Object> result = new LinkedHashMap<>();
         IterablePlainWraps.forEach(names, name -> {
             List<String> values = EnumerationPlainWraps.toElementList(request.getHeaders(name));
-            if (CollectionUtils.isEmpty(values)) {
+            if (CollectionPlainWraps.isEmpty(values)) {
                 result.put(name, null);
                 return;
             }
@@ -775,7 +767,7 @@ public abstract class RequestParamWraps {
         // Converts the payload into map and processes it
         String content = WebUtilsWraps.getContentAsStringQuietly(request);
         Map<String, Object> payloads = JsonParserWraps.parseChildToMap(content, null);
-        if (CollectionUtils.isEmpty(payloads)) {
+        if (MapPlainWraps.isEmpty(payloads)) {
             return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
         }
         MapPlainWraps.forEach(payloads, (key, value) -> {
@@ -841,7 +833,7 @@ public abstract class RequestParamWraps {
             return null;
         }
         List<Cookie> cookies = getCookies(request);
-        if (CollectionUtils.isEmpty(cookies)) {
+        if (CollectionPlainWraps.isEmpty(cookies)) {
             return null;
         }
         StringJoiner joiner = new StringJoiner(groupDelimiter);
@@ -881,22 +873,16 @@ public abstract class RequestParamWraps {
         populateParametersToBean(bean, request, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
         if (ObjectUtils.anyNull(bean, request)) {
             return;
         }
         Map<String, Object> map = getParameterObjectMap(request, emptyAsNull, includePayload);
-        if (CollectionUtils.isEmpty(map)) {
+        if (MapPlainWraps.isEmpty(map)) {
             return;
         }
-        Set<String> ignores = CollectionPlainWraps.newHashSetIfNull(ignoredFields);
-        CollectionPlainWraps.addAll(ignores, StringVariantConst.AUDIT_CREATE, StringVariantConst.AUDIT_MODIFY);
-        ignores.forEach(map::remove);
-        Collection<Class<? extends Annotation>> annotations = Arrays.asList(Id.class, CreatedBy.class, LastModifiedBy.class, LastModifiedDate.class, BeanCopyIgnore.class, ViewSubmitIgnore.class);
-        Set<String> fields = ReflectionUtilsWraps.getFieldNamesWithAnyAnnotationsToSet(bean.getClass(), annotations);
-        if (!CollectionUtils.isEmpty(fields)) {
-            fields.forEach(map::remove);
+        if (CollectionPlainWraps.isNotEmpty(ignoredFields)) {
+            ignoredFields.forEach(map::remove);
         }
         BeanUtilsWraps.mapToBeanQuietly(bean, map);
     }
