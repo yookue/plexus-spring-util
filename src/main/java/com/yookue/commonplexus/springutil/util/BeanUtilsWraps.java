@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -34,13 +35,20 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.cglib.beans.BeanMap;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
+import com.yookue.commonplexus.javaseutil.annotation.ViewSubmitIgnore;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.PropertyPlainWraps;
+import com.yookue.commonplexus.springutil.constant.BeanCopierConst;
 
 
 /**
@@ -67,17 +75,17 @@ public abstract class BeanUtilsWraps {
         if (source == null || target == null || (!exclude && CollectionUtils.isEmpty(fields))) {
             return;
         }
-        String[] ignored;
+        String[] ignores;
         if (exclude) {
-            ignored = (fields == null) ? null : fields.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+            ignores = (fields == null) ? null : fields.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         } else {
             Set<String> nested = ReflectionUtilsWraps.getNestedFieldNamesToSet(target.getClass());
             if (CollectionUtils.isEmpty(nested)) {
                 return;
             }
-            ignored = nested.stream().filter(element -> !CollectionPlainWraps.containsString(fields, element)).toArray(String[]::new);
+            ignores = nested.stream().filter(element -> !CollectionPlainWraps.containsString(fields, element)).toArray(String[]::new);
         }
-        BeanUtils.copyProperties(source, target, ignored);
+        BeanUtils.copyProperties(source, target, ignores);
     }
 
     @SuppressWarnings("DataFlowIssue")
@@ -102,6 +110,55 @@ public abstract class BeanUtilsWraps {
     public static void copyPropertiesQuietly(@Nullable Object source, @Nullable Object target, boolean exclude, @Nullable Collection<String> fields) {
         try {
             copyProperties(source, target, exclude, fields);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void copyPropertiesSheared(@Nullable Object source, @Nullable Object target) throws BeansException {
+        copyPropertiesSheared(source, target, (Collection<String>) null);
+    }
+
+    public static void copyPropertiesSheared(@Nullable Object source, @Nullable Object target, @Nullable String... excludes) throws BeansException {
+        copyPropertiesSheared(source, target, ArrayUtilsWraps.asList(excludes));
+    }
+
+    /**
+     * Copy properties from source to target, but ignore the given fields and other fields with some special annotations
+     * <p>
+     * <ul>
+     *     <li>Fields with {@link CreatedBy} annotation</li>
+     *     <li>Fields with {@link CreatedDate} annotation</li>
+     *     <li>Fields with {@link LastModifiedBy} annotation</li>
+     *     <li>Fields with {@link LastModifiedDate} annotation</li>
+     *     <li>Fields with {@link BeanCopyIgnore} annotation</li>
+     *     <li>Fields with {@link ViewSubmitIgnore} annotation</li>
+     * </ul>
+     *
+     * @param source The source object to copy properties from
+     * @param target The target object to copy properties to
+     * @param excludes The fields to ignore
+     */
+    public static void copyPropertiesSheared(@Nullable Object source, @Nullable Object target, @Nullable Collection<String> excludes) throws BeansException {
+        if (source == null || target == null) {
+            return;
+        }
+        Set<String> ignores = new HashSet<>();
+        CollectionPlainWraps.addAllIfNotBlank(ignores, excludes);
+        CollectionPlainWraps.addAllIfNotBlank(ignores, ReflectionUtilsWraps.getFieldNamesWithAnyAnnotationsToSet(target.getClass(), BeanCopierConst.IGNORABLE_ANNOTATIONS));
+        copyProperties(source, target, true, ignores);
+    }
+
+    public static void copyPropertiesShearedQuietly(@Nullable Object source, @Nullable Object target) {
+        copyPropertiesShearedQuietly(source, target, (Collection<String>) null);
+    }
+
+    public static void copyPropertiesShearedQuietly(@Nullable Object source, @Nullable Object target, @Nullable String... excludes) {
+        copyPropertiesShearedQuietly(source, target, ArrayUtilsWraps.asList(excludes));
+    }
+
+    public static void copyPropertiesShearedQuietly(@Nullable Object source, @Nullable Object target, @Nullable Collection<String> excludes) {
+        try {
+            copyPropertiesSheared(source, target, excludes);
         } catch (Exception ignored) {
         }
     }
