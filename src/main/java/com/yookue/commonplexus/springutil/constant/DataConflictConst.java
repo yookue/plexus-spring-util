@@ -31,6 +31,8 @@ public abstract class DataConflictConst {
     public static final String RECORD_NOT_FOUND = PREFIX + "recordNotFound";    // $NON-NLS-1$
     public static final String CODE_AVAILABLE = PREFIX + "codeAvailable";    // $NON-NLS-1$
     public static final String CODE_UNAVAILABLE = PREFIX + "codeUnavailable";    // $NON-NLS-1$
+    public static final String CLAZZ_AVAILABLE = PREFIX + "clazzAvailable";    // $NON-NLS-1$
+    public static final String CLAZZ_UNAVAILABLE = PREFIX + "clazzUnavailable";    // $NON-NLS-1$
     public static final String USERNAME_AVAILABLE = PREFIX + "usernameAvailable";    // $NON-NLS-1$
     public static final String USERNAME_UNAVAILABLE = PREFIX + "usernameUnavailable";    // $NON-NLS-1$
     public static final String ROLE_AVAILABLE = PREFIX + "roleAvailable";    // $NON-NLS-1$
