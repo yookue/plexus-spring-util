@@ -20,7 +20,6 @@ package com.yookue.commonplexus.springutil.util;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -381,84 +380,29 @@ public abstract class JsonParserWraps {
      * @return a map of direct child that contains field names and field values
      */
     @Nullable
-    public static Map<String, Object> parseChildToMap(@Nullable String content, @Nullable JsonParserType type) {
+    @SuppressWarnings("unchecked")
+    public static Map<String, Object> parseJsonToMap(@Nullable String content, @Nullable JsonParserType type) {
         if (StringUtils.isBlank(content)) {
             return null;
         }
         if (type == null) {
             type = detectParserType();
-        }
-        if (type == null) {
-            return null;
+            if (type == null) {
+                return null;
+            }
         }
         if (type == JsonParserType.JACKSON) {
             com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-            com.fasterxml.jackson.databind.JsonNode node = JacksonJsonWraps.readTree(mapper, content);
-            if (node == null || !node.isContainerNode()) {
-                return null;
-            }
-            Map<String, Object> result = new LinkedHashMap<>();
-            node.fieldNames().forEachRemaining(fieldName -> {
-                com.fasterxml.jackson.databind.JsonNode child = node.get(fieldName);
-                if (child == null || child.isNull()) {
-                    result.put(fieldName, null);
-                    return;
-                }
-                if (child.isBoolean()) {
-                    result.put(fieldName, child.booleanValue());
-                    return;
-                }
-                if (child.isNumber()) {
-                    result.put(fieldName, child.numberValue());
-                    return;
-                }
-                result.put(fieldName, child.asText());
-            });
-            return result.isEmpty() ? null : result;
+            return JacksonJsonWraps.readValue(mapper, content, new com.fasterxml.jackson.core.type.TypeReference<>(){});
         } else if (type == JsonParserType.GSON) {
-            Map<String, Object> result = new LinkedHashMap<>();
-            com.google.gson.JsonElement element = GsonJsonWraps.parseString(content);
-            if (element == null) {
-                return null;
-            }
-            for (Map.Entry<String, com.google.gson.JsonElement> entry : element.getAsJsonObject().entrySet()) {
-                com.google.gson.JsonElement child = entry.getValue();
-                if (child == null || child.isJsonNull()) {
-                    result.put(entry.getKey(), null);
-                    continue;
-                }
-                if (child.isJsonPrimitive()) {
-                    com.google.gson.JsonPrimitive primitive = child.getAsJsonPrimitive();
-                    if (primitive.isBoolean()) {
-                        result.put(entry.getKey(), primitive.getAsBoolean());
-                        continue;
-                    }
-                    if (primitive.isNumber()) {
-                        result.put(entry.getKey(), primitive.getAsNumber());
-                        continue;
-                    }
-                    result.put(entry.getKey(), primitive.getAsString());
-                    continue;
-                }
-                result.put(entry.getKey(), child.getAsString());
-            }
-            return result.isEmpty() ? null : result;
+            com.google.gson.Gson gson = new com.google.gson.Gson();
+            return GsonJsonWraps.fromJson(gson, content, new com.google.gson.reflect.TypeToken<Map<String, Object>>(){}.getType());
         } else if (type == JsonParserType.JAKARTA) {
-            Map<String, Object> result = new LinkedHashMap<>();
-            try (jakarta.json.JsonReader jsonReader = jakarta.json.Json.createReader(new StringReader(content))) {
-                jakarta.json.JsonStructure node = jsonReader.read();
-                if (node.getValueType() == jakarta.json.JsonValue.ValueType.OBJECT) {
-                    for (Map.Entry<String, jakarta.json.JsonValue> entry : node.asJsonObject().entrySet()) {
-                        jakarta.json.JsonValue child = entry.getValue();
-                        if (child == null) {
-                            continue;
-                        }
-                        result.put(entry.getKey(), child.toString());
-                    }
-                }
+            try (jakarta.json.bind.Jsonb jsonb = jakarta.json.bind.JsonbBuilder.create()) {
+                return jsonb.fromJson(content, Map.class);
             } catch (Exception ignored) {
             }
-            return result.isEmpty() ? null : result;
+            return null;
         }
         return null;
     }

@@ -766,7 +766,7 @@ public abstract class RequestParamWraps {
         }
         // Converts the payload into map and processes it
         String content = WebUtilsWraps.getContentAsStringQuietly(request);
-        Map<String, Object> payloads = JsonParserWraps.parseChildToMap(content, null);
+        Map<String, Object> payloads = JsonParserWraps.parseJsonToMap(content, null);
         if (MapPlainWraps.isEmpty(payloads)) {
             return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
         }
