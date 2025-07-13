@@ -773,6 +773,8 @@ public abstract class RequestParamWraps {
         MapPlainWraps.forEach(payloads, (key, value) -> {
             if (value instanceof String instance && emptyAsNull) {
                 result.put(key, StringUtils.trimToNull(instance));
+            } else if (value instanceof Collection<?> instance) {
+                result.put(key, instance.toArray());
             } else {
                 result.put(key, value);
             }
