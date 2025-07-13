@@ -29,6 +29,11 @@ public abstract class DataConflictConst {
 
     public static final String INVALID_PARAMETER = PREFIX + "invalidParameter";    // $NON-NLS-1$
     public static final String RECORD_NOT_FOUND = PREFIX + "recordNotFound";    // $NON-NLS-1$
+    public static final String USER_NOT_FOUND = PREFIX + "userNotFound";    // $NON-NLS-1$
+    public static final String ROLE_NOT_FOUND = PREFIX + "roleNotFound";    // $NON-NLS-1$
+    public static final String RANK_NOT_FOUND = PREFIX + "rankNotFound";    // $NON-NLS-1$
+    public static final String ORGAN_NOT_FOUND = PREFIX + "organNotFound";    // $NON-NLS-1$
+
     public static final String CODE_AVAILABLE = PREFIX + "codeAvailable";    // $NON-NLS-1$
     public static final String CODE_UNAVAILABLE = PREFIX + "codeUnavailable";    // $NON-NLS-1$
     public static final String CLAZZ_AVAILABLE = PREFIX + "clazzAvailable";    // $NON-NLS-1$
@@ -39,4 +44,6 @@ public abstract class DataConflictConst {
     public static final String ROLE_UNAVAILABLE = PREFIX + "roleUnavailable";    // $NON-NLS-1$
     public static final String RANK_AVAILABLE = PREFIX + "rankAvailable";    // $NON-NLS-1$
     public static final String RANK_UNAVAILABLE = PREFIX + "rankUnavailable";    // $NON-NLS-1$
+    public static final String ORGAN_AVAILABLE = PREFIX + "organAvailable";    // $NON-NLS-1$
+    public static final String ORGAN_UNAVAILABLE = PREFIX + "organUnavailable";    // $NON-NLS-1$
 }
