@@ -20,8 +20,8 @@ package com.yookue.commonplexus.springutil.security.event;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.security.core.Authentication;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
-import com.yookue.commonplexus.springutil.security.authentication.JwtAuthenticationToken;
 import lombok.Getter;
 
 
@@ -35,21 +35,24 @@ import lombok.Getter;
 @Getter
 @SuppressWarnings("unused")
 public class JwtAuthenticationDestroyedEvent extends ApplicationEvent {
-    public JwtAuthenticationDestroyedEvent(@Nonnull JwtAuthenticationToken token) {
-        super(token);
+    private String token;
+
+    public JwtAuthenticationDestroyedEvent(@Nonnull Authentication authentication) {
+        super(authentication);
     }
 
-    public JwtAuthenticationDestroyedEvent(@Nonnull String token) {
-        super(token);
+    public JwtAuthenticationDestroyedEvent(@Nonnull Authentication authentication, @Nullable String token) {
+        super(authentication);
+        this.token = token;
     }
 
     @Nullable
-    public JwtAuthenticationToken getRawSourceAsToken() {
-        return !(super.getSource() instanceof JwtAuthenticationToken) ? null : ObjectUtilsWraps.castAs(super.getSource(), JwtAuthenticationToken.class);
+    public Authentication getRawSource() {
+        return ObjectUtilsWraps.castAs(super.getSource(), Authentication.class);
     }
 
     @Nullable
-    public String getRawSourceAsString() {
-        return !(super.getSource() instanceof String) ? null : ObjectUtilsWraps.castAs(super.getSource(), String.class);
+    public String getRawToken() {
+        return token;
     }
 }
