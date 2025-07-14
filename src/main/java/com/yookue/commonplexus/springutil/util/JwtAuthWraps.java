@@ -43,9 +43,9 @@ import com.yookue.commonplexus.springutil.enumeration.JwtAlgorithmType;
 public abstract class JwtAuthWraps {
     @Nonnull
     @SuppressWarnings("DuplicatedCode")
-    public static String encodeToken(@Nullable Consumer<JWTCreator.Builder> callback, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
+    public static String encodeToken(@Nullable String jwtId, @Nullable Consumer<JWTCreator.Builder> callback, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
         JWTCreator.Builder builder = JWT.create();
-        builder.withJWTId(JdkUuidGenerator.getPopularId());
+        builder.withJWTId(StringUtils.defaultIfBlank(jwtId, JdkUuidGenerator.getPopularId()));
         if (callback != null) {
             callback.accept(builder);
         }
@@ -63,9 +63,9 @@ public abstract class JwtAuthWraps {
 
     @Nonnull
     @SuppressWarnings("DuplicatedCode")
-    public static String encodeToken(@Nullable String audience, @Nullable String issuer, @Nullable String subject, @Nullable Date timestamp, @Nullable Duration timeout, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
+    public static String encodeToken(@Nullable String jwtId, @Nullable String audience, @Nullable String issuer, @Nullable String subject, @Nullable Date timestamp, @Nullable Duration timeout, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
         JWTCreator.Builder builder = JWT.create();
-        builder.withJWTId(JdkUuidGenerator.getPopularId());
+        builder.withJWTId(StringUtils.defaultIfBlank(jwtId, JdkUuidGenerator.getPopularId()));
         if (StringUtils.isNotBlank(audience)) {
             builder.withAudience(audience);
         }
