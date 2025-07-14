@@ -26,7 +26,7 @@ import lombok.Getter;
 
 
 /**
- * Event when the jwt authentication been destroyed
+ * Event when the jwt authentication been created
  *
  * @author David Hsing
  *
@@ -34,12 +34,12 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("unused")
-public class JwtAuthenticationDestroyedEvent extends ApplicationEvent {
-    public JwtAuthenticationDestroyedEvent(@Nonnull JwtAuthenticationToken token) {
+public class JwtAuthenticationCreatedEvent extends ApplicationEvent {
+    public JwtAuthenticationCreatedEvent(@Nonnull JwtAuthenticationToken token) {
         super(token);
     }
 
-    public JwtAuthenticationDestroyedEvent(@Nonnull String token) {
+    public JwtAuthenticationCreatedEvent(@Nonnull String token) {
         super(token);
     }
 
