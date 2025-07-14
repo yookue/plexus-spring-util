@@ -46,7 +46,7 @@ public class JwtAuthenticationDestroyedEvent extends ApplicationEvent {
         this.token = token;
     }
 
-    @Nullable
+    @Nonnull
     public Authentication getRawSource() {
         return ObjectUtilsWraps.castAs(super.getSource(), Authentication.class);
     }
