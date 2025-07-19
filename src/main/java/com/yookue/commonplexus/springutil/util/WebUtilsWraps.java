@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Constructor;
-import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
@@ -97,6 +96,7 @@ import com.yookue.commonplexus.javaseutil.util.LocalePlainWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.NumberUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import com.yookue.commonplexus.springutil.constant.SpringAttributeConst;
 
 
@@ -368,13 +368,32 @@ public abstract class WebUtilsWraps {
         return null;
     }
 
+    public static String getForwardAddress(@Nullable HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
+        String server = request.getHeader(HttpHeaderConst.X_FORWARDED_SERVER);
+        if (StringUtils.isNotBlank(server)) {
+            return server;
+        }
+        String host = request.getHeader(HttpHeaderConst.X_FORWARDED_HOST);
+        String port = request.getHeader(HttpHeaderConst.X_FORWARDED_PORT);
+        if (StringUtilsWraps.allNotBlank(host, port)) {
+            return host + CharVariantConst.COLON + port;
+        }
+        if (StringUtils.isNotBlank(host)) {
+            return host;
+        }
+        return null;
+    }
+
     /**
      * @see "org.apache.http.conn.util.InetAddressWraps"
      * @see "com.alibaba.druid.util.DruidWebUtils#getRemoteAddr(HttpServletRequest)"
      *
      * @reference "http://www.cnblogs.com/ITtangtang/p/3927768.html"
      */
-    public static String getRemoteAddress(@Nullable HttpServletRequest request) throws UnknownHostException {
+    public static String getRemoteAddress(@Nullable HttpServletRequest request) {
         if (request == null) {
             return null;
         }
@@ -389,15 +408,6 @@ public abstract class WebUtilsWraps {
             result = request.getRemoteAddr();
         }
         return InetAddressWraps.toLanAddress(result);
-    }
-
-    @Nullable
-    public static String getRemoteAddressQuietly(@Nullable HttpServletRequest request) {
-        try {
-            return getRemoteAddress(request);
-        } catch (UnknownHostException ignored) {
-        }
-        return null;
     }
 
     public static Object getRequestAttribute(@Nullable HttpServletRequest request, @Nullable String name) {

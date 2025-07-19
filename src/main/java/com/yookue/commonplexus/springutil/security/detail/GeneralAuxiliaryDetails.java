@@ -46,7 +46,7 @@ public class GeneralAuxiliaryDetails extends WebAuthenticationDetails {
 
     public GeneralAuxiliaryDetails(@Nonnull HttpServletRequest request) {
         super(request);
-        StringUtilsWraps.ifNotBlank(WebUtilsWraps.getRemoteAddressQuietly(request), element -> {
+        StringUtilsWraps.ifNotBlank(WebUtilsWraps.getRemoteAddress(request), element -> {
             FieldUtilsWraps.writeField(this, "remoteAddress", element, true);    // $NON-NLS-1$
         });
         if (StringUtils.isBlank(super.getSessionId())) {
