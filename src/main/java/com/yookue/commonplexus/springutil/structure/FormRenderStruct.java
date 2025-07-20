@@ -20,11 +20,10 @@ package com.yookue.commonplexus.springutil.structure;
 import java.io.Serializable;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import com.yookue.commonplexus.springutil.enumeration.FormRenderType;
+import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import lombok.experimental.Accessors;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -34,19 +33,24 @@ import lombok.NoArgsConstructor;
  *
  * @author David Hsing
  *
+ * @see com.yookue.commonplexus.springutil.enumeration.FormRenderType
  * @reference "https://xrender.fun"
  */
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Getter
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class FormRenderStruct<T> implements Serializable {
-    private FormRenderType type = FormRenderType.STRING;
+    private final String type = StringVariantConst.OBJECT;
+
+    @Setter
     private T properties;
 
+    public FormRenderStruct(@Nullable T properties) {
+        this.properties = properties;
+    }
+
     @Nonnull
-    public static <T> FormRenderStruct <T> of(@Nullable FormRenderType type, @Nullable T properties) {
-        return new FormRenderStruct<>(type, properties);
+    public static <T> FormRenderStruct<T> of(@Nullable T properties) {
+        return new FormRenderStruct<>(properties);
     }
 }
