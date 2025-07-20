@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Structure for FormValidation
+ * Structure for form validation
  *
  * @author David Hsing
  *

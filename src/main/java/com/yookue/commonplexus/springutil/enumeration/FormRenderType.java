@@ -14,37 +14,34 @@
  * limitations under the License.
  */
 
-package com.yookue.commonplexus.springutil.structure;
+package com.yookue.commonplexus.springutil.enumeration;
 
 
-import java.io.Serializable;
-import java.math.BigInteger;
-import org.springframework.http.MediaType;
-import lombok.experimental.Accessors;
+import com.yookue.commonplexus.javaseutil.support.ValueEnum;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 
 /**
- * Structure for Upload of Ant Design
+ * Enumerations of form render types
  *
  * @author David Hsing
  *
- * @reference "https://ant.design/components/upload"
+ * @reference "https://xrender.fun/form-render/api-schema#type-1"
  */
-@Accessors(chain = true)
-@NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@ToString
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public class AntUploadStruct implements Serializable {
-    private String uid;
-    private String name;
-    private BigInteger size;
-    private Long lastModified;
-    private Float percent;
-    private String url;
-    private String thumbUrl;
-    private MediaType type;
+public enum FormRenderType implements ValueEnum<String> {
+    STRING("string"),    // $NON-NLS-1$
+    NUMBER("number"),    // $NON-NLS-1$
+    BOOLEAN("boolean"),    // $NON-NLS-1$
+    ARRAY("array"),    // $NON-NLS-1$
+    RANGE("range"),    // $NON-NLS-1$
+    HTML("html"),    // $NON-NLS-1$
+    VOID("void");    // $NON-NLS-1$
+
+    private final String value;
 }

@@ -39,7 +39,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings({"unused", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
+@SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class AntMenuStruct extends ChildrenTreeStruct<AntMenuStruct> {
     private String path;
     private String name;

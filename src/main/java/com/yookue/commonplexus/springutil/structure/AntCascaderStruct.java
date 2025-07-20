@@ -37,7 +37,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings({"unused", "UnusedReturnValue", "JavadocDeclaration", "JavadocLinkAsPlainText"})
+@SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class AntCascaderStruct extends ChildrenTreeStruct<AntCascaderStruct> {
     private String label;
     private String value;

@@ -18,8 +18,9 @@ package com.yookue.commonplexus.springutil.structure;
 
 
 import java.io.Serializable;
-import java.math.BigInteger;
-import org.springframework.http.MediaType;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import com.yookue.commonplexus.springutil.enumeration.FormRenderType;
 import lombok.experimental.Accessors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,24 +28,25 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Structure for Upload of Ant Design
+ * Structure for form render
+ *
+ * @param <T> the type of the object inside
  *
  * @author David Hsing
  *
- * @reference "https://ant.design/components/upload"
+ * @reference "https://xrender.fun"
  */
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
-public class AntUploadStruct implements Serializable {
-    private String uid;
-    private String name;
-    private BigInteger size;
-    private Long lastModified;
-    private Float percent;
-    private String url;
-    private String thumbUrl;
-    private MediaType type;
+public class FormRenderStruct<T> implements Serializable {
+    private FormRenderType type = FormRenderType.STRING;
+    private T properties;
+
+    @Nonnull
+    public static <T> FormRenderStruct <T> of(@Nullable FormRenderType type, @Nullable T properties) {
+        return new FormRenderStruct<>(type, properties);
+    }
 }

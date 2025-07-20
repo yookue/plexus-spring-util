@@ -45,7 +45,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Structure for REST response
+ * Structure for rest response
  *
  * @author David Hsing
  *
@@ -55,7 +55,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class RestResponseStruct implements Serializable {
     private Integer status = ResponseBodyConst.CODE_FAILURE;
     private Object data;

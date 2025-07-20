@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Structure for DataTables
+ * Structure for data tables
  *
  * @author David Hsing
  *
