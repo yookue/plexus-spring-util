@@ -85,33 +85,38 @@ public abstract class AntTableWraps {
 
     @Nullable
     public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForTableWithContextParameterized(sqlSession, statementId, false, null);
+        return queryForTableWithContextParameterized(sqlSession, statementId, false, false, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
-        return queryForTableWithContextParameterized(sqlSession, statementId, payloadParam, null);
+    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean includePayload, boolean unwrapSingleArray) {
+        return queryForTableWithContextParameterized(sqlSession, statementId, includePayload, unwrapSingleArray, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
+    public static AntTableStruct queryForTableWithContextParameterized(@Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean includePayload, boolean unwrapSingleArray, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
         HttpServletRequest request = WebUtilsWraps.getContextServletRequest();
-        return (request == null) ? null : queryForTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, paramsAction);
+        return (request == null) ? null : queryForTableWithRequestParameterized(request, sqlSession, statementId, includePayload, unwrapSingleArray, paramsAction);
     }
 
     @Nullable
     public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId) {
-        return queryForTableWithRequestParameterized(request, sqlSession, statementId, false, null);
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, false, false, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam) {
-        return queryForTableWithRequestParameterized(request, sqlSession, statementId, payloadParam, null);
+    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean includePayload) {
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, includePayload, false, null);
     }
 
     @Nullable
-    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean payloadParam, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
-        Map<String, Object> params = RequestParamWraps.getParameterObjectMap(request, false, payloadParam);
+    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean includePayload, boolean unwrapSingleArray) {
+        return queryForTableWithRequestParameterized(request, sqlSession, statementId, includePayload, unwrapSingleArray, null);
+    }
+
+    @Nullable
+    public static AntTableStruct queryForTableWithRequestParameterized(@Nonnull HttpServletRequest request, @Nonnull SqlSession sqlSession, @Nonnull String statementId, boolean includePayload, boolean unwrapSingleArray, @Nullable UnaryOperator<Map<String, Object>> paramsAction) {
+        Map<String, Object> params = RequestParamWraps.getParameterObjectMap(request, false, includePayload, unwrapSingleArray);
         if (paramsAction != null) {
             params = paramsAction.apply(params);
         }

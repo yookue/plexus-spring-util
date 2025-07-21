@@ -732,19 +732,28 @@ public abstract class RequestParamWraps {
     }
 
     public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request) {
-        return getParameterObjectMap(request, false, false);
+        return getParameterObjectMap(request, false, false, false);
+    }
+
+    public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull) {
+        return getParameterObjectMap(request, emptyAsNull, false, false);
+    }
+
+    public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
+        return getParameterObjectMap(request, emptyAsNull, includePayload, false);
     }
 
     /**
      * Returns a {@link java.util.LinkedHashMap} that contains all the request parameters
      *
      * @param request the http servlet request to inspect
-     * @param emptyAsNull whether returns null if there isn't any parameters
+     * @param emptyAsNull whether returns null if there isn't any parameters or the parameter value is empty
      * @param includePayload whether includes the payload parameters when the request is an ajax request
+     * @param unwrapSingleArray whether to unwrap single array parameters to plain value, e.g. [1] -> 1. Useful for binding mobile picker values
      *
      * @return a {@link java.util.LinkedHashMap} that contains all the request parameters
      */
-    public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
+    public static Map<String, Object> getParameterObjectMap(@Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
         Map<String, Object> result = new LinkedHashMap<>();
         if (request == null) {
             return emptyAsNull ? null : result;
@@ -774,7 +783,8 @@ public abstract class RequestParamWraps {
             if (value instanceof String instance && emptyAsNull) {
                 result.put(key, StringUtils.trimToNull(instance));
             } else if (value instanceof Collection<?> instance) {
-                result.put(key, instance.toArray());
+                Object[] values = instance.toArray();
+                result.put(key, (unwrapSingleArray && ArrayUtils.getLength(values) == 1) ? ArrayUtilsWraps.getFirst(values) : values);
             } else {
                 result.put(key, value);
             }
@@ -783,19 +793,20 @@ public abstract class RequestParamWraps {
     }
 
     public static Map<String, Object> getContextRequestParameterObjectMap() {
-        return getContextRequestParameterObjectMap(true, false);
+        return getContextRequestParameterObjectMap(true, false, false);
     }
 
     /**
      * Returns a {@link java.util.LinkedHashMap} that contains all the context request parameters
      *
-     * @param emptyAsNull whether returns null if there isn't any parameters
+     * @param emptyAsNull whether returns null if there isn't any parameters or the parameter value is empty
      * @param includePayload whether includes the payload parameters when the request is an ajax request
+     * @param unwrapSingleArray whether to unwrap single array parameters to plain value, e.g. [1] -> 1. Useful for binding mobile picker values
      *
      * @return a {@link java.util.LinkedHashMap} that contains all the context request parameters
      */
-    public static Map<String, Object> getContextRequestParameterObjectMap(boolean emptyAsNull, boolean includePayload) {
-        return getParameterObjectMap(WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload);
+    public static Map<String, Object> getContextRequestParameterObjectMap(boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
+        return getParameterObjectMap(WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, unwrapSingleArray);
     }
 
     public static Cookie getCookie(@Nullable HttpServletRequest request, @Nullable String name) {
@@ -864,22 +875,30 @@ public abstract class RequestParamWraps {
     }
 
     public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request) {
-        populateParametersToBean(bean, request, false, false, (Collection<String>) null);
+        populateParametersToBean(bean, request, false, false, false, (Collection<String>) null);
+    }
+
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull) {
+        populateParametersToBean(bean, request, emptyAsNull, false, false, (Collection<String>) null);
     }
 
     public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
-        populateParametersToBean(bean, request, emptyAsNull, includePayload, (Collection<String>) null);
+        populateParametersToBean(bean, request, emptyAsNull, includePayload, false, (Collection<String>) null);
     }
 
-    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable String... ignoredFields) {
-        populateParametersToBean(bean, request, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
+        populateParametersToBean(bean, request, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
     }
 
-    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
+        populateParametersToBean(bean, request, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
+    }
+
+    public static void populateParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
         if (ObjectUtils.anyNull(bean, request)) {
             return;
         }
-        Map<String, Object> map = getParameterObjectMap(request, emptyAsNull, includePayload);
+        Map<String, Object> map = getParameterObjectMap(request, emptyAsNull, includePayload, unwrapSingleArray);
         if (MapPlainWraps.isEmpty(map)) {
             return;
         }
@@ -890,18 +909,26 @@ public abstract class RequestParamWraps {
     }
 
     public static void populateContextParametersToBean(@Nullable Object bean) {
-        populateContextParametersToBean(bean, false, false, (Collection<String>) null);
+        populateContextParametersToBean(bean, false, false, false, (Collection<String>) null);
+    }
+
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull) {
+        populateContextParametersToBean(bean, emptyAsNull, false, false, (Collection<String>) null);
     }
 
     public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload) {
-        populateContextParametersToBean(bean, emptyAsNull, includePayload, (Collection<String>) null);
+        populateContextParametersToBean(bean, emptyAsNull, includePayload, false, (Collection<String>) null);
     }
 
-    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, @Nullable String... ignoredFields) {
-        populateContextParametersToBean(bean, emptyAsNull, includePayload, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
+        populateContextParametersToBean(bean, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
     }
 
-    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, @Nullable Collection<String> ignoredFields) {
-        populateParametersToBean(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, ignoredFields);
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
+        populateContextParametersToBean(bean, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
+    }
+
+    public static void populateContextParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
+        populateParametersToBean(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, unwrapSingleArray, ignoredFields);
     }
 }
