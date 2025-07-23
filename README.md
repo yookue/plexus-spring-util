@@ -41,7 +41,6 @@ Yookue plexus-spring-util is a packages of utility classes for Spring's hierarch
 | structure   | Various structs to represents data combinations                                      |
 | support     | Components that extends from Spring to provide some particular purposes              |
 | util        | Powerful utilities that may speed up your development                                |
-| validation  | Useful sequences and groups for Spring validation                                    |
 
 ## Document
 

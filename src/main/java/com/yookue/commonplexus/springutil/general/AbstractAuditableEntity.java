@@ -33,7 +33,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yookue.commonplexus.javaseutil.annotation.BeanCopyIgnore;
-import com.yookue.commonplexus.springutil.validation.sequence.InsertUpdateSequence;
+import com.yookue.commonplexus.javaseutil.validation.sequence.InsertUpdateSequence;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

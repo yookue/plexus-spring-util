@@ -22,7 +22,7 @@
 
     <groupId>com.yookue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.5.2</version>
+    <version>3.5.3</version>
 
     <name>${project.artifactId}</name>
     <description>Yookue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
@@ -47,7 +47,7 @@
         <project.build.resourceEncoding>${file.encoding}</project.build.resourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
 
-        <spring-boot.version>3.5.2</spring-boot.version>
+        <spring-boot.version>3.5.3</spring-boot.version>
 
         <commons-beanutils2.version>2.0.1</commons-beanutils2.version>
         <commons-fileupload2.version>2.0.0-M1</commons-fileupload2.version>
@@ -56,8 +56,8 @@
         <java-jwt.version>4.5.0</java-jwt.version>
         <joda-time.version>2.14.0</joda-time.version>
         <mybatis.version>3.5.19</mybatis.version>
-        <pagehelper.version>6.1.0</pagehelper.version>
-        <plexus-javase-util.version>2.0.9</plexus-javase-util.version>
+        <pagehelper.version>6.1.1</pagehelper.version>
+        <plexus-javase-util.version>2.1.0</plexus-javase-util.version>
 
         <javadoc-docent-maven-plugin.version>2.0.2</javadoc-docent-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
@@ -66,9 +66,9 @@
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
-        <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
