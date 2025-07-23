@@ -60,7 +60,7 @@ public abstract class DataTableWraps {
     /**
      * Return a map that contains the column name and the sort order
      *
-     * @param params the parameters map, most likely servlet request parameters
+     * @param params The parameters map, most likely servlet request parameters
      *
      * @return a map that contains the column name and the sort order
      */

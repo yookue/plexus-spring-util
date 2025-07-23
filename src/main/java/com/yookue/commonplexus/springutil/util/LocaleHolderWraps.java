@@ -64,7 +64,7 @@ public abstract class LocaleHolderWraps {
      * <li><tt>en-US</tt></li>
      * <li><tt>zh-CN</tt></li>
      *
-     * @param locale the source locale to convert
+     * @param locale The source locale to convert
      *
      * @return a BCP47 language tag representing the locale, or from the context locale
      */

@@ -87,11 +87,11 @@ public class BeanValidationMessenger {
     /**
      * Return a string list that contains violation error messages from a binding result
      *
-     * @param binding a binding result object
-     * @param fieldName indicate using field name or not
-     * @param nameLocalized indicate using localized field name or not, must be coordinated with {@code fieldName} true
-     * @param orderFormat a template format used to format order string (e.g. "[%d]")
-     * @param locale the locale in which to resolve the error message, may be {@code null}
+     * @param binding A binding result object
+     * @param fieldName Indicate using field name or not
+     * @param nameLocalized Indicate using localized field name or not, must be coordinated with {@code fieldName} true
+     * @param orderFormat A template format used to format order string (e.g. "[%d]")
+     * @param locale The locale in which to resolve the error message, may be {@code null}
      *
      * @return a string list that contains violation error messages from a binding result
      */

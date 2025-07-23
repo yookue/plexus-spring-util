@@ -52,8 +52,8 @@ public abstract class StringUtilsWraps {
     /**
      * Return formatted string template as {@link org.slf4j.Logger} does
      *
-     * @param template string template to be formatted with curly brackets
-     * @param arguments anything to be converted to string
+     * @param template The string template to be formatted with curly brackets
+     * @param arguments Anything to be converted to string
      *
      * @return formatted string template as {@link org.slf4j.Logger} does
      */
@@ -119,9 +119,9 @@ public abstract class StringUtilsWraps {
      *     StringUtilsWraps.splitKeyValuesIntoProperties("firstKey=firstValue, secondKey=secondValue", ",", "=")
      * </code></pre>
      *
-     * @param text the string to split (potentially {@code null} or empty)
-     * @param groupDelimiter the separate string for groups, {@code null} means use whitespace
-     * @param keyValueDelimiter the separate string for key values, {@code null} or empty means use "="
+     * @param text The string to split (potentially {@code null} or empty)
+     * @param groupDelimiter The separate string for groups, {@code null} means use whitespace
+     * @param keyValueDelimiter The separate string for key values, {@code null} or empty means use "="
      *
      * @return a {@code Properties} instance that split by the given group delimiter and key value delimiter
      *
@@ -138,10 +138,10 @@ public abstract class StringUtilsWraps {
      *     StringUtilsWraps.splitKeyValuesIntoProperties("firstKey=firstValue, secondKey=secondValue", ",", "=", null)
      * </code></pre>
      *
-     * @param text the string to split (potentially {@code null} or empty)
-     * @param groupDelimiter the separate string for groups, {@code null} means use whitespace
-     * @param keyValueDelimiter the separate string for key values, {@code null} or empty means use "="
-     * @param charsToDelete one or more characters to remove from each element
+     * @param text The string to split (potentially {@code null} or empty)
+     * @param groupDelimiter The separate string for groups, {@code null} means use whitespace
+     * @param keyValueDelimiter The separate string for key values, {@code null} or empty means use "="
+     * @param charsToDelete One or more characters to remove from each element
      *
      * @return a {@code Properties} instance that split by the given group delimiter and key value delimiter
      *

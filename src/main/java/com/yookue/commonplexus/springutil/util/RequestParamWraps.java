@@ -746,10 +746,10 @@ public abstract class RequestParamWraps {
     /**
      * Returns a {@link java.util.LinkedHashMap} that contains all the request parameters
      *
-     * @param request the http servlet request to inspect
-     * @param emptyAsNull whether returns null if there isn't any parameters or the parameter value is empty
-     * @param includePayload whether includes the payload parameters when the request is an ajax request
-     * @param unwrapSingleArray whether to unwrap single array parameters to plain value, e.g. [1] -> 1. Useful for binding mobile picker values
+     * @param request The http servlet request to inspect
+     * @param emptyAsNull Whether returns null if there isn't any parameters or the parameter value is empty
+     * @param includePayload Whether includes the payload parameters when the request is an ajax request
+     * @param unwrapSingleArray Whether to unwrap single array parameters to plain value, e.g. [1] -> 1. Useful for binding mobile picker values
      *
      * @return a {@link java.util.LinkedHashMap} that contains all the request parameters
      */
@@ -799,9 +799,9 @@ public abstract class RequestParamWraps {
     /**
      * Returns a {@link java.util.LinkedHashMap} that contains all the context request parameters
      *
-     * @param emptyAsNull whether returns null if there isn't any parameters or the parameter value is empty
-     * @param includePayload whether includes the payload parameters when the request is an ajax request
-     * @param unwrapSingleArray whether to unwrap single array parameters to plain value, e.g. [1] -> 1. Useful for binding mobile picker values
+     * @param emptyAsNull Whether returns null if there isn't any parameters or the parameter value is empty
+     * @param includePayload Whether includes the payload parameters when the request is an ajax request
+     * @param unwrapSingleArray Whether to unwrap single array parameters to plain value, e.g. [1] -> 1. Useful for binding mobile picker values
      *
      * @return a {@link java.util.LinkedHashMap} that contains all the context request parameters
      */

@@ -53,7 +53,7 @@ public abstract class AbstractExcludableRequestFilter extends OncePerRequestFilt
     /**
      * Excludes the specified path from the filter
      *
-     * @param path a string that represents an ant path pattern
+     * @param path A string that represents an ant path pattern
      */
     public void addExcludedPath(@Nullable String path) {
         CollectionPlainWraps.addAllIfNotBlank(excludedPaths, path);
@@ -62,7 +62,7 @@ public abstract class AbstractExcludableRequestFilter extends OncePerRequestFilt
     /**
      * Excludes the specified paths from the filter
      *
-     * @param paths a string array that contains ant path pattern
+     * @param paths A string array that contains ant path pattern
      */
     public void addExcludedPath(@Nullable String... paths) {
         CollectionPlainWraps.addAllIfNotBlank(excludedPaths, paths);
@@ -71,7 +71,7 @@ public abstract class AbstractExcludableRequestFilter extends OncePerRequestFilt
     /**
      * Excludes the specified paths from the filter
      *
-     * @param paths a string collection that contains ant path pattern
+     * @param paths A string collection that contains ant path pattern
      */
     public void addExcludedPath(@Nullable Collection<String> paths) {
         CollectionPlainWraps.addAllIfNotBlank(excludedPaths, paths);

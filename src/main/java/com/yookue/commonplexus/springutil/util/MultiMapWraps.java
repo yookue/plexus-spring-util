@@ -40,9 +40,9 @@ public abstract class MultiMapWraps {
     /**
      * Add the given value to the {@code target} map for the given key
      *
-     * @param target the target map to add to
-     * @param key the key to search
-     * @param value the value to be added
+     * @param target The target map to add to
+     * @param key The key to search
+     * @param value The value to be added
      */
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> void add(@Nullable MultiValueMap<K, V> target, @Nullable K key, @Nullable V value) {
@@ -54,9 +54,9 @@ public abstract class MultiMapWraps {
     /**
      * Add all the values to the {@code target} map for the given key
      *
-     * @param target the target map to add to
-     * @param key the key to search
-     * @param values the values to be added
+     * @param target The target map to add to
+     * @param key The key to search
+     * @param values The values to be added
      */
     @SuppressWarnings("DataFlowIssue")
     public static <K, V> void addAll(@Nullable MultiValueMap<K, V> target, @Nullable K key, @Nullable List<? extends V> values) {
@@ -68,8 +68,8 @@ public abstract class MultiMapWraps {
     /**
      * Add all the {@code source} map to the {@code target} map
      *
-     * @param target the target map to add to
-     * @param source the key and values to be added
+     * @param target The target map to add to
+     * @param source The key and values to be added
      */
     public static <K, V> void addAll(@Nullable MultiValueMap<K, V> target, @Nullable MultiValueMap<K, V> source) {
         if (target != null && MapPlainWraps.isNotEmpty(source)) {
@@ -97,8 +97,8 @@ public abstract class MultiMapWraps {
     /**
      * Returns the first element of value list for the given key
      *
-     * @param map the source map to look for
-     * @param key the key to find
+     * @param map The source map to look for
+     * @param key The key to find
      *
      * @return the first element of value list for the given key
      */
@@ -111,8 +111,8 @@ public abstract class MultiMapWraps {
     /**
      * Returns the first non-null value for the given key
      *
-     * @param map the source map to look for
-     * @param key the key to find
+     * @param map The source map to look for
+     * @param key The key to find
      *
      * @return the first non-null value for the given key
      */
@@ -124,8 +124,8 @@ public abstract class MultiMapWraps {
     /**
      * Returns the first non-empty value for the given key
      *
-     * @param map the source map to look for
-     * @param key the key to find
+     * @param map The source map to look for
+     * @param key The key to find
      *
      * @return the first non-empty value for the given key
      */
@@ -137,8 +137,8 @@ public abstract class MultiMapWraps {
     /**
      * Returns the first non-blank value for the given key
      *
-     * @param map the source map to look for
-     * @param key the key to find
+     * @param map The source map to look for
+     * @param key The key to find
      *
      * @return the first non-blank value for the given key
      */
@@ -150,8 +150,8 @@ public abstract class MultiMapWraps {
     /**
      * Returns the value array for the given key
      *
-     * @param map the source map to look for
-     * @param key the key to find
+     * @param map The source map to look for
+     * @param key The key to find
      *
      * @return the value array for the given key
      */

@@ -101,8 +101,8 @@ public abstract class ObjectProviderWraps {
     /**
      * If a value is available, performs the given action with the value, otherwise performs the given empty-based action
      *
-     * @param presentAction the action to be performed, if a value is available
-     * @param absentAction the empty-based action to be performed, if no value is available
+     * @param presentAction The action to be performed, if a value is available
+     * @param absentAction The empty-based action to be performed, if no value is available
      */
     public static <E, T extends ObjectProvider<E>> void ifAvailableOrElse(@Nullable T provider, @Nullable Consumer<E> presentAction, @Nullable Runnable absentAction) {
         E value = getIfAvailable(provider);
@@ -196,8 +196,8 @@ public abstract class ObjectProviderWraps {
     /**
      * If a value is unique, performs the given action with the value, otherwise performs the given empty-based action
      *
-     * @param presentAction the action to be performed, if a value is unique
-     * @param absentAction the empty-based action to be performed, if no value is unique
+     * @param presentAction The action to be performed, if a value is unique
+     * @param absentAction The empty-based action to be performed, if no value is unique
      */
     public static <E, T extends ObjectProvider<E>> void ifUniqueOrElse(@Nullable T provider, @Nullable Consumer<E> presentAction, @Nullable Consumer<Iterator<E>> absentAction) {
         E value = getIfUnique(provider);

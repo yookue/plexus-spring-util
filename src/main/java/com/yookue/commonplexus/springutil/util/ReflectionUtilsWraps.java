@@ -258,8 +258,8 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found {@link java.lang.reflect.Field} with the given class and field name
      *
-     * @param clazz the class to introspect
-     * @param fieldName the name of the field
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field
      *
      * @return the found {@link java.lang.reflect.Field} with the given class and field name
      */
@@ -271,9 +271,9 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found {@link java.lang.reflect.Field} with the given class and field name/type
      *
-     * @param clazz the class to introspect
-     * @param fieldName the name of the field (could be {@code null} if {@code fieldType} is specified)
-     * @param fieldType the type of the field (could be {@code null} if {@code fieldName} is specified)
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field (could be {@code null} if {@code fieldType} is specified)
+     * @param fieldType The type of the field (could be {@code null} if {@code fieldName} is specified)
      *
      * @return the found {@link java.lang.reflect.Field} with the given class and field name/type
      */
@@ -285,8 +285,8 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found accessible {@link java.lang.reflect.Field} with the given class and field name
      *
-     * @param clazz the class to introspect
-     * @param fieldName the name of the field
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field
      *
      * @return the found accessible {@link java.lang.reflect.Field} with the given class and field name
      */
@@ -298,9 +298,9 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found accessible {@link java.lang.reflect.Field} with the given class and field name/type
      *
-     * @param clazz the class to introspect
-     * @param fieldName the name of the field (could be {@code null} if {@code fieldType} is specified)
-     * @param fieldType the type of the field (could be {@code null} if {@code fieldName} is specified)
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field (could be {@code null} if {@code fieldType} is specified)
+     * @param fieldType The type of the field (could be {@code null} if {@code fieldName} is specified)
      *
      * @return the found accessible {@link java.lang.reflect.Field} with the given class and field name/type
      */
@@ -314,8 +314,8 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found {@link java.lang.reflect.Method} with the given class and method name
      *
-     * @param clazz the class to introspect
-     * @param methodName the name of the method
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
      *
      * @return the found {@link java.lang.reflect.Method} with the given class and method name
      */
@@ -327,9 +327,9 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found {@link java.lang.reflect.Method} with the given class and method name/parameter types
      *
-     * @param clazz the class to introspect
-     * @param methodName the name of the method
-     * @param paramTypes the parameter types of the method (could be {@code null} to indicate any signature)
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     * @param paramTypes The parameter types of the method (could be {@code null} to indicate any signature)
      *
      * @return the found {@link java.lang.reflect.Method} with the given class and method name/parameter types
      */
@@ -341,9 +341,9 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found {@link java.lang.reflect.Method} with the given class and method name/assignable parameter types
      *
-     * @param clazz the class to introspect
-     * @param methodName the name of the method
-     * @param paramTypes the assignable parameter types of the method (could be {@code null} to indicate any signature)
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     * @param paramTypes The assignable parameter types of the method (could be {@code null} to indicate any signature)
      *
      * @return the found {@link java.lang.reflect.Method} with the given class and method name/assignable parameter types
      */
@@ -359,8 +359,8 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found accessible {@link java.lang.reflect.Method} with the given class and method name
      *
-     * @param clazz the class to introspect
-     * @param methodName the name of the method
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
      *
      * @return the found accessible {@link java.lang.reflect.Method} with the given class and method name
      */
@@ -372,9 +372,9 @@ public abstract class ReflectionUtilsWraps {
     /**
      * Returns the found accessible {@link java.lang.reflect.Method} with the given class and method name/parameter types
      *
-     * @param clazz the class to introspect
-     * @param methodName the name of the method
-     * @param paramTypes the parameter types of the method (could be {@code null} to indicate any signature)
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     * @param paramTypes The parameter types of the method (could be {@code null} to indicate any signature)
      *
      * @return the found accessible {@link java.lang.reflect.Method} with the given class and method name/parameter types
      */

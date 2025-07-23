@@ -49,9 +49,9 @@ public abstract class ValidationUtilsWraps {
     /**
      * Returns the formatted reason phrase for {@link org.springframework.validation.ObjectError}
      *
-     * @param error the object error to be detected
-     * @param prefix the prefix for field, if {@code error} is a {@link org.springframework.validation.FieldError}
-     * @param suffix the suffix for field, if {@code error} is a {@link org.springframework.validation.FieldError}
+     * @param error The object error to be detected
+     * @param prefix The prefix for field, if {@code error} is a {@link org.springframework.validation.FieldError}
+     * @param suffix The suffix for field, if {@code error} is a {@link org.springframework.validation.FieldError}
      *
      * @return the formatted reason phrase for {@link org.springframework.validation.ObjectError}
      */

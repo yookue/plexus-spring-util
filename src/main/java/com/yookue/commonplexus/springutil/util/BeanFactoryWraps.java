@@ -105,10 +105,10 @@ public abstract class BeanFactoryWraps {
     /**
      * Return a bean instance that uniquely matches the given object type
      *
-     * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param expectType the class of the bean to instantiate
-     * @param autowireMode by name or type, using the constants in the interface of {@link org.springframework.beans.factory.config.AutowireCapableBeanFactory}
-     * @param dependencyCheck whether to perform a dependency check for object
+     * @param factory The {@link org.springframework.beans.factory.BeanFactory} object that be searched
+     * @param expectType The class of the bean to instantiate
+     * @param autowireMode By name or type, using the constants in the interface of {@link org.springframework.beans.factory.config.AutowireCapableBeanFactory}
+     * @param dependencyCheck Whether to perform a dependency check for object
      *
      * @return a bean instance that uniquely matches the given object type
      *
@@ -203,8 +203,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Check if this bean factory contains a bean definition with the given name
      *
-     * @param factory the bean factory to look for
-     * @param beanName the name of the bean to look for
+     * @param factory The bean factory to look for
+     * @param beanName The name of the bean to look for
      *
      * @return if this bean factory contains a bean definition with the given name
      */
@@ -309,9 +309,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
-     * @param factory the bean factory to look for
-     * @param expectType type the bean must match; can be an interface or superclass
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType Type the bean must match; can be an interface or superclass
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
@@ -324,9 +324,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
-     * @param factory the bean factory to look for
-     * @param expectType the type of bean to match, can be a generic type declaration
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType The type of bean to match, can be a generic type declaration
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return an instance for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
@@ -339,8 +339,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Return a bean instance that uniquely matches the given object type, if any
      *
-     * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param expectType type the bean must match; can be an interface or superclass
+     * @param factory A {@link org.springframework.beans.factory.BeanFactory} object that be searched
+     * @param expectType Type the bean must match; can be an interface or superclass
      *
      * @return a bean instance that uniquely matches the given object type, if any
      */
@@ -461,9 +461,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns an annotation on the specified bean, traversing its interfaces and superclasses if no annotation can be found on the given class itself, as well as checking the bean's factory method (if any)
      *
-     * @param factory the bean factory to look for
-     * @param beanName the name of the bean to look for annotations on
-     * @param annotation the type of annotation to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param beanName The name of the bean to look for annotations on
+     * @param annotation The type of annotation to look for (at class, interface or factory method level of the specified bean)
      *
      * @return the annotation of the given type if found, or {@code null} otherwise
      */
@@ -475,10 +475,10 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns an annotation on the specified bean, traversing its interfaces and superclasses if no annotation can be found on the given class itself, as well as checking the bean's factory method (if any)
      *
-     * @param factory the bean factory to look for
-     * @param beanName the name of the bean to look for annotations on
-     * @param annotation the type of annotation to look for (at class, interface or factory method level of the specified bean)
-     * @param allowFactoryBeanInit whether a {@code FactoryBean} may get initialized just for the purpose of determining its object type
+     * @param factory The bean factory to look for
+     * @param beanName The name of the bean to look for annotations on
+     * @param annotation The type of annotation to look for (at class, interface or factory method level of the specified bean)
+     * @param allowFactoryBeanInit Whether a {@code FactoryBean} may get initialized just for the purpose of determining its object type
      *
      * @return the annotation of the given type if found, or {@code null} otherwise
      */
@@ -497,8 +497,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Determine the type of the bean with the given name
      *
-     * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param beanName the name of the bean to query
+     * @param factory A {@link org.springframework.beans.factory.BeanFactory} object that be searched
+     * @param beanName The name of the bean to query
      *
      * @return the type of the bean, or {@code null} if not determinable
      */
@@ -517,9 +517,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Determine the type of the bean with the given name
      *
-     * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param beanName the name of the bean to query
-     * @param allowFactoryBeanInit whether a {@code FactoryBean} may get initialized
+     * @param factory A {@link org.springframework.beans.factory.BeanFactory} object that be searched
+     * @param beanName The name of the bean to query
+     * @param allowFactoryBeanInit Whether a {@code FactoryBean} may get initialized
      *
      * @return the type of the bean, or {@code null} if not determinable
      */
@@ -557,8 +557,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Return a set of bean names that match the given annotations, in intersection
      *
-     * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param annotations the given annotations
+     * @param factory A {@link org.springframework.beans.factory.BeanFactory} object that be searched
+     * @param annotations The given annotations
      *
      * @return a set of bean names that match the given annotations, in intersection
      *
@@ -617,8 +617,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Return a set of bean names that match any of the given annotations
      *
-     * @param factory a {@link org.springframework.beans.factory.BeanFactory} object that be searched
-     * @param annotations the given annotations
+     * @param factory A {@link org.springframework.beans.factory.BeanFactory} object that be searched
+     * @param annotations The given annotations
      *
      * @return a set of bean names that match any of the given annotations
      *
@@ -651,7 +651,7 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the number of beans defined in the factory
      *
-     * @param factory the bean factory to look for
+     * @param factory The bean factory to look for
      *
      * @return the number of beans defined in the factory
      */
@@ -662,7 +662,7 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the names of all beans defined in this factory
      *
-     * @param factory the bean factory to look for
+     * @param factory The bean factory to look for
      *
      * @return the names of all beans defined in this factory
      */
@@ -699,9 +699,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
-     * @param factory the bean factory to look for
-     * @param expectType type the bean must match; can be an interface or superclass
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType Type the bean must match; can be an interface or superclass
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
@@ -716,9 +716,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      *
-     * @param factory the bean factory to look for
-     * @param expectType the type of bean to match, can be a generic type declaration
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType The type of bean to match, can be a generic type declaration
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return a provider for the specified bean, allowing for lazy on-demand retrieval of instances, including availability and uniqueness options
      */
@@ -733,8 +733,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
-     * @param factory the bean factory to look for
-     * @param expectType the type of bean to match, can be a generic type declaration
+     * @param factory The bean factory to look for
+     * @param expectType The type of bean to match, can be a generic type declaration
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
@@ -746,10 +746,10 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
-     * @param factory the bean factory to look for
-     * @param expectType the type of bean to match, can be a generic type declaration
-     * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType The type of bean to match, can be a generic type declaration
+     * @param includeNonSingletons Whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
@@ -764,8 +764,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Return the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all bean names
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all bean names
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
@@ -777,10 +777,10 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the names of beans matching the given type (including subclasses), judging from either bean definitions or the value of {@code getObjectType} in the case of FactoryBeans
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all bean names
-     * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all bean names
+     * @param includeNonSingletons Whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return the names of beans (or objects created by FactoryBeans) matching
      */
@@ -795,8 +795,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the bean instances that match the given object type (including subclasses)
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all concrete beans
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all concrete beans
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -808,9 +808,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all concrete beans
-     * @param beanNames the bean names that should match
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all concrete beans
+     * @param beanNames The bean names that should match
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -822,9 +822,9 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all concrete beans
-     * @param beanNames the bean names that should match
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all concrete beans
+     * @param beanNames The bean names that should match
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -843,10 +843,10 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the bean instances that match the given object type (including subclasses)
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all concrete beans
-     * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all concrete beans
+     * @param includeNonSingletons Whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -865,11 +865,11 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all concrete beans
-     * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
-     * @param beanNames the bean names that should match
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all concrete beans
+     * @param includeNonSingletons Whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param beanNames The bean names that should match
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -881,11 +881,11 @@ public abstract class BeanFactoryWraps {
     /**
      * Returns the bean instances that match the given object type (including subclasses), with specified {@code beanNames}
      *
-     * @param factory the bean factory to look for
-     * @param expectType the class or interface to match, or {@code null} for all concrete beans
-     * @param includeNonSingletons whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
-     * @param allowEagerInit whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
-     * @param beanNames the bean names that should match
+     * @param factory The bean factory to look for
+     * @param expectType The class or interface to match, or {@code null} for all concrete beans
+     * @param includeNonSingletons Whether to include prototype or scoped beans too or just singletons (also applies to FactoryBeans)
+     * @param allowEagerInit Whether stream-based access may initialize <i>lazy-init singletons</i> and <i>objects created by FactoryBeans</i> (or by factory methods with a "factory-bean" reference)
+     * @param beanNames The bean names that should match
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -904,8 +904,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Find all beans which are annotated with the supplied {@code annotation}
      *
-     * @param factory the bean factory to look for
-     * @param annotation the type of annotation to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param annotation The type of annotation to look for (at class, interface or factory method level of the specified bean)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -924,8 +924,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Find all beans which are annotated with the supplied {@code annotation}, casting to {@code expectType}
      *
-     * @param factory the bean factory to look for
-     * @param annotation the type of annotation to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param annotation The type of annotation to look for (at class, interface or factory method level of the specified bean)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -951,8 +951,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Find all beans which are annotated with all the supplied {@code annotations}
      *
-     * @param factory the bean factory to look for
-     * @param annotations the types of annotations to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param annotations The types of annotations to look for (at class, interface or factory method level of the specified bean)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -965,8 +965,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Find all beans which are annotated with all the supplied {@code annotations}
      *
-     * @param factory the bean factory to look for
-     * @param annotations the types of annotations to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param annotations The types of annotations to look for (at class, interface or factory method level of the specified bean)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -1006,8 +1006,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Find all beans which are annotated with any of the supplied {@code annotations}
      *
-     * @param factory the bean factory to look for
-     * @param annotations the types of annotations to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param annotations The types of annotations to look for (at class, interface or factory method level of the specified bean)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
@@ -1020,8 +1020,8 @@ public abstract class BeanFactoryWraps {
     /**
      * Find all beans which are annotated with any of the supplied {@code annotations}
      *
-     * @param factory the bean factory to look for
-     * @param annotations the types of annotations to look for (at class, interface or factory method level of the specified bean)
+     * @param factory The bean factory to look for
+     * @param annotations The types of annotations to look for (at class, interface or factory method level of the specified bean)
      *
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */

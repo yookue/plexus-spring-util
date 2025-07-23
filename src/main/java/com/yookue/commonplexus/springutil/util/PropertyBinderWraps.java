@@ -51,8 +51,8 @@ public abstract class PropertyBinderWraps {
     /**
      * Returns whether the environment contains the given property/prefix or not
      *
-     * @param environment the environment of {@link org.springframework.core.env.ConfigurableEnvironment}
-     * @param property the property name or property prefix, should be a valid name of {@link org.springframework.boot.context.properties.source.ConfigurationPropertyName}
+     * @param environment The environment of {@link org.springframework.core.env.ConfigurableEnvironment}
+     * @param property The property name or property prefix, should be a valid name of {@link org.springframework.boot.context.properties.source.ConfigurationPropertyName}
      *
      * @return whether the environment contains the given property/prefix or not
      */
@@ -102,8 +102,8 @@ public abstract class PropertyBinderWraps {
     /**
      * Returns whether the given properties are equal to each other or not
      *
-     * @param property1 the first property
-     * @param property2 the second property
+     * @param property1 The first property
+     * @param property2 The second property
      *
      * @return whether the given properties are equal to each other or not
      *

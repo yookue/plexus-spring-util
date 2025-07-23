@@ -115,10 +115,10 @@ public abstract class WebUtilsWraps {
     /**
      * Add an attribute to an http request instance
      *
-     * @param request an http request instance
-     * @param response an http response instance, must not be null when {@code input} is true
-     * @param name the attribute name
-     * @param value the attribute value
+     * @param request An http request instance
+     * @param response An http response instance, must not be null when {@code input} is true
+     * @param name The attribute name
+     * @param value The attribute value
      *
      * @see org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap
      * @see org.springframework.web.servlet.DispatcherServlet#doService
@@ -334,7 +334,7 @@ public abstract class WebUtilsWraps {
     /**
      * Return a language priority list consisting of language ranges included in the given {@code ranges} and their equivalent language ranges if available
      *
-     * @param range a list of comma-separated language ranges or a list of language ranges in the form of the "Accept-Language" header, defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>
+     * @param range A list of comma-separated language ranges or a list of language ranges in the form of the "Accept-Language" header, defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>
      * <pre>
      *     "zh,en;q=0.8"
      * </pre>
@@ -440,8 +440,8 @@ public abstract class WebUtilsWraps {
      * <p>
      * To make sure the session is properly maintained, you must call this method before the response is committed
      *
-     * @param request the <code>HttpServletRequest</code> associated
-     * @param createIfNull if there is no current session and <code>create</code> is true, returns a new session
+     * @param request The <code>HttpServletRequest</code> associated
+     * @param createIfNull If there is no current session and <code>create</code> is true, returns a new session
      *
      * @return the current <code>HttpSession</code> associated with this request
      */

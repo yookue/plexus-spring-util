@@ -46,7 +46,7 @@ public abstract class ClassPathWraps {
     /**
      * Return the path content after the prefix of 'classpath:' or 'classpath*:'
      *
-     * @param path the absolute path within the class path
+     * @param path The absolute path within the class path
      *
      * @return the path content after the prefix of 'classpath:' or 'classpath*:'
      */

@@ -42,8 +42,8 @@ public abstract class ApplicationEnvironmentWraps {
     /**
      * Returns whether the environment contains the specified active profile or not
      *
-     * @param environment the Spring environment
-     * @param profile the profile name, case-sensitive
+     * @param environment The Spring environment
+     * @param profile The profile name, case-sensitive
      *
      * @return whether the environment contains the specified active profile or not
      */
@@ -54,8 +54,8 @@ public abstract class ApplicationEnvironmentWraps {
     /**
      * Returns whether the environment contains the specified active profile or not
      *
-     * @param environment the Spring environment
-     * @param profile the profile name, case-insensitive
+     * @param environment The Spring environment
+     * @param profile The profile name, case-insensitive
      *
      * @return whether the environment contains the specified active profile or not
      */
@@ -66,8 +66,8 @@ public abstract class ApplicationEnvironmentWraps {
     /**
      * Returns whether the environment contains the specified default profile or not
      *
-     * @param environment the Spring environment
-     * @param profile the profile name, case-sensitive
+     * @param environment The Spring environment
+     * @param profile The profile name, case-sensitive
      *
      * @return whether the environment contains the specified default profile or not
      */
@@ -78,8 +78,8 @@ public abstract class ApplicationEnvironmentWraps {
     /**
      * Returns whether the environment contains the specified default profile or not
      *
-     * @param environment the Spring environment
-     * @param profile the profile name, case-insensitive
+     * @param environment The Spring environment
+     * @param profile The profile name, case-insensitive
      *
      * @return whether the environment contains the specified default profile or not
      */
@@ -90,7 +90,7 @@ public abstract class ApplicationEnvironmentWraps {
     /**
      * Return the array of profiles explicitly made active for this environment
      *
-     * @param environment the Spring environment
+     * @param environment The Spring environment
      *
      * @return the array of profiles explicitly made active for this environment
      */
@@ -101,7 +101,7 @@ public abstract class ApplicationEnvironmentWraps {
     /**
      * Return the array of profiles to be active by default when no active profiles have been set explicitly
      *
-     * @param environment the Spring environment
+     * @param environment The Spring environment
      *
      * @return the array of profiles to be active by default when no active profiles have been set explicitly
      */

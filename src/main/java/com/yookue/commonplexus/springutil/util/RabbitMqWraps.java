@@ -64,10 +64,10 @@ public abstract class RabbitMqWraps {
     /**
      * Return a {@link com.rabbitmq.client.AMQP.BasicProperties} object with the specified content type and charset, and delivery mode
      *
-     * @param headers additional headers to set for this properties
-     * @param contentType the content type for properties, default is {@code MessageProperties.CONTENT_TYPE_JSON}
-     * @param charset the charset for properties, default is {@code StandardCharsets.UTF_8}
-     * @param mode the delivery mode, default is {@code MessageDeliveryMode.PERSISTENT}
+     * @param headers Additional headers to set for this properties
+     * @param contentType The content type for properties, default is {@code MessageProperties.CONTENT_TYPE_JSON}
+     * @param charset The charset for properties, default is {@code StandardCharsets.UTF_8}
+     * @param mode The delivery mode, default is {@code MessageDeliveryMode.PERSISTENT}
      *
      * @return a {@link com.rabbitmq.client.AMQP.BasicProperties} object with the specified content type and charset, and delivery mode
      */

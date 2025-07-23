@@ -48,8 +48,8 @@ public abstract class JdbcUtilsWraps {
     /**
      * Call the specified method on DatabaseMetaData for the given DataSource, and extract the invocation result.
      *
-     * @param dataSource the DataSource to extract meta-data for
-     * @param metaMethod the name of the DatabaseMetaData method to call
+     * @param dataSource The DataSource to extract meta-data for
+     * @param metaMethod The name of the DatabaseMetaData method to call
      *
      * @return the object returned by the specified DatabaseMetaData method
      *
@@ -98,9 +98,9 @@ public abstract class JdbcUtilsWraps {
     /**
      * Returns the database product name
      *
-     * @param dataSource the database source
-     * @param commonName indicates use the common name instead, for example, "MariaDB" will be represented as "MySQL"
-     * @param validateDriver whether to validate the database product driver or not, returns driver id if true
+     * @param dataSource The database source
+     * @param commonName Indicates use the common name instead, for example, "MariaDB" will be represented as "MySQL"
+     * @param validateDriver Whether to validate the database product driver or not, returns driver id if true
      *
      * @return the database product name
      *
@@ -153,7 +153,7 @@ public abstract class JdbcUtilsWraps {
      *     JdbcUtilsWraps.getHostName("jdbc:mysql://127.0.0.1:3306/schema?characterEncoding=UTF-8") = "127.0.0.1:3306"
      * </pre>
      *
-     * @param jdbcUrl the url to detect
+     * @param jdbcUrl The url to detect
      *
      * @return the host name from a jdbc url
      */
@@ -175,7 +175,7 @@ public abstract class JdbcUtilsWraps {
      *     JdbcUtilsWraps.getHostSchemaName("jdbc:mysql://127.0.0.1:3306/schema?characterEncoding=UTF-8") = "127.0.0.1:3306/schema"
      * </pre>
      *
-     * @param jdbcUrl the url to detect
+     * @param jdbcUrl The url to detect
      *
      * @return the host and schema name from a jdbc url
      */
@@ -197,7 +197,7 @@ public abstract class JdbcUtilsWraps {
      *     JdbcUtilsWraps.getSchemaName("jdbc:mysql://127.0.0.1:3306/schema?characterEncoding=UTF-8"") = "schema"
      * </pre>
      *
-     * @param jdbcUrl the url to detect
+     * @param jdbcUrl The url to detect
      *
      * @return the schema name from a jdbc url
      */

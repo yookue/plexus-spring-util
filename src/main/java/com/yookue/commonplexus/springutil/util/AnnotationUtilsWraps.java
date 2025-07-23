@@ -77,8 +77,8 @@ public abstract class AnnotationUtilsWraps {
     /**
      * Returns whether all the annotations are present on the given method or the method owner class or not
      *
-     * @param method the method to get annotations from
-     * @param annotations the annotations to check
+     * @param method The method to get annotations from
+     * @param annotations The annotations to check
      *
      * @return whether all the annotations are present on the given method or the method owner class or not
      */
@@ -97,8 +97,8 @@ public abstract class AnnotationUtilsWraps {
      * <p>
      * With annotation class as keys, {@link java.lang.annotation.ElementType} as values
      *
-     * @param method the method to get annotations from
-     * @param annotations the annotations to check
+     * @param method The method to get annotations from
+     * @param annotations The annotations to check
      *
      * @return a {@link com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct} that contains all the annotations, on the given method or the method owner class
      */
@@ -121,8 +121,8 @@ public abstract class AnnotationUtilsWraps {
     /**
      * Returns whether any of the annotations are present on the given method or the method owner class or not
      *
-     * @param method the method to get annotations from
-     * @param annotations the annotations to check
+     * @param method The method to get annotations from
+     * @param annotations The annotations to check
      *
      * @return whether any of the annotations are present on the given method or the method owner class or not
      */
@@ -141,8 +141,8 @@ public abstract class AnnotationUtilsWraps {
      * <p>
      * With annotation class as keys, {@link java.lang.annotation.ElementType} as values
      *
-     * @param method the method to get annotations from
-     * @param annotations the annotations to check
+     * @param method The method to get annotations from
+     * @param annotations The annotations to check
      *
      * @return a {@link com.yookue.commonplexus.javaseutil.structure.BooleanDataStruct} that contains any of the annotations, on the given method or the method owner class
      */
@@ -220,8 +220,8 @@ public abstract class AnnotationUtilsWraps {
     /**
      * Returns the annotation map on the given method or on the method declared class
      *
-     * @param method the method to get the annotation from
-     * @param annotations the annotations to check
+     * @param method The method to get the annotation from
+     * @param annotations The annotations to check
      *
      * @return the annotation map on the given method or on the method declared class
      */

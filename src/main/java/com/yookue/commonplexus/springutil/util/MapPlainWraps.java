@@ -88,13 +88,13 @@ public abstract class MapPlainWraps {
     /**
      * Return a delimited string with specified delimiters
      *
-     * @param map the {@code Map} to convert
-     * @param keyValueDelimiter the delimiter to separate key and value (typically is "=")
-     * @param groupDelimiter the delimiter to separate groups (typically is "&amp;")
-     * @param keyPrefix the string to start each key with
-     * @param keySuffix the string to end each key with
-     * @param valuePrefix the string to start each value with
-     * @param valueSuffix the string to end each value with
+     * @param map The {@code Map} to convert
+     * @param keyValueDelimiter The delimiter to separate key and value (typically is "=")
+     * @param groupDelimiter The delimiter to separate groups (typically is "&amp;")
+     * @param keyPrefix The string to start each key with
+     * @param keySuffix The string to end each key with
+     * @param valuePrefix The string to start each value with
+     * @param valueSuffix The string to end each value with
      *
      * @return a delimited string with specified delimiters
      *

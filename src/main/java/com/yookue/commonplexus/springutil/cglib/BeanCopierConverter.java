@@ -34,11 +34,11 @@ public interface BeanCopierConverter {
     /**
      * Returns the converted value that will be assigned to the target field
      *
-     * @param sourceValue the source field value
-     * @param targetType the target field class
-     * @param targetSetter the setter method name of target field, represents as string
-     * @param targetName the target field name
-     * @param targetValue the original target field value
+     * @param sourceValue The source field value
+     * @param targetType The target field class
+     * @param targetSetter The setter method name of target field, represents as string
+     * @param targetName The target field name
+     * @param targetValue The original target field value
      *
      * @return the converted value that will be assigned to the target field
      */

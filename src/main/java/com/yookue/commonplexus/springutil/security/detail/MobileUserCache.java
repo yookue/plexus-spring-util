@@ -34,8 +34,8 @@ public interface MobileUserCache {
     /**
      * Returns a {@link org.springframework.security.core.userdetails.UserDetails} from the cache
      *
-     * @param mobile the mobile number
-     * @param dial the mobile dial code, may be null
+     * @param mobile The mobile number
+     * @param dial The mobile dial code, may be null
      *
      * @return a {@link org.springframework.security.core.userdetails.UserDetails} from the cache
      */
@@ -45,7 +45,7 @@ public interface MobileUserCache {
     /**
      * Places a {@link org.springframework.security.core.userdetails.UserDetails} in the cache
      *
-     * @param details the fully populated {@link org.springframework.security.core.userdetails.UserDetails} to place in the cache
+     * @param details The fully populated {@link org.springframework.security.core.userdetails.UserDetails} to place in the cache
      */
     @SuppressWarnings("EmptyMethod")
     void putUserInCache(@Nonnull UserDetails details);
@@ -55,8 +55,8 @@ public interface MobileUserCache {
      * <p>
      * The <code>mobile</code> is the key
      *
-     * @param mobile the mobile number
-     * @param dial the mobile dial code, may be null
+     * @param mobile The mobile number
+     * @param dial The mobile dial code, may be null
      */
     @SuppressWarnings("EmptyMethod")
     void removeUserFromCache(@Nonnull String mobile, @Nullable String dial);

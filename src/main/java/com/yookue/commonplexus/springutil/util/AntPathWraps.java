@@ -73,9 +73,9 @@ public abstract class AntPathWraps {
     /**
      * Return <code>true</code> if the given pattern matches the path in the collection
      *
-     * @param separator the path separator to use, default to '/' if is empty
-     * @param pattern the target ant path pattern
-     * @param paths the collection of path to get the input from
+     * @param separator The path separator to use, default to '/' if is empty
+     * @param pattern The target ant path pattern
+     * @param paths The collection of path to get the input from
      *
      * @return <code>true</code> if the given pattern matches the path in the collection
      */
@@ -118,9 +118,9 @@ public abstract class AntPathWraps {
     /**
      * Return <code>true</code> if the given pattern matches the start of the path in the collection
      *
-     * @param separator the path separator to use, default to '/' if is empty
-     * @param pattern the target ant path pattern
-     * @param paths the collection of path to get the input from
+     * @param separator The path separator to use, default to '/' if is empty
+     * @param pattern The target ant path pattern
+     * @param paths The collection of path to get the input from
      *
      * @return <code>true</code> if the given pattern matches the start of the path in the collection
      */
@@ -163,9 +163,9 @@ public abstract class AntPathWraps {
     /**
      * Return <code>true</code> if any patterns in the collection matches the given path
      *
-     * @param separator the path separator to use, default to '/' if is empty
-     * @param path the target path
-     * @param patterns the collection of pattern to get the input from
+     * @param separator The path separator to use, default to '/' if is empty
+     * @param path The target path
+     * @param patterns The collection of pattern to get the input from
      *
      * @return <code>true</code> if any patterns in the collection matches the given path
      */
@@ -208,9 +208,9 @@ public abstract class AntPathWraps {
     /**
      * Return <code>true</code> if any patterns in the collection matches the start of the given path
      *
-     * @param separator the path separator to use, default to '/' if is empty
-     * @param path the target path
-     * @param patterns the collection of pattern to get the input from
+     * @param separator The path separator to use, default to '/' if is empty
+     * @param path The target path
+     * @param patterns The collection of pattern to get the input from
      *
      * @return <code>true</code> if any patterns in the collection matches the start of the given path
      */

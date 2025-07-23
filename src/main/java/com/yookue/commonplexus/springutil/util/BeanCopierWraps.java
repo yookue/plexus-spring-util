@@ -35,8 +35,8 @@ public abstract class BeanCopierWraps {
     /**
      * Copy properties from the {@code source} to the {@code target}, ignored the source properties which is null
      *
-     * @param source the source object to read properties from
-     * @param target the target object to write properties to
+     * @param source The source object to read properties from
+     * @param target The target object to write properties to
      */
     public static void copyIfNotNull(@Nullable Object source, @Nullable Object target) {
         if (source == null || target == null) {
@@ -49,8 +49,8 @@ public abstract class BeanCopierWraps {
     /**
      * Copy properties from the {@code source} to the {@code target}, ignored the source properties which is empty
      *
-     * @param source the source object to read properties from
-     * @param target the target object to write properties to
+     * @param source The source object to read properties from
+     * @param target The target object to write properties to
      */
     public static void copyIfNotEmpty(@Nullable Object source, @Nullable Object target) {
         if (source == null || target == null) {
@@ -63,8 +63,8 @@ public abstract class BeanCopierWraps {
     /**
      * Copy properties from the {@code source} to the {@code target}, ignored the source properties which is blank
      *
-     * @param source the source object to read properties from
-     * @param target the target object to write properties to
+     * @param source The source object to read properties from
+     * @param target The target object to write properties to
      */
     public static void copyIfNotBlank(@Nullable Object source, @Nullable Object target) {
         if (source == null || target == null) {

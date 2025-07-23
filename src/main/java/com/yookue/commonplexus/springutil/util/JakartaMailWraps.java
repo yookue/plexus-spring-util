@@ -43,8 +43,8 @@ public abstract class JakartaMailWraps {
     /**
      * Returns a new {@link jakarta.mail.internet.InternetAddress} with the specified email
      *
-     * @param email the given email address
-     * @param personal whether to extract personal information automatically (before the character @)
+     * @param email The given email address
+     * @param personal Whether to extract personal information automatically (before the character @)
      *
      * @return a new {@link jakarta.mail.internet.InternetAddress} with the specified email
      *

@@ -151,7 +151,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.stereotype.Controller} or {@link org.springframework.web.bind.annotation.RestController}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.stereotype.Controller} or {@link org.springframework.web.bind.annotation.RestController}
      */
@@ -162,7 +162,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.stereotype.Controller}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.stereotype.Controller}
      */
@@ -173,7 +173,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.web.bind.annotation.ControllerAdvice}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.web.bind.annotation.ControllerAdvice}
      */
@@ -184,7 +184,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.web.bind.annotation.RestController}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.web.bind.annotation.RestController}
      */
@@ -195,7 +195,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.web.bind.annotation.RestControllerAdvice}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.web.bind.annotation.RestControllerAdvice}
      */
@@ -206,7 +206,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.stereotype.Service}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.stereotype.Service}
      */
@@ -217,7 +217,7 @@ public abstract class StereotypeBeanWraps {
     /**
      * Returns whether the given class is annotated with {@link org.springframework.stereotype.Repository}
      *
-     * @param clazz the target class to check
+     * @param clazz The target class to check
      *
      * @return whether the given class is annotated with {@link org.springframework.stereotype.Repository}
      */

@@ -93,8 +93,8 @@ public class AccountPasswordAuthenticationFilter extends UsernamePasswordAuthent
      * <li>Throw an <tt>AuthenticationException</tt> if the authentication process fails</li>
      * </ol>
      *
-     * @param request from which to extract parameters and perform the authentication
-     * @param response which may be needed if the implementation has to do a redirect as part of a multi-stage authentication process (such as OpenID)
+     * @param request From which to extract parameters and perform the authentication
+     * @param response Which may be needed if the implementation has to do a redirect as part of a multi-stage authentication process (such as OpenID)
      *
      * @return the actual authentication through the given request
      *

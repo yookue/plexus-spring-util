@@ -87,8 +87,8 @@ public abstract class UriUtilsWraps {
      * <p>
      * Without schema, host, port or query string
      *
-     * @param request the servlet request
-     * @param endSlash whether to append a slash at the end of path or not
+     * @param request The servlet request
+     * @param endSlash Whether to append a slash at the end of path or not
      *
      * @return the context path for the given request
      */
@@ -207,7 +207,7 @@ public abstract class UriUtilsWraps {
      * <p>
      * Without schema, host, port and query string, with context path
      *
-     * @param request the servlet request
+     * @param request The servlet request
      *
      * @return the request URI for the given request
      */
@@ -224,7 +224,7 @@ public abstract class UriUtilsWraps {
      * <p>
      * Without schema, host, port, with context path and query string
      *
-     * @param request the servlet request
+     * @param request The servlet request
      *
      * @return the request URI and query string for the given request
      */
@@ -249,7 +249,7 @@ public abstract class UriUtilsWraps {
      * <p>
      * With schema, host, port and context path, without query string
      *
-     * @param request the servlet request
+     * @param request The servlet request
      *
      * @return the request URL for the given request
      */
@@ -262,7 +262,7 @@ public abstract class UriUtilsWraps {
      * <p>
      * With schema, host, port, context path and query string
      *
-     * @param request the servlet request
+     * @param request The servlet request
      *
      * @return the request URL and query string for the given request
      */
@@ -279,7 +279,7 @@ public abstract class UriUtilsWraps {
      * <p>
      * Without schema, host, port, context path and query string
      *
-     * @param request the servlet request
+     * @param request The servlet request
      *
      * @return the servlet path for the given request
      */
@@ -296,7 +296,7 @@ public abstract class UriUtilsWraps {
      * <p>
      * Without schema, host, port, context path, with query string
      *
-     * @param request the servlet request
+     * @param request The servlet request
      *
      * @return the servlet path and query string for the given request
      */

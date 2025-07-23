@@ -39,7 +39,7 @@ public abstract class ObjectUtilsWraps {
      * Return a content-based string representation
      * Differ from {@link org.springframework.util.ObjectUtils#getDisplayString}, this return null rather than an empty string
      *
-     * @param source the object to build a string representation for
+     * @param source The object to build a string representation for
      *
      * @return a content-based string representation if {@code object} is not {@code null}
      *
@@ -53,7 +53,7 @@ public abstract class ObjectUtilsWraps {
      * Return a hex string form of an object's identity hash code
      * Differ from {@link org.springframework.util.ObjectUtils#getIdentityHexString}, this return null when {@code object} is null
      *
-     * @param source the object to build a string representation for
+     * @param source The object to build a string representation for
      *
      * @return a hex string form of an object's identity hash code
      */

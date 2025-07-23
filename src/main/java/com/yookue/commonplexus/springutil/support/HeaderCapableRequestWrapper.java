@@ -51,7 +51,7 @@ public class HeaderCapableRequestWrapper extends HttpServletRequestWrapper {
     /**
      * Constructs a request object wrapping the given request
      *
-     * @param request the {@link jakarta.servlet.http.HttpServletRequest} to be wrapped
+     * @param request The {@link jakarta.servlet.http.HttpServletRequest} to be wrapped
      */
     public HeaderCapableRequestWrapper(@Nonnull HttpServletRequest request) {
         super(request);

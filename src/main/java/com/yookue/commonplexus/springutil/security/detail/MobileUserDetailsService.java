@@ -37,8 +37,8 @@ public interface MobileUserDetailsService {
     /**
      * a detail instance that located user with the given mobile and dial code
      *
-     * @param mobile the mobile number
-     * @param dial the mobile dial code, may be null
+     * @param mobile The mobile number
+     * @param dial The mobile dial code, may be null
      *
      * @return a detail instance that located user with the given mobile and dial code
      */
