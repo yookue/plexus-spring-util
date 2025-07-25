@@ -38,7 +38,6 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
 import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
-import com.yookue.commonplexus.javaseutil.util.BeanUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.EnumerationPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.IterablePlainWraps;
@@ -872,82 +871,5 @@ public abstract class RequestParamWraps {
 
     public static boolean isValidPathVariable(@Nullable CharSequence sequence) {
         return StringUtils.isNotBlank(sequence) && !StringUtils.equalsAnyIgnoreCase(sequence, StringVariantConst.NULL, StringVariantConst.UNDEFINED);
-    }
-
-    public static void populateContextRequestParametersToBean(@Nullable Object bean) {
-        populateContextRequestParametersToBean(bean, false, false, false, (Collection<String>) null);
-    }
-
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull) {
-        populateContextRequestParametersToBean(bean, emptyAsNull, false, false, (Collection<String>) null);
-    }
-
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload) {
-        populateContextRequestParametersToBean(bean, emptyAsNull, includePayload, false, (Collection<String>) null);
-    }
-
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
-        populateContextRequestParametersToBean(bean, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
-    }
-
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
-        populateContextRequestParametersToBean(bean, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
-    }
-
-    public static void populateContextRequestParametersToBean(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
-        populateRequestParametersToBean(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, unwrapSingleArray, ignoredFields);
-    }
-
-    public static void populateParametersToBean(@Nullable Object bean, @Nullable Map<String, Object> params) {
-        populateParametersToBean(bean, params, (Collection<String>) null);
-    }
-
-    public static void populateParametersToBean(@Nullable Object bean, @Nullable Map<String, Object> params, @Nullable String... ignoredFields) {
-        populateParametersToBean(bean, params, ArrayUtilsWraps.asList(ignoredFields));
-    }
-
-    public static void populateParametersToBean(@Nullable Object bean, @Nullable Map<String, Object> params, @Nullable Collection<String> ignoredFields) {
-        if (bean == null || MapPlainWraps.isEmpty(params)) {
-            return;
-        }
-        Map<String, Object> alias = MapPlainWraps.newHashMapIfNull(params);
-        if (CollectionPlainWraps.isNotEmpty(ignoredFields)) {
-            ignoredFields.forEach(alias::remove);
-        }
-        BeanUtilsWraps.mapToBeanQuietly(bean, alias);
-    }
-
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request) {
-        populateRequestParametersToBean(bean, request, false, false, false, (Collection<String>) null);
-    }
-
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull) {
-        populateRequestParametersToBean(bean, request, emptyAsNull, false, false, (Collection<String>) null);
-    }
-
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
-        populateRequestParametersToBean(bean, request, emptyAsNull, includePayload, false, (Collection<String>) null);
-    }
-
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
-        populateRequestParametersToBean(bean, request, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
-    }
-
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
-        populateRequestParametersToBean(bean, request, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
-    }
-
-    public static void populateRequestParametersToBean(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
-        if (ObjectUtils.anyNull(bean, request)) {
-            return;
-        }
-        Map<String, Object> map = getParameterObjectMap(request, emptyAsNull, includePayload, unwrapSingleArray);
-        if (MapPlainWraps.isEmpty(map)) {
-            return;
-        }
-        if (CollectionPlainWraps.isNotEmpty(ignoredFields)) {
-            ignoredFields.forEach(map::remove);
-        }
-        BeanUtilsWraps.mapToBeanQuietly(bean, map);
     }
 }
