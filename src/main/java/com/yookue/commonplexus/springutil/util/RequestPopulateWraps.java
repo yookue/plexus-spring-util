@@ -61,28 +61,28 @@ public abstract class RequestPopulateWraps {
         populateRequestParametersToBean(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, unwrapSingleArray, ignoredFields);
     }
 
-    public static void populateContextRequestParametersToBeanPresetting(@Nullable Object bean) {
-        populateContextRequestParametersToBeanPresetting(bean, false, false, false, (Collection<String>) null);
+    public static void populateContextRequestParametersToBeanSheared(@Nullable Object bean) {
+        populateContextRequestParametersToBeanSheared(bean, false, false, false, (Collection<String>) null);
     }
 
-    public static void populateContextRequestParametersToBeanPresetting(@Nullable Object bean, boolean emptyAsNull) {
-        populateContextRequestParametersToBeanPresetting(bean, emptyAsNull, false, false, (Collection<String>) null);
+    public static void populateContextRequestParametersToBeanSheared(@Nullable Object bean, boolean emptyAsNull) {
+        populateContextRequestParametersToBeanSheared(bean, emptyAsNull, false, false, (Collection<String>) null);
     }
 
-    public static void populateContextRequestParametersToBeanPresetting(@Nullable Object bean, boolean emptyAsNull, boolean includePayload) {
-        populateContextRequestParametersToBeanPresetting(bean, emptyAsNull, includePayload, false, (Collection<String>) null);
+    public static void populateContextRequestParametersToBeanSheared(@Nullable Object bean, boolean emptyAsNull, boolean includePayload) {
+        populateContextRequestParametersToBeanSheared(bean, emptyAsNull, includePayload, false, (Collection<String>) null);
     }
 
-    public static void populateContextRequestParametersToBeanPresetting(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
-        populateContextRequestParametersToBeanPresetting(bean, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
+    public static void populateContextRequestParametersToBeanSheared(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
+        populateContextRequestParametersToBeanSheared(bean, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
     }
 
-    public static void populateContextRequestParametersToBeanPresetting(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
-        populateContextRequestParametersToBeanPresetting(bean, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateContextRequestParametersToBeanSheared(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
+        populateContextRequestParametersToBeanSheared(bean, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
     }
 
-    public static void populateContextRequestParametersToBeanPresetting(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
-        populateRequestParametersToBeanPresetting(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, unwrapSingleArray, ignoredFields);
+    public static void populateContextRequestParametersToBeanSheared(@Nullable Object bean, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
+        populateRequestParametersToBeanSheared(bean, WebUtilsWraps.getContextServletRequest(), emptyAsNull, includePayload, unwrapSingleArray, ignoredFields);
     }
 
     public static void populateParametersToBean(@Nullable Object bean, @Nullable Map<String, Object> params) {
@@ -104,15 +104,15 @@ public abstract class RequestPopulateWraps {
         BeanUtilsWraps.mapToBeanQuietly(bean, alias);
     }
 
-    public static void populateParametersToBeanPresetting(@Nullable Object bean, @Nullable Map<String, Object> params) {
-        populateParametersToBeanPresetting(bean, params, (Collection<String>) null);
+    public static void populateParametersToBeanSheared(@Nullable Object bean, @Nullable Map<String, Object> params) {
+        populateParametersToBeanSheared(bean, params, (Collection<String>) null);
     }
 
-    public static void populateParametersToBeanPresetting(@Nullable Object bean, @Nullable Map<String, Object> params, @Nullable String... ignoredFields) {
-        populateParametersToBeanPresetting(bean, params, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateParametersToBeanSheared(@Nullable Object bean, @Nullable Map<String, Object> params, @Nullable String... ignoredFields) {
+        populateParametersToBeanSheared(bean, params, ArrayUtilsWraps.asList(ignoredFields));
     }
 
-    public static void populateParametersToBeanPresetting(@Nullable Object bean, @Nullable Map<String, Object> params, @Nullable Collection<String> ignoredFields) {
+    public static void populateParametersToBeanSheared(@Nullable Object bean, @Nullable Map<String, Object> params, @Nullable Collection<String> ignoredFields) {
         if (bean == null || MapPlainWraps.isEmpty(params)) {
             return;
         }
@@ -155,28 +155,28 @@ public abstract class RequestPopulateWraps {
         BeanUtilsWraps.mapToBeanQuietly(bean, map);
     }
 
-    public static void populateRequestParametersToBeanPresetting(@Nullable Object bean, @Nullable HttpServletRequest request) {
-        populateRequestParametersToBeanPresetting(bean, request, false, false, false, (Collection<String>) null);
+    public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request) {
+        populateRequestParametersToBeanSheared(bean, request, false, false, false, (Collection<String>) null);
     }
 
-    public static void populateRequestParametersToBeanPresetting(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull) {
-        populateRequestParametersToBeanPresetting(bean, request, emptyAsNull, false, false, (Collection<String>) null);
+    public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull) {
+        populateRequestParametersToBeanSheared(bean, request, emptyAsNull, false, false, (Collection<String>) null);
     }
 
-    public static void populateRequestParametersToBeanPresetting(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
-        populateRequestParametersToBeanPresetting(bean, request, emptyAsNull, includePayload, false, (Collection<String>) null);
+    public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload) {
+        populateRequestParametersToBeanSheared(bean, request, emptyAsNull, includePayload, false, (Collection<String>) null);
     }
 
-    public static void populateRequestParametersToBeanPresetting(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
-        populateRequestParametersToBeanPresetting(bean, request, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
+    public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray) {
+        populateRequestParametersToBeanSheared(bean, request, emptyAsNull, includePayload, unwrapSingleArray, (Collection<String>) null);
     }
 
-    public static void populateRequestParametersToBeanPresetting(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
-        populateRequestParametersToBeanPresetting(bean, request, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
+    public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable String... ignoredFields) {
+        populateRequestParametersToBeanSheared(bean, request, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static void populateRequestParametersToBeanPresetting(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
+    public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
         if (ObjectUtils.anyNull(bean, request)) {
             return;
         }
