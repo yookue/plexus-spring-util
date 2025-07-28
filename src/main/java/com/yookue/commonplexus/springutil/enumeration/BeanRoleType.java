@@ -38,7 +38,7 @@ public enum BeanRoleType implements ValueEnum<Integer> {
      * <br>
      * Typically corresponds to a user-defined bean
      */
-    APPLICATION(0),    // $NON-NLS-1$
+    APPLICATION(0),
 
     /**
      * Indicates that a {@link org.springframework.beans.factory.config.BeanDefinition} is a supporting part of some larger configuration
@@ -48,14 +48,14 @@ public enum BeanRoleType implements ValueEnum<Integer> {
      * {@code SUPPORT} beans are considered important enough to be aware of when looking more closely at a particular
      * {@link org.springframework.beans.factory.parsing.ComponentDefinition}, but not when looking at the overall configuration of an application
      */
-    SUPPORT(1),    // $NON-NLS-1$
+    SUPPORT(1),
 
     /**
      * Indicates that a {@link org.springframework.beans.factory.config.BeanDefinition} is providing an entirely background role and has no relevance to the end-user
      * <br>
      * This hint is used when registering beans that are completely part of the internal workings of a {@link org.springframework.beans.factory.parsing.ComponentDefinition}
      */
-    INFRASTRUCTURE(2);    // $NON-NLS-1$
+    INFRASTRUCTURE(2);
 
     private final Integer value;
 }
