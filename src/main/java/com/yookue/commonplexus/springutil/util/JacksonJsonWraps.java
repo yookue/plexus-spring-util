@@ -26,6 +26,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.net.URL;
 import jakarta.annotation.Nullable;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonEncoding;
@@ -242,7 +243,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, valueType)) {
             return null;
         }
         try {
@@ -254,7 +255,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, reference)) {
             return null;
         }
         try {
@@ -266,7 +267,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable ResolvedType valueType) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, valueType)) {
             return null;
         }
         try {
@@ -278,7 +279,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, valueType)) {
             return null;
         }
         try {
@@ -302,7 +303,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> MappingIterator<T> readValues(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable ResolvedType valueType) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, valueType)) {
             return null;
         }
         try {
@@ -314,7 +315,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> MappingIterator<T> readValues(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, valueType)) {
             return null;
         }
         try {
@@ -326,7 +327,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> MappingIterator<T> readValues(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, valueType)) {
             return null;
         }
         try {
@@ -338,7 +339,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> MappingIterator<T> readValues(@Nullable ObjectMapper mapper, @Nullable JsonParser parser, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, parser)) {
+        if (ObjectUtils.anyNull(mapper, parser, reference)) {
             return null;
         }
         try {
@@ -374,7 +375,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static JsonNode readTree(@Nullable ObjectMapper mapper, @Nullable String content) {
-        if (ObjectUtils.anyNull(mapper, content)) {
+        if (mapper == null || StringUtils.isBlank(content)) {
             return null;
         }
         try {
@@ -386,7 +387,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static JsonNode readTree(@Nullable ObjectMapper mapper, @Nullable byte[] content) {
-        if (ObjectUtils.anyNull(mapper, content)) {
+        if (mapper == null || ArrayUtils.isEmpty(content)) {
             return null;
         }
         try {
@@ -398,11 +399,11 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static JsonNode readTree(@Nullable ObjectMapper mapper, @Nullable byte[] content, int offset, int length) {
-        if (ObjectUtils.anyNull(mapper, content)) {
+        if (mapper == null || ArrayUtils.isEmpty(content) || length <= 0) {
             return null;
         }
         try {
-            return mapper.readTree(content);
+            return mapper.readTree(content, offset, length);
         } catch (Exception ignored) {
         }
         return null;
@@ -500,7 +501,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable File source, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -512,7 +513,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable File source, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, reference)) {
             return null;
         }
         try {
@@ -524,7 +525,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable File source, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -536,7 +537,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable URL source, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -548,7 +549,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable URL source, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, reference)) {
             return null;
         }
         try {
@@ -560,7 +561,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable URL source, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -572,7 +573,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable String content, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, content)) {
+        if (ObjectUtils.anyNull(mapper, valueType) || StringUtils.isBlank(content)) {
             return null;
         }
         try {
@@ -584,7 +585,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable String content, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, content)) {
+        if (ObjectUtils.anyNull(mapper, content, reference)) {
             return null;
         }
         try {
@@ -596,7 +597,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable String content, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, content)) {
+        if (ObjectUtils.anyNull(mapper, content, valueType)) {
             return null;
         }
         try {
@@ -608,7 +609,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable Reader source, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -620,7 +621,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable Reader source, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, reference)) {
             return null;
         }
         try {
@@ -632,7 +633,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable Reader source, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -644,7 +645,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable InputStream input, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, input)) {
+        if (ObjectUtils.anyNull(mapper, input, valueType)) {
             return null;
         }
         try {
@@ -656,7 +657,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable InputStream input, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, input)) {
+        if (ObjectUtils.anyNull(mapper, input, reference)) {
             return null;
         }
         try {
@@ -668,7 +669,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable InputStream input, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, input)) {
+        if (ObjectUtils.anyNull(mapper, input, valueType)) {
             return null;
         }
         try {
@@ -680,7 +681,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable byte[] source, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -692,7 +693,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable byte[] source, int offset, int length, Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType) || length <= 0) {
             return null;
         }
         try {
@@ -704,7 +705,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable byte[] source, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, reference)) {
             return null;
         }
         try {
@@ -716,7 +717,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable byte[] source, int offset, int length, @Nullable TypeReference<T> reference) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, reference) || length <= 0) {
             return null;
         }
         try {
@@ -728,7 +729,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable byte[] source, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType)) {
             return null;
         }
         try {
@@ -740,7 +741,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable byte[] source, int offset, int length, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, source)) {
+        if (ObjectUtils.anyNull(mapper, source, valueType) || length <= 0) {
             return null;
         }
         try {
@@ -752,7 +753,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable DataInput input, @Nullable Class<T> valueType) {
-        if (ObjectUtils.anyNull(mapper, input)) {
+        if (ObjectUtils.anyNull(mapper, input, valueType)) {
             return null;
         }
         try {
@@ -764,7 +765,7 @@ public abstract class JacksonJsonWraps {
 
     @Nullable
     public static <T> T readValue(@Nullable ObjectMapper mapper, @Nullable DataInput input, @Nullable JavaType valueType) {
-        if (ObjectUtils.anyNull(mapper, input)) {
+        if (ObjectUtils.anyNull(mapper, input, valueType)) {
             return null;
         }
         try {
