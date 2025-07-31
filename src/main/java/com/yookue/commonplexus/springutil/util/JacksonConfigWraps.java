@@ -18,6 +18,7 @@ package com.yookue.commonplexus.springutil.util;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -32,13 +33,19 @@ import org.springframework.util.ClassUtils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.yookue.commonplexus.springutil.enumeration.JacksonTemporalType;
+import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJdkDateCustomizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJodaTimeCustomizer;
 import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJsr310Customizer;
-import com.yookue.commonplexus.springutil.registrar.assistant.JacksonJdkDateCustomizer;
 
 
 /**
@@ -143,5 +150,30 @@ public abstract class JacksonConfigWraps {
     @Nonnull
     public static Jackson2ObjectMapperBuilder xmlObjectMapperBuilder(@Nullable String dateFormat, @Nullable String timeFormat, @Nullable String dateTimeFormat, @Nullable TimeZone timeZone, @Nullable Locale locale) {
         return jsonObjectMapperBuilder(dateFormat, timeFormat, dateTimeFormat, timeZone, locale).createXmlMapper(true);
+    }
+
+    /**
+     * Return a {@link com.fasterxml.jackson.databind.json.JsonMapper.Builder} instance which is configured with the same features as the given {@code mapper}
+     *
+     * @param mapper The mapper to copy the features from
+     *
+     * @return a {@link com.fasterxml.jackson.databind.json.JsonMapper.Builder} instance which is configured with the same features as the given {@code mapper}
+     *
+     * @see com.fasterxml.jackson.databind.MapperFeature
+     */
+    @Nonnull
+    public static JsonMapper.Builder jsonMapperBuilder(@Nullable ObjectMapper mapper) {
+        JsonMapper.Builder builder = JsonMapper.builder().findAndAddModules();
+        if (mapper == null) {
+            return builder;
+        }
+        SerializationConfig serConfig = mapper.getSerializationConfig();
+        DeserializationConfig deserConfig = mapper.getDeserializationConfig();
+        Arrays.stream(SerializationFeature.values()).forEach(feature -> builder.configure(feature, serConfig.isEnabled(feature)));
+        Arrays.stream(DeserializationFeature.values()).forEach(feature -> builder.configure(feature, deserConfig.isEnabled(feature)));
+        Arrays.stream(MapperFeature.values()).forEach(feature -> builder.configure(feature, mapper.isEnabled(feature)));
+        Arrays.stream(JsonGenerator.Feature.values()).forEach(feature -> builder.configure(feature, mapper.getFactory().isEnabled(feature)));
+        builder.propertyNamingStrategy(mapper.getPropertyNamingStrategy()).serializationInclusion(serConfig.getDefaultPropertyInclusion().getValueInclusion()).defaultDateFormat(mapper.getDateFormat()).defaultLocale(serConfig.getLocale()).defaultTimeZone(serConfig.getTimeZone());
+        return builder;
     }
 }
