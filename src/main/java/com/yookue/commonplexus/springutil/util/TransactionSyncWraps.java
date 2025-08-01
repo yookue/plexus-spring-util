@@ -41,7 +41,7 @@ public abstract class TransactionSyncWraps {
      * @see org.springframework.transaction.support.TransactionSynchronization#afterCommit
      */
     public static void triggerAfterCommit(@Nullable Runnable callback) {
-        if (callback == null) {
+        if (callback == null || !TransactionSynchronizationManager.isSynchronizationActive()) {
             return;
         }
         TransactionSynchronizationManager.registerSynchronization(
@@ -63,7 +63,7 @@ public abstract class TransactionSyncWraps {
      * @see com.yookue.commonplexus.springutil.enumeration.TransactionStatusType
      */
     public static void triggerAfterCompletion(@Nullable Consumer<Integer> callback) {
-        if (callback == null) {
+        if (callback == null || !TransactionSynchronizationManager.isSynchronizationActive()) {
             return;
         }
         TransactionSynchronizationManager.registerSynchronization(
@@ -84,7 +84,7 @@ public abstract class TransactionSyncWraps {
      * @see org.springframework.transaction.support.TransactionSynchronization#beforeCommit
      */
     public static void triggerBeforeCommit(@Nullable Consumer<Boolean> callback) {
-        if (callback == null) {
+        if (callback == null || !TransactionSynchronizationManager.isSynchronizationActive()) {
             return;
         }
         TransactionSynchronizationManager.registerSynchronization(
@@ -105,7 +105,7 @@ public abstract class TransactionSyncWraps {
      * @see org.springframework.transaction.support.TransactionSynchronization#beforeCompletion
      */
     public static void triggerBeforeCompletion(@Nullable Runnable callback) {
-        if (callback == null) {
+        if (callback == null || !TransactionSynchronizationManager.isSynchronizationActive()) {
             return;
         }
         TransactionSynchronizationManager.registerSynchronization(
