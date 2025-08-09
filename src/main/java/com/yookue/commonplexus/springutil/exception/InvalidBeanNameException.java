@@ -23,7 +23,7 @@ import org.springframework.beans.BeansException;
 
 
 /**
- * Thrown to indicate that the requested bean name is invalid
+ * Exception thrown to indicate that the requested bean name is invalid
  *
  * @author David Hsing
  */

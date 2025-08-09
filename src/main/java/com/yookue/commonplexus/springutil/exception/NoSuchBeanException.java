@@ -24,7 +24,7 @@ import org.springframework.core.ResolvableType;
 
 
 /**
- * Thrown to indicate that the requested bean is missing
+ * Exception thrown to indicate that the requested bean is missing
  *
  * @author David Hsing
  *

@@ -23,7 +23,7 @@ import org.springframework.util.ClassUtils;
 
 
 /**
- * Thrown to indicate that the requested bean type is mismatched
+ * Exception thrown to indicate that the requested bean type is mismatched
  *
  * @author David Hsing
  *

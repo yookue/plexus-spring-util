@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Thrown to indicate that the request rate is limited
+ * Exception thrown to indicate that the request rate is limited
  *
  * @author David Hsing
  */

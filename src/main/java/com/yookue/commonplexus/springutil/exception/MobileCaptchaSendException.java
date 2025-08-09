@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Checked exception thrown that occurred when sending mobile captcha
+ * Exception thrown to indicate that the mobile captcha sending is failed
  *
  * @author David Hsing
  */

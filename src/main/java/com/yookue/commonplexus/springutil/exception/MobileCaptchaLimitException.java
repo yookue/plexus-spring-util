@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Thrown to indicate that the mobile captcha sending is limited
+ * Exception thrown to indicate that the mobile captcha sending is limited
  *
  * @author David Hsing
  */
