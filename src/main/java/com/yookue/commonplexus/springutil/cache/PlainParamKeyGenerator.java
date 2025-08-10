@@ -98,19 +98,19 @@ public class PlainParamKeyGenerator extends AbstractKeyGenerator {
                     continue;
                 }
                 if (param instanceof java.util.Date alias) {
-                    joiner.add(JdkDateWraps.formatDateTime(alias, TemporalFormatConst.NON_YYYYMMDD));
+                    joiner.add(JdkDateWraps.formatDateTime(alias, TemporalFormatConst.RAW_YYYYMMDD));
                     continue;
                 }
                 if (param instanceof java.time.LocalDate alias) {
-                    joiner.add(LocalDateWraps.formatDate(alias, TemporalFormatConst.NON_YYYYMMDD));
+                    joiner.add(LocalDateWraps.formatDate(alias, TemporalFormatConst.RAW_YYYYMMDD));
                     continue;
                 }
                 if (param instanceof java.time.LocalDateTime alias) {
-                    joiner.add(LocalDateWraps.formatDateTime(alias, TemporalFormatConst.NON_YYYYMMDD_HHMMSS));
+                    joiner.add(LocalDateWraps.formatDateTime(alias, TemporalFormatConst.RAW_YYYYMMDD_HHMMSS));
                     continue;
                 }
                 if (param instanceof java.time.LocalTime alias) {
-                    joiner.add(LocalDateWraps.formatTime(alias, TemporalFormatConst.NON_HHMMSS));
+                    joiner.add(LocalDateWraps.formatTime(alias, TemporalFormatConst.RAW_HHMMSS));
                     continue;
                 }
                 joiner.add(ObjectUtils.getDisplayString(param));
