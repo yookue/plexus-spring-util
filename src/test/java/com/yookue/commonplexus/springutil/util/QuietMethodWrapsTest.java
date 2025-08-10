@@ -20,10 +20,8 @@ package com.yookue.commonplexus.springutil.util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import com.google.gson.Gson;
 import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
 import com.yookue.commonplexus.javaseutil.util.StackTraceWraps;
 import lombok.extern.slf4j.Slf4j;
@@ -38,10 +36,12 @@ import lombok.extern.slf4j.Slf4j;
 class QuietMethodWrapsTest {
     @Test
     void writeMethods() throws IOException {
-        File output = new File("D:/GsonJsonWraps.java");
+        File output = new File("/Volumes/Workspace/FilePlainWraps.java");
         QuietMethodWraps.BuildParam param = new QuietMethodWraps.BuildParam();
-        param.setMethodFilter(method -> StringUtils.startsWithAny(method.getName(), "fromJson", "toJson"));
-        boolean result = QuietMethodWraps.writeMethods(Gson.class, param, output, StandardCharsets.UTF_8);
+        param.setTypeFullName("FilePlainWraps");
+        param.setMethodSuffix(null);
+        // param.setMethodFilter(method -> StringUtils.startsWithAny(method.getName(), "fromJson", "toJson"));
+        boolean result = QuietMethodWraps.writeMethods(java.nio.file.Files.class, param, output, StandardCharsets.UTF_8);
         log.info("{} = {}", StackTraceWraps.getExecutingMethodName(), result);
         Assertions.assertTrue(result, AssertMessageConst.IS_TRUE);
     }

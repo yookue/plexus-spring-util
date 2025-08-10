@@ -33,8 +33,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class ValueEnumWrapsTest {
     @Test
-    void getNameFromValue() {
-        CacheManagerType result = ValueEnumWraps.fromValue(CacheManagerType.class, CacheManagerType.REDIS.getValue());
+    void getNameOfValue() {
+        CacheManagerType result = ValueEnumWraps.ofValue(CacheManagerType.class, CacheManagerType.REDIS.getValue());
         Assertions.assertNotNull(result);
         log.info("{}: {}", StackTraceWraps.getExecutingMethodName(), result.name());
     }

@@ -99,7 +99,7 @@ public abstract class QuietMethodWraps {
         }
         buildParam = ObjectUtils.defaultIfNull(buildParam, new BuildParam());
         String srcType = ClassUtils.getShortName(classType);
-        String destType = StringUtils.join(buildParam.typePrefix, srcType, buildParam.typeSuffix);
+        String destType = StringUtils.defaultIfBlank(buildParam.typeFullName, StringUtils.join(buildParam.typePrefix, srcType, buildParam.typeSuffix));
         // Generate type content
         TypeSpec.Builder typeBuilder = TypeSpec.classBuilder(destType).addModifiers(buildParam.typeModifiers);
         doWithTypeInternal(classType, typeBuilder, buildParam);
@@ -157,7 +157,6 @@ public abstract class QuietMethodWraps {
         return writeMethods(classType, buildParam, output, charset, false);
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean writeMethods(@Nullable Class<?> classType, @Nullable BuildParam buildParam, @Nullable File output, @Nullable Charset charset, boolean append) throws IOException {
         if (ObjectUtils.anyNull(classType, output)) {
             return false;
@@ -459,6 +458,13 @@ public abstract class QuietMethodWraps {
          * Content that will be used with the {@code @since} annotation in the javadoc, for the generated class
          */
         private String docSince;
+
+        /**
+         * Full name for the generated class name
+         * <p>
+         * If empty, the {@code typePrefix}, source type, and {@code typeSuffix} will be used
+         */
+        private String typeFullName;
 
         /**
          * Prefix for the generated class name
