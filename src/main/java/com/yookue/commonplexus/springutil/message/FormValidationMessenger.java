@@ -39,7 +39,7 @@ import lombok.RequiredArgsConstructor;
  * @reference "https://old.formvalidation.io/"
  */
 @RequiredArgsConstructor
-@SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
+@SuppressWarnings({"unused", "ClassCanBeRecord", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class FormValidationMessenger {
     private final MessageSource messageSource;
 

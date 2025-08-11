@@ -50,7 +50,6 @@ public abstract class JavapoetPlainWraps {
         }
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void addReturnStatement(@Nullable Method method, @Nullable MethodSpec.Builder builder, boolean skipVoid) {
         if (ObjectUtils.anyNull(method, builder)) {
             return;

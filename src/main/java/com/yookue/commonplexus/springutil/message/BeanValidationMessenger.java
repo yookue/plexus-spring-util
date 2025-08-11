@@ -64,7 +64,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 @Slf4j
-@SuppressWarnings({"unused", "JavadocReference"})
+@SuppressWarnings({"unused", "ClassCanBeRecord", "JavadocReference"})
 public class BeanValidationMessenger {
     private final MessageSource messageSource;
     private final Validator validator;

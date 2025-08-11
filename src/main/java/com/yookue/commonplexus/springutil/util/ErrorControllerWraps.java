@@ -70,7 +70,6 @@ public abstract class ErrorControllerWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <C extends AbstractErrorController> Map<String, Object> getErrorAttributes(@Nullable C controller, @Nullable HttpServletRequest request, @Nullable ErrorAttributeOptions options) {
         if (ObjectUtils.anyNull(controller, request, options)) {
             return null;
@@ -88,7 +87,6 @@ public abstract class ErrorControllerWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <C extends AbstractErrorController> Throwable getErrorCause(@Nullable C controller, @Nullable HttpServletRequest request) {
         if (ObjectUtils.anyNull(controller, request)) {
             return null;

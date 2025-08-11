@@ -70,7 +70,6 @@ public abstract class BeanFactoryWraps {
         return allBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectType)));
     }
@@ -79,7 +78,6 @@ public abstract class BeanFactoryWraps {
         return allBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean allBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().allMatch(IgnorableFailable.asPredicate(beanName -> StringUtils.isNotBlank(beanName) && factory.isTypeMatch(beanName, expectType)));
     }
@@ -88,7 +86,6 @@ public abstract class BeanFactoryWraps {
         return anyBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable Class<?> expectType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectType)));
     }
@@ -97,7 +94,6 @@ public abstract class BeanFactoryWraps {
         return anyBeansMatchType(factory, expectType, ArrayUtilsWraps.asList(beanNames));
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean anyBeansMatchType(@Nullable BeanFactory factory, @Nullable ResolvableType expectType, @Nullable Collection<String> beanNames) {
         return ObjectUtils.allNotNull(factory, expectType) && !CollectionUtils.isEmpty(beanNames) && beanNames.stream().filter(StringUtils::isNotBlank).anyMatch(IgnorableFailable.asPredicate(beanName -> factory.isTypeMatch(beanName, expectType)));
     }
@@ -345,7 +341,6 @@ public abstract class BeanFactoryWraps {
      * @return a bean instance that uniquely matches the given object type, if any
      */
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> T getBean(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
         if (ObjectUtils.anyNull(factory, expectType)) {
             return null;
@@ -383,7 +378,6 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> T getBean(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<T> expectType) {
         if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return null;
@@ -676,7 +670,6 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable Class<T> expectType) {
         return ObjectUtils.anyNull(factory, expectType) ? null : factory.getBeanProvider(expectType);
     }
@@ -691,7 +684,6 @@ public abstract class BeanFactoryWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> ObjectProvider<T> getBeanProvider(@Nullable BeanFactory factory, @Nullable ResolvableType expectType) {
         return ObjectUtils.anyNull(factory, expectType) ? null : factory.getBeanProvider(expectType);
     }
@@ -930,7 +922,6 @@ public abstract class BeanFactoryWraps {
      * @return a map with the matching beans, containing the bean names as keys and the corresponding bean instances as values
      */
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> Map<String, T> getBeansWithAnnotationAs(@Nullable BeanFactory factory, @Nullable Class<? extends Annotation> annotation, @Nullable Class<T> expectType) {
         if (!(factory instanceof ListableBeanFactory) || ObjectUtils.anyNull(annotation, expectType)) {
             return null;
@@ -1062,7 +1053,6 @@ public abstract class BeanFactoryWraps {
         return false;
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable Class<?> expectType) {
         if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return false;
@@ -1074,7 +1064,6 @@ public abstract class BeanFactoryWraps {
         return false;
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean matchBeanType(@Nullable BeanFactory factory, @Nullable String beanName, @Nullable ResolvableType expectType) {
         if (ObjectUtils.anyNull(factory, expectType) || StringUtils.isBlank(beanName)) {
             return false;

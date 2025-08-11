@@ -146,7 +146,6 @@ public class PropertiesAuthenticationEventPublisher implements AuthenticationEve
         addExceptionEvent("org.springframework.security.oauth2.server.resource.InvalidBearerTokenException", PropertiesAuthenticationFailureBadCredentialsEvent.class);    // $NON-NLS-1$
     }
 
-    @SuppressWarnings("DataFlowIssue")
     protected void publishEvent(@Nullable AbstractAuthenticationEvent event) {
         if (ObjectUtils.allNotNull(event, applicationEventPublisher)) {
             applicationEventPublisher.publishEvent(event);

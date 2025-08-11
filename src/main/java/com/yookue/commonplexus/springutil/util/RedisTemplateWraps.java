@@ -182,7 +182,7 @@ public abstract class RedisTemplateWraps {
 
     @SuppressWarnings("DataFlowIssue")
     public static <K> boolean existsKey(@Nullable RedisTemplate<K, ?> template, @Nullable K key) {
-        return org.apache.commons.lang3.ObjectUtils.allNotNull(template, key) && BooleanUtils.isTrue(template.hasKey(key));
+        return ObjectUtilsWraps.allNotNull(template, key) && BooleanUtils.isTrue(template.hasKey(key));
     }
 
     @SafeVarargs

@@ -44,7 +44,6 @@ public abstract class MultiMapWraps {
      * @param key The key to search
      * @param value The value to be added
      */
-    @SuppressWarnings("DataFlowIssue")
     public static <K, V> void add(@Nullable MultiValueMap<K, V> target, @Nullable K key, @Nullable V value) {
         if (ObjectUtils.allNotNull(target, key, value)) {
             target.add(key, value);
@@ -103,7 +102,6 @@ public abstract class MultiMapWraps {
      * @return the first element of value list for the given key
      */
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <K, V> V firstValue(@Nullable MultiValueMap<K, V> map, @Nullable K key) {
         return ObjectUtils.anyNull(map, key) ? null : map.getFirst(key);
     }

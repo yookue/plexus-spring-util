@@ -175,7 +175,6 @@ public abstract class RequestPopulateWraps {
         populateRequestParametersToBeanSheared(bean, request, emptyAsNull, includePayload, unwrapSingleArray, ArrayUtilsWraps.asList(ignoredFields));
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void populateRequestParametersToBeanSheared(@Nullable Object bean, @Nullable HttpServletRequest request, boolean emptyAsNull, boolean includePayload, boolean unwrapSingleArray, @Nullable Collection<String> ignoredFields) {
         if (ObjectUtils.anyNull(bean, request)) {
             return;

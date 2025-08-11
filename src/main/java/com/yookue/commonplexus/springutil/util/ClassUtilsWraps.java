@@ -297,7 +297,6 @@ public abstract class ClassUtilsWraps {
         return !isPrimitive(clazz);
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static boolean isAssignable(@Nullable Class<?> superclass, @Nullable Class<?> subclass) {
         return ObjectUtils.allNotNull(superclass, subclass) && ClassUtils.isAssignable(superclass, subclass);
     }

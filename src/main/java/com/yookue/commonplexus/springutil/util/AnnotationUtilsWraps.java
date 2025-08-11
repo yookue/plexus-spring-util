@@ -172,7 +172,6 @@ public abstract class AnnotationUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <A extends Annotation> A findAnnotationAnywhere(@Nullable Method method, @Nullable Class<A> annotation) {
         if (ObjectUtils.anyNull(method, annotation)) {
             return null;
@@ -199,7 +198,6 @@ public abstract class AnnotationUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <A extends Annotation> A getAnnotationAnywhere(@Nullable Method method, @Nullable Class<A> annotation) {
         if (ObjectUtils.anyNull(method, annotation)) {
             return null;
@@ -243,7 +241,6 @@ public abstract class AnnotationUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static Object getAnnotationAttribute(@Nullable AnnotatedElement element, @Nullable Class<? extends Annotation> annotation, @Nullable String attribute) {
         if (ObjectUtils.anyNull(element, annotation) || StringUtils.isBlank(attribute)) {
             return null;

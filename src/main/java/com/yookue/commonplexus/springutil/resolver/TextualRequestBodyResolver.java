@@ -52,7 +52,6 @@ public class TextualRequestBodyResolver implements HandlerMethodArgumentResolver
     }
 
     @Override
-    @SuppressWarnings("DataFlowIssue")
     public Object resolveArgument(@Nonnull MethodParameter parameter, ModelAndViewContainer container, @Nonnull NativeWebRequest request, @Nullable WebDataBinderFactory factory) {
         Object attribute = request.getAttribute(REQUEST_ATTRIBUTE, NativeWebRequest.SCOPE_REQUEST);
         if (attribute instanceof String) {

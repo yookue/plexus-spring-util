@@ -37,7 +37,6 @@ import org.springframework.util.FileCopyUtils;
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class FileCopyWraps {
-    @SuppressWarnings("DataFlowIssue")
     public static int copy(@Nullable File input, @Nullable File output) {
         if (ObjectUtils.anyNull(input, output)) {
             return 0;
@@ -49,7 +48,6 @@ public abstract class FileCopyWraps {
         return 0;
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void copy(@Nullable byte[] input, @Nullable OutputStream output) {
         if (ObjectUtils.anyNull(input, output)) {
             return;
@@ -60,7 +58,6 @@ public abstract class FileCopyWraps {
         }
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static int copy(@Nullable Reader input, @Nullable Writer output) {
         if (ObjectUtils.anyNull(input, output)) {
             return 0;
@@ -72,7 +69,6 @@ public abstract class FileCopyWraps {
         return 0;
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void copy(@Nullable String input, @Nullable Writer output) {
         if (ObjectUtils.anyNull(input, output)) {
             return;
@@ -83,7 +79,6 @@ public abstract class FileCopyWraps {
         }
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void copy(@Nullable byte[] input, @Nullable File output) {
         if (ObjectUtils.anyNull(input, output)) {
             return;
@@ -94,7 +89,6 @@ public abstract class FileCopyWraps {
         }
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static int copy(@Nullable InputStream input, @Nullable OutputStream output) {
         if (ObjectUtils.anyNull(input, output)) {
             return 0;

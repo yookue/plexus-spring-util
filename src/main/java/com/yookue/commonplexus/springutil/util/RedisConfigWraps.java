@@ -101,7 +101,6 @@ public abstract class RedisConfigWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <K, V> RedisTemplate<K, V> redisTemplate(@Nullable RedisConnectionFactory factory, @Nullable RedisSerializer<K> keySerializer, @Nullable RedisSerializer<V> valueSerializer) {
         if (ObjectUtils.anyNull(factory, keySerializer, valueSerializer)) {
             return null;

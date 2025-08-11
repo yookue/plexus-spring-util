@@ -75,7 +75,6 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationPrincipalAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
         return ObjectUtils.anyNull(authentication, expectType) ? null : ObjectUtilsWraps.castAs(authentication.getPrincipal(), expectType);
     }
@@ -86,7 +85,6 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationCredentialsAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
         return ObjectUtils.anyNull(authentication, expectType) ? null : ObjectUtilsWraps.castAs(authentication.getCredentials(), expectType);
     }
@@ -97,7 +95,6 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static <T> T getAuthenticationDetailsAs(@Nullable Authentication authentication, @Nullable Class<T> expectType) {
         return ObjectUtils.anyNull(authentication, expectType) ? null : ObjectUtilsWraps.castAs(authentication.getDetails(), expectType);
     }
@@ -334,7 +331,6 @@ public abstract class SecurityUtilsWraps {
     /**
      * @see org.springframework.security.web.authentication.WebAuthenticationDetails
      */
-    @SuppressWarnings("DataFlowIssue")
     public static void setAuthenticationDetails(@Nullable Authentication authentication, @Nullable Object details) {
         if (ObjectUtils.anyNull(authentication, details)) {
             return;

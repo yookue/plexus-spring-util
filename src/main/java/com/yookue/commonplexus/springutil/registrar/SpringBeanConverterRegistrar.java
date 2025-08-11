@@ -32,6 +32,7 @@ import com.yookue.commonplexus.springutil.converter.spring.StringToSqlDateConver
  *
  * @author David Hsing
  */
+@SuppressWarnings("unused")
 public class SpringBeanConverterRegistrar implements WebMvcConfigurer {
     @Override
     public void addFormatters(@Nonnull FormatterRegistry registry) {

@@ -452,7 +452,6 @@ public abstract class RequestMappingWraps {
      * @return a set of string that contains the path patterns with the given annotation, in the application context
      */
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static Set<String> getRequestMappingPatternsWithAnnotationToSet(@Nullable ApplicationContext context, @Nullable Class<? extends Annotation> annotation, @Nullable BiPredicate<RequestMappingInfo, HandlerMethod> filter) {
         if (ObjectUtils.anyNull(context, annotation)) {
             return null;

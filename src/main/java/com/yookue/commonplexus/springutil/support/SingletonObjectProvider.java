@@ -35,7 +35,7 @@ import org.springframework.beans.factory.ObjectProvider;
  * @see org.springframework.util.function.SingletonSupplier
  * @see org.springframework.beans.factory.support.StaticListableBeanFactory
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public class SingletonObjectProvider<T> implements ObjectProvider<T> {
     private static final SingletonObjectProvider<?> EMPTY = new SingletonObjectProvider<>(null);
     private final T value;

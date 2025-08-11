@@ -79,7 +79,6 @@ public abstract class CacheUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static CacheManager getCacheManager(@Nullable BeanFactory factory, @Nullable CacheOperationInvocationContext<?> context) {
         return ObjectUtils.anyNull(factory, context) ? null : getCacheManager(factory, context.getOperation());
     }
@@ -93,7 +92,6 @@ public abstract class CacheUtilsWraps {
     }
 
     @Nullable
-    @SuppressWarnings("DataFlowIssue")
     public static CacheResolver getCacheResolver(@Nullable BeanFactory factory, @Nullable CacheOperationInvocationContext<?> context) {
         return ObjectUtils.anyNull(factory, context) ? null : getCacheResolver(factory, context.getOperation());
     }

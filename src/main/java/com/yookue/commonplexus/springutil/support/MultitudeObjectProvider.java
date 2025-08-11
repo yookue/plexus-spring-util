@@ -36,7 +36,7 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
  *
  * @see org.springframework.beans.factory.support.StaticListableBeanFactory
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public class MultitudeObjectProvider<T> implements ObjectProvider<T> {
     private static final MultitudeObjectProvider<?> EMPTY = new MultitudeObjectProvider<>();
     private final T[] values;

@@ -26,6 +26,7 @@ import com.yookue.commonplexus.javaseutil.util.BeanUtilsWraps;
  *
  * @author David Hsing
  */
+@SuppressWarnings("unused")
 public class ApacheBeanConverterRegistrar implements InitializingBean {
     @Override
     public void afterPropertiesSet() {
