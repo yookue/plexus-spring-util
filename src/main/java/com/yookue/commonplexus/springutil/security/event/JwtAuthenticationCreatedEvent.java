@@ -18,7 +18,6 @@ package com.yookue.commonplexus.springutil.security.event;
 
 
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.security.core.Authentication;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
@@ -35,24 +34,12 @@ import lombok.Getter;
 @Getter
 @SuppressWarnings("unused")
 public class JwtAuthenticationCreatedEvent extends ApplicationEvent {
-    private String token;
-
     public JwtAuthenticationCreatedEvent(@Nonnull Authentication authentication) {
         super(authentication);
-    }
-
-    public JwtAuthenticationCreatedEvent(@Nonnull Authentication authentication, @Nullable String token) {
-        super(authentication);
-        this.token = token;
     }
 
     @Nonnull
     public Authentication getRawSource() {
         return ObjectUtilsWraps.castAs(super.getSource(), Authentication.class);
-    }
-
-    @Nullable
-    public String getRawToken() {
-        return token;
     }
 }
