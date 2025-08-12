@@ -21,6 +21,8 @@ import java.util.Collection;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.springframework.security.core.GrantedAuthority;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.yookue.commonplexus.springutil.util.JwtAuthWraps;
 import lombok.Getter;
 
 
@@ -44,5 +46,9 @@ public class JwtAuthenticationToken extends AbstractAdditiveAuthenticationToken 
 
     public JwtAuthenticationToken(@Nonnull Object principal, @Nullable Object credentials, @Nullable Collection<? extends GrantedAuthority> authorities) {
         super(principal, credentials, authorities);
+    }
+
+    public DecodedJWT getDecodedJwt() {
+        return JwtAuthWraps.decodeToken(super.getCredentialsAs(String.class));
     }
 }
