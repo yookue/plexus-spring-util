@@ -100,7 +100,7 @@ public abstract class JwtAuthWraps {
         try {
             return JWT.decode(token);
         } catch (Exception ignored) {
-            return null;
         }
+        return null;
     }
 }
