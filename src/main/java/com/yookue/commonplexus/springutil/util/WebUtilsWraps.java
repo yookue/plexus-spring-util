@@ -474,6 +474,18 @@ public abstract class WebUtilsWraps {
         return ObjectUtilsWraps.castAs(WebUtils.getSessionAttribute(request, name), expectType);
     }
 
+    public static Object getSessionAttribute(@Nullable HttpSession session, @Nullable String name) {
+        return (session == null || StringUtils.isBlank(name)) ? null : session.getAttribute(name);
+    }
+
+    @Nullable
+    public static <T> T getSessionAttributeAs(@Nullable HttpSession session, @Nullable String name, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(session, expectType) || StringUtils.isBlank(name)) {
+            return null;
+        }
+        return ObjectUtilsWraps.castAs(getSessionAttribute(session, name), expectType);
+    }
+
     public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value) {
         setSessionAttribute(request, name, value, true);
     }
