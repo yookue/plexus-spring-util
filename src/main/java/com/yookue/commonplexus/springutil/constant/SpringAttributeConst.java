@@ -55,6 +55,8 @@ public abstract class SpringAttributeConst {
      */
     public static final String LOCALE_RESOLVER_TIMEZONE = "LocaleResolver.TIMEZONE";    // $NON-NLS-1$
 
+    public static final String SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";    // $NON-NLS-1$
+
     /**
      * @see org.springframework.session.data.redis.RedisIndexedSessionRepository
      */
