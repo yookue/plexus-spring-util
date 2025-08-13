@@ -25,7 +25,7 @@ import lombok.Getter;
 
 
 /**
- * Event when the jwt authentication been distributed
+ * Event when the jwt authentication been created
  *
  * @author David Hsing
  *
@@ -33,8 +33,8 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("unused")
-public class JwtAuthenticationDistributedEvent extends ApplicationEvent {
-    public JwtAuthenticationDistributedEvent(@Nonnull Authentication authentication) {
+public class JwtAuthenticationCreatedEvent extends ApplicationEvent {
+    public JwtAuthenticationCreatedEvent(@Nonnull Authentication authentication) {
         super(authentication);
     }
 
