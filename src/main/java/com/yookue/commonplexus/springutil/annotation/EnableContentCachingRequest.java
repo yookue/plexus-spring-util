@@ -42,7 +42,7 @@ import com.yookue.commonplexus.springutil.registrar.ContentCachingRequestRegistr
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@ConditionalOnWebApplication
 @Import(value = ContentCachingRequestRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnableContentCachingRequest {

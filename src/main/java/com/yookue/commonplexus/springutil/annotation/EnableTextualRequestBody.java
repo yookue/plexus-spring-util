@@ -42,7 +42,7 @@ import com.yookue.commonplexus.springutil.registrar.TextualRequestBodyRegistrar;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@ConditionalOnWebApplication
 @Import(value = TextualRequestBodyRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnableTextualRequestBody {

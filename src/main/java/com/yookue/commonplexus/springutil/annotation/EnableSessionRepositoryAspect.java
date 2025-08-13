@@ -19,38 +19,28 @@ package com.yookue.commonplexus.springutil.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.apache.commons.fileupload2.jakarta.JakartaFileCleaner;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import com.yookue.commonplexus.springutil.registrar.FileUploadCleanerRegistrar;
+import com.yookue.commonplexus.springutil.registrar.SessionRepositoryAspectRegistrar;
 
 
 /**
- * Annotation that enables a {@link org.apache.commons.fileupload2.jakarta.JakartaFileCleaner}
+ * Annotation for enables a {@link com.yookue.commonplexus.springutil.aspect.SessionRepositoryAspect}
  *
  * @author David Hsing
- *
- * @see org.apache.commons.fileupload2.jakarta.JakartaFileCleaner
- * @see com.yookue.commonplexus.springutil.registrar.FileUploadCleanerRegistrar
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
+@Inherited
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(value = JakartaFileCleaner.class)
 @ConditionalOnWebApplication
-@Import(value = FileUploadCleanerRegistrar.class)
+@Import(value = SessionRepositoryAspectRegistrar.class)
 @SuppressWarnings("unused")
-public @interface EnableFileUploadCleaner {
-    /**
-     * Returns the listener registration order
-     *
-     * @return the listener registration order
-     */
-    int listenerOrder() default 0;
+public @interface EnableSessionRepositoryAspect {
 }

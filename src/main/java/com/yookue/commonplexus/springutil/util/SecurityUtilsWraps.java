@@ -47,6 +47,7 @@ import org.springframework.util.CollectionUtils;
 import com.yookue.commonplexus.javaseutil.exception.UnsupportedClassException;
 import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import com.yookue.commonplexus.springutil.constant.SpringAttributeConst;
 import com.yookue.commonplexus.springutil.security.exception.IllegalAuthenticationException;
 
 
@@ -217,6 +218,54 @@ public abstract class SecurityUtilsWraps {
         return CollectionUtils.isEmpty(authorities) ? null : authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
     }
 
+    @Nullable
+    public static Authentication getSessionAuthentication(@Nullable HttpServletRequest request) {
+        return (request == null) ? null : getSessionAuthentication(request.getSession());
+    }
+
+    @Nullable
+    public static Authentication getSessionAuthentication(@Nullable HttpSession session) {
+        SecurityContext context = getSessionSecurityContext(session);
+        return (context == null) ? null : context.getAuthentication();
+    }
+
+    @Nullable
+    public static <T extends Authentication> T getSessionAuthenticationAs(@Nullable HttpServletRequest request, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(request, expectType) ? null : getSessionAuthenticationAs(request.getSession(), expectType);
+    }
+
+    @Nullable
+    public static <T extends Authentication> T getSessionAuthenticationAs(@Nullable HttpSession session, @Nullable Class<T> expectType) {
+        return ObjectUtilsWraps.castAs(getSessionAuthentication(session), expectType);
+    }
+
+    public static List<Authentication> getSessionAuthentications(@Nullable HttpServletRequest request) {
+        return (request == null) ? null : getSessionAuthentications(request.getSession());
+    }
+
+    public static List<Authentication> getSessionAuthentications(@Nullable HttpSession session) {
+        if (session == null) {
+            return null;
+        }
+        List<SecurityContext> contexts = getSessionSecurityContexts(session);
+        return CollectionUtils.isEmpty(contexts) ? null : contexts.stream().map(SecurityContext::getAuthentication).collect(Collectors.toList());
+    }
+
+    @Nullable
+    public static SecurityContext getSessionSecurityContext(@Nullable HttpServletRequest request) {
+        return (request == null) ? null : getSessionSecurityContext(request.getSession());
+    }
+
+    @Nullable
+    public static SecurityContext getSessionSecurityContext(@Nullable HttpSession session) {
+        if (session == null) {
+            return null;
+        }
+        Object attribute = session.getAttribute(SpringAttributeConst.SECURITY_CONTEXT);
+        return ObjectUtilsWraps.castAs(attribute, SecurityContext.class);
+    }
+
+    @Nullable
     public static List<SecurityContext> getSessionSecurityContexts(@Nullable HttpServletRequest request) {
         return (request == null) ? null : getSessionSecurityContexts(request.getSession());
     }
@@ -224,6 +273,7 @@ public abstract class SecurityUtilsWraps {
     /**
      * @see org.springframework.security.web.session.HttpSessionDestroyedEvent#getSecurityContexts
      */
+    @Nullable
     public static List<SecurityContext> getSessionSecurityContexts(@Nullable HttpSession session) {
         if (session == null) {
             return null;
@@ -238,18 +288,6 @@ public abstract class SecurityUtilsWraps {
             }
         }
         return CollectionUtils.isEmpty(result) ? null : result;
-    }
-
-    public static List<Authentication> getSessionAuthentications(@Nullable HttpServletRequest request) {
-        return (request == null) ? null : getSessionAuthentications(request.getSession());
-    }
-
-    public static List<Authentication> getSessionAuthentications(@Nullable HttpSession session) {
-        if (session == null) {
-            return null;
-        }
-        List<SecurityContext> contexts = getSessionSecurityContexts(session);
-        return CollectionUtils.isEmpty(contexts) ? null : contexts.stream().map(SecurityContext::getAuthentication).collect(Collectors.toList());
     }
 
     public static boolean isAuthenticationAuthenticated(@Nullable Authentication authentication) {

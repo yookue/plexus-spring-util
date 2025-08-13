@@ -23,6 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.context.WebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -50,6 +51,14 @@ public abstract class ApplicationContextWraps {
 
     public static String getApplicationName(@Nullable ApplicationContext context, @Nullable String defaultValue) {
         return (context == null) ? defaultValue : StringUtils.firstNonBlank(context.getApplicationName(), getProperty(context, SpringPropertyConst.APPLICATION_NAME), defaultValue);
+    }
+
+    public static ApplicationEventPublisher getApplicationEventPublisher(@Nullable ApplicationContext context) {
+        return getApplicationEventPublisher(context, null);
+    }
+
+    public static ApplicationEventPublisher getApplicationEventPublisher(@Nullable ApplicationContext context, @Nullable ApplicationEventPublisher defaultValue) {
+        return (context == null) ? defaultValue : context;
     }
 
     public static String getDisplayName(@Nullable ApplicationContext context) {

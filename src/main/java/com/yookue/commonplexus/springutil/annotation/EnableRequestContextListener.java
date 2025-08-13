@@ -43,7 +43,7 @@ import com.yookue.commonplexus.springutil.registrar.RequestContextListenerRegist
 @Retention(value = RetentionPolicy.RUNTIME)
 @Documented
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@ConditionalOnWebApplication
 @Import(value = RequestContextListenerRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnableRequestContextListener {
