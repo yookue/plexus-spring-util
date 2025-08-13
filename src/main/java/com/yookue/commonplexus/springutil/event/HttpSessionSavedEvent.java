@@ -17,10 +17,13 @@
 package com.yookue.commonplexus.springutil.event;
 
 
+import java.util.Map;
 import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.context.ApplicationEvent;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+import lombok.Getter;
 
 
 /**
@@ -28,10 +31,18 @@ import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
  *
  * @author David Hsing
  */
+@Getter
 @SuppressWarnings("unused")
 public class HttpSessionSavedEvent extends ApplicationEvent {
+    private final Map<String, Object> changedAttributes;
+
     public HttpSessionSavedEvent(@Nonnull HttpSession session) {
+        this(session, null);
+    }
+
+    public HttpSessionSavedEvent(@Nonnull HttpSession session, @Nullable Map<String, Object> changedAttributes) {
         super(session);
+        this.changedAttributes = changedAttributes;
     }
 
     @Nonnull

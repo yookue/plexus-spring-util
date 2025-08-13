@@ -500,6 +500,10 @@ public abstract class WebUtilsWraps {
         }
     }
 
+    public static void removeContextSessionAttribute(@Nullable String name) {
+        removeSessionAttribute(getContextSession(), name);
+    }
+
     public static void removeSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name) {
         if (request == null || StringUtils.isBlank(name)) {
             return;
@@ -508,6 +512,13 @@ public abstract class WebUtilsWraps {
         if (session != null) {
             session.removeAttribute(name);
         }
+    }
+
+    public static void removeSessionAttribute(@Nullable HttpSession session, @Nullable String name) {
+        if (session == null || StringUtils.isBlank(name)) {
+            return;
+        }
+        session.removeAttribute(name);
     }
 
     @Nullable

@@ -43,4 +43,26 @@ import com.yookue.commonplexus.springutil.registrar.SessionRepositoryAspectRegis
 @Import(value = SessionRepositoryAspectRegistrar.class)
 @SuppressWarnings("unused")
 public @interface EnableSessionRepositoryAspect {
+    /**
+     * Returns whether to fire a {@link com.yookue.commonplexus.springutil.event.HttpSessionSavedEvent} only on attribute changes
+     *
+     * @return whether to fire a {@link com.yookue.commonplexus.springutil.event.HttpSessionSavedEvent} only on attribute changes
+     */
+    boolean fireChangedOnly() default true;
+
+    /**
+     * Returns the ignored attributes of the session
+     * <p>
+     * The default attributes is like {@code "creationTime"} {@code "maxInactiveInterval"}
+     *
+     * @return The ignored attributes of the session
+     */
+    String[] ignoredAttributes() default {"creationTime", "maxInactiveInterval"};    // $NON-NLS-1$ $NON-NLS-2$
+
+    /**
+     * Returns whether to remove the attribute prefix {@code "sessionAttr:"} of the session
+     *
+     * @return whether to remove the attribute prefix {@code "sessionAttr:"} of the session
+     */
+    boolean removeAttributePrefix() default true;
 }

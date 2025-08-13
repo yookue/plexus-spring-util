@@ -17,8 +17,14 @@
 package com.yookue.commonplexus.springutil.registrar;
 
 
+import java.lang.annotation.Annotation;
+import jakarta.annotation.Nonnull;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportAware;
+import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.type.AnnotationMetadata;
+import com.yookue.commonplexus.springutil.annotation.EnableSessionRepositoryAspect;
 import com.yookue.commonplexus.springutil.aspect.SessionRepositoryAspect;
 
 
@@ -27,10 +33,25 @@ import com.yookue.commonplexus.springutil.aspect.SessionRepositoryAspect;
  *
  * @author David Hsing
  */
-public class SessionRepositoryAspectRegistrar {
+public class SessionRepositoryAspectRegistrar implements ImportAware {
+    private final Class<? extends Annotation> annotation = EnableSessionRepositoryAspect.class;
+    private AnnotationAttributes attributes;
+
+    @Override
+    public void setImportMetadata(@Nonnull AnnotationMetadata metadata) {
+        attributes = AnnotationAttributes.fromMap(metadata.getAnnotationAttributes(annotation.getName()));
+        if (attributes == null) {
+            throw new IllegalArgumentException(String.format("@%s is not present on importing class: %s", annotation.getSimpleName(), metadata.getClassName()));    // $NON-NLS-1$
+        }
+    }
+
     @Bean
     @ConditionalOnMissingBean
     public SessionRepositoryAspect sessionRepositoryAspect() {
-        return new SessionRepositoryAspect();
+        SessionRepositoryAspect result = new SessionRepositoryAspect();
+        result.setFireChangedOnly(attributes.getBoolean("fireChangedOnly"));    // $NON-NLS-1$
+        result.setIgnoredAttributes(attributes.getStringArray("ignoredAttributes"));    // $NON-NLS-1$
+        result.setRemoveAttributePrefix(attributes.getBoolean("removeAttributePrefix"));    // $NON-NLS-1$
+        return result;
     }
 }

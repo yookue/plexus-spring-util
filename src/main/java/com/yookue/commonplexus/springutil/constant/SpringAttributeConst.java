@@ -61,4 +61,5 @@ public abstract class SpringAttributeConst {
      * @see org.springframework.session.data.redis.RedisIndexedSessionRepository
      */
     public static final String SESSION_NAMESPACE = "spring:session:";    // $NON-NLS-1$
+    public static final String SESSION_ATTR = "sessionAttr:";    // $NON-NLS-1$
 }

@@ -404,14 +404,20 @@ public abstract class ReflectionUtilsWraps {
     }
 
     @Nullable
-    public static Object getField(@Nullable Class<?> clazz, @Nullable String fieldName, boolean makeAccessible, @Nullable Object target) {
-        Field field = makeAccessible ? findFieldAccessible(clazz, fieldName) : findField(clazz, fieldName);
+    public static Object getField(@Nullable Object target, @Nullable String fieldName, boolean makeAccessible) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return null;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName) : findField(target.getClass(), fieldName);
         return getField(field, target);
     }
 
     @Nullable
-    public static Object getField(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object target) {
-        Field field = makeAccessible ? findFieldAccessible(clazz, fieldName, fieldType) : findField(clazz, fieldName, fieldType);
+    public static Object getField(@Nullable Object target, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return null;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName, fieldType) : findField(target.getClass(), fieldName, fieldType);
         return getField(field, target);
     }
 
@@ -432,19 +438,19 @@ public abstract class ReflectionUtilsWraps {
     }
 
     @Nullable
-    public static <T> T getFieldAs(@Nullable Class<?> clazz, @Nullable String fieldName, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
-        if (ObjectUtils.anyNull(clazz, expectType) || StringUtils.isBlank(fieldName)) {
+    public static <T> T getFieldAs(@Nullable Object target, @Nullable String fieldName, boolean makeAccessible, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(target, expectType) || StringUtils.isBlank(fieldName)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(getField(clazz, fieldName, makeAccessible, target), expectType);
+        return ObjectUtilsWraps.castAs(getField(target, fieldName, makeAccessible), expectType);
     }
 
     @Nullable
-    public static <T> T getFieldAs(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
-        if (ObjectUtils.anyNull(clazz, expectType) || StringUtils.isBlank(fieldName)) {
+    public static <T> T getFieldAs(@Nullable Object target, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(target, expectType) || StringUtils.isBlank(fieldName)) {
             return null;
         }
-        return ObjectUtilsWraps.castAs(getField(clazz, fieldName, fieldType, makeAccessible, target), expectType);
+        return ObjectUtilsWraps.castAs(getField(target, fieldName, fieldType, makeAccessible), expectType);
     }
 
     @Nullable
@@ -813,13 +819,19 @@ public abstract class ReflectionUtilsWraps {
         }
     }
 
-    public static void setField(@Nullable Class<?> clazz, @Nullable String fieldName, boolean makeAccessible, @Nullable Object target, @Nullable Object value) {
-        Field field = makeAccessible ? findFieldAccessible(clazz, fieldName) : findField(clazz, fieldName);
+    public static void setField(@Nullable Object target, @Nullable String fieldName, boolean makeAccessible, @Nullable Object value) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName) : findField(target.getClass(), fieldName);
         setField(field, target, value);
     }
 
-    public static void setField(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object target, @Nullable Object value) {
-        Field field = makeAccessible ? findFieldAccessible(clazz, fieldName, fieldType) : findField(clazz, fieldName, fieldType);
+    public static void setField(@Nullable Object target, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object value) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName, fieldType) : findField(target.getClass(), fieldName, fieldType);
         setField(field, target, value);
     }
 }

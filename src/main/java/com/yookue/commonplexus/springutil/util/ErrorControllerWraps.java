@@ -66,7 +66,7 @@ public abstract class ErrorControllerWraps {
 
     @Nullable
     public static <C extends AbstractErrorController> ErrorAttributes getErrorAttributes(@Nullable C controller) {
-        return (controller == null) ? null : ReflectionUtilsWraps.getFieldAs(AbstractErrorController.class, "errorAttributes", true, controller, ErrorAttributes.class);    // $NON-NLS-1$
+        return (controller == null) ? null : ReflectionUtilsWraps.getFieldAs(controller, "errorAttributes", true, ErrorAttributes.class);    // $NON-NLS-1$
     }
 
     @Nullable
