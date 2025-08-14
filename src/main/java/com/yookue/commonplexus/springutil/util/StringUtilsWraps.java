@@ -141,7 +141,7 @@ public abstract class StringUtilsWraps {
      * @param text The string to split (potentially {@code null} or empty)
      * @param groupDelimiter The separate string for groups, {@code null} means use whitespace
      * @param keyValueDelimiter The separate string for key values, {@code null} or empty means use "="
-     * @param charsToDelete One or more characters to remove from each element
+     * @param charsToDelete One or more characters to remove from each item
      *
      * @return a {@code Properties} instance that split by the given group delimiter and key value delimiter
      *

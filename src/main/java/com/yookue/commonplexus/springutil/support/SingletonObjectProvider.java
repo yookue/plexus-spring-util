@@ -26,9 +26,9 @@ import org.springframework.beans.factory.ObjectProvider;
 
 
 /**
- * Singleton element for {@link org.springframework.beans.factory.ObjectProvider}
+ * Singleton item for {@link org.springframework.beans.factory.ObjectProvider}
  *
- * @param <T> the type of the element to hold
+ * @param <T> the type of the item to hold
  *
  * @author David Hsing
  *

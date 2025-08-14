@@ -154,7 +154,7 @@ public abstract class ReflectionUtilsWraps {
     @Nullable
     public static List<String> getDeclaredFieldNamesToList(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
         List<String> result = new ArrayList<>();
-        doWithDeclaredFields(clazz, element -> result.add(element.getName()), filter);
+        doWithDeclaredFields(clazz, item -> result.add(item.getName()), filter);
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
@@ -238,7 +238,7 @@ public abstract class ReflectionUtilsWraps {
             return null;
         }
         List<String> result = new ArrayList<>();
-        ReflectionUtils.doWithFields(clazz, element -> result.add(element.getName()), filter);
+        ReflectionUtils.doWithFields(clazz, item -> result.add(item.getName()), filter);
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
@@ -477,7 +477,7 @@ public abstract class ReflectionUtilsWraps {
             return null;
         }
         List<Field> result = new ArrayList<>();
-        ReflectionUtils.doWithFields(clazz, result::add, element -> AnnotationUtilsWraps.allPresent(element, annotations));
+        ReflectionUtils.doWithFields(clazz, result::add, item -> AnnotationUtilsWraps.allPresent(item, annotations));
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
@@ -505,7 +505,7 @@ public abstract class ReflectionUtilsWraps {
             return null;
         }
         List<Field> result = new ArrayList<>();
-        ReflectionUtils.doWithFields(clazz, result::add, element -> AnnotationUtilsWraps.anyPresent(element, annotations));
+        ReflectionUtils.doWithFields(clazz, result::add, item -> AnnotationUtilsWraps.anyPresent(item, annotations));
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
@@ -605,7 +605,7 @@ public abstract class ReflectionUtilsWraps {
             return null;
         }
         List<Method> result = new ArrayList<>();
-        ReflectionUtils.doWithMethods(clazz, result::add, element -> AnnotationUtilsWraps.allPresent(element, annotations));
+        ReflectionUtils.doWithMethods(clazz, result::add, item -> AnnotationUtilsWraps.allPresent(item, annotations));
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 
@@ -633,7 +633,7 @@ public abstract class ReflectionUtilsWraps {
             return null;
         }
         List<Method> result = new ArrayList<>();
-        ReflectionUtils.doWithMethods(clazz, result::add, element -> AnnotationUtilsWraps.anyPresent(element, annotations));
+        ReflectionUtils.doWithMethods(clazz, result::add, item -> AnnotationUtilsWraps.anyPresent(item, annotations));
         return CollectionUtils.isEmpty(result) ? null : result;
     }
 

@@ -56,7 +56,7 @@ public abstract class RedisTemplateWraps {
         if (template == null || CollectionUtils.isEmpty(keys)) {
             return 0L;
         }
-        return keys.stream().filter(element -> Objects.nonNull(element) && template.hasKey(element)).count();
+        return keys.stream().filter(item -> Objects.nonNull(item) && template.hasKey(item)).count();
     }
 
     @SafeVarargs

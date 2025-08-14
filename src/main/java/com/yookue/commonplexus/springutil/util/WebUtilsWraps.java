@@ -188,7 +188,7 @@ public abstract class WebUtilsWraps {
             return;
         }
         MapPlainWraps.forEach(attributes, request::setAttribute, (key, value) -> StringUtils.isNotBlank(key));
-        NumberUtilsWraps.ifPositive(status, element -> response.setStatus(status));
+        NumberUtilsWraps.ifPositive(status, item -> response.setStatus(status));
         RequestDispatcher dispatcher = request.getRequestDispatcher(path);
         if (dispatcher != null) {
             dispatcher.forward(request, response);

@@ -91,7 +91,7 @@ public abstract class RabbitMqWraps {
         BasicProperties.Builder builder = new BasicProperties.Builder();
         Map<String, Object> params = new LinkedHashMap<>();
         MapPlainWraps.putAllIfKeyNotBlank(params, headers);
-        DurationUtilsWraps.ifPositive(delay, element -> params.put(MessageProperties.X_DELAY, element.toMillis()));
+        DurationUtilsWraps.ifPositive(delay, item -> params.put(MessageProperties.X_DELAY, item.toMillis()));
         params.put(AmqpHeaderConst.X_DELAYED_TIMES, NumberUtilsWraps.isPositive(delayedTimes) ? delayedTimes : 0);
         MapPlainWraps.ifNotEmpty(params, builder::headers);
         builder.contentType(StringUtils.defaultIfBlank(contentType, MessageProperties.CONTENT_TYPE_JSON));

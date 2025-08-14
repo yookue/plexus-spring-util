@@ -46,12 +46,12 @@ public class GeneralAuxiliaryDetails extends WebAuthenticationDetails {
 
     public GeneralAuxiliaryDetails(@Nonnull HttpServletRequest request) {
         super(request);
-        StringUtilsWraps.ifNotBlank(WebUtilsWraps.getRemoteAddress(request), element -> {
-            FieldUtilsWraps.writeField(this, "remoteAddress", element, true);    // $NON-NLS-1$
+        StringUtilsWraps.ifNotBlank(WebUtilsWraps.getRemoteAddress(request), item -> {
+            FieldUtilsWraps.writeField(this, "remoteAddress", item, true);    // $NON-NLS-1$
         });
         if (StringUtils.isBlank(super.getSessionId())) {
-            StringUtilsWraps.ifNotBlank(WebUtilsWraps.getSessionId(request, true), element -> {
-                FieldUtilsWraps.writeField(this, "sessionId", element, true);    // $NON-NLS-1$
+            StringUtilsWraps.ifNotBlank(WebUtilsWraps.getSessionId(request, true), item -> {
+                FieldUtilsWraps.writeField(this, "sessionId", item, true);    // $NON-NLS-1$
             });
         }
         timestamp = LocalDateWraps.getCurrentDateTime();

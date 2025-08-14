@@ -28,9 +28,9 @@ import com.yookue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 
 
 /**
- * Multitude elements for {@link org.springframework.beans.factory.ObjectProvider}
+ * Multitude items for {@link org.springframework.beans.factory.ObjectProvider}
  *
- * @param <T> the type of the elements to hold
+ * @param <T> the type of the items to hold
  *
  * @author David Hsing
  *

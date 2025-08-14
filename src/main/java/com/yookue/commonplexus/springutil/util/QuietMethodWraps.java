@@ -180,7 +180,7 @@ public abstract class QuietMethodWraps {
     protected static void doWithTypeInternal(@Nonnull Class<?> classType, @Nonnull TypeSpec.Builder typeBuilder, @Nonnull BuildParam buildParam) {
         // Javadoc content
         CodeBlock.Builder docBuilder = CodeBlock.builder();
-        StringUtilsWraps.ifNotBlank(buildParam.typeDescription, element -> docBuilder.add("$L", element));    // $NON-NLS-1$
+        StringUtilsWraps.ifNotBlank(buildParam.typeDescription, item -> docBuilder.add("$L", item));    // $NON-NLS-1$
         BooleanUtilsWraps.ifNotFalse(buildParam.docGeneratedBy, () -> docBuilder.add("$L", GENERATED_BY));    // $NON-NLS-1$
         BooleanUtilsWraps.ifTrue(buildParam.docCreatedOn, () -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
@@ -192,40 +192,40 @@ public abstract class QuietMethodWraps {
         });
         if (BooleanUtils.isTrue(buildParam.docDeprecated) || AnnotatedElementUtils.hasAnnotation(classType, Deprecated.class)) {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true, 2);
-            StringUtilsWraps.ifBlankOrElse(buildParam.docDeprecatedContent, element -> docBuilder.add("@deprecated"), element -> docBuilder.addStatement("@deprecated $L", element));    // $NON-NLS-1$ // $NON-NLS-2$
+            StringUtilsWraps.ifBlankOrElse(buildParam.docDeprecatedContent, item -> docBuilder.add("@deprecated"), item -> docBuilder.addStatement("@deprecated $L", item));    // $NON-NLS-1$ // $NON-NLS-2$
             typeBuilder.addAnnotation(AnnotationSpec.builder(Deprecated.class).build());
         }
-        CollectionPlainWraps.forEach(buildParam.apiNotes, element -> {
+        CollectionPlainWraps.forEach(buildParam.apiNotes, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@apiNote $L", element);    // $NON-NLS-1$
+            docBuilder.add("@apiNote $L", item);    // $NON-NLS-1$
         }, StringUtils::isNotBlank);
-        CollectionPlainWraps.forEach(buildParam.implNotes, element -> {
+        CollectionPlainWraps.forEach(buildParam.implNotes, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@implNote $L", element);    // $NON-NLS-1$
+            docBuilder.add("@implNote $L", item);    // $NON-NLS-1$
         }, StringUtils::isNotBlank);
-        CollectionPlainWraps.forEach(buildParam.implSpecs, element -> {
+        CollectionPlainWraps.forEach(buildParam.implSpecs, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@implSpec $L", element);    // $NON-NLS-1$
+            docBuilder.add("@implSpec $L", item);    // $NON-NLS-1$
         }, StringUtils::isNotBlank);
-        CollectionPlainWraps.forEach(buildParam.serials, element -> {
+        CollectionPlainWraps.forEach(buildParam.serials, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@serial $L", element);    // $NON-NLS-1$
+            docBuilder.add("@serial $L", item);    // $NON-NLS-1$
         }, StringUtils::isNotBlank);
-        CollectionPlainWraps.forEach(buildParam.sees, element -> {
+        CollectionPlainWraps.forEach(buildParam.sees, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@see $L", element);    // $NON-NLS-1$
+            docBuilder.add("@see $L", item);    // $NON-NLS-1$
         }, StringUtils::isNotBlank);
-        CollectionPlainWraps.forEach(buildParam.authors, element -> {
+        CollectionPlainWraps.forEach(buildParam.authors, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@author $L", element);    // $NON-NLS-1$
+            docBuilder.add("@author $L", item);    // $NON-NLS-1$
         }, StringUtils::isNotBlank);
-        StringUtilsWraps.ifNotBlank(buildParam.docVersion, element -> {
+        StringUtilsWraps.ifNotBlank(buildParam.docVersion, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@version $L", element);    // $NON-NLS-1$
+            docBuilder.add("@version $L", item);    // $NON-NLS-1$
         });
-        StringUtilsWraps.ifNotBlank(buildParam.docSince, element -> {
+        StringUtilsWraps.ifNotBlank(buildParam.docSince, item -> {
             JavapoetPlainWraps.addLineSeparator(docBuilder, true);
-            docBuilder.add("@since $L", element);    // $NON-NLS-1$
+            docBuilder.add("@since $L", item);    // $NON-NLS-1$
         });
         typeBuilder.addJavadoc(docBuilder.build());
         // Class annotations
@@ -234,8 +234,8 @@ public abstract class QuietMethodWraps {
         }
         AtomicBoolean hasMemberAtom = new AtomicBoolean(false);
         AnnotationSpec.Builder warningsSpec = AnnotationSpec.builder(SuppressWarnings.class);
-        CollectionPlainWraps.forEach(buildParam.suppressWarnings, element -> {
-            warningsSpec.addMember("value", "$S", element);    // $NON-NLS-1$ // $NON-NLS-2$
+        CollectionPlainWraps.forEach(buildParam.suppressWarnings, item -> {
+            warningsSpec.addMember("value", "$S", item);    // $NON-NLS-1$ // $NON-NLS-2$
             hasMemberAtom.set(true);
         }, StringUtils::isNotBlank);
         if (hasMemberAtom.get()) {
@@ -262,7 +262,7 @@ public abstract class QuietMethodWraps {
                 methodBuilder.addTypeVariable(TypeVariableName.get(alias));
             } else if (returnType instanceof ParameterizedType) {
                 Type[] actualTypes = ((ParameterizedType) method.getGenericReturnType()).getActualTypeArguments();
-                ArrayUtilsWraps.forEach(actualTypes, element -> methodBuilder.addTypeVariable(TypeVariableName.get(element.getTypeName())));
+                ArrayUtilsWraps.forEach(actualTypes, item -> methodBuilder.addTypeVariable(TypeVariableName.get(item.getTypeName())));
             }
         }
         // Determine parameter types and names
@@ -275,14 +275,14 @@ public abstract class QuietMethodWraps {
             DefaultParameterNameDiscoverer discoverer = new DefaultParameterNameDiscoverer();
             String[] names = discoverer.getParameterNames(method);
             if (ArrayUtils.isEmpty(names)) {
-                ArrayUtilsWraps.forEachIndexing(types, (index, element) -> nameTypes.put(String.format("arg%d", index), element));    // $NON-NLS-1$
+                ArrayUtilsWraps.forEachIndexing(types, (index, item) -> nameTypes.put(String.format("arg%d", index), item));    // $NON-NLS-1$
             } else {
-                ArrayUtilsWraps.forEachIndexing(types, (index, element) -> {
+                ArrayUtilsWraps.forEachIndexing(types, (index, item) -> {
                     String name = StringUtils.defaultIfBlank(ArrayUtils.get(names, index), String.format("arg%d", index));    // $NON-NLS-1$
                     while (MapPlainWraps.containsKey(nameTypes, name)) {
                         name = StringUtils.lowerCase(RandomStringUtils.secure().next(6));
                     }
-                    nameTypes.put(name, element);
+                    nameTypes.put(name, item);
                 });
             }
         }
@@ -325,7 +325,7 @@ public abstract class QuietMethodWraps {
             String pattern = StringUtils.join((method.getReturnType() == Void.TYPE ? null : "return "), "$L.$L$L");    // $NON-NLS-1$
             methodBuilder.addStatement(pattern, StringVariantConst.INSTANCE, method.getName(), jointParams);    // $NON-NLS-1$
         }
-        boolean throwable = Arrays.stream(method.getExceptionTypes()).anyMatch(element -> element == Throwable.class);
+        boolean throwable = Arrays.stream(method.getExceptionTypes()).anyMatch(item -> item == Throwable.class);
         methodBuilder.nextControlFlow("catch ($T ignored)", (throwable ? Throwable.class : Exception.class)).endControlFlow();    // $NON-NLS-1$
         // Build method return
         JavapoetPlainWraps.addReturnStatement(method, methodBuilder, true);
@@ -339,9 +339,9 @@ public abstract class QuietMethodWraps {
         }
         if (StringUtils.isNotBlank(buildParam.commentFile)) {
             List<String> comments = FileUtilsWraps.readLines(new File(buildParam.commentFile), buildParam.commentFileCharset);
-            CollectionPlainWraps.forEach(comments, element -> fileBuilder.addFileComment("$L", element), StringUtils::isNotEmpty);    // $NON-NLS-1$
+            CollectionPlainWraps.forEach(comments, item -> fileBuilder.addFileComment("$L", item), StringUtils::isNotEmpty);    // $NON-NLS-1$
         }
-        CollectionPlainWraps.forEach(buildParam.fileComments, element -> fileBuilder.addFileComment("$L", element), StringUtils::isNotEmpty);    // $NON-NLS-1$
+        CollectionPlainWraps.forEach(buildParam.fileComments, item -> fileBuilder.addFileComment("$L", item), StringUtils::isNotEmpty);    // $NON-NLS-1$
     }
 
     /**

@@ -90,7 +90,7 @@ public abstract class NumberUtilsWraps {
         if (expectType == null || CollectionUtils.isEmpty(values)) {
             return null;
         }
-        return values.stream().filter(NumberUtils::isParsable).distinct().map(element -> parseNumber(element, expectType, format)).max(ObjectUtils::compare).orElse(null);
+        return values.stream().filter(NumberUtils::isParsable).distinct().map(item -> parseNumber(item, expectType, format)).max(ObjectUtils::compare).orElse(null);
     }
 
     public static <T extends Number & Comparable<? super T>> T minParsableNumber(@Nullable Class<T> expectType, @Nullable String... values) {
@@ -109,6 +109,6 @@ public abstract class NumberUtilsWraps {
         if (expectType == null || CollectionUtils.isEmpty(values)) {
             return null;
         }
-        return values.stream().filter(NumberUtils::isParsable).distinct().map(element -> parseNumber(element, expectType, format)).min(ObjectUtils::compare).orElse(null);
+        return values.stream().filter(NumberUtils::isParsable).distinct().map(item -> parseNumber(item, expectType, format)).min(ObjectUtils::compare).orElse(null);
     }
 }

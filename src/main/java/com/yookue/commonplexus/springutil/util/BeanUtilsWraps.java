@@ -83,7 +83,7 @@ public abstract class BeanUtilsWraps {
             if (CollectionUtils.isEmpty(nested)) {
                 return;
             }
-            ignores = nested.stream().filter(element -> !CollectionPlainWraps.containsString(fields, element)).toArray(String[]::new);
+            ignores = nested.stream().filter(item -> !CollectionPlainWraps.containsString(fields, item)).toArray(String[]::new);
         }
         BeanUtils.copyProperties(source, target, ignores);
     }

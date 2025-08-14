@@ -417,7 +417,7 @@ public abstract class RequestMappingWraps {
                 continue;
             }
             if (MultiMapWraps.containsValue(mappings, ElementType.TYPE)) {
-                Set<String> patterns = condition.getPatterns().stream().filter(StringUtils::isNoneBlank).map(element -> StringUtilsWraps.appendIfMissing(FilenamePlainWraps.removeEndSlashes(element), AntPathConst.SLASH_STARS)).collect(Collectors.toSet());
+                Set<String> patterns = condition.getPatterns().stream().filter(StringUtils::isNoneBlank).map(item -> StringUtilsWraps.appendIfMissing(FilenamePlainWraps.removeEndSlashes(item), AntPathConst.SLASH_STARS)).collect(Collectors.toSet());
                 result.addAll(patterns);
                 continue;
             }
@@ -470,7 +470,7 @@ public abstract class RequestMappingWraps {
                     continue;
                 }
                 if (onClass) {
-                    Set<String> patterns = condition.getPatterns().stream().filter(StringUtils::isNoneBlank).map(element -> StringUtilsWraps.appendIfMissing(FilenamePlainWraps.removeEndSlashes(element), AntPathConst.SLASH_STARS)).collect(Collectors.toSet());
+                    Set<String> patterns = condition.getPatterns().stream().filter(StringUtils::isNoneBlank).map(item -> StringUtilsWraps.appendIfMissing(FilenamePlainWraps.removeEndSlashes(item), AntPathConst.SLASH_STARS)).collect(Collectors.toSet());
                     result.addAll(patterns);
                     continue;
                 }

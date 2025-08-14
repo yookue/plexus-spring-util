@@ -205,7 +205,7 @@ public abstract class MessageSourceWraps {
         if (source == null || CollectionUtils.isEmpty(codes)) {
             return defaultMessage;
         }
-        return codes.stream().filter(StringUtils::isNotBlank).map(element -> getMessage(source, element, args, defaultMessage, locale)).filter(StringUtils::isNotEmpty).findFirst().orElse(defaultMessage);
+        return codes.stream().filter(StringUtils::isNotBlank).map(item -> getMessage(source, item, args, defaultMessage, locale)).filter(StringUtils::isNotEmpty).findFirst().orElse(defaultMessage);
     }
 
     /**
@@ -238,7 +238,7 @@ public abstract class MessageSourceWraps {
         if (ArrayUtils.isEmpty(resolvable.getCodes())) {
             return resolvable.getDefaultMessage();
         }
-        return Arrays.stream(resolvable.getCodes()).filter(StringUtils::isNotBlank).map(element -> getMessage(source, element, resolvable.getArguments(), resolvable.getDefaultMessage(), locale)).filter(StringUtils::isNotEmpty).findFirst().orElse(resolvable.getDefaultMessage());
+        return Arrays.stream(resolvable.getCodes()).filter(StringUtils::isNotBlank).map(item -> getMessage(source, item, resolvable.getArguments(), resolvable.getDefaultMessage(), locale)).filter(StringUtils::isNotEmpty).findFirst().orElse(resolvable.getDefaultMessage());
     }
 
     /**
@@ -410,7 +410,7 @@ public abstract class MessageSourceWraps {
         if (CollectionUtils.isEmpty(locales)) {
             return defaultMessage;
         }
-        return locales.stream().map(element -> firstMessage(source, codes, args, defaultMessage, element)).filter(StringUtils::isNotEmpty).findFirst().orElse(defaultMessage);
+        return locales.stream().map(item -> firstMessage(source, codes, args, defaultMessage, item)).filter(StringUtils::isNotEmpty).findFirst().orElse(defaultMessage);
     }
 
     /**
@@ -449,7 +449,7 @@ public abstract class MessageSourceWraps {
         if (CollectionUtils.isEmpty(locales)) {
             return resolvable.getDefaultMessage();
         }
-        return locales.stream().map(element -> firstMessage(source, resolvable, element)).filter(StringUtils::isNotEmpty).findFirst().orElse(resolvable.getDefaultMessage());
+        return locales.stream().map(item -> firstMessage(source, resolvable, item)).filter(StringUtils::isNotEmpty).findFirst().orElse(resolvable.getDefaultMessage());
     }
 
     /**
@@ -691,7 +691,7 @@ public abstract class MessageSourceWraps {
         if (CollectionUtils.isEmpty(locales)) {
             return defaultMessage;
         }
-        return locales.stream().map(element -> getMessage(source, code, args, defaultMessage, element)).filter(StringUtils::isNotEmpty).findFirst().orElse(defaultMessage);
+        return locales.stream().map(item -> getMessage(source, code, args, defaultMessage, item)).filter(StringUtils::isNotEmpty).findFirst().orElse(defaultMessage);
     }
 
     /**
@@ -727,6 +727,6 @@ public abstract class MessageSourceWraps {
         if (CollectionUtils.isEmpty(locales)) {
             return resolvable.getDefaultMessage();
         }
-        return locales.stream().map(element -> getMessage(source, resolvable, element)).filter(StringUtils::isNotEmpty).findFirst().orElse(resolvable.getDefaultMessage());
+        return locales.stream().map(item -> getMessage(source, resolvable, item)).filter(StringUtils::isNotEmpty).findFirst().orElse(resolvable.getDefaultMessage());
     }
 }

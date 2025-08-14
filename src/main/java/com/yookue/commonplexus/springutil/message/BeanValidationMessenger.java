@@ -162,7 +162,7 @@ public class BeanValidationMessenger {
         if (error.contains(ConstraintViolation.class)) {
             ConstraintViolation<?> violation = error.unwrap(ConstraintViolation.class);
             ObjectUtilsWraps.ifNotNull(violation.getRootBeanClass(), lookupTypes::add);
-            ObjectUtilsWraps.ifNotNull(violation.getLeafBean(), element -> lookupTypes.add(element.getClass()));
+            ObjectUtilsWraps.ifNotNull(violation.getLeafBean(), item -> lookupTypes.add(item.getClass()));
         }
         if (CollectionPlainWraps.isNotEmpty(lookupTypes)) {
             String fieldName = StringUtils.substringAfterLast(error.getField(), CharVariantConst.DOT);

@@ -94,12 +94,12 @@ public abstract class MultiMapWraps {
     }
 
     /**
-     * Returns the first element of value list for the given key
+     * Returns the first item of value list for the given key
      *
      * @param map The source map to look for
      * @param key The key to find
      *
-     * @return the first element of value list for the given key
+     * @return the first item of value list for the given key
      */
     @Nullable
     public static <K, V> V firstValue(@Nullable MultiValueMap<K, V> map, @Nullable K key) {

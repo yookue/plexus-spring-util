@@ -87,7 +87,7 @@ public abstract class AmqpUtilsWraps {
             }
             MessageProperties properties = message.getMessageProperties();
             MapPlainWraps.forEach(headers, properties::setHeader);
-            DurationUtilsWraps.ifPositive(delay, element -> properties.setHeader(MessageProperties.X_DELAY, element.toMillis()));
+            DurationUtilsWraps.ifPositive(delay, item -> properties.setHeader(MessageProperties.X_DELAY, item.toMillis()));
             properties.setHeader(AmqpHeaderConst.X_DELAYED_TIMES, NumberUtilsWraps.isPositive(delayedTimes) ? delayedTimes : 0);
             properties.setContentType(StringUtils.defaultIfBlank(contentType, MessageProperties.CONTENT_TYPE_JSON));
             properties.setContentEncoding(CharsetPlainWraps.defaultCharsetName(charset));

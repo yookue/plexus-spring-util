@@ -62,12 +62,12 @@ public class RequestMappingStruct implements Serializable {
         this.handlerMethod = handlerMethod;
     }
 
-    public void addMapping(@Nullable Class<? extends Annotation> annotation, @Nullable ElementType element) {
+    public void addMapping(@Nullable Class<? extends Annotation> annotation, @Nullable ElementType type) {
         if (mappings == null) {
             mappings = new LinkedMultiValueMap<>();
         }
-        if (ObjectUtils.allNotNull(annotation, element)) {
-            mappings.add(annotation, element);
+        if (ObjectUtils.allNotNull(annotation, type)) {
+            mappings.add(annotation, type);
         }
     }
 
@@ -84,8 +84,8 @@ public class RequestMappingStruct implements Serializable {
         }
     }
 
-    public boolean containsMapping(@Nullable Class<? extends Annotation> annotation, @Nullable ElementType element) {
-        return MultiMapWraps.containsKeyValue(mappings, annotation, element);
+    public boolean containsMapping(@Nullable Class<? extends Annotation> annotation, @Nullable ElementType type) {
+        return MultiMapWraps.containsKeyValue(mappings, annotation, type);
     }
 
     @SuppressWarnings("unchecked")

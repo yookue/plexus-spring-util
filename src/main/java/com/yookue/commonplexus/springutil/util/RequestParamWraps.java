@@ -66,7 +66,7 @@ public abstract class RequestParamWraps {
         if (request == null || CollectionPlainWraps.isEmpty(names)) {
             return null;
         }
-        return names.stream().filter(StringUtils::isNotBlank).map(element -> getCookieValue(request, element)).filter(StringUtils::isNotEmpty).findFirst().orElse(null);
+        return names.stream().filter(StringUtils::isNotBlank).map(item -> getCookieValue(request, item)).filter(StringUtils::isNotEmpty).findFirst().orElse(null);
     }
 
     @Nullable
@@ -79,7 +79,7 @@ public abstract class RequestParamWraps {
         if (request == null || CollectionPlainWraps.isEmpty(names)) {
             return null;
         }
-        return names.stream().filter(StringUtils::isNotBlank).map(element -> getCookieValue(request, element)).filter(StringUtils::isNotBlank).findFirst().orElse(null);
+        return names.stream().filter(StringUtils::isNotBlank).map(item -> getCookieValue(request, item)).filter(StringUtils::isNotBlank).findFirst().orElse(null);
     }
 
     @Nullable
@@ -816,7 +816,7 @@ public abstract class RequestParamWraps {
         if (request == null || StringUtils.isBlank(name)) {
             return defaultValue;
         }
-        return Arrays.stream(request.getCookies()).filter(element -> StringUtils.equals(element.getName(), name)).findFirst().orElse(defaultValue);
+        return Arrays.stream(request.getCookies()).filter(item -> StringUtils.equals(item.getName(), name)).findFirst().orElse(defaultValue);
     }
 
     public static String getCookieValue(@Nullable HttpServletRequest request, @Nullable String name) {

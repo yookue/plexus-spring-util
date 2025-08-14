@@ -68,8 +68,8 @@ public abstract class PropertyBinderWraps {
         Assert.notNull(sources, AssertMessageConst.NOT_NULL);
         for (PropertySource<?> source : sources) {
             if (source instanceof OriginTrackedMapPropertySource) {
-                ConfigurationPropertySource element = ConfigurationPropertySource.from(source);
-                if (element.containsDescendantOf(name) == ConfigurationPropertyState.PRESENT) {
+                ConfigurationPropertySource item = ConfigurationPropertySource.from(source);
+                if (item.containsDescendantOf(name) == ConfigurationPropertyState.PRESENT) {
                     return true;
                 }
             }
@@ -85,7 +85,7 @@ public abstract class PropertyBinderWraps {
         if (!(environment instanceof ConfigurableEnvironment) || CollectionUtils.isEmpty(properties)) {
             return false;
         }
-        return properties.stream().allMatch(element -> contains(environment, element));
+        return properties.stream().allMatch(item -> contains(environment, item));
     }
 
     public static boolean containsAny(@Nullable Environment environment, @Nullable String... properties) {
@@ -96,7 +96,7 @@ public abstract class PropertyBinderWraps {
         if (!(environment instanceof ConfigurableEnvironment) || CollectionUtils.isEmpty(properties)) {
             return false;
         }
-        return properties.stream().anyMatch(element -> contains(environment, element));
+        return properties.stream().anyMatch(item -> contains(environment, item));
     }
 
     /**

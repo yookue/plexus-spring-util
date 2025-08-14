@@ -577,7 +577,7 @@ public abstract class BeanFactoryWraps {
                 if (index == 0) {
                     result.addAll(set);
                 } else {
-                    result.removeIf(element -> !set.contains(element));
+                    result.removeIf(item -> !set.contains(item));
                 }
             } catch (Exception ignored) {
             }
@@ -623,7 +623,7 @@ public abstract class BeanFactoryWraps {
         if (!(factory instanceof ListableBeanFactory alias) || CollectionUtils.isEmpty(annotations)) {
             return null;
         }
-        return annotations.stream().filter(Objects::nonNull).map(annotation -> ArrayUtilsWraps.asSet(alias.getBeanNamesForAnnotation(annotation))).filter(element -> !CollectionUtils.isEmpty(element)).flatMap(Collection::stream).collect(Collectors.toSet());
+        return annotations.stream().filter(Objects::nonNull).map(annotation -> ArrayUtilsWraps.asSet(alias.getBeanNamesForAnnotation(annotation))).filter(item -> !CollectionUtils.isEmpty(item)).flatMap(Collection::stream).collect(Collectors.toSet());
     }
 
     public static BeanDefinition getBeanDefinition(@Nullable BeanFactory factory, @Nullable String beanName) throws NoSuchBeanDefinitionException {
@@ -827,7 +827,7 @@ public abstract class BeanFactoryWraps {
         }
         Map<String, T> result = getBeansOfType(factory, expectType);
         if (!CollectionUtils.isEmpty(result)) {
-            MapPlainWraps.removeIfKey(result, element -> !beanNames.contains(element));
+            MapPlainWraps.removeIfKey(result, item -> !beanNames.contains(item));
         }
         return CollectionUtils.isEmpty(result) ? null : result;
     }
@@ -888,7 +888,7 @@ public abstract class BeanFactoryWraps {
         }
         Map<String, T> result = getBeansOfType(factory, expectType, includeNonSingletons, allowEagerInit);
         if (!CollectionUtils.isEmpty(result)) {
-            MapPlainWraps.removeIfKey(result, element -> !beanNames.contains(element));
+            MapPlainWraps.removeIfKey(result, item -> !beanNames.contains(item));
         }
         return CollectionUtils.isEmpty(result) ? null : result;
     }
@@ -982,7 +982,7 @@ public abstract class BeanFactoryWraps {
                             result.remove(entry.getKey());
                         }
                     }
-                    MapPlainWraps.removeIfKey(result, element -> !map.containsKey(element));
+                    MapPlainWraps.removeIfKey(result, item -> !map.containsKey(item));
                 }
             } catch (Exception ignored) {
             }
