@@ -30,6 +30,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.item.ExecutionContext;
 
@@ -46,8 +47,16 @@ public abstract class BatchJobWraps {
         return (context == null) ? null : context.getStepContext().getStepExecution().getJobExecution().getExecutionContext();
     }
 
+    public static ExecutionContext getJobExecutionContext(@Nullable StepExecution execution) {
+        return (execution == null) ? null : execution.getJobExecution().getExecutionContext();
+    }
+
     public static ExecutionContext getStepExecutionContext(@Nullable ChunkContext context) {
         return (context == null) ? null : context.getStepContext().getStepExecution().getExecutionContext();
+    }
+
+    public static ExecutionContext getStepExecutionContext(@Nullable StepExecution execution) {
+        return (execution == null) ? null : execution.getExecutionContext();
     }
 
     @Nonnull
