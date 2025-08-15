@@ -22,9 +22,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Map;
+import java.util.function.Consumer;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 
@@ -72,5 +75,29 @@ public abstract class BatchJobWraps {
             }
         }
         return builder;
+    }
+
+    @Nonnull
+    public static JobExecutionListener beforeJobExecutionListener(@Nullable Consumer<JobExecution> action) {
+        return new JobExecutionListener() {
+            @Override
+            public void beforeJob(@Nonnull JobExecution execution) {
+                if (action != null) {
+                    action.accept(execution);
+                }
+            }
+        };
+    }
+
+    @Nonnull
+    public static JobExecutionListener afterJobExecutionListener(@Nullable Consumer<JobExecution> action) {
+        return new JobExecutionListener() {
+            @Override
+            public void afterJob(@Nonnull JobExecution execution) {
+                if (action != null) {
+                    action.accept(execution);
+                }
+            }
+        };
     }
 }
