@@ -19,7 +19,7 @@ package com.yookue.commonplexus.springutil.enumeration;
 
 import org.springframework.http.MediaType;
 import com.yookue.commonplexus.javaseutil.constant.FileExtensionConst;
-import com.yookue.commonplexus.javaseutil.support.KeyValueEnum;
+import com.yookue.commonplexus.javaseutil.enumeration.KeyValueEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -18,7 +18,7 @@ package com.yookue.commonplexus.springutil.enumeration;
 
 
 import org.springframework.transaction.support.TransactionSynchronization;
-import com.yookue.commonplexus.javaseutil.support.ValueEnum;
+import com.yookue.commonplexus.javaseutil.enumeration.ValueEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
