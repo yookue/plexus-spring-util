@@ -18,14 +18,14 @@ package com.yookue.commonplexus.springutil.constant;
 
 
 /**
- * Constants for mybatis page helper
+ * Constants for mybatis sql
  *
  * @author David Hsing
  *
  * @see "com.github.pagehelper.page.PageParams"
  */
 @SuppressWarnings("unused")
-public abstract class MybatisPageConst {
+public abstract class MybatisSqlConst {
     /**
      * Integer value
      */

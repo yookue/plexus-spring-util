@@ -136,11 +136,11 @@ public abstract class DataTableWraps {
         struct.setDrawTimes(ObjectUtils.defaultIfNull(drawTimes, 0));
         PageRowBounds cloneBounds = bounds;
         if (cloneBounds == null && MapPlainWraps.containsAllKeys(params, START_PARAM, LENGTH_PARAM)) {
-            cloneBounds = MybatisPageWraps.getRowBounds(params, START_PARAM, LENGTH_PARAM, true);
+            cloneBounds = MybatisSqlWraps.getRowBounds(params, START_PARAM, LENGTH_PARAM, true);
         }
         if (cloneBounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
-            MybatisPageWraps.disablePagination(cloneParams);
+            MybatisSqlWraps.disablePagination(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
             struct.setRecordsDetails(resultSets);
             int resultSize = CollectionPlainWraps.size(resultSets);

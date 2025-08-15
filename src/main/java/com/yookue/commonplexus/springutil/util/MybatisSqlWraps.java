@@ -22,15 +22,21 @@ import java.util.Map;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.util.CollectionUtils;
 import com.github.pagehelper.PageRowBounds;
+import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
-import com.yookue.commonplexus.springutil.constant.MybatisPageConst;
+import com.yookue.commonplexus.springutil.constant.MybatisSqlConst;
 
 
 /**
- * Utilities for mybatis page helper
+ * Utilities for mybatis sql
  *
  * @author David Hsing
  *
@@ -40,7 +46,7 @@ import com.yookue.commonplexus.springutil.constant.MybatisPageConst;
  * @reference "https://www.cnblogs.com/jinit/p/14841966.html"
  */
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText", "UnusedReturnValue"})
-public abstract class MybatisPageWraps {
+public abstract class MybatisSqlWraps {
     @Nonnull
     public static RowBounds getRowBounds(@Nullable Map<String, Object> params, @Nullable String offsetParam, @Nullable String limitParam) {
         return getRowBounds(params, offsetParam, limitParam, null, null);
@@ -92,13 +98,36 @@ public abstract class MybatisPageWraps {
 
     public static Map<String, Object> disablePagination(@Nullable Map<String, Object> params, boolean newIfNull) {
         if (params == null) {
-            return !newIfNull ? null : MapPlainWraps.newHashMapWithin(MybatisPageConst.PAGE_SIZE_ZERO, true);
+            return !newIfNull ? null : MapPlainWraps.newHashMapWithin(MybatisSqlConst.PAGE_SIZE_ZERO, true);
         }
         try {
-            params.put(MybatisPageConst.PAGE_SIZE_ZERO, true);
+            params.put(MybatisSqlConst.PAGE_SIZE_ZERO, true);
             return params;
         } catch (Exception ignored) {
             return new HashMap<>(params);
         }
+    }
+
+    @Nullable
+    public static String extractSqlById(@Nullable SqlSessionFactory factory, @Nullable String statementId, @Nullable Object parameter) {
+        if (factory == null || StringUtils.isBlank(statementId)) {
+            return null;
+        }
+        Configuration configuration = factory.getConfiguration();
+        MappedStatement statement = configuration.getMappedStatement(statementId);
+        if (statement == null) {
+            return null;
+        }
+        BoundSql boundSql = statement.getBoundSql(parameter);
+        return (boundSql == null) ? null : boundSql.getSql();
+    }
+
+    @Nullable
+    public static String extractSqlByName(@Nullable SqlSessionFactory factory, @Nullable Class<?> mapper, String method, @Nullable Object parameter) {
+        if (ObjectUtils.anyNull(factory, mapper)) {
+            return null;
+        }
+        String statementId = StringUtils.join(mapper.getName(), CharVariantConst.DOT, method);
+        return extractSqlById(factory, statementId, parameter);
     }
 }
