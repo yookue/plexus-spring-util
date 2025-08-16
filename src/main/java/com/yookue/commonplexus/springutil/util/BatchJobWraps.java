@@ -43,12 +43,24 @@ import org.springframework.batch.item.ExecutionContext;
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class BatchJobWraps {
+    public static JobExecution getJobExecution(@Nullable ChunkContext context) {
+        return (context == null) ? null : context.getStepContext().getStepExecution().getJobExecution();
+    }
+
+    public static JobExecution getJobExecution(@Nullable StepExecution execution) {
+        return (execution == null) ? null : execution.getJobExecution();
+    }
+
     public static ExecutionContext getJobExecutionContext(@Nullable ChunkContext context) {
         return (context == null) ? null : context.getStepContext().getStepExecution().getJobExecution().getExecutionContext();
     }
 
     public static ExecutionContext getJobExecutionContext(@Nullable StepExecution execution) {
         return (execution == null) ? null : execution.getJobExecution().getExecutionContext();
+    }
+
+    public static StepExecution getStepExecution(@Nullable ChunkContext context) {
+        return (context == null) ? null : context.getStepContext().getStepExecution();
     }
 
     public static ExecutionContext getStepExecutionContext(@Nullable ChunkContext context) {
