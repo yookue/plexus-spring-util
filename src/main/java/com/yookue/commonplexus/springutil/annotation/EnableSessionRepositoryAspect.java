@@ -55,7 +55,7 @@ public @interface EnableSessionRepositoryAspect {
      * <p>
      * The default attributes is like {@code "creationTime"} {@code "maxInactiveInterval"}
      *
-     * @return The ignored attributes of the session
+     * @return the ignored attributes of the session
      */
     String[] ignoredAttributes() default {"creationTime", "maxInactiveInterval"};    // $NON-NLS-1$ $NON-NLS-2$
 
