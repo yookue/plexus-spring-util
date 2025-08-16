@@ -37,4 +37,6 @@ public abstract class MiscMessageConst {
     public static final String WAIT_FIRST_TIME = PREFIX + "waitFirstTime";    // $NON-NLS-1$
     public static final String WAIT_FEW_SECONDS = PREFIX + "waitFewSeconds";    // $NON-NLS-1$
     public static final String WAIT_FEW_MINUTES = PREFIX + "waitFewMinutes";    // $NON-NLS-1$
+    public static final String FILE_EXPORT_SUCCESS = PREFIX + "fileExportSuccess";    // $NON-NLS-1$
+    public static final String FILE_EXPORT_FAILURE = PREFIX + "fileExportFailure";    // $NON-NLS-1$
 }
