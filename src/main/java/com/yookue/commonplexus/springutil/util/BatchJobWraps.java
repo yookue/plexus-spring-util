@@ -23,14 +23,17 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.item.ExecutionContext;
 
@@ -128,6 +131,28 @@ public abstract class BatchJobWraps {
                 if (action != null) {
                     action.accept(execution);
                 }
+            }
+        };
+    }
+
+    @Nonnull
+    public static StepExecutionListener beforeStepExecutionListener(@Nullable Consumer<StepExecution> action) {
+        return new StepExecutionListener() {
+            @Override
+            public void beforeStep(@Nonnull StepExecution execution) {
+                if (action != null) {
+                    action.accept(execution);
+                }
+            }
+        };
+    }
+
+    @Nonnull
+    public static StepExecutionListener afterStepExecutionListener(@Nullable Function<StepExecution, ExitStatus> action) {
+        return new StepExecutionListener() {
+            @Override
+            public ExitStatus afterStep(@Nonnull StepExecution execution) {
+                return (action == null) ? null : action.apply(execution);
             }
         };
     }
