@@ -39,11 +39,6 @@ import io.minio.MinioClient;
 public abstract class MinioConfigWraps {
     @Nonnull
     public static MinioClient minioClient(@Nonnull MinioProperties properties) throws Exception {
-        return minioClient(properties, true);
-    }
-
-    @Nonnull
-    public static MinioClient minioClient(@Nonnull MinioProperties properties, boolean createBucketIfNotExist) throws Exception {
         MinioClient.Builder builder = MinioClient.builder();
         builder.endpoint(properties.getHost(), ObjectUtils.defaultIfNull(properties.getPort(), 9000), BooleanUtils.isTrue(properties.getSecureHttp()));
         if (StringUtils.isNotBlank(properties.getAccessKey()) || StringUtils.isNotBlank(properties.getSecretKey())) {
@@ -70,7 +65,7 @@ public abstract class MinioConfigWraps {
         } else {
             result.disableVirtualStyleEndpoint();
         }
-        if (createBucketIfNotExist && StringUtils.isNotBlank(properties.getBucketName()) && !result.bucketExists(BucketExistsArgs.builder().bucket(properties.getBucketName()).build())) {
+        if (BooleanUtils.isTrue(properties.getAutoCreateBucket()) && StringUtils.isNotBlank(properties.getBucketName()) && !result.bucketExists(BucketExistsArgs.builder().bucket(properties.getBucketName()).build())) {
             MakeBucketArgs.Builder bucket = MakeBucketArgs.builder().bucket(properties.getBucketName());
             if (StringUtils.isNotBlank(properties.getRegionName())) {
                 bucket.region(properties.getRegionName());

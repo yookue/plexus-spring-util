@@ -37,6 +37,11 @@ import lombok.ToString;
 @SuppressWarnings("unused")
 public class MinioProperties implements Serializable {
     /**
+     * Indicates whether to automatically create bucket if not exists, default is {@code true}
+     */
+    private Boolean autoCreateBucket = true;
+
+    /**
      * Endpoint host, is a domain name, IPv4 or IPv6 address, such as
      * <pre>
      *     s3.amazonaws.com
