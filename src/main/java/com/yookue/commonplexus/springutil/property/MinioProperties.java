@@ -37,7 +37,9 @@ import lombok.ToString;
 @SuppressWarnings("unused")
 public class MinioProperties implements Serializable {
     /**
-     * Indicates whether to automatically create bucket if not exists, default is {@code true}
+     * Indicates whether to automatically create bucket if not exists
+     * <p>
+     * Default is {@code true}
      */
     private Boolean autoCreateBucket = true;
 
@@ -82,6 +84,11 @@ public class MinioProperties implements Serializable {
      * Default bucket for endpoint
      */
     private String bucketName;
+
+    /**
+     * Indicates whether to automatically make bucket public-readonly
+     */
+    private Boolean bucketPublic;
 
     /**
      * Name for user agent, need version

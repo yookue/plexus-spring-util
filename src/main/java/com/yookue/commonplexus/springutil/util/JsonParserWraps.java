@@ -371,6 +371,10 @@ public abstract class JsonParserWraps {
         return type != null && ClassUtils.isPresent(type.getValue(), loader);
     }
 
+    public static Map<String, Object> parseJsonToMap(@Nullable String content) {
+        return parseJsonToMap(content, detectParserType());
+    }
+
     /**
      * Returns a map of direct child that contains field names and field values
      *
@@ -434,6 +438,11 @@ public abstract class JsonParserWraps {
     }
 
     @Nullable
+    public static String toJsonString(@Nullable Object value) {
+        return toJsonString(value, detectParserType());
+    }
+
+    @Nullable
     public static String toJsonString(@Nullable Object value, @Nullable JsonParserType type) {
         if (value == null || !isParserPresent(type)) {
             return null;
@@ -484,6 +493,11 @@ public abstract class JsonParserWraps {
             }
         }
         return null;
+    }
+
+    @Nullable
+    public static Object toJsonTree(@Nullable String content) {
+        return toJsonTree(content, detectParserType());
     }
 
     /**
