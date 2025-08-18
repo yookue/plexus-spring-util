@@ -49,12 +49,14 @@ public class MinioProperties implements Serializable {
      *     127.0.0.1
      * </pre>
      */
-    private String host;
+    private String endpoint;
 
     /**
      * Endpoint port, range in [1, 65535]
+     * <p>
+     * Default is 9000
      */
-    private Integer port;
+    private Integer port = 9000;
 
     /**
      * Protocol to access endpoint, use HTTPS or HTTP
@@ -64,7 +66,7 @@ public class MinioProperties implements Serializable {
     /**
      * Endpoint region
      */
-    private String regionName;
+    private String region;
 
     /**
      * Access key to access endpoint

@@ -40,12 +40,12 @@ public abstract class MinioConfigWraps {
     @Nonnull
     public static MinioClient minioClient(@Nonnull MinioProperties properties) throws Exception {
         MinioClient.Builder builder = MinioClient.builder();
-        builder.endpoint(properties.getHost(), ObjectUtils.defaultIfNull(properties.getPort(), 9000), BooleanUtils.isTrue(properties.getSecureHttp()));
+        builder.endpoint(properties.getEndpoint(), ObjectUtils.defaultIfNull(properties.getPort(), 9000), BooleanUtils.isTrue(properties.getSecureHttp()));
         if (StringUtils.isNotBlank(properties.getAccessKey()) || StringUtils.isNotBlank(properties.getSecretKey())) {
             builder.credentials(properties.getAccessKey(), properties.getSecretKey());
         }
-        if (StringUtils.isNotBlank(properties.getRegionName())) {
-            builder.region(properties.getRegionName());
+        if (StringUtils.isNotBlank(properties.getRegion())) {
+            builder.region(properties.getRegion());
         }
         long connectTimeout = DurationUtils.isPositive(properties.getConnectTimeout()) ? properties.getConnectTimeout().toMillis() : 0L;
         long writeTimeout = DurationUtils.isPositive(properties.getWriteTimeout()) ? properties.getWriteTimeout().toMillis() : 0L;
@@ -67,8 +67,8 @@ public abstract class MinioConfigWraps {
         }
         if (BooleanUtils.isTrue(properties.getAutoCreateBucket()) && StringUtils.isNotBlank(properties.getBucketName()) && !result.bucketExists(BucketExistsArgs.builder().bucket(properties.getBucketName()).build())) {
             MakeBucketArgs.Builder bucket = MakeBucketArgs.builder().bucket(properties.getBucketName());
-            if (StringUtils.isNotBlank(properties.getRegionName())) {
-                bucket.region(properties.getRegionName());
+            if (StringUtils.isNotBlank(properties.getRegion())) {
+                bucket.region(properties.getRegion());
             }
             result.makeBucket(bucket.objectLock(true).build());
         }
