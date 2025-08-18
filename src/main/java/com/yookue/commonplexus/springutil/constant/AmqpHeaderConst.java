@@ -24,5 +24,5 @@ package com.yookue.commonplexus.springutil.constant;
  */
 @SuppressWarnings("unused")
 public abstract class AmqpHeaderConst {
-    public static final String X_DELAYED_TIMES = "x-delayed-times";    // $NON-NLS-1$
+    public static final String X_DELAYED_TIMES = "X-Delayed-Times";    // $NON-NLS-1$
 }
