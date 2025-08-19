@@ -36,6 +36,9 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.item.ExecutionContext;
+import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
+import com.yookue.commonplexus.javaseutil.constant.StringVariantConst;
+import com.yookue.commonplexus.javaseutil.identity.JdkUuidGenerator;
 
 
 /**
@@ -76,7 +79,25 @@ public abstract class BatchJobWraps {
 
     @Nonnull
     public static JobParameters newJobParameters(@Nullable Map<String, Object> params) {
-        return newJobParametersBuilder(params).toJobParameters();
+        return newJobParameters(params, false);
+    }
+
+    /**
+     * Returns a new job parameters, with random id capability
+     *
+     * @param params The source job parameters
+     * @param addRandom Whether to add a random id to the job parameters, to avoid job parameters conflict
+     *
+     * @return a new job parameters, with random id capability
+     */
+    @Nonnull
+    public static JobParameters newJobParameters(@Nullable Map<String, Object> params, boolean addRandom) {
+        JobParametersBuilder builder = newJobParametersBuilder(params);
+        if (addRandom) {
+            String randomId = JdkUuidGenerator.getPopularId();
+            builder.addString(StringUtils.join(StringVariantConst.RANDOM, CharVariantConst.UNDERSCORE, randomId), randomId);
+        }
+        return builder.toJobParameters();
     }
 
     @Nonnull
