@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import org.springframework.boot.convert.DurationUnit;
+import com.yookue.commonplexus.springutil.enumeration.MinioAccessType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -86,9 +87,11 @@ public class MinioProperties implements Serializable {
     private String bucketName;
 
     /**
-     * Indicates whether to automatically make bucket public-readonly
+     * The canned access control for accessing files
+     * <p>
+     * For example: "private", "public-read", "public-read-write"
      */
-    private Boolean bucketPublic;
+    private MinioAccessType accessControl;
 
     /**
      * Name for user agent, need version

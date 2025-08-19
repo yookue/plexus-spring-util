@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.BooleanUtils;
@@ -32,6 +33,7 @@ import com.yookue.commonplexus.javaseutil.util.CollectionPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.ListPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.MapPlainWraps;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
+import com.yookue.commonplexus.springutil.enumeration.MinioAccessType;
 import com.yookue.commonplexus.springutil.property.MinioProperties;
 import io.minio.BucketExistsArgs;
 import io.minio.GetBucketPolicyArgs;
@@ -81,8 +83,8 @@ public abstract class MinioConfigWraps {
             if (BooleanUtils.isTrue(properties.getAutoCreateBucket()) && !isBucketExist(minioClient, properties.getBucketName())) {
                 makeBucket(minioClient, properties.getBucketName(), properties.getRegion());
             }
-            if (BooleanUtils.isTrue(properties.getBucketPublic()) && isBucketExist(minioClient, properties.getBucketName()) && !isBucketPublic(minioClient, properties.getBucketName())) {
-                makeBucketPublic(minioClient, properties.getBucketName());
+            if (properties.getAccessControl() != null && isBucketExist(minioClient, properties.getBucketName())) {
+                setBucketAccess(minioClient, properties.getBucketName(), properties.getAccessControl());
             }
         }
         return minioClient;
@@ -129,10 +131,15 @@ public abstract class MinioConfigWraps {
                 if (!CollectionPlainWraps.containsString((List<String>) statement.get("Resource"), "arn:aws:s3:::" + bucketName + "/*")) {    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
                     continue;
                 }
-                Map<String, Object> principal = (Map<String, Object>) statement.get("Principal");    // $NON-NLS-1$
-                List<?> aws = (principal == null) ? null : (List<?>) principal.get("AWS");    // $NON-NLS-1$
-                if (StringUtils.equals(Objects.toString(ListPlainWraps.getFirst(aws)), "*")) {    // $NON-NLS-1$
-                    return true;
+                if (statement.get("Principal") instanceof String || statement.get("Principal") instanceof Map) {
+                    if (statement.get("Principal") instanceof String alias && alias.equals("*")) {
+                        return true;
+                    }
+                    Map<String, Object> principal = (Map<String, Object>) statement.get("Principal");    // $NON-NLS-1$
+                    List<?> aws = (principal == null) ? null : (List<?>) principal.get("AWS");    // $NON-NLS-1$
+                    if (StringUtils.equals(Objects.toString(ListPlainWraps.getFirst(aws)), "*")) {    // $NON-NLS-1$
+                        return true;
+                    }
                 }
             }
         } catch (Exception ignored) {
@@ -154,7 +161,7 @@ public abstract class MinioConfigWraps {
         return false;
     }
 
-    public static boolean makeBucketPublic(@Nonnull MinioClient minioClient, @Nonnull String bucketName) {
+    public static boolean setBucketAccess(@Nonnull MinioClient minioClient, @Nonnull String bucketName, @Nonnull MinioAccessType accessType) {
         if (StringUtils.isBlank(bucketName)) {
             return false;
         }
@@ -162,10 +169,42 @@ public abstract class MinioConfigWraps {
         // Fixed version, only "2012-10-17" and "2008-10-17" available
         readonlyPolicy.put("Version", "2012-10-17");    // $NON-NLS-1$ // $NON-NLS-2$
         Map<String, Object> policyStatement = new HashMap<>();
-        policyStatement.put("Effect", "Allow");    // $NON-NLS-1$ // $NON-NLS-2$
-        policyStatement.put("Principal", Collections.singletonMap("AWS", Collections.singletonList("*")));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
-        policyStatement.put("Action", Collections.singletonList("s3:GetObject"));    // $NON-NLS-1$ // $NON-NLS-2$
-        policyStatement.put("Resource", Collections.singletonList("arn:aws:s3:::" + bucketName + "/*"));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+        switch (accessType) {
+            case DEFAULT:
+                policyStatement.put("Effect", "Allow");    // $NON-NLS-1$ // $NON-NLS-2$
+                policyStatement.put("Principal", Collections.singletonMap("AWS", Collections.singletonList("arn:aws:iam::owner-account-id:root")));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                policyStatement.put("Action", Set.of("s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetObject", "s3:PutObject", "s3:DeleteObject"));    // $NON-NLS-1$ // $NON-NLS-2$ $NON-NLS-3$ // $NON-NLS-4$ // $NON-NLS-5$ // $NON-NLS-6$ // $NON-NLS-7$
+                policyStatement.put("Resource", Set.of("arn:aws:s3:::" + bucketName, "arn:aws:s3:::" + bucketName + "/*"));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$ // $NON-NLS-4$
+                break;
+            case PRIVATE:
+                policyStatement.put("Effect", "Deny");    // $NON-NLS-1$ // $NON-NLS-2$
+                policyStatement.put("Principal", Collections.singletonMap("AWS", Collections.singletonList("*")));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                policyStatement.put("Action", Collections.singletonList("s3:GetObject"));    // $NON-NLS-1$ // $NON-NLS-2$
+                policyStatement.put("Resource", Collections.singletonList("arn:aws:s3:::" + bucketName + "/*"));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                break;
+            case PUBLIC_READ:
+            case PUBLIC_READ_WRITE:
+                Set<String> publicActions = (accessType == MinioAccessType.PUBLIC_READ) ? Set.of("s3:GetObject") : Set.of("s3:GetObject", "s3:PutObject", "s3:DeleteObject");    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$ // $NON-NLS-4$
+                policyStatement.put("Effect", "Allow");    // $NON-NLS-1$ // $NON-NLS-2$
+                policyStatement.put("Principal", Collections.singletonMap("AWS", Collections.singletonList("*")));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                policyStatement.put("Action", publicActions);    // $NON-NLS-1$
+                policyStatement.put("Resource", Collections.singletonList("arn:aws:s3:::" + bucketName + "/*"));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                break;
+            case AUTHENTICATED_READ:
+            case AUTHENTICATED_READ_WRITE:
+                Set<String> authActions = (accessType == MinioAccessType.AUTHENTICATED_READ) ? Set.of("s3:GetObject") : Set.of("s3:GetObject", "s3:PutObject", "s3:DeleteObject");    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$ // $NON-NLS-4$
+                policyStatement.put("Effect", "Allow");    // $NON-NLS-1$ // $NON-NLS-2$
+                policyStatement.put("Principal", Collections.singletonMap("AWS", Collections.singletonList("*")));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                policyStatement.put("Action", authActions);    // $NON-NLS-1$ // $NON-NLS-2$
+                policyStatement.put("Resource", Collections.singletonList("arn:aws:s3:::" + bucketName + "/*"));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$
+                policyStatement.put("Condition", Collections.singletonMap("StringEquals", Collections.singletonMap("s3:ExistingObjectTag/Authentication", "required")));    // $NON-NLS-1$ // $NON-NLS-2$ // $NON-NLS-3$ // $NON-NLS-4$
+                break;
+            default:
+                break;
+        }
+        if (MapPlainWraps.isEmpty(policyStatement)) {
+            return false;
+        }
         readonlyPolicy.put("Statement", Collections.singletonList(policyStatement));    // $NON-NLS-1$
         String readonlyJson = JsonParserWraps.toJsonString(readonlyPolicy);
         if (StringUtils.isBlank(readonlyJson)) {
