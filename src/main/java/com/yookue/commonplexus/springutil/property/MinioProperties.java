@@ -94,12 +94,12 @@ public class MinioProperties implements Serializable {
     private MinioAccessType accessControl;
 
     /**
-     * Name for user agent, need version
+     * Name for user agent
      */
     private String userAgentName;
 
     /**
-     * Version for user agent, need name
+     * Version for user agent
      */
     private String userAgentVersion;
 
