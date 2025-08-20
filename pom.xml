@@ -22,7 +22,7 @@
 
     <groupId>com.yookue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.5.3</version>
+    <version>3.5.4</version>
 
     <name>${project.artifactId}</name>
     <description>Yookue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
@@ -47,9 +47,9 @@
         <project.build.resourceEncoding>${file.encoding}</project.build.resourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
 
-        <spring-boot.version>3.5.3</spring-boot.version>
+        <spring-boot.version>3.5.4</spring-boot.version>
 
-        <commons-beanutils2.version>2.0.1</commons-beanutils2.version>
+        <commons-beanutils2.version>2.0.2</commons-beanutils2.version>
         <commons-fileupload2.version>2.0.0-M1</commons-fileupload2.version>
         <javapoet.version>1.13.0</javapoet.version>
         <java-jwt.version>4.5.0</java-jwt.version>
@@ -57,7 +57,7 @@
         <minio.version>8.5.17</minio.version>
         <mybatis.version>3.5.19</mybatis.version>
         <pagehelper.version>6.1.1</pagehelper.version>
-        <plexus-javase-util.version>2.1.0</plexus-javase-util.version>
+        <plexus-javase-util.version>2.1.1</plexus-javase-util.version>
 
         <javadoc-docent-maven-plugin.version>2.0.2</javadoc-docent-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
