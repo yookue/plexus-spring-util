@@ -52,7 +52,7 @@ import io.minio.SetBucketPolicyArgs;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
 public abstract class MinioConfigWraps {
     @Nonnull
-    public static MinioClient minioClient(@Nonnull MinioProperties properties) {
+    public static MinioClient minioClient(@Nonnull MinioProperties properties) throws Exception {
         MinioClient.Builder clientBuilder = MinioClient.builder();
         clientBuilder.endpoint(properties.getEndpoint(), ObjectUtils.defaultIfNull(properties.getPort(), 9000), BooleanUtils.isTrue(properties.getSecureHttp()));
         if (StringUtils.isNotBlank(properties.getAccessKey()) || StringUtils.isNotBlank(properties.getSecretKey())) {
@@ -90,16 +90,12 @@ public abstract class MinioConfigWraps {
         return minioClient;
     }
 
-    public static boolean isBucketExist(@Nonnull MinioClient minioClient, @Nonnull String bucketName) {
+    public static boolean isBucketExist(@Nonnull MinioClient minioClient, @Nonnull String bucketName) throws Exception {
         if (StringUtils.isBlank(bucketName)) {
             return false;
         }
-        try {
-            BucketExistsArgs existsArgs = BucketExistsArgs.builder().bucket(bucketName).build();
-            return minioClient.bucketExists(existsArgs);
-        } catch (Exception ignored) {
-        }
-        return false;
+        BucketExistsArgs existsArgs = BucketExistsArgs.builder().bucket(bucketName).build();
+        return minioClient.bucketExists(existsArgs);
     }
 
     @SuppressWarnings("unchecked")
@@ -147,23 +143,18 @@ public abstract class MinioConfigWraps {
         return false;
     }
 
-    public static boolean makeBucket(@Nonnull MinioClient minioClient, @Nonnull String bucketName, @Nullable String region) {
+    public static void makeBucket(@Nonnull MinioClient minioClient, @Nonnull String bucketName, @Nullable String region) throws Exception {
         if (StringUtils.isBlank(bucketName)) {
-            return false;
+            return;
         }
-        try {
             MakeBucketArgs.Builder argsBuilder = MakeBucketArgs.builder().bucket(bucketName);
             StringUtilsWraps.ifNotBlank(region, argsBuilder::region);
             minioClient.makeBucket(argsBuilder.objectLock(true).build());
-            return true;
-        } catch (Exception ignored) {
-        }
-        return false;
     }
 
-    public static boolean setBucketAccess(@Nonnull MinioClient minioClient, @Nonnull String bucketName, @Nonnull MinioAccessType accessType) {
+    public static void setBucketAccess(@Nonnull MinioClient minioClient, @Nonnull String bucketName, @Nonnull MinioAccessType accessType) throws Exception {
         if (StringUtils.isBlank(bucketName)) {
-            return false;
+            return;
         }
         Map<String, Object> readonlyPolicy = new HashMap<>();
         // Fixed version, only "2012-10-17" and "2008-10-17" available
@@ -203,19 +194,14 @@ public abstract class MinioConfigWraps {
                 break;
         }
         if (MapPlainWraps.isEmpty(policyStatement)) {
-            return false;
+            return;
         }
         readonlyPolicy.put("Statement", Collections.singletonList(policyStatement));    // $NON-NLS-1$
         String readonlyJson = JsonParserWraps.toJsonString(readonlyPolicy);
         if (StringUtils.isBlank(readonlyJson)) {
-            return false;
+            return;
         }
-        try {
-            SetBucketPolicyArgs policyArgs = SetBucketPolicyArgs.builder().bucket(bucketName).config(readonlyJson).build();
-            minioClient.setBucketPolicy(policyArgs);
-            return true;
-        } catch (Exception ignored) {
-        }
-        return false;
+        SetBucketPolicyArgs policyArgs = SetBucketPolicyArgs.builder().bucket(bucketName).config(readonlyJson).build();
+        minioClient.setBucketPolicy(policyArgs);
     }
 }
