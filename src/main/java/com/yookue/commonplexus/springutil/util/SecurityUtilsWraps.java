@@ -161,6 +161,20 @@ public abstract class SecurityUtilsWraps {
     }
 
     @Nullable
+    public static String getContextAuthenticationNameRequiredQuietly() {
+        return getContextAuthenticationNameRequiredQuietly(true);
+    }
+
+    @Nullable
+    public static String getContextAuthenticationNameRequiredQuietly(boolean authenticated) {
+        try {
+            return getContextAuthenticationNameRequired(authenticated);
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    @Nullable
     public static <T> T getContextAuthenticationPrincipalAs(@Nullable Class<T> expectType) {
         return getContextAuthenticationPrincipalAs(expectType, false);
     }
@@ -182,6 +196,20 @@ public abstract class SecurityUtilsWraps {
             throw new IllegalAuthenticationException("Context authentication principal not found");
         }
         return result;
+    }
+
+    @Nullable
+    public static <T> T getContextAuthenticationPrincipalRequiredAsQuietly(@Nullable Class<T> expectType) {
+        return getContextAuthenticationPrincipalRequiredAsQuietly(expectType, true);
+    }
+
+    @Nullable
+    public static <T> T getContextAuthenticationPrincipalRequiredAsQuietly(@Nullable Class<T> expectType, boolean authenticated) {
+        try {
+            return getContextAuthenticationPrincipalRequiredAs(expectType, authenticated);
+        } catch (Exception ignored) {
+        }
+        return null;
     }
 
     @Nullable
