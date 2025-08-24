@@ -62,9 +62,9 @@ public class MinioProperties implements Serializable {
     private Integer port = 9000;
 
     /**
-     * Protocol to access endpoint, use HTTPS or HTTP
+     * Indicates the protocol to access endpoint, using HTTPS or HTTP
      */
-    private Boolean secureHttp;
+    private Boolean sslEnabled;
 
     /**
      * Endpoint region

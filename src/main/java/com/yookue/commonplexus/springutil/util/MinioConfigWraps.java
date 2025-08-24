@@ -54,7 +54,7 @@ public abstract class MinioConfigWraps {
     @Nonnull
     public static MinioClient minioClient(@Nonnull MinioProperties properties) throws Exception {
         MinioClient.Builder clientBuilder = MinioClient.builder();
-        clientBuilder.endpoint(properties.getEndpoint(), ObjectUtils.defaultIfNull(properties.getPort(), 9000), BooleanUtils.isTrue(properties.getSecureHttp()));
+        clientBuilder.endpoint(properties.getEndpoint(), ObjectUtils.defaultIfNull(properties.getPort(), 9000), BooleanUtils.isTrue(properties.getSslEnabled()));
         if (StringUtils.isNotBlank(properties.getAccessKey()) || StringUtils.isNotBlank(properties.getSecretKey())) {
             clientBuilder.credentials(properties.getAccessKey(), properties.getSecretKey());
         }

@@ -18,7 +18,6 @@ package com.yookue.commonplexus.springutil.event.listener;
 
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.ServletContext;
 import org.apache.commons.lang3.StringUtils;
@@ -36,6 +35,7 @@ import com.yookue.commonplexus.javaseutil.constant.SymbolVariantConst;
 import com.yookue.commonplexus.javaseutil.enumeration.InetProtocolType;
 import com.yookue.commonplexus.javaseutil.util.InetAddressWraps;
 import com.yookue.commonplexus.javaseutil.util.LocalDateWraps;
+import com.yookue.commonplexus.javaseutil.util.ServerContainerWraps;
 import com.yookue.commonplexus.springutil.util.ApplicationContextWraps;
 import lombok.Getter;
 import lombok.Setter;
@@ -111,7 +111,15 @@ public abstract class AbstractApplicationEventListener<E extends ApplicationEven
         if (serverPort == null || serverPort <= 0) {
             return;
         }
-        protocol = Objects.equals(serverPort, 443) ? InetProtocolType.HTTPS.getValue() : InetProtocolType.HTTP.getValue();
+        if (serverPort == 443) {
+            protocol = InetProtocolType.HTTPS.getValue();
+        } else {
+            if (ServerContainerWraps.isTomcatSslEnabled()) {
+                protocol = InetProtocolType.HTTPS.getValue();
+            } else {
+                protocol = InetProtocolType.HTTP.getValue();
+            }
+        }
         accessUrl = buildServerUrl(true);
         privateUrl = buildServerUrl(false);
     }
