@@ -18,11 +18,8 @@ package com.yookue.commonplexus.springutil.event;
 
 
 import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.ApplicationEvent;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
-import lombok.Getter;
 
 
 /**
@@ -30,22 +27,14 @@ import lombok.Getter;
  *
  * @author David Hsing
  */
-@Getter
 @SuppressWarnings("unused")
 public class PasswordChangedEvent extends ApplicationEvent {
-    private String password;
-
-    public PasswordChangedEvent(@Nonnull HttpServletRequest request) {
-        super(request);
-    }
-
-    public PasswordChangedEvent(@Nonnull HttpServletRequest request, @Nullable String password) {
-        super(request);
-        this.password = password;
+    public PasswordChangedEvent(@Nonnull String userId) {
+        super(userId);
     }
 
     @Nonnull
-    public HttpServletRequest getRawSource() {
-        return ObjectUtilsWraps.castAs(super.getSource(), HttpServletRequest.class);
+    public String getUserId() {
+        return ObjectUtilsWraps.castAsString(super.getSource());
     }
 }

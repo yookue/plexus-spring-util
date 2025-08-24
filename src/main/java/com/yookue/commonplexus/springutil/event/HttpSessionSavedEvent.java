@@ -31,9 +31,9 @@ import lombok.Getter;
  *
  * @author David Hsing
  */
-@Getter
 @SuppressWarnings("unused")
 public class HttpSessionSavedEvent extends ApplicationEvent {
+    @Getter
     private final Map<String, Object> changedAttributes;
 
     public HttpSessionSavedEvent(@Nonnull HttpSession session) {
@@ -46,7 +46,7 @@ public class HttpSessionSavedEvent extends ApplicationEvent {
     }
 
     @Nonnull
-    public HttpSession getRawSource() {
+    public HttpSession getHttpSession() {
         return ObjectUtilsWraps.castAs(super.getSource(), HttpSession.class);
     }
 }
