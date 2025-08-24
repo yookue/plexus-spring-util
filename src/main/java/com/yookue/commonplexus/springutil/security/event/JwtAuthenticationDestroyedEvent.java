@@ -21,7 +21,6 @@ import jakarta.annotation.Nonnull;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.security.core.Authentication;
 import com.yookue.commonplexus.javaseutil.util.ObjectUtilsWraps;
-import lombok.Getter;
 
 
 /**
@@ -31,7 +30,6 @@ import lombok.Getter;
  *
  * @see com.yookue.commonplexus.springutil.security.authentication.JwtAuthenticationToken
  */
-@Getter
 @SuppressWarnings("unused")
 public class JwtAuthenticationDestroyedEvent extends ApplicationEvent {
     public JwtAuthenticationDestroyedEvent(@Nonnull Authentication authentication) {
@@ -39,7 +37,7 @@ public class JwtAuthenticationDestroyedEvent extends ApplicationEvent {
     }
 
     @Nonnull
-    public Authentication getRawSource() {
+    public Authentication getAuthentication() {
         return ObjectUtilsWraps.castAs(super.getSource(), Authentication.class);
     }
 }
