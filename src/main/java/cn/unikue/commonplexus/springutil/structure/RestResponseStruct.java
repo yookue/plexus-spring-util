@@ -1,0 +1,257 @@
+/*
+ * Copyright (c) 2016 Unikue Ltd. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package cn.unikue.commonplexus.springutil.structure;
+
+
+import java.io.Serializable;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.MultiValueMap;
+import cn.unikue.commonplexus.javaseutil.constant.TemporalFormatConst;
+import cn.unikue.commonplexus.javaseutil.enumeration.PromptReminderType;
+import cn.unikue.commonplexus.javaseutil.structure.BooleanDataStruct;
+import cn.unikue.commonplexus.javaseutil.structure.BooleanTextStruct;
+import cn.unikue.commonplexus.javaseutil.structure.StatusDataStruct;
+import cn.unikue.commonplexus.javaseutil.structure.StatusTextStruct;
+import cn.unikue.commonplexus.javaseutil.util.LocalDateWraps;
+import cn.unikue.commonplexus.springutil.constant.ResponseBodyConst;
+import lombok.experimental.Accessors;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+/**
+ * Structure for rest response
+ *
+ * @author David Hsing
+ *
+ * @see org.springframework.http.ResponseEntity
+ */
+@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@SuppressWarnings({"unused", "UnusedReturnValue"})
+public class RestResponseStruct implements Serializable {
+    private Integer status = ResponseBodyConst.CODE_FAILURE;
+    private Object data;
+    private String message;
+    private String additive;
+    private Duration duration;
+    private PromptReminderType reminder;
+    private String url;
+
+    @DateTimeFormat(pattern = TemporalFormatConst.ISO_YYYYMMDD_HHMMSS)
+    private LocalDateTime timestamp = LocalDateWraps.getCurrentDateTime();
+
+    public RestResponseStruct(@Nonnull HttpStatus status) {
+        this.status = status.value();
+    }
+
+    public RestResponseStruct(@Nonnull HttpStatus status, @Nullable Object data) {
+        this.status = status.value();
+        this.data = data;
+    }
+
+    public RestResponseStruct(@Nonnull HttpStatus status, @Nullable Object data, @Nullable String message) {
+        this.status = status.value();
+        this.data = data;
+        this.message = message;
+    }
+
+    public RestResponseStruct(@Nonnull Integer status) {
+        this.status = status;
+    }
+
+    public RestResponseStruct(@Nonnull Integer status, @Nullable Object data) {
+        this.status = status;
+        this.data = data;
+    }
+
+    public RestResponseStruct(@Nonnull Integer status, @Nullable Object data, @Nullable String message) {
+        this.status = status;
+        this.data = data;
+        this.message = message;
+    }
+
+    public RestResponseStruct appendMessage(@Nullable String message) {
+        this.message = StringUtils.join(this.message, message);
+        return this;
+    }
+
+    public RestResponseStruct appendMessage(@Nullable Collection<String> messages) {
+        return appendMessage(messages, null);
+    }
+
+    public RestResponseStruct appendMessage(@Nullable Collection<String> messages, @Nullable String delimiter) {
+        if (!CollectionUtils.isEmpty(messages)) {
+            message = StringUtils.join(message, StringUtils.join(messages, delimiter));
+        }
+        return this;
+    }
+
+    public RestResponseStruct prependMessage(@Nullable String message) {
+        this.message = StringUtils.join(message, this.message);
+        return this;
+    }
+
+    public RestResponseStruct appendAdditive(@Nullable String additive) {
+        this.additive = StringUtils.join(this.additive, additive);
+        return this;
+    }
+
+    public RestResponseStruct appendAdditive(@Nullable Collection<String> additives) {
+        return appendAdditive(additives, null);
+    }
+
+    public RestResponseStruct appendAdditive(@Nullable Collection<String> additives, @Nullable String delimiter) {
+        if (!CollectionUtils.isEmpty(additives)) {
+            additive = StringUtils.join(additive, StringUtils.join(additives, delimiter));
+        }
+        return this;
+    }
+
+    public RestResponseStruct prependAdditive(@Nullable String additive) {
+        this.additive = StringUtils.join(additive, this.additive);
+        return this;
+    }
+
+    public RestResponseStruct setStatus(@Nonnull Integer status) {
+        this.status = status;
+        return this;
+    }
+
+    public RestResponseStruct setStatus(@Nonnull HttpStatus status) {
+        this.status = status.value();
+        return this;
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntity() {
+        return toResponseEntityOverlay(null);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntity(@Nullable MultiValueMap<String, String> headers) {
+        return toResponseEntityOverlay(headers, null);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOk() {
+        return toResponseEntityOverlay(HttpStatus.OK);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOk(@Nullable MultiValueMap<String, String> headers) {
+        return toResponseEntityOverlay(headers, HttpStatus.OK);
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOverlay(@Nullable HttpStatus status) {
+        return new ResponseEntity<>(this, ObjectUtils.defaultIfNull(status, HttpStatus.valueOf(getStatus())));
+    }
+
+    @Nonnull
+    public ResponseEntity<RestResponseStruct> toResponseEntityOverlay(@Nullable MultiValueMap<String, String> headers, @Nullable HttpStatus status) {
+        return new ResponseEntity<>(this, headers, ObjectUtils.defaultIfNull(status, HttpStatus.valueOf(getStatus())));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanData(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanDataWithout(@Nonnull BooleanDataStruct<?> struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, char delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofBooleanText(@Nonnull BooleanTextStruct struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.isSuccess() ? ResponseBodyConst.CODE_SUCCESS : ResponseBodyConst.CODE_FAILURE, null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct) {
+        return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct, char delimiter) {
+        return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusData(@Nonnull StatusDataStruct<?> struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.getStatus(), struct.getData(), struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText());
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, char delimiter) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    }
+
+    @Nonnull
+    public static RestResponseStruct ofStatusText(@Nonnull StatusTextStruct struct, @Nullable String delimiter) {
+        return new RestResponseStruct(struct.getStatus(), null, struct.getCompositeText(delimiter));
+    }
+}

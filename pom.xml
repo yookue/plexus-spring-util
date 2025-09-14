@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * Copyright (c) 2016 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2016 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yookue.commonplexus</groupId>
+    <groupId>cn.unikue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.5.4</version>
+    <version>3.5.5</version>
 
     <name>${project.artifactId}</name>
-    <description>Yookue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
-    <url>https://github.com/yookue/plexus-spring-util</url>
+    <description>Unikue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
+    <url>https://github.com/unikueltd/plexus-spring-util</url>
     <inceptionYear>2016</inceptionYear>
 
     <organization>
-        <name>Yookue Ltd</name>
-        <url>https://yookue.com</url>
+        <name>Unikue Ltd</name>
+        <url>https://unikue.cn</url>
     </organization>
 
     <properties>
@@ -47,9 +47,9 @@
         <project.build.resourceEncoding>${file.encoding}</project.build.resourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
 
-        <spring-boot.version>3.5.4</spring-boot.version>
+        <spring-boot.version>3.5.5</spring-boot.version>
 
-        <commons-beanutils2.version>2.0.2</commons-beanutils2.version>
+        <commons-beanutils2.version>2.0.0-M2</commons-beanutils2.version>
         <commons-fileupload2.version>2.0.0-M1</commons-fileupload2.version>
         <javapoet.version>1.13.0</javapoet.version>
         <java-jwt.version>4.5.0</java-jwt.version>
@@ -57,13 +57,13 @@
         <minio.version>8.5.17</minio.version>
         <mybatis.version>3.5.19</mybatis.version>
         <pagehelper.version>6.1.1</pagehelper.version>
-        <plexus-javase-util.version>2.1.1</plexus-javase-util.version>
+        <plexus-javase-util.version>2.2.0</plexus-javase-util.version>
 
-        <javadoc-docent-maven-plugin.version>2.0.2</javadoc-docent-maven-plugin.version>
+        <javadoc-docent-maven-plugin.version>2.1.0</javadoc-docent-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
-        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
@@ -91,7 +91,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.yookue.forkextension.apache</groupId>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-beanutils2</artifactId>
             <version>${commons-beanutils2.version}</version>
             <optional>true</optional>
@@ -291,7 +291,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.yookue.commonplexus</groupId>
+            <groupId>cn.unikue.commonplexus</groupId>
             <artifactId>plexus-javase-util</artifactId>
             <version>${plexus-javase-util.version}</version>
             <exclusions>
@@ -963,11 +963,11 @@
                     </links>
                     <taglets>
                         <taglet>
-                            <tagletClass>com.yookue.mavenplugin.javadocdocent.taglet.ReferenceTaglet</tagletClass>
+                            <tagletClass>cn.unikue.mavenplugin.javadocdocent.taglet.ReferenceTaglet</tagletClass>
                         </taglet>
                     </taglets>
                     <tagletArtifact>
-                        <groupId>com.yookue.mavenplugin</groupId>
+                        <groupId>cn.unikue.mavenplugin</groupId>
                         <artifactId>javadoc-docent-maven-plugin</artifactId>
                         <version>${javadoc-docent-maven-plugin.version}</version>
                     </tagletArtifact>
@@ -1064,14 +1064,14 @@
     </build>
 
     <scm>
-        <url>https://github.com/yookue/plexus-spring-util</url>
-        <connection>scm:git:https://github.com/yookue/plexus-spring-util.git</connection>
-        <developerConnection>scm:git:https://github.com/yookue/plexus-spring-util.git</developerConnection>
+        <url>https://github.com/unikueltd/plexus-spring-util</url>
+        <connection>scm:git:https://github.com/unikueltd/plexus-spring-util.git</connection>
+        <developerConnection>scm:git:https://github.com/unikueltd/plexus-spring-util.git</developerConnection>
     </scm>
 
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/yookue/plexus-spring-util/issues</url>
+        <url>https://github.com/unikueltd/plexus-spring-util/issues</url>
     </issueManagement>
 
     <licenses>
@@ -1084,7 +1084,7 @@
 
     <developers>
         <developer>
-            <name>Yookue Ltd</name>
+            <name>Unikue Ltd</name>
         </developer>
         <developer>
             <id>davidhsing</id>
@@ -1096,8 +1096,8 @@
             <roles>
                 <role>developer</role>
             </roles>
-            <organization>Yookue Ltd</organization>
-            <organizationUrl>https://yookue.com</organizationUrl>
+            <organization>Unikue Ltd</organization>
+            <organizationUrl>https://unikue.cn</organizationUrl>
             <timezone>China/Beijing</timezone>
         </developer>
     </developers>

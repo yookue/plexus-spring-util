@@ -1,0 +1,837 @@
+/*
+ * Copyright (c) 2016 Unikue Ltd. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package cn.unikue.commonplexus.springutil.util;
+
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import jakarta.annotation.Nullable;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ReflectionUtils;
+import cn.unikue.commonplexus.javaseutil.util.ArrayUtilsWraps;
+import cn.unikue.commonplexus.javaseutil.util.ClassUtilsWraps;
+import cn.unikue.commonplexus.javaseutil.util.ObjectUtilsWraps;
+
+
+/**
+ * Utilities for {@link org.springframework.util.ReflectionUtils}
+ *
+ * @author David Hsing
+ *
+ * @see org.springframework.util.ReflectionUtils
+ */
+@SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
+public abstract class ReflectionUtilsWraps {
+    public static void doWithDeclaredFields(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldCallback callback, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (ObjectUtils.anyNull(clazz, callback)) {
+            return;
+        }
+        Field[] fields = clazz.getDeclaredFields();
+        if (ArrayUtils.isEmpty(fields)) {
+            return;
+        }
+        for (Field field : fields) {
+            if (filter == null || filter.matches(field)) {
+                try {
+                    callback.doWith(field);
+                } catch (IllegalAccessException ex) {
+                    throw new IllegalStateException("Not allowed to access field '" + field.getName() + "': " + ex);
+                }
+            }
+        }
+    }
+
+    public static void doWithDeclaredMethods(@Nullable Class<?> clazz, @Nullable ReflectionUtils.MethodCallback callback, @Nullable ReflectionUtils.MethodFilter filter) {
+        if (ObjectUtils.anyNull(clazz, callback)) {
+            return;
+        }
+        Method[] methods = clazz.getDeclaredMethods();
+        if (ArrayUtils.isEmpty(methods)) {
+            return;
+        }
+        for (Method method : methods) {
+            if (filter == null || filter.matches(method)) {
+                try {
+                    callback.doWith(method);
+                } catch (IllegalAccessException ex) {
+                    throw new IllegalStateException("Not allowed to access method '" + method.getName() + "': " + ex);
+                }
+            }
+        }
+    }
+
+    @Nullable
+    public static Field[] getDeclaredFields(@Nullable Class<?> clazz) {
+        return getDeclaredFields(clazz, null);
+    }
+
+    @Nullable
+    public static Field[] getDeclaredFields(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<Field> fields = getDeclaredFieldsToList(clazz, filter);
+        return CollectionUtils.isEmpty(fields) ? null : fields.toArray(ArrayUtils.EMPTY_FIELD_ARRAY);
+    }
+
+    @Nullable
+    public static List<Field> getDeclaredFieldsToList(@Nullable Class<?> clazz) {
+        return getDeclaredFieldsToList(clazz, null);
+    }
+
+    @Nullable
+    public static List<Field> getDeclaredFieldsToList(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (clazz == null) {
+            return null;
+        }
+        List<Field> result = new ArrayList<>();
+        doWithDeclaredFields(clazz, result::add, filter);
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    public static Map<String, ?> getDeclaredFieldsToMap(@Nullable Object object, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (object == null || ClassUtils.isPrimitiveOrWrapper(object.getClass())) {
+            return null;
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        doWithDeclaredFields(object.getClass(), (field) -> result.put(field.getName(), getField(field, true, object)), filter);
+        return result.isEmpty() ? null : result;
+    }
+
+    @Nullable
+    public static Set<Field> getDeclaredFieldsToSet(@Nullable Class<?> clazz) {
+        return getDeclaredFieldsToSet(clazz, null);
+    }
+
+    @Nullable
+    public static Set<Field> getDeclaredFieldsToSet(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<Field> fields = getDeclaredFieldsToList(clazz, filter);
+        return CollectionUtils.isEmpty(fields) ? null : new LinkedHashSet<>(fields);
+    }
+
+    @Nullable
+    public static String[] getDeclaredFieldNames(@Nullable Class<?> clazz) {
+        return getDeclaredFieldNames(clazz, null);
+    }
+
+    @Nullable
+    public static String[] getDeclaredFieldNames(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<String> names = getDeclaredFieldNamesToList(clazz, filter);
+        return CollectionUtils.isEmpty(names) ? null : names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    @Nullable
+    public static List<String> getDeclaredFieldNamesToList(@Nullable Class<?> clazz) {
+        return getDeclaredFieldNamesToList(clazz, null);
+    }
+
+    @Nullable
+    public static List<String> getDeclaredFieldNamesToList(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<String> result = new ArrayList<>();
+        doWithDeclaredFields(clazz, item -> result.add(item.getName()), filter);
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    public static Set<String> getDeclaredFieldNamesToSet(@Nullable Class<?> clazz) {
+        return getDeclaredFieldNamesToSet(clazz, null);
+    }
+
+    @Nullable
+    public static Set<String> getDeclaredFieldNamesToSet(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<String> names = getDeclaredFieldNamesToList(clazz, filter);
+        return CollectionUtils.isEmpty(names) ? null : new LinkedHashSet<>(names);
+    }
+
+    @Nullable
+    public static Field[] getNestedFields(@Nullable Class<?> clazz) {
+        return getNestedFields(clazz, null);
+    }
+
+    @Nullable
+    public static Field[] getNestedFields(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<Field> fields = getNestedFieldsToList(clazz, filter);
+        return CollectionUtils.isEmpty(fields) ? null : fields.toArray(ArrayUtils.EMPTY_FIELD_ARRAY);
+    }
+
+    @Nullable
+    public static List<Field> getNestedFieldsToList(@Nullable Class<?> clazz) {
+        return getNestedFieldsToList(clazz, null);
+    }
+
+    @Nullable
+    public static List<Field> getNestedFieldsToList(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (clazz == null) {
+            return null;
+        }
+        List<Field> result = new ArrayList<>();
+        ReflectionUtils.doWithFields(clazz, result::add, filter);
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    public static Map<String, ?> getNestedFieldsToMap(@Nullable Object object, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (object == null || ClassUtils.isPrimitiveOrWrapper(object.getClass())) {
+            return null;
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        ReflectionUtils.doWithFields(object.getClass(), (field) -> result.put(field.getName(), getField(field, true, object)), filter);
+        return result.isEmpty() ? null : result;
+    }
+
+    @Nullable
+    public static Set<Field> getNestedFieldsToSet(@Nullable Class<?> clazz) {
+        return getNestedFieldsToSet(clazz, null);
+    }
+
+    @Nullable
+    public static Set<Field> getNestedFieldsToSet(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<Field> fields = getNestedFieldsToList(clazz, filter);
+        return CollectionUtils.isEmpty(fields) ? null : new LinkedHashSet<>(fields);
+    }
+
+    @Nullable
+    public static String[] getNestedFieldNames(@Nullable Class<?> clazz) {
+        return getNestedFieldNames(clazz, null);
+    }
+
+    @Nullable
+    public static String[] getNestedFieldNames(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<String> names = getNestedFieldNamesToList(clazz, filter);
+        return CollectionUtils.isEmpty(names) ? null : names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    @Nullable
+    public static List<String> getNestedFieldNamesToList(@Nullable Class<?> clazz) {
+        return getNestedFieldNamesToList(clazz, null);
+    }
+
+    @Nullable
+    public static List<String> getNestedFieldNamesToList(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        if (clazz == null) {
+            return null;
+        }
+        List<String> result = new ArrayList<>();
+        ReflectionUtils.doWithFields(clazz, item -> result.add(item.getName()), filter);
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    public static Set<String> getNestedFieldNamesToSet(@Nullable Class<?> clazz) {
+        return getNestedFieldNamesToSet(clazz, null);
+    }
+
+    @Nullable
+    public static Set<String> getNestedFieldNamesToSet(@Nullable Class<?> clazz, @Nullable ReflectionUtils.FieldFilter filter) {
+        List<String> names = getNestedFieldNamesToList(clazz, filter);
+        return CollectionUtils.isEmpty(names) ? null : new LinkedHashSet<>(names);
+    }
+
+    /**
+     * Returns the found {@link java.lang.reflect.Field} with the given class and field name
+     *
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field
+     *
+     * @return the found {@link java.lang.reflect.Field} with the given class and field name
+     */
+    @Nullable
+    public static Field findField(@Nullable Class<?> clazz, @Nullable String fieldName) {
+        return (clazz == null || StringUtils.isBlank(fieldName)) ? null : ReflectionUtils.findField(clazz, fieldName);
+    }
+
+    /**
+     * Returns the found {@link java.lang.reflect.Field} with the given class and field name/type
+     *
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field (could be {@code null} if {@code fieldType} is specified)
+     * @param fieldType The type of the field (could be {@code null} if {@code fieldName} is specified)
+     *
+     * @return the found {@link java.lang.reflect.Field} with the given class and field name/type
+     */
+    @Nullable
+    public static Field findField(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType) {
+        return (clazz == null || (StringUtils.isBlank(fieldName) && fieldType == null)) ? null : ReflectionUtils.findField(clazz, fieldName, fieldType);
+    }
+
+    /**
+     * Returns the found accessible {@link java.lang.reflect.Field} with the given class and field name
+     *
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field
+     *
+     * @return the found accessible {@link java.lang.reflect.Field} with the given class and field name
+     */
+    @Nullable
+    public static Field findFieldAccessible(@Nullable Class<?> clazz, @Nullable String fieldName) {
+        return findFieldAccessible(clazz, fieldName, null);
+    }
+
+    /**
+     * Returns the found accessible {@link java.lang.reflect.Field} with the given class and field name/type
+     *
+     * @param clazz The class to introspect
+     * @param fieldName The name of the field (could be {@code null} if {@code fieldType} is specified)
+     * @param fieldType The type of the field (could be {@code null} if {@code fieldName} is specified)
+     *
+     * @return the found accessible {@link java.lang.reflect.Field} with the given class and field name/type
+     */
+    @Nullable
+    public static Field findFieldAccessible(@Nullable Class<?> clazz, @Nullable String fieldName, @Nullable Class<?> fieldType) {
+        Field field = findField(clazz, fieldName, fieldType);
+        makeAccessible(field);
+        return field;
+    }
+
+    /**
+     * Returns the found {@link java.lang.reflect.Method} with the given class and method name
+     *
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     *
+     * @return the found {@link java.lang.reflect.Method} with the given class and method name
+     */
+    @Nullable
+    public static Method findMethod(@Nullable Class<?> clazz, @Nullable String methodName) {
+        return (clazz == null || StringUtils.isBlank(methodName)) ? null : ReflectionUtils.findMethod(clazz, methodName);
+    }
+
+    /**
+     * Returns the found {@link java.lang.reflect.Method} with the given class and method name/parameter types
+     *
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     * @param paramTypes The parameter types of the method (could be {@code null} to indicate any signature)
+     *
+     * @return the found {@link java.lang.reflect.Method} with the given class and method name/parameter types
+     */
+    @Nullable
+    public static Method findMethod(@Nullable Class<?> clazz, String methodName, @Nullable Class<?>... paramTypes) {
+        return (clazz == null || StringUtils.isBlank(methodName)) ? null : ReflectionUtils.findMethod(clazz, methodName, paramTypes);
+    }
+
+    /**
+     * Returns the found {@link java.lang.reflect.Method} with the given class and method name/assignable parameter types
+     *
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     * @param paramTypes The assignable parameter types of the method (could be {@code null} to indicate any signature)
+     *
+     * @return the found {@link java.lang.reflect.Method} with the given class and method name/assignable parameter types
+     */
+    @Nullable
+    public static Method findMethodAssignable(@Nullable Class<?> clazz, String methodName, @Nullable Class<?>... paramTypes) {
+        if (clazz == null || StringUtils.isBlank(methodName)) {
+            return null;
+        }
+        Method result = ReflectionUtils.findMethod(clazz, methodName, (Class<?>[]) null);
+        return (result != null && ClassUtils.isAssignable(paramTypes, result.getParameterTypes())) ? result : null;
+    }
+
+    /**
+     * Returns the found accessible {@link java.lang.reflect.Method} with the given class and method name
+     *
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     *
+     * @return the found accessible {@link java.lang.reflect.Method} with the given class and method name
+     */
+    @Nullable
+    public static Method findMethodAccessible(@Nullable Class<?> clazz, @Nullable String methodName) {
+        return findMethodAccessible(clazz, methodName, ArrayUtils.EMPTY_CLASS_ARRAY);
+    }
+
+    /**
+     * Returns the found accessible {@link java.lang.reflect.Method} with the given class and method name/parameter types
+     *
+     * @param clazz The class to introspect
+     * @param methodName The name of the method
+     * @param paramTypes The parameter types of the method (could be {@code null} to indicate any signature)
+     *
+     * @return the found accessible {@link java.lang.reflect.Method} with the given class and method name/parameter types
+     */
+    @Nullable
+    public static Method findMethodAccessible(@Nullable Class<?> clazz, String methodName, @Nullable Class<?>... paramTypes) {
+        Method method = findMethod(clazz, methodName, paramTypes);
+        makeAccessible(method);
+        return method;
+    }
+
+    @Nullable
+    public static Object getField(@Nullable Field field, @Nullable Object target) {
+        return getField(field, false, target);
+    }
+
+    @Nullable
+    public static Object getField(@Nullable Field field, boolean makeAccessible, @Nullable Object target) {
+        if (field == null) {
+            return null;
+        }
+        try {
+            if (makeAccessible) {
+                ReflectionUtils.makeAccessible(field);
+            }
+            return ReflectionUtils.getField(field, target);
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    @Nullable
+    public static Object getField(@Nullable Object target, @Nullable String fieldName, boolean makeAccessible) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return null;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName) : findField(target.getClass(), fieldName);
+        return getField(field, target);
+    }
+
+    @Nullable
+    public static Object getField(@Nullable Object target, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return null;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName, fieldType) : findField(target.getClass(), fieldName, fieldType);
+        return getField(field, target);
+    }
+
+    @Nullable
+    public static <T> T getFieldAs(@Nullable Field field, @Nullable Object target, @Nullable Class<T> expectType) {
+        return getFieldAs(field, false, target, expectType);
+    }
+
+    @Nullable
+    public static <T> T getFieldAs(@Nullable Field field, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(field, expectType)) {
+            return null;
+        }
+        if (makeAccessible) {
+            makeAccessible(field);
+        }
+        return ObjectUtilsWraps.castAs(getField(field, target), expectType);
+    }
+
+    @Nullable
+    public static <T> T getFieldAs(@Nullable Object target, @Nullable String fieldName, boolean makeAccessible, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(target, expectType) || StringUtils.isBlank(fieldName)) {
+            return null;
+        }
+        return ObjectUtilsWraps.castAs(getField(target, fieldName, makeAccessible), expectType);
+    }
+
+    @Nullable
+    public static <T> T getFieldAs(@Nullable Object target, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(target, expectType) || StringUtils.isBlank(fieldName)) {
+            return null;
+        }
+        return ObjectUtilsWraps.castAs(getField(target, fieldName, fieldType, makeAccessible), expectType);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Field[] getFieldsWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldsWithAllAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Field[] getFieldsWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Field> fields = getFieldsWithAllAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(fields) ? null : fields.toArray(ArrayUtils.EMPTY_FIELD_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static List<Field> getFieldsWithAllAnnotationsToList(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldsWithAllAnnotationsToList(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static List<Field> getFieldsWithAllAnnotationsToList(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        if (clazz == null || CollectionUtils.isEmpty(annotations)) {
+            return null;
+        }
+        List<Field> result = new ArrayList<>();
+        ReflectionUtils.doWithFields(clazz, result::add, item -> AnnotationUtilsWraps.allPresent(item, annotations));
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Field[] getFieldsWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldsWithAnyAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Field[] getFieldsWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Field> fields = getFieldsWithAnyAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(fields) ? null : fields.toArray(ArrayUtils.EMPTY_FIELD_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static List<Field> getFieldsWithAnyAnnotationsToList(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldsWithAnyAnnotationsToList(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static List<Field> getFieldsWithAnyAnnotationsToList(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        if (clazz == null || CollectionUtils.isEmpty(annotations)) {
+            return null;
+        }
+        List<Field> result = new ArrayList<>();
+        ReflectionUtils.doWithFields(clazz, result::add, item -> AnnotationUtilsWraps.anyPresent(item, annotations));
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static String[] getFieldNamesWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldNamesWithAllAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static String[] getFieldNamesWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<String> names = getFieldNamesWithAllAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(names) ? null : names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static List<String> getFieldNamesWithAllAnnotationsToList(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldNamesWithAllAnnotationsToList(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static List<String> getFieldNamesWithAllAnnotationsToList(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Field> fields = getFieldsWithAllAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(fields) ? null : fields.stream().map(Field::getName).collect(Collectors.toList());
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Set<String> getFieldNamesWithAllAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldNamesWithAllAnnotationsToSet(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Set<String> getFieldNamesWithAllAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<String> names = getFieldNamesWithAllAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(names) ? null : new LinkedHashSet<>(names);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static String[] getFieldNamesWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldNamesWithAnyAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static String[] getFieldNamesWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        Set<String> names = getFieldNamesWithAnyAnnotationsToSet(clazz, annotations);
+        return CollectionUtils.isEmpty(names) ? null : names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static List<String> getFieldNamesWithAnyAnnotationsToList(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldNamesWithAnyAnnotationsToList(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static List<String> getFieldNamesWithAnyAnnotationsToList(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Field> fields = getFieldsWithAnyAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(fields) ? null : fields.stream().map(Field::getName).collect(Collectors.toList());
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Set<String> getFieldNamesWithAnyAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getFieldNamesWithAnyAnnotationsToSet(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Set<String> getFieldNamesWithAnyAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<String> names = getFieldNamesWithAnyAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(names) ? null : new LinkedHashSet<>(names);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Method[] getMethodsWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodsWithAllAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Method[] getMethodsWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Method> methods = getMethodsWithAllAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(methods) ? null : methods.toArray(ArrayUtils.EMPTY_METHOD_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static List<Method> getMethodsWithAllAnnotationsToList(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodsWithAllAnnotationsToList(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static List<Method> getMethodsWithAllAnnotationsToList(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        if (clazz == null || CollectionUtils.isEmpty(annotations)) {
+            return null;
+        }
+        List<Method> result = new ArrayList<>();
+        ReflectionUtils.doWithMethods(clazz, result::add, item -> AnnotationUtilsWraps.allPresent(item, annotations));
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Method[] getMethodsWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodsWithAnyAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Method[] getMethodsWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Method> methods = getMethodsWithAnyAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(methods) ? null : methods.toArray(ArrayUtils.EMPTY_METHOD_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static List<Method> getMethodsWithAnyAnnotationsToList(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodsWithAnyAnnotationsToList(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static List<Method> getMethodsWithAnyAnnotationsToList(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        if (clazz == null || CollectionUtils.isEmpty(annotations)) {
+            return null;
+        }
+        List<Method> result = new ArrayList<>();
+        ReflectionUtils.doWithMethods(clazz, result::add, item -> AnnotationUtilsWraps.anyPresent(item, annotations));
+        return CollectionUtils.isEmpty(result) ? null : result;
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static String[] getMethodNamesWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodNamesWithAllAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static String[] getMethodNamesWithAllAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        Set<String> names = getMethodNamesWithAllAnnotationsToSet(clazz, annotations);
+        return CollectionUtils.isEmpty(names) ? null : names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Set<String> getMethodNamesWithAllAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodNamesWithAllAnnotationsToSet(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Set<String> getMethodNamesWithAllAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Method> methods = getMethodsWithAllAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(methods) ? null : methods.stream().map(Method::getName).collect(Collectors.toSet());
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static String[] getMethodNamesWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodNamesWithAnyAnnotations(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static String[] getMethodNamesWithAnyAnnotations(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        Set<String> names = getMethodNamesWithAnyAnnotationsToSet(clazz, annotations);
+        return CollectionUtils.isEmpty(names) ? null : names.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+    }
+
+    @Nullable
+    @SafeVarargs
+    public static Set<String> getMethodNamesWithAnyAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Class<? extends Annotation>... annotations) {
+        return getMethodNamesWithAnyAnnotationsToSet(clazz, ArrayUtilsWraps.asList(annotations));
+    }
+
+    @Nullable
+    public static Set<String> getMethodNamesWithAnyAnnotationsToSet(@Nullable Class<?> clazz, @Nullable Collection<Class<? extends Annotation>> annotations) {
+        List<Method> methods = getMethodsWithAnyAnnotationsToList(clazz, annotations);
+        return CollectionUtils.isEmpty(methods) ? null : methods.stream().map(Method::getName).collect(Collectors.toSet());
+    }
+
+    @Nullable
+    public static Object invokeMethod(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target) {
+        Method method = makeAccessible ? findMethodAccessible(clazz, methodName) : findMethod(clazz, methodName);
+        return invokeMethod(method, target);
+    }
+
+    @Nullable
+    public static Object invokeMethod(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Object... args) {
+        Class<?>[] paramTypes = ClassUtilsWraps.getObjectClasses(args);
+        Method method = makeAccessible ? findMethodAccessible(clazz, methodName, paramTypes) : findMethod(clazz, methodName, paramTypes);
+        return invokeMethod(method, target, args);
+    }
+
+    @Nullable
+    public static Object invokeMethod(@Nullable Method method, @Nullable Object target) {
+        return invokeMethod(method, target, ArrayUtils.EMPTY_OBJECT_ARRAY);
+    }
+
+    @Nullable
+    public static Object invokeMethod(@Nullable Method method, @Nullable Object target, @Nullable Object... args) {
+        if (method == null) {
+            return null;
+        }
+        try {
+            return ReflectionUtils.invokeMethod(method, target, args);
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    @Nullable
+    public static Object invokeMethod(@Nullable Object target, @Nullable String methodName, @Nullable Object... args) {
+        return invokeMethod(target, methodName, false, args);
+    }
+
+    @Nullable
+    public static Object invokeMethod(@Nullable Object target, @Nullable String methodName, boolean makeAccessible, @Nullable Object... args) {
+        if (target == null || StringUtils.isBlank(methodName)) {
+            return null;
+        }
+        Method method = makeAccessible ? findMethodAccessible(target.getClass(), methodName) : findMethod(target.getClass(), methodName);
+        return (method == null) ? null : ReflectionUtils.invokeMethod(method, target, args);
+    }
+
+    @Nullable
+    public static <T> T invokeMethodAs(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Class<T> expectType) {
+        return invokeMethodAs(clazz, methodName, false, target, ArrayUtils.EMPTY_OBJECT_ARRAY, expectType);
+    }
+
+    @Nullable
+    public static <T> T invokeMethodAs(@Nullable Class<?> clazz, @Nullable String methodName, boolean makeAccessible, @Nullable Object target, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        if (ObjectUtils.anyNull(clazz, expectType) || StringUtils.isBlank(methodName)) {
+            return null;
+        }
+        return ObjectUtilsWraps.castAs(invokeMethod(clazz, methodName, makeAccessible, target, args), expectType);
+    }
+
+    @Nullable
+    public static <T> T invokeMethodAs(@Nullable Method method, @Nullable Object target, @Nullable Class<T> expectType) {
+        return invokeMethodAs(method, target, ArrayUtils.EMPTY_OBJECT_ARRAY, expectType);
+    }
+
+    @Nullable
+    public static <T> T invokeMethodAs(@Nullable Method method, @Nullable Object target, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(method, expectType) ? null : ObjectUtilsWraps.castAs(invokeMethod(method, target, args), expectType);
+    }
+
+    @Nullable
+    public static <T> T invokeMethodAs(@Nullable Object target, @Nullable String methodName, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        return invokeMethodAs(target, methodName, false, args, expectType);
+    }
+
+    @Nullable
+    public static <T> T invokeMethodAs(@Nullable Object target, @Nullable String methodName, boolean makeAccessible, @Nullable Object[] args, @Nullable Class<T> expectType) {
+        return ObjectUtils.anyNull(target, methodName, expectType) ? null : ObjectUtilsWraps.castAs(invokeMethod(target, methodName, makeAccessible, args), expectType);
+    }
+
+    public static boolean isUserDefined(@Nullable Method method) {
+        return method != null && !method.isBridge() && !method.isSynthetic() && method.getDeclaringClass() != Object.class;
+    }
+
+    public static <A, B extends A> boolean isUserOverride(@Nullable Class<A> superclass, @Nullable Class<B> subclass, @Nullable String methodName) {
+        return isUserOverride(superclass, subclass, methodName, ArrayUtils.EMPTY_CLASS_ARRAY);
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    public static <A, B extends A> boolean isUserOverride(@Nullable Class<A> superclass, @Nullable Class<B> subclass, @Nullable String methodName, @Nullable Class<?>... paramTypes) {
+        if (ObjectUtils.anyNull(superclass, subclass) || superclass == subclass || StringUtils.isBlank(methodName)) {
+            return false;
+        }
+        Method superMethod = findMethod(superclass, methodName, paramTypes), subMethod = findMethod(subclass, methodName, paramTypes);
+        return superMethod.getDeclaringClass() != subMethod.getDeclaringClass();
+    }
+
+    public static void makeAccessible(@Nullable Constructor<?> constructor) {
+        if (constructor == null) {
+            return;
+        }
+        try {
+            ReflectionUtils.makeAccessible(constructor);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void makeAccessible(@Nullable Field field) {
+        if (field == null) {
+            return;
+        }
+        try {
+            ReflectionUtils.makeAccessible(field);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void makeAccessible(@Nullable Method method) {
+        if (method == null) {
+            return;
+        }
+        try {
+            ReflectionUtils.makeAccessible(method);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void setField(@Nullable Field field, @Nullable Object target, @Nullable Object value) {
+        if (field == null) {
+            return;
+        }
+        try {
+            ReflectionUtils.setField(field, target, value);
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void setField(@Nullable Object target, @Nullable String fieldName, boolean makeAccessible, @Nullable Object value) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName) : findField(target.getClass(), fieldName);
+        setField(field, target, value);
+    }
+
+    public static void setField(@Nullable Object target, @Nullable String fieldName, @Nullable Class<?> fieldType, boolean makeAccessible, @Nullable Object value) {
+        if (target == null || StringUtils.isBlank(fieldName)) {
+            return;
+        }
+        Field field = makeAccessible ? findFieldAccessible(target.getClass(), fieldName, fieldType) : findField(target.getClass(), fieldName, fieldType);
+        setField(field, target, value);
+    }
+}

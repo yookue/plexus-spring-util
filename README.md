@@ -1,6 +1,6 @@
 # Plexus Spring Util
 
-Yookue plexus-spring-util is a packages of utility classes for Spring's hierarchy, or are considered to enhance its abilities.
+Unikue plexus-spring-util is a packages of utility classes for Spring's hierarchy, or are considered to enhance its abilities.
 
 ## Quickstart
 
@@ -8,7 +8,7 @@ Yookue plexus-spring-util is a packages of utility classes for Spring's hierarch
 
 ```xml
     <dependency>
-        <groupId>com.yookue.commonplexus</groupId>
+        <groupId>cn.unikue.commonplexus</groupId>
         <artifactId>plexus-spring-util</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -44,7 +44,7 @@ Yookue plexus-spring-util is a packages of utility classes for Spring's hierarch
 
 ## Document
 
-- Github: https://github.com/yookue/plexus-spring-util
+- Github: https://github.com/unikueltd/plexus-spring-util
 
 ## Requirement
 
@@ -58,12 +58,12 @@ See the `NOTICE.txt` file for required notices and attributions.
 
 ## Donation
 
-You like this package? Then [donate to us](https://yookue.com/donation) to support the development.
+You like this package? Then [donate to us](https://unikue.cn/donation) to support the development.
 
 ## Copyright
 
-Beijing Yookue Network Technology Ltd.
+Beijing Unikue Network Technology Ltd.
 
 ## Website
 
-- Yookue: https://yookue.com
+- Unikue: https://unikue.cn
