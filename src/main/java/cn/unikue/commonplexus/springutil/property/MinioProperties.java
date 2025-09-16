@@ -87,13 +87,6 @@ public class MinioProperties implements Serializable {
     private String bucketName;
 
     /**
-     * The domain of endpoint for accessing files
-     * <p>
-     * For example: {@code "https://cdn.example.com"}
-     */
-    private String domain;
-
-    /**
      * The canned access control for accessing files
      * <p>
      * For example: "private", "public-read", "public-read-write"
