@@ -17,6 +17,7 @@
 package cn.unikue.commonplexus.springutil.util;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.MultiValueMap;
@@ -36,5 +37,19 @@ class UriUtilsWrapsTest {
         MultiValueMap<String, String> result = UriUtilsWraps.getQueryParamsFromUrl("https://foo.com/bar/path/page?param1=value1&param2=value2#fragment");
         Assertions.assertNotNull(result);
         log.info("{}: {}", StackTraceWraps.getExecutingMethodName(), result.size());
+    }
+
+    @Test
+    void replaceSchemaHost() {
+        String result = UriUtilsWraps.replaceSchemaHost("https://foo.com/bar/path/page?param1=value1&param2=value2#fragment", "https://bar.net");
+        log.info("{}: {}", StackTraceWraps.getExecutingMethodName(), result);
+        Assertions.assertTrue(StringUtils.startsWith(result, "https://bar.net"));
+    }
+
+    @Test
+    void replaceSchemaHostPort() {
+        String result = UriUtilsWraps.replaceSchemaHostPort("https://foo.com/bar/path/page?param1=value1&param2=value2#fragment", "https://bar.net:8080");
+        log.info("{}: {}", StackTraceWraps.getExecutingMethodName(), result);
+        Assertions.assertTrue(StringUtils.startsWith(result, "https://bar.net:8080"));
     }
 }

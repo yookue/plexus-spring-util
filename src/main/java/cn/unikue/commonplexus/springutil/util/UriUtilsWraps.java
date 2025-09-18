@@ -340,4 +340,64 @@ public abstract class UriUtilsWraps {
     public static UriComponents ofUriComponentsFromUrl(@Nullable String url) {
         return StringUtils.isBlank(url) ? null : UriComponentsBuilder.fromUriString(url).build();
     }
+
+    /**
+     * Returns a new URL with the schema and host replaced
+     *
+     * @return a new URL with the schema and host replaced
+     */
+    @Nullable
+    public static String replaceSchemaHost(@Nullable String originUrl, @Nullable String replaceUrl) {
+        return replaceSchemaHost(originUrl, UriComponentsBuilder.ParserType.RFC, replaceUrl, UriComponentsBuilder.ParserType.RFC);
+    }
+
+    /**
+     * Returns a new URL with the schema and host replaced
+     *
+     * @return a new URL with the schema and host replaced
+     */
+    @Nullable
+    @SuppressWarnings({"DataFlowIssue", "DuplicatedCode"})
+    public static String replaceSchemaHost(@Nullable String originUrl, @Nullable UriComponentsBuilder.ParserType originParserType, @Nullable String replaceUrl, @Nullable UriComponentsBuilder.ParserType replaceParserType) {
+        if (StringUtils.isAnyBlank(originUrl, replaceUrl)) {
+            return originUrl;
+        }
+        try {
+            UriComponents originComp = UriComponentsBuilder.fromUriString(originUrl, ObjectUtils.defaultIfNull(originParserType, UriComponentsBuilder.ParserType.RFC)).build();
+            UriComponents replaceComp = UriComponentsBuilder.fromUriString(replaceUrl, ObjectUtils.defaultIfNull(originParserType, UriComponentsBuilder.ParserType.RFC)).build();
+            return UriComponentsBuilder.newInstance().scheme(replaceComp.getScheme()).host(replaceComp.getHost()).port(originComp.getPort()).path(originComp.getPath()).query(originComp.getQuery()).fragment(originComp.getFragment()).build().toUriString();
+        } catch (Exception ignored) {
+        }
+        return originUrl;
+    }
+
+    /**
+     * Returns a new URL with the schema, host and port replaced
+     *
+     * @return a new URL with the schema, host and port replaced
+     */
+    @Nullable
+    public static String replaceSchemaHostPort(@Nullable String originUrl, @Nullable String replaceUrl) {
+        return replaceSchemaHostPort(originUrl, UriComponentsBuilder.ParserType.RFC, replaceUrl, UriComponentsBuilder.ParserType.RFC);
+    }
+
+    /**
+     * Returns a new URL with the schema, host and port replaced
+     *
+     * @return a new URL with the schema, host and port replaced
+     */
+    @Nullable
+    @SuppressWarnings({"DataFlowIssue", "DuplicatedCode"})
+    public static String replaceSchemaHostPort(@Nullable String originUrl, @Nullable UriComponentsBuilder.ParserType originParserType, @Nullable String replaceUrl, @Nullable UriComponentsBuilder.ParserType replaceParserType) {
+        if (StringUtils.isAnyBlank(originUrl, replaceUrl)) {
+            return originUrl;
+        }
+        try {
+            UriComponents originComp = UriComponentsBuilder.fromUriString(originUrl, ObjectUtils.defaultIfNull(originParserType, UriComponentsBuilder.ParserType.RFC)).build();
+            UriComponents replaceComp = UriComponentsBuilder.fromUriString(replaceUrl, ObjectUtils.defaultIfNull(originParserType, UriComponentsBuilder.ParserType.RFC)).build();
+            return UriComponentsBuilder.newInstance().scheme(replaceComp.getScheme()).host(replaceComp.getHost()).port(replaceComp.getPort()).path(originComp.getPath()).query(originComp.getQuery()).fragment(originComp.getFragment()).build().toUriString();
+        } catch (Exception ignored) {
+        }
+        return originUrl;
+    }
 }
