@@ -51,7 +51,7 @@ public @interface EnableContentCachingRequest {
      *
      * @return the url patterns of the filter
      */
-    String[] urlPatterns() default {AntPathConst.SLASH_STAR};
+    String[] urlPatterns() default {AntPathConst.SLASH_STARS};
 
     /**
      * Returns the url excludes of the filter

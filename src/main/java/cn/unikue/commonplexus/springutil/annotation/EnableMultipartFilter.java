@@ -52,7 +52,7 @@ public @interface EnableMultipartFilter {
      *
      * @return the url patterns of the filter
      */
-    String[] urlPatterns() default {AntPathConst.SLASH_STAR};
+    String[] urlPatterns() default {AntPathConst.SLASH_STARS};
 
     /**
      * Returns the order of the filter
