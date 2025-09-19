@@ -421,6 +421,16 @@ public abstract class WebUtilsWraps {
         return ObjectUtilsWraps.castAs(request.getAttribute(name), expectType);
     }
 
+    @Nullable
+    public static String getRequestAttributeAsString(@Nullable HttpServletRequest request, @Nullable String name) {
+        return getRequestAttributeAs(request, name, String.class);
+    }
+
+    @Nullable
+    public static Integer getRequestAttributeAsInteger(@Nullable HttpServletRequest request, @Nullable String name) {
+        return getRequestAttributeAs(request, name, Integer.class);
+    }
+
     public static List<String> getRequestAttributeNames(@Nullable HttpServletRequest request) {
         return (request == null) ? null : EnumerationPlainWraps.toElementList(request.getAttributeNames());
     }
@@ -484,6 +494,16 @@ public abstract class WebUtilsWraps {
             return null;
         }
         return ObjectUtilsWraps.castAs(getSessionAttribute(session, name), expectType);
+    }
+
+    @Nullable
+    public static String getSessionAttributeAsString(@Nullable HttpServletRequest request, @Nullable String name) {
+        return getSessionAttributeAs(request, name, String.class);
+    }
+
+    @Nullable
+    public static Integer getSessionAttributeAsInteger(@Nullable HttpServletRequest request, @Nullable String name) {
+        return getSessionAttributeAs(request, name, Integer.class);
     }
 
     public static void setSessionAttribute(@Nullable HttpServletRequest request, @Nullable String name, @Nullable Object value) {
