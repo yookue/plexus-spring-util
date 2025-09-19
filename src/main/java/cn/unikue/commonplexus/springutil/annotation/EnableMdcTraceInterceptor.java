@@ -48,5 +48,5 @@ public @interface EnableMdcTraceInterceptor {
      *
      * @return the url patterns of the interceptor
      */
-    String[] urlPatterns() default {AntPathConst.SLASH_STAR};
+    String[] urlPatterns() default {AntPathConst.SLASH_STARS};
 }
