@@ -22,7 +22,7 @@
 
     <groupId>cn.unikue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.5.5</version>
+    <version>3.5.14</version>
 
     <name>${project.artifactId}</name>
     <description>Unikue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
@@ -47,28 +47,28 @@
         <project.build.resourceEncoding>${file.encoding}</project.build.resourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
 
-        <spring-boot.version>3.5.5</spring-boot.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
 
         <commons-beanutils2.version>2.0.0-M2</commons-beanutils2.version>
         <commons-fileupload2.version>2.0.0-M1</commons-fileupload2.version>
         <javapoet.version>1.13.0</javapoet.version>
-        <java-jwt.version>4.5.0</java-jwt.version>
-        <joda-time.version>2.14.0</joda-time.version>
-        <minio.version>8.5.17</minio.version>
+        <java-jwt.version>4.5.1</java-jwt.version>
+        <joda-time.version>2.14.1</joda-time.version>
+        <minio.version>9.0.0</minio.version>
         <mybatis.version>3.5.19</mybatis.version>
         <pagehelper.version>6.1.1</pagehelper.version>
-        <plexus-javase-util.version>2.2.0</plexus-javase-util.version>
+        <plexus-javase-util.version>2.3.1</plexus-javase-util.version>
 
-        <javadoc-docent-maven-plugin.version>2.1.0</javadoc-docent-maven-plugin.version>
-        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <javadoc-docent-maven-plugin.version>2.1.2</javadoc-docent-maven-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -880,6 +880,7 @@
                 <configuration>
                     <compilerArgs>
                         <arg>-parameters</arg>
+                        <arg>-Xlint:unchecked</arg>
                     </compilerArgs>
                     <excludes>
                         <exclude>**/._*</exclude>

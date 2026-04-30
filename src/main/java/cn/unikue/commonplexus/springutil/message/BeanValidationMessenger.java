@@ -146,9 +146,6 @@ public class BeanValidationMessenger {
         return getFieldLocaleName(error, binding, null);
     }
 
-    /**
-     * @see org.springframework.validation.beanvalidation.SpringValidatorAdapter.ViolationFieldError
-     */
     public String getFieldLocaleName(@Nonnull FieldError error, @Nullable BindingResult binding, @Nullable Locale locale) {
         Set<String> lookupCodes = new LinkedHashSet<>();
         if (StringUtils.isNotBlank(error.getObjectName())) {

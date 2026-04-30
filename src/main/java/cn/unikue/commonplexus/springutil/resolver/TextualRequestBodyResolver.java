@@ -66,7 +66,7 @@ public class TextualRequestBodyResolver implements HandlerMethodArgumentResolver
         if (servletRequest instanceof ContentCachingRequestWrapper alias) {
             wrapper = alias;
         } else {
-            wrapper = (annotation.limitation() >= 0) ? new ContentCachingRequestWrapper(servletRequest, annotation.limitation()) : new ContentCachingRequestWrapper(servletRequest);
+            wrapper = (annotation.limitation() >= 0) ? new ContentCachingRequestWrapper(servletRequest, annotation.limitation()) : new ContentCachingRequestWrapper(servletRequest, -1);
         }
         String content = WebUtilsWraps.getContentAsStringQuietly(wrapper);
         if (StringUtils.isNotEmpty(content)) {

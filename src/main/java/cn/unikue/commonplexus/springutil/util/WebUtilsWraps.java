@@ -813,7 +813,7 @@ public abstract class WebUtilsWraps {
     }
 
     public static HttpServletRequest wrapWithContentCaching(@Nullable HttpServletRequest request) {
-        return (request == null || request instanceof ContentCachingRequestWrapper) ? request : new ContentCachingRequestWrapper(request);
+        return (request == null || request instanceof ContentCachingRequestWrapper) ? request : new ContentCachingRequestWrapper(request, -1);
     }
 
     public static HttpServletResponse wrapWithContentCaching(@Nullable HttpServletResponse response) {
