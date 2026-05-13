@@ -69,16 +69,17 @@ public abstract class AntTableWraps {
             cloneBounds = MybatisSqlWraps.ofRowBounds((currentPage - 1) * pageSize, pageSize, true);
         }
         AntTableStruct struct = new AntTableStruct();
+        struct.setSuccess(true);
         if (cloneBounds == null) {
             Map<String, Object> cloneParams = new LinkedHashMap<>(params);
             MybatisSqlWraps.disablePagination(cloneParams);
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, cloneParams);
-            struct.setRecordsDetails(resultSets);
-            struct.setRecordsTotal((long) CollectionPlainWraps.size(resultSets));
+            struct.setData(resultSets);
+            struct.setTotal((long) CollectionPlainWraps.size(resultSets));
         } else {
             List<Map<String, Object>> resultSets = sqlSession.selectList(statementId, params, cloneBounds);
-            struct.setRecordsDetails(resultSets);
-            struct.setRecordsTotal(cloneBounds.getTotal());
+            struct.setData(resultSets);
+            struct.setTotal(cloneBounds.getTotal());
         }
         return struct;
     }

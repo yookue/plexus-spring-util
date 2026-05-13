@@ -40,6 +40,7 @@ import lombok.NoArgsConstructor;
 @Data
 @SuppressWarnings({"unused", "JavadocDeclaration", "JavadocLinkAsPlainText"})
 public class AntTableStruct implements Serializable {
-    private List<Map<String, Object>> recordsDetails;
-    private Long recordsTotal = 0L;
+    private Boolean success;
+    private List<Map<String, Object>> data;
+    private Long total = 0L;
 }
