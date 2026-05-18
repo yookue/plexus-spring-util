@@ -61,17 +61,11 @@ public class ContentCachingRequestFilter extends AbstractExcludableRequestFilter
         if (cacheMultipart || RegexUtilsWraps.findAnyIgnoreCase(request.getContentType(), RegexVariantConst.APPLICATION_JSON, RegexVariantConst.APPLICATION_XML)) {
             ContentCachingRequestWrapper wrapper;
             if (requestWrapperClass == ContentCachingRequestWrapper.class) {
-                wrapper = (cacheLimit > 0) ? new ContentCachingRequestWrapper(request, cacheLimit) : new ContentCachingRequestWrapper(request);
+                wrapper = (cacheLimit > 0) ? new ContentCachingRequestWrapper(request, cacheLimit) : new ContentCachingRequestWrapper(request, -1);
             } else {
-                if (cacheLimit > 0) {
-                    Constructor<? extends ContentCachingRequestWrapper> constructor = ClassUtils.getConstructorIfAvailable(requestWrapperClass, HttpServletRequest.class, Integer.class);
-                    Assert.notNull(constructor, AssertMessageConst.NOT_NULL);
-                    wrapper = BeanUtils.instantiateClass(constructor, request, cacheLimit);
-                } else {
-                    Constructor<? extends ContentCachingRequestWrapper> constructor = ClassUtils.getConstructorIfAvailable(requestWrapperClass, HttpServletRequest.class);
-                    Assert.notNull(constructor, AssertMessageConst.NOT_NULL);
-                    wrapper = BeanUtils.instantiateClass(constructor, request);
-                }
+                Constructor<? extends ContentCachingRequestWrapper> constructor = ClassUtils.getConstructorIfAvailable(requestWrapperClass, HttpServletRequest.class, Integer.class);
+                Assert.notNull(constructor, AssertMessageConst.NOT_NULL);
+                wrapper = BeanUtils.instantiateClass(constructor, request, cacheLimit);
             }
             chain.doFilter(wrapper, response);
         } else {
