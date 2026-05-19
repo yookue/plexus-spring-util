@@ -17,11 +17,14 @@
 package cn.unikue.commonplexus.springutil.util;
 
 
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ClassPathUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.ClassPathResource;
 import cn.unikue.commonplexus.javaseutil.constant.StringVariantConst;
+import cn.unikue.commonplexus.javaseutil.util.IoUtilsWraps;
 import cn.unikue.commonplexus.javaseutil.util.StringUtilsWraps;
 
 
@@ -41,6 +44,35 @@ public abstract class ClassPathWraps {
     public static boolean existsResource(@Nullable String path, @Nullable ClassLoader loader) {
         String pathToUse = removeClasspathPrefix(path);
         return StringUtils.isNotBlank(pathToUse) && new ClassPathResource(pathToUse, loader).exists();
+    }
+
+    @Nullable
+    public static InputStream readResourceToInputStream(@Nullable String path, @Nullable ClassLoader loader) {
+        String pathToUse = removeClasspathPrefix(path);
+        ClassPathResource resource = new ClassPathResource(pathToUse, loader);
+        try {
+            return resource.getInputStream();
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    @Nullable
+    public static byte[] readResourceToByteArray(@Nullable String path, @Nullable ClassLoader loader) {
+        try (InputStream stream = readResourceToInputStream(path, loader)) {
+            return IoUtilsWraps.toByteArray(stream);
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    @Nullable
+    public static String readResourceToString(@Nullable String path, @Nullable ClassLoader loader, @Nullable Charset charset) {
+        try (InputStream stream = readResourceToInputStream(path, loader)) {
+            return IoUtilsWraps.toString(stream, charset);
+        } catch (Exception ignored) {
+        }
+        return null;
     }
 
     /**
