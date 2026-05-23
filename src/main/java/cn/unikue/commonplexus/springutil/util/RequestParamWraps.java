@@ -769,7 +769,7 @@ public abstract class RequestParamWraps {
             result.put(key, emptyAsNull ? StringUtils.trimToNull(values[0]) : values[0]);
         }, (key, values) -> StringUtils.isNotBlank(key));
         // Checks if the request has payload
-        if (!includePayload || !WebUtilsWraps.isAjaxRequest(request)) {
+        if (!includePayload || !WebUtilsWraps.isRestRequest(request)) {
             return emptyAsNull ? MapPlainWraps.emptyAsNull(result) : result;
         }
         // Converts the payload into map and processes it

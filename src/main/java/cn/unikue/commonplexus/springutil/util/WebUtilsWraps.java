@@ -679,25 +679,36 @@ public abstract class WebUtilsWraps {
     }
 
     /**
-     * Returns whether the {@code request} is ajax capable
+     * Returns whether the {@code request} is rest capable
      * <p>
-     * With a header named {@code "X-Requested-With"} and value {@code "XMLHttpRequest"}
+     * With a header named {@code "X-Requested-With"} and value {@code "XMLHttpRequest"},
+     * or Content-Type is {@code "application/json"}, or Content-Type is {@code "application/xml"}
      *
-     * @return whether the {@code request} is ajax capable
+     * @param request The HTTP servlet request
+     * @return whether the {@code request} is rest capable
      */
-    public static boolean isAjaxRequest(@Nullable HttpServletRequest request) {
-        return HttpHeaderWraps.existsHeaderValueIgnoreCase(request, HttpHeaderConst.X_REQUESTED_WITH, HttpHeaderConst.XML_HTTP_REQUEST) || HttpHeaderWraps.isContentTypeApplicationJson(request) || HttpHeaderWraps.isContentTypeApplicationXml(request);
+    public static boolean isRestRequest(@Nullable HttpServletRequest request) {
+        return isRestRequest(request, false);
     }
 
     /**
      * Returns whether the {@code request} is rest capable
      * <p>
-     * With a header named {@code "X-Requested-With"} and value {@code "XMLHttpRequest"}, or accept {@code "application/json"}, or accept {@code "application/xml"}
+     * With a header named {@code "X-Requested-With"} and value {@code "XMLHttpRequest"},
+     * or Content-Type is {@code "application/json"}, or Content-Type is {@code "application/xml"}
+     * <p>
+     * When {@code includeAccept} is true, also checks Accept header for {@code "application/json"} or {@code "application/xml"}
      *
+     * @param request The HTTP servlet request
+     * @param includeAccept Whether to include Accept header checks
      * @return whether the {@code request} is rest capable
      */
-    public static boolean isRestRequest(@Nullable HttpServletRequest request) {
-        return isAjaxRequest(request) || HttpHeaderWraps.isAcceptApplicationJson(request) || HttpHeaderWraps.isAcceptApplicationXml(request);
+    public static boolean isRestRequest(@Nullable HttpServletRequest request, boolean includeAccept) {
+        boolean result = HttpHeaderWraps.existsHeaderValueIgnoreCase(request, HttpHeaderConst.X_REQUESTED_WITH, HttpHeaderConst.XML_HTTP_REQUEST) || HttpHeaderWraps.isContentTypeApplicationJson(request) || HttpHeaderWraps.isContentTypeApplicationXml(request);
+        if (!includeAccept) {
+            return result;
+        }
+        return result || HttpHeaderWraps.isAcceptApplicationJson(request) || HttpHeaderWraps.isAcceptApplicationXml(request);
     }
 
     public static boolean isCanonicalModelView(@Nullable ModelAndView view) {
