@@ -18,7 +18,6 @@ package cn.unikue.commonplexus.springutil.structure;
 
 
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import jakarta.annotation.Nonnull;
@@ -31,7 +30,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 import cn.unikue.commonplexus.javaseutil.constant.TemporalFormatConst;
-import cn.unikue.commonplexus.javaseutil.enumeration.PromptReminderType;
 import cn.unikue.commonplexus.javaseutil.structure.BooleanDataStruct;
 import cn.unikue.commonplexus.javaseutil.structure.BooleanTextStruct;
 import cn.unikue.commonplexus.javaseutil.structure.StatusDataStruct;
@@ -61,9 +59,6 @@ public class RestResponseStruct implements Serializable {
     private Object data;
     private String message;
     private String additive;
-    private Duration duration;
-    private PromptReminderType reminder;
-    private String url;
 
     @DateTimeFormat(pattern = TemporalFormatConst.ISO_YYYYMMDD_HHMMSS)
     private LocalDateTime timestamp = LocalDateWraps.getCurrentDateTime();
