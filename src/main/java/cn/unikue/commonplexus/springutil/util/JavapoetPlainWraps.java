@@ -20,8 +20,8 @@ package cn.unikue.commonplexus.springutil.util;
 import java.lang.reflect.Method;
 import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
-import com.squareup.javapoet.CodeBlock;
-import com.squareup.javapoet.MethodSpec;
+import com.palantir.javapoet.CodeBlock;
+import com.palantir.javapoet.MethodSpec;
 import cn.unikue.commonplexus.javaseutil.constant.JavaKeywordConst;
 import cn.unikue.commonplexus.javaseutil.enumeration.LineSeparatorType;
 
@@ -31,7 +31,7 @@ import cn.unikue.commonplexus.javaseutil.enumeration.LineSeparatorType;
  *
  * @author David Hsing
  *
- * @see com.squareup.javapoet.JavaFile
+ * @see com.palantir.javapoet.JavaFile
  * @see "https://github.com/square/javapoet"
  * @see "https://www.baeldung.com/java-poet"
  */

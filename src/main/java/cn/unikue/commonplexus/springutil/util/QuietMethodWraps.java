@@ -46,14 +46,14 @@ import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
-import com.squareup.javapoet.AnnotationSpec;
-import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.CodeBlock;
-import com.squareup.javapoet.JavaFile;
-import com.squareup.javapoet.MethodSpec;
-import com.squareup.javapoet.ParameterSpec;
-import com.squareup.javapoet.TypeSpec;
-import com.squareup.javapoet.TypeVariableName;
+import com.palantir.javapoet.AnnotationSpec;
+import com.palantir.javapoet.ClassName;
+import com.palantir.javapoet.CodeBlock;
+import com.palantir.javapoet.JavaFile;
+import com.palantir.javapoet.MethodSpec;
+import com.palantir.javapoet.ParameterSpec;
+import com.palantir.javapoet.TypeSpec;
+import com.palantir.javapoet.TypeVariableName;
 import cn.unikue.commonplexus.javaseutil.constant.StringVariantConst;
 import cn.unikue.commonplexus.javaseutil.util.ArrayUtilsWraps;
 import cn.unikue.commonplexus.javaseutil.util.AssertMessageWraps;
@@ -77,7 +77,7 @@ import lombok.ToString;
  *
  * @author David Hsing
  *
- * @see com.squareup.javapoet.JavaFile
+ * @see com.palantir.javapoet.JavaFile
  * @see "https://github.com/square/javapoet"
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted", "UnusedReturnValue"})
