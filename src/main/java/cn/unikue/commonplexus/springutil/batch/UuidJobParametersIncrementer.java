@@ -52,6 +52,6 @@ public class UuidJobParametersIncrementer implements JobParametersIncrementer {
     @Override
     public JobParameters getNext(@Nullable JobParameters parameters) {
         JobParameters params = (parameters == null) ? new JobParameters() : parameters;
-        return new JobParametersBuilder(params).addString(this.key, JdkUuidGenerator.getPopularId()).toJobParameters();
+        return new JobParametersBuilder(params).addString(this.key, JdkUuidGenerator.getRandomId()).toJobParameters();
     }
 }

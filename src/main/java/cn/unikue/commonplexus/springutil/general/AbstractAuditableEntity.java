@@ -53,27 +53,27 @@ import lombok.ToString;
 @ToString
 @SuppressWarnings("unused")
 public abstract class AbstractAuditableEntity implements Serializable {
-    @Column(name = "CREATE_USER", nullable = false, updatable = false, length = 40)
+    @Column(name = "create_user", nullable = false, updatable = false, length = 40)
     @NotBlank(groups = InsertUpdateSequence.class)
     @Size(max = 40)
     @CreatedBy
     @JsonIgnore
     private String createUser;
 
-    @Column(name = "CREATE_TIME", nullable = false, updatable = false)
+    @Column(name = "create_time", nullable = false, updatable = false)
     @NotNull(groups = InsertUpdateSequence.class)
     @CreatedDate
     @JsonIgnore
     private LocalDateTime createTime;
 
-    @Column(name = "MODIFY_USER", nullable = false, length = 40)
+    @Column(name = "modify_user", nullable = false, length = 40)
     @NotBlank(groups = InsertUpdateSequence.class)
     @Size(max = 40)
     @LastModifiedBy
     @JsonIgnore
     private String modifyUser;
 
-    @Column(name = "MODIFY_TIME", nullable = false)
+    @Column(name = "modify_time", nullable = false)
     @NotNull(groups = InsertUpdateSequence.class)
     @LastModifiedDate
     @JsonIgnore

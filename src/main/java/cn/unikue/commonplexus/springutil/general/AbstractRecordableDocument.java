@@ -35,19 +35,19 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @SuppressWarnings("unused")
 public abstract class AbstractRecordableDocument extends AbstractBsonDocument {
-    @Field(name = "RECORD_ID")
+    @Field(name = "record_id")
     @JsonIgnore
     private String recordId;
 
-    @Field(name = "RECORD_TYPE")
+    @Field(name = "record_type")
     @JsonIgnore
     private String recordType;
 
-    @Field(name = "RECORD_USER")
+    @Field(name = "record_user")
     @JsonIgnore
     private String recordUser;
 
-    @Field(name = "RECORD_TIME")
+    @Field(name = "record_time")
     @JsonIgnore
     private LocalDateTime recordTime;
 }

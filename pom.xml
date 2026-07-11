@@ -22,7 +22,7 @@
 
     <groupId>cn.unikue.commonplexus</groupId>
     <artifactId>plexus-spring-util</artifactId>
-    <version>3.5.14</version>
+    <version>3.5.15</version>
 
     <name>${project.artifactId}</name>
     <description>Unikue Plexus Spring Util provides many easy-to-use utilities for Spring</description>
@@ -57,7 +57,7 @@
         <minio.version>9.0.3</minio.version>
         <mybatis.version>3.5.19</mybatis.version>
         <pagehelper.version>6.1.1</pagehelper.version>
-        <plexus-javase-util.version>2.3.1</plexus-javase-util.version>
+        <plexus-javase-util.version>2.3.2</plexus-javase-util.version>
 
         <javadoc-docent-maven-plugin.version>2.1.2</javadoc-docent-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>

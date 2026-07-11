@@ -48,22 +48,22 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @SuppressWarnings("unused")
 public abstract class AbstractAuditableDocument extends AbstractBsonDocument {
-    @Field(name = "CREATE_USER")
+    @Field(name = "create_user")
     @CreatedBy
     @JsonIgnore
     private String createUser;
 
-    @Field(name = "CREATE_TIME")
+    @Field(name = "create_time")
     @CreatedDate
     @JsonIgnore
     private LocalDateTime createTime;
 
-    @Field(name = "MODIFY_USER")
+    @Field(name = "modify_user")
     @LastModifiedBy
     @JsonIgnore
     private String modifyUser;
 
-    @Field(name = "MODIFY_TIME")
+    @Field(name = "modify_time")
     @LastModifiedDate
     @JsonIgnore
     private LocalDateTime modifyTime;

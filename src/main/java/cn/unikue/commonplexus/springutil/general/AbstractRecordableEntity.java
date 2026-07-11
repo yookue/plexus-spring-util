@@ -40,25 +40,25 @@ import lombok.ToString;
 @ToString
 @SuppressWarnings("unused")
 public abstract class AbstractRecordableEntity implements Serializable {
-    @Column(name = "RECORD_ID", nullable = false, updatable = false, length = 40)
+    @Column(name = "record_id", nullable = false, updatable = false, length = 40)
     @NotBlank(groups = InsertUpdateSequence.class)
     @Size(max = 40)
     @JsonIgnore
     private String recordId;
 
-    @Column(name = "RECORD_TYPE", nullable = false, updatable = false, length = 1)
+    @Column(name = "record_type", nullable = false, updatable = false, length = 1)
     @NotBlank(groups = InsertUpdateSequence.class)
     @Size(max = 1)
     @JsonIgnore
     private String recordType;
 
-    @Column(name = "RECORD_USER", nullable = false, updatable = false, length = 40)
+    @Column(name = "record_user", nullable = false, updatable = false, length = 40)
     @NotBlank(groups = InsertUpdateSequence.class)
     @Size(max = 40)
     @JsonIgnore
     private String recordUser;
 
-    @Column(name = "RECORD_TIME", nullable = false, updatable = false)
+    @Column(name = "record_time", nullable = false, updatable = false)
     @NotNull(groups = InsertUpdateSequence.class)
     @JsonIgnore
     private LocalDateTime recordTime;

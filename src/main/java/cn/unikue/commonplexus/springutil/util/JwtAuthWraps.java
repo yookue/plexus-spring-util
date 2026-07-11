@@ -45,7 +45,7 @@ public abstract class JwtAuthWraps {
     @SuppressWarnings("DuplicatedCode")
     public static String encodeToken(@Nullable String jwtId, @Nullable Consumer<JWTCreator.Builder> callback, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
         JWTCreator.Builder builder = JWT.create();
-        builder.withJWTId(StringUtils.defaultIfBlank(jwtId, JdkUuidGenerator.getPopularId()));
+        builder.withJWTId(StringUtils.defaultIfBlank(jwtId, JdkUuidGenerator.getRandomId()));
         if (callback != null) {
             callback.accept(builder);
         }
@@ -65,7 +65,7 @@ public abstract class JwtAuthWraps {
     @SuppressWarnings("DuplicatedCode")
     public static String encodeToken(@Nullable String jwtId, @Nullable String audience, @Nullable String issuer, @Nullable String subject, @Nullable Date timestamp, @Nullable Duration timeout, @Nullable JwtAlgorithmType algorithm, @Nullable String secret) {
         JWTCreator.Builder builder = JWT.create();
-        builder.withJWTId(StringUtils.defaultIfBlank(jwtId, JdkUuidGenerator.getPopularId()));
+        builder.withJWTId(StringUtils.defaultIfBlank(jwtId, JdkUuidGenerator.getRandomId()));
         if (StringUtils.isNotBlank(audience)) {
             builder.withAudience(audience);
         }

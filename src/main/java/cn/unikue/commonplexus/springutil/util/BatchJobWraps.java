@@ -94,7 +94,7 @@ public abstract class BatchJobWraps {
     public static JobParameters newJobParameters(@Nullable Map<String, Object> params, boolean addRandom) {
         JobParametersBuilder builder = newJobParametersBuilder(params);
         if (addRandom) {
-            String randomId = JdkUuidGenerator.getPopularId();
+            String randomId = JdkUuidGenerator.getRandomId();
             builder.addString(StringUtils.join(StringVariantConst.RANDOM, CharVariantConst.UNDERSCORE, randomId), randomId);
         }
         return builder.toJobParameters();
